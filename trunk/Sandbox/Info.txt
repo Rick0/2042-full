@@ -1,0 +1,7 @@
+- Cuando creas un archivo nuevo, a la hora de 'commit' lo tenes que seleccionar.
+
+
+- Ademas, podes tener archivos en la misma carpeta del proyecto, pero que no se suban al repositorio. Para eso tenes que poner al archivo como 'Ignore'.
+
+
+- 
