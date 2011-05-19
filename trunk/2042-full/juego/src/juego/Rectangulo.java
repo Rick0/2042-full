@@ -10,8 +10,8 @@ public class Rectangulo {
 		int posicionX;
 		int posicionY;
 		
-		void inicializar( int alturaR, int anchoR, int posicion_X, int posicion_Y ) {
-			
+		public Rectangulo(int alturaR, int anchoR, int posicion_X, int posicion_Y ) {
+		/*Constructor del rectangulo, recibe su posicion en el espacio y sus dimensiones*/
 			posicionX=posicion_X;
 			posicionY=posicion_Y;
 			ancho=anchoR;
@@ -19,7 +19,17 @@ public class Rectangulo {
 			
 		}
 		
-		boolean coincideConPosicionDe(Rectangulo otroRectangulo){
+		public void modificarPosicion(int posX, int posY){
+		
+			posicionX=posX;
+			posicionY=posY;
+		}
+		
+		public boolean coincideConPosicionDe(Rectangulo otroRectangulo){
+			
+			/*Compara dos rectangulos y devuelve true si se superponen
+			 * (Es decir, si tienen en comun al menos un punto) o false en caso contrario.
+			 */
 			
 			int otroXComienzo, otroXFinal, XComienzo, XFinal, otroYComienzo, otroYFinal, YComienzo, YFinal;
 		
