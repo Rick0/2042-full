@@ -19,7 +19,7 @@ public class Rectangulo {
 			
 		}
 		
-		public void modificarPosicion(int posX, int posY){
+		public void determinarPosicion(int posX, int posY){
 		
 			posicionX=posX;
 			posicionY=posY;

@@ -12,9 +12,9 @@ public class PruebaRectangulo extends TestCase{
 		Rectangulo rectangulo2 = new Rectangulo (10,10,20,20);
 
 		assertEquals(rectangulo1.coincideConPosicionDe(rectangulo2),true);
-		rectangulo2.modificarPosicion(30,30);
+		rectangulo2.determinarPosicion(30,30);
 		assertEquals(rectangulo1.coincideConPosicionDe(rectangulo2),true);
-		rectangulo2.modificarPosicion(47, 50);
+		rectangulo2.determinarPosicion(47, 50);
 		assertEquals(rectangulo1.coincideConPosicionDe(rectangulo2),false);
 
 	}
