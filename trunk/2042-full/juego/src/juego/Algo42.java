@@ -1,7 +1,7 @@
 package juego;
 
 public class Algo42 extends Nave {
-/*El algo42 es la nave principal del juego,
+/*El algo42 es la nave principal del juego,,
 Es la unica nave que puede ser manejada por el jugador.*/
 	
 	int torpedos;
