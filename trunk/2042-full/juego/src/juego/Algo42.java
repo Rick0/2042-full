@@ -7,7 +7,7 @@ Es la unica nave que puede ser manejada por el jugador.*/
 	int torpedos;
 	int cohetes;
 	
-	Algo42(int posicion_X,int posicion_Y,Plano planoJuego){
+	public Algo42(int posicion_X,int posicion_Y,Plano planoJuego){
 	/*Crea una nueva instancia de algo42, con ubicaciÃ³n(posicion_X,posicion_Y),
 	 * en el plano de juego que recibe por parametro
 	 */
@@ -24,6 +24,16 @@ Es la unica nave que puede ser manejada por el jugador.*/
 	}
 	else{
 		/*Lanzar excepcion*/
+		}
+	}
+	
+	public void ModificarEnergia (int puntosModificar) {
+	
+	"Recibe una cierta cantidad de puntos y los suma a la energía de la nave."
+		
+		energia = energia+puntosModificar.
+		if ( energia <= 0 ) {
+			destruida = true;
 		}
 	}
 }
