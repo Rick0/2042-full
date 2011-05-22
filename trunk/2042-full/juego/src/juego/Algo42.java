@@ -29,9 +29,9 @@ Es la unica nave que puede ser manejada por el jugador.*/
 	
 	public void ModificarEnergia (int puntosModificar) {
 	
-	"Recibe una cierta cantidad de puntos y los suma a la energía de la nave."
+	/*Recibe una cierta cantidad de puntos y los suma a la energia de la nave.*/
 		
-		energia = energia+puntosModificar.
+		energia = energia+puntosModificar;
 		if ( energia <= 0 ) {
 			destruida = true;
 		}

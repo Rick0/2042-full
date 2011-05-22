@@ -21,4 +21,8 @@ y armas en juego y se encarga de operar sobre ellas e iterarlas.*/
 
 		algo42=algo;
 	}
+	public void agregarNaveEliminada(Nave nave) {
+	
+		
+	}
 }

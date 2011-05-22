@@ -1,4 +1,5 @@
 package juego;
+import excepciones.NaveNoDestruidaError;
 
 public abstract class Nave extends ObjetoUbicable {
 	
@@ -8,26 +9,26 @@ public abstract class Nave extends ObjetoUbicable {
 	boolean operable;
 	int energia;
 	
-	public void destruirse {
-	"Lleva a cabo las acciones correspondientes si debe destruirse"
-		if ( this.devolverCantidadEnergia>0 ){
-			"NaveNoDestruidaError new signal: 'La nave aun tiene energia en su tanque'"
-		}
-		else {
-			destruida = true;
-			plano.agregarNaveEliminada( this );
-		}
-	}
-	
 	public int devolverCantidadEnergia() {
-	"devuelve la cantidad de energia actual con la que cuenta la nave"
+	/*devuelve la cantidad de energia actual con la que cuenta la nave*/
 
 	return energia;
 	
 	}
 	
+	public void destruirse() throws NaveNoDestruidaError {
+		/*Lleva a cabo las acciones correspondientes si debe destruirse*/
+			if ( (this.devolverCantidadEnergia())>0 ){
+				throw new NaveNoDestruidaError("La nave aun tiene energia en su tanque");
+			}
+			else {
+				destruida = true;
+				plano.agregarNaveEliminada( this );
+			}
+		}
+	
 	public boolean estadoActualDestruida() {
-	"Devuelve True si la nave está destruida".
+	/*Devuelve True si la nave esta destruida*/
 
 	return destruida;
 	}
