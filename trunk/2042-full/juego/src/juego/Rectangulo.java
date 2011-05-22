@@ -19,6 +19,30 @@ public class Rectangulo {
 			
 		}
 		
+		public int devolverPosicionY() {
+			/*Devuelve la posicion en Y del rectangulo*/
+				return posicionY;
+				
+			}
+		
+		public int devolverPosicionX() {
+			/*Devuelve la posicion en X del rectangulo*/
+				return posicionX;
+				
+			}
+		
+		public int devolverAltura() {
+			/*Devuelve la altura del rectangulo*/
+				return altura;
+				
+		}
+
+		public int devolverAncho() {
+			/*Devuelve el ancho del rectangulo*/
+				return ancho;
+				
+		}
+		
 		public void determinarPosicion(int posX, int posY){
 		
 			posicionX=posX;

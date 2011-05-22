@@ -16,6 +16,18 @@ y armas en juego y se encarga de operar sobre ellas e iterarlas.*/
 			altura=dimensionY;
 			
 		}
+	public int devolverAltura(){
+		/*Devuelve la altura del plano*/
+
+		return altura;
+	}
+	
+	public int devolverAncho(){
+		/*Devuelve el ancho del plano*/
+
+		return ancho;
+	}
+	
 	public void introducirAlgo(Algo42 algo){
 		/*Introduce un algo42 al plano*/
 
