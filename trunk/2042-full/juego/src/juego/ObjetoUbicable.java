@@ -15,4 +15,13 @@ public abstract class ObjetoUbicable {
 		rectangulo.determinarPosicion(posicionX,posicionY);
 	}
 
+	public int posicionX(){
+		/*Devuelve la posicion en X del objeto*/
+		return rectangulo.devolverPosicionX();
+	}
+	
+	public int posicionY(){
+		/*Devuelve la posicion en Y del objeto*/
+		return rectangulo.devolverPosicionY();
+	}
 }

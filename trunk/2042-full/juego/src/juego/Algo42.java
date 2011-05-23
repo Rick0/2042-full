@@ -9,6 +9,10 @@ Es la unica nave que puede ser manejada por el jugador.*/
 	int torpedos;
 	int cohetes;
 	
+	public Algo42() throws AreaInvalidaError{
+		
+	}
+	
 	public Algo42(int posicion_X,int posicion_Y,Plano planoJuego) throws AreaInvalidaError{
 	/*Crea una nueva instancia de algo42, con ubicación(posicion_X,posicion_Y),
 	 * en el plano de juego que recibe por parametro
