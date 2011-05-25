@@ -33,4 +33,12 @@ public abstract class ObjetoUbicable {
 	
 	return ( this.rectangulo.coincideConPosicionDe( figuraRectangulo ));
 	}
+	
+	public void determinarPlano(Plano planoDelObjeto) {
+		/*Toda instancia de objeto ubicable esta contenida en un plano. Para permitir la interaccion entre objetos
+		contenidos en el mismo plano, toda instancia de ObjetoUbicable tiene una referencia al plano que lo contiene.
+		Este metodo sirve para determinar el plano del objeto.*/
+
+		this.plano = planoDelObjeto;
+	}
 }

@@ -9,6 +9,10 @@ Es la unica nave que puede ser manejada por el jugador.*/
 	int torpedos;
 	int cohetes;
 	
+	public Algo42() throws AreaInvalidaError{
+		
+	}
+	
 	public Algo42(int posicion_X,int posicion_Y,Plano planoJuego) throws AreaInvalidaError{
 	/*Crea una nueva instancia de algo42, con ubicación(posicion_X,posicion_Y),
 	 * en el plano de juego que recibe por parametro
@@ -22,7 +26,7 @@ Es la unica nave que puede ser manejada por el jugador.*/
 	operable=true;
 	if (( (posicion_X<(planoJuego.ancho)) & (posicion_Y<(planoJuego.altura)) )  & ((posicion_X>=0) & (posicion_Y>=0) ) ){
 		planoJuego.introducirAlgo(this);
-		rectangulo= new Rectangulo (5,3,posicion_X,posicion_Y);
+		rectangulo = new Rectangulo (5,3,posicion_X,posicion_Y);
 	}
 	else{
 		throw new AreaInvalidaError("La nave debe ser creada en una posicion valida dentro del area de juego.");
@@ -77,9 +81,5 @@ Es la unica nave que puede ser manejada por el jugador.*/
 			throw new AreaInvalidaError("La nave ya no puede moverse mas hacia la izquierda");
 		}
 		this.determinarPosicion((rectangulo.devolverPosicionX())-1,(rectangulo.devolverPosicionY()));
-	}
-
-	
-	public void modificarEnergia(int danio){
 	}
 }
