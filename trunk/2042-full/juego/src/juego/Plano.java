@@ -1,5 +1,7 @@
 package juego;
 
+import java.util.ArrayList;
+
 public class Plano {
 	/*Maneja el escenario del nivel, contiene listas con las naves, items
 y armas en juego y se encarga de operar sobre ellas e iterarlas.*/
@@ -7,6 +9,13 @@ y armas en juego y se encarga de operar sobre ellas e iterarlas.*/
 	int ancho;
 	int altura;
 	Algo42 algo42;
+	ArrayList<Arma> listaArmas = new ArrayList<Arma>();
+	ArrayList<Nave> listaNaves = new ArrayList<Nave>();
+	ArrayList<Item> listaItems = new ArrayList<Item>();
+	ArrayList<Nave> listaNavesDestruidas = new ArrayList<Nave>();
+	ArrayList<Item> listaItemsUsados = new ArrayList<Item>();
+	ArrayList<Arma> listaArmasUsadas = listaArmas = new ArrayList<Arma>();
+	Nivel nivel;
 	
 	public Plano(int dimensionX,int dimensionY ) {
 		/*Constructor del plano, recibe sus dimensiones

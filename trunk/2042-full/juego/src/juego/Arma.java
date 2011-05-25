@@ -3,7 +3,7 @@ import excepciones.*;
 
 public abstract class Arma extends ObjetoUbicable {
 	
-	float danio;
+	int danio;
 	boolean usada;
 	boolean origenAlgo42;
 	
