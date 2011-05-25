@@ -43,10 +43,15 @@ y armas en juego y se encarga de operar sobre ellas e iterarlas.*/
 
 		algo42=algo;
 	}
-	public void agregarNaveEliminada(Nave nave) {
 	
-		
+	public void agregarNaveEliminada(Nave nave) throws NaveNoDestruidaError{
+	/*Agrega una nave no operable a la lista de naves destruidas*/
+		if(!nave.estadoActualDestruida()){
+			throw new NaveNoDestruidaError("La nave aun no esta destruida");
+		}
+		this.listaNavesDestruidas.add(nave);
 	}
+		
 	public void agregarArmaUsada(Arma arma) throws ArmaNoUsadaError {
 		
 		//Agrega un arma a la lista de armas usadas
@@ -56,5 +61,11 @@ y armas en juego y se encarga de operar sobre ellas e iterarlas.*/
 		}
 		
 		this.listaArmasUsadas.add( arma );
+	}
+	public Algo42 algo42() {
+		
+		//Devuelve el algo42 del plano
+		
+		return algo42;
 	}
 }
