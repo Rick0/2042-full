@@ -50,4 +50,17 @@ lanza un arma, la agrega a la lista de Armas.*/
 		}
 		return false;
 	}
+	
+	public boolean estaFueraDeArea() {
+		 /*Decide si la nave esta fuera de area,
+		es decir si con su movimiento ya llego a una posicion fuera del plano. En ese caso,
+		cambia su estado fuera de juego a true*/
+
+			if ( (rectangulo.devolverPosicionX() > 100) || (rectangulo.devolverPosicionX() <0 ) || (rectangulo.devolverPosicionY() > 100) || (rectangulo.devolverPosicionY() < 0) ) {
+				this.fueraDeJuego = true;
+				return true;
+			}
+			this.fueraDeJuego = false;
+			return false;
+	}
 }
