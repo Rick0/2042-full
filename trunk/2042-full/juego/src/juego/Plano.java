@@ -1,6 +1,7 @@
 package juego;
 
 import java.util.ArrayList;
+import excepciones.*;
 
 public class Plano {
 	/*Maneja el escenario del nivel, contiene listas con las naves, items
@@ -45,5 +46,15 @@ y armas en juego y se encarga de operar sobre ellas e iterarlas.*/
 	public void agregarNaveEliminada(Nave nave) {
 	
 		
+	}
+	public void agregarArmaUsada(Arma arma) throws ArmaNoUsadaError {
+		
+		//Agrega un arma a la lista de armas usadas
+		
+		if ( !arma.estadoUsado() ) {
+			throw new ArmaNoUsadaError("Esta municion no fue usada");
+		}
+		
+		this.listaArmasUsadas.add( arma );
 	}
 }

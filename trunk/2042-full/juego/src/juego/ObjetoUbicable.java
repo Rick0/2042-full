@@ -24,4 +24,13 @@ public abstract class ObjetoUbicable {
 		/*Devuelve la posicion en Y del objeto*/
 		return rectangulo.devolverPosicionY();
 	}
+	
+	public boolean coincidePosicionCon( Rectangulo figuraRectangulo) {
+		
+	/*Toda instancia de esta clase contiene un rectangulo que representa su figura 
+	Este metodo devuelve true si la posicion del objeto ubicable se superpone en 
+	al menos un punto con el rectangulo que recibe por parametro.*/
+	
+	return ( this.rectangulo.coincideConPosicionDe( figuraRectangulo ));
+	}
 }

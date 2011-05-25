@@ -1,4 +1,6 @@
 package juego;
+import java.util.Iterator;
+
 import excepciones.*;
 
 public abstract class Arma extends ObjetoUbicable {
@@ -15,21 +17,35 @@ public abstract class Arma extends ObjetoUbicable {
 	}
 	
 	public void actuar() {
-		/*actuar
+			//actuar
 		
-		self intentarMovimiento .
-		(origenAlgo42 )ifTrue: [
-			plano listaNaves do: [:cadaNave|
-					self intentarAtacar: cadaNave .
-					].
-			] ifFalse: [
-					self intentarAtacar: (plano algo42 ).].
-		(usada)ifTrue:[plano agregarArmaUsada: self.].*/
 		this.intentarMovimiento();
-		/*recorrer la lista*/
+		if (origenAlgo42 ){
+			Iterator<Nave> i = this.plano.listaNaves.iterator();
+			
+			while ( i.hasNext() ) {
+				try {
+					this.intentarAtacar( this.plano.algo42 );
+				} catch ( Exception e) {
+					System.out.println("Algo pasó pero no sabemos bien porque");
+				}					
+			} 
+		} else {
+			
+			try {
+					this.intentarAtacar( this.plano.algo42 );
+				} catch ( Exception e) {
+					System.out.println("Algo pasó pero no sabemos bien porque");
+				}
+		}	
 		
 		if ( this.usada ) {
-			this.plano.agregarArmaUsada(this);
+			
+			try {
+				this.plano.agregarArmaUsada( this );
+			} catch (ArmaNoUsadaError error) {
+				System.out.println("El Juego ha sufrido una fálla irrecuperable");
+			}
 		}
 	}
 	
@@ -64,12 +80,20 @@ public abstract class Arma extends ObjetoUbicable {
 		x = this.plano.ancho;
 		y = this.plano.altura;
 		if (( this.posicionX() < 0) || ( this.posicionX() > x )) {
-			usada = true; 
-			this.plano.agregarArmaUsada( this );
+			usada = true;
+			try {
+				this.plano.agregarArmaUsada( this );
+			} catch (ArmaNoUsadaError error) {
+				System.out.println("El Juego ha sufrido una fálla irrecuperable");
+			}
 		}
 		if ((this.posicionY() < 0) || (this.posicionY() > y )) {
 			usada = true;
-			this.plano.agregarArmaUsada( this );
+			try {
+				this.plano.agregarArmaUsada( this );
+			} catch (ArmaNoUsadaError error) {
+				System.out.println("El Juego ha sufrido una falla irrecuperable");
+			}
 		}
 		if (! this.usada ) {
 			this.mover();
