@@ -33,6 +33,12 @@ Es la unica nave que puede ser manejada por el jugador.*/
 		}
 	}
 	
+	public void aumentarArmas( int cantidadTorpedos, int cantidadCohetes ) {
+		//Aumenta las cantidades de torpedos y cohetes recibidos por parametro
+		this.torpedos = (this.torpedos + cantidadTorpedos);
+		this.cohetes = (this.cohetes + cantidadCohetes);
+	}
+	
 	public void ModificarEnergia (int puntosModificar) {
 	
 	/*Recibe una cierta cantidad de puntos y los suma a la energia de la nave.*/
