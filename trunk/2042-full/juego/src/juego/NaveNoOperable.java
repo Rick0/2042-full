@@ -1,5 +1,7 @@
 package juego;
 
+import java.util.Iterator;
+
 import excepciones.NaveNoDestruidaError;
 
 public abstract class NaveNoOperable extends Nave{
@@ -7,7 +9,7 @@ public abstract class NaveNoOperable extends Nave{
  * heredar de esta clase abstracta.*/
 	
 	boolean fueraDeJuego;
-	boolean puntos;
+	int puntos;
 	
 	abstract void IntentarAccionSobre(Algo42 algo42);
 	/*La nave se mueve y lleva a cabo su funcion: Si esta en la posicion de algo42 lo choca. Si
@@ -36,4 +38,16 @@ lanza un arma, la agrega a la lista de Armas.*/
 				}
 			}
 		}
+	public boolean seSuperponeConOtraNave() {
+		//Devuelve true si la posicion de una nave se superpone con alguna otra de la lista.
+		Nave nave;
+		Iterator<Nave> i = this.plano.listaNaves.iterator();
+		while ( i.hasNext() ) {
+			nave = i.next();
+			if ( nave.coincidePosicionCon(rectangulo) && (nave != this)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

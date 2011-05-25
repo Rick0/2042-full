@@ -74,5 +74,13 @@ y armas en juego y se encarga de operar sobre ellas e iterarlas.*/
 		this.listaArmas.add( arma);
 		
 	}
+	public void agregarNave(Nave unaNave) {
+		//Agrega una nave no operable a la lista de naves
+		if ( unaNave.estadoActualDestruida() ) {
+			new NaveDestruidaError("La nave esta destruida");
+		}
+		this.listaNaves.add( unaNave );
+		
+	}
 
 }
