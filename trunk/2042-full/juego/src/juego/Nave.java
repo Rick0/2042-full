@@ -33,5 +33,14 @@ public abstract class Nave extends ObjetoUbicable {
 	return destruida;
 	}
 	
+	public void modificarEnergia(int puntosModificar) throws NaveNoDestruidaError{
+	/*Recibe una cierta cantidad de puntos y los suma a la energÃ­a de la nave.*/
+
+		energia = energia+puntosModificar;
+		if(energia<=0) {
+			this.destruirse();
+		}
+	}
+	
 	
 }

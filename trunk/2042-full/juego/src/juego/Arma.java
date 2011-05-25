@@ -1,6 +1,7 @@
 package juego;
+import excepciones.*;
 
-public abstract class Arma {
+public abstract class Arma extends ObjetoUbicable {
 	
 	float danio;
 	boolean usada;
@@ -8,7 +9,7 @@ public abstract class Arma {
 	
 	public void InicializarOrigenAlgo42( boolean verdaderoOFalso) {
 	
-	/*true indica que quien lanzó el arma fue una instancia de Algo42,
+	/*true indica que quien lanzo el arma fue una instancia de Algo42,
 	false en caso contrario.*/
 		this.origenAlgo42 = verdaderoOFalso;
 	}
@@ -38,13 +39,13 @@ public abstract class Arma {
 		return this.usada;
 	}
 	
-	public boolean intentarAtacar(Nave unaNave) throws AlgoSeAtacaASiMismo, AtaqueEntreNavesNoOperables {
+	public boolean intentarAtacar(Nave unaNave) throws AlgoSeAtacaASiMismoError, AtaqueEntreNavesNoOperables {
 		//Ataca a la nave que recibe por parametro. Devuelve true si el ataque fue efectivo, false en caso contrario
 		if (( unaNave.operable ) && ( origenAlgo42 )) {
-				throw new AlgoSeAtacaASiMismoError;
+				throw new AlgoSeAtacaASiMismoError("Una nave algo42 no puede atacarse a si misma");
 		}
 		if ((unaNave.operable == false ) && ( origenAlgo42 == false )) {
-				throw new AtaqueEntreNavesNoOperables;
+				throw new AtaqueEntreNavesNoOperables("Una nave no operable no puede atacar a otra del mismo tipo");
 		}
 		
 		if (unaNave.coincidePosicionCon( this.rectangulo ) && (this.usada == false)) {
@@ -62,11 +63,11 @@ public abstract class Arma {
 		float x,y;
 		x = this.plano.ancho;
 		y = this.plano.altura;
-		if (( this.devolverPosicionX() < 0) || ( this.devolverPosicionX() > x )) {
+		if (( this.posicionX() < 0) || ( this.posicionX() > x )) {
 			usada = true; 
 			this.plano.agregarArmaUsada( this );
 		}
-		if ((this.devolverPosicionY() < 0) || (this.devolverPosicionY() > y )) {
+		if ((this.posicionY() < 0) || (this.posicionY() > y )) {
 			usada = true;
 			this.plano.agregarArmaUsada( this );
 		}
@@ -80,9 +81,9 @@ public abstract class Arma {
 		
 		//El arma cambia su posicion
 		if ( this.origenAlgo42 ) {
-			this.determinarPosicion( this.devolverPosicionX, (this.devolverPosicionY + 2 ));
+			this.determinarPosicion( this.posicionX(), (this.posicionY() + 2 ));
 		} else {
-			this.determinarPosicion( this.devolverPosicionX, (this.devolverPosicionY - 2 ));
+			this.determinarPosicion( this.posicionX(), (this.posicionY() - 2 ));
 		}
 	}
 	
