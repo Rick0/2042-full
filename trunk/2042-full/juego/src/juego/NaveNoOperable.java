@@ -63,4 +63,15 @@ lanza un arma, la agrega a la lista de Armas.*/
 			this.fueraDeJuego = false;
 			return false;
 	}
+	
+	public boolean intentarChocar( Algo42 algo42) {
+	//Recibe una nave Algo42 y la choca; Como consecuencia, la Algo42 pierde puntos 30 de su tanque de energia. Ademas, la nave es destruida."
+	
+	if (algo42.coincidePosicionCon(this.rectangulo)) {
+			algo42.recibirChoque();
+			destruida = true;
+			return true;
+	}
+	return false;
+	}
 }

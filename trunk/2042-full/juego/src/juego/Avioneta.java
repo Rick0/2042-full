@@ -49,10 +49,32 @@ public class Avioneta extends NaveNoOperable {
 		this.estaFueraDeArea();
 	}
 	
+	public void moverAternativo() throws SuperposicionNavesError {
+		/*Este metodo debe ser llamado cuando, por alguna razon, el movimiento que realiza
+		la nave por defecto no puede ser llevado a cabo.*/
+			
+			if (this.puntosAdelante < 62) {
+					this.puntosAtras = 0;
+					this.puntosAdelante = 0; //Hago que empiece a moverse hacia adelante desde 0,
+					//pero antes lo hago moverse hacia atras, si es que puedo.
+					this.determinarPosicion(this.posicionX(), (this.posicionY() + 2 ) );
+			}else {
+					this.puntosAtras = 0;
+					this.determinarPosicion( this.posicionX(),(this.posicionY() - 2));
+			}
+			if ( this.seSuperponeConOtraNave() ) {
+				throw new SuperposicionNavesError("La posicion ya esta ocupada");
+			}
+			this.estaFueraDeArea();
+	}
+	
 	@Override
 	void IntentarAccionSobre(Algo42 algo42) {
-		// TODO Auto-generated method stub
-
+		//Si la nave esta en la posicion de algo42 lo choca. Lanza
+		//un laser y lo agrega a la lista de Armas."
+			
+			this.intentarChocar(algo42);
+			new Laser( this.posicionX(), this.posicionY(), false, this.plano);
 	}
 
 }

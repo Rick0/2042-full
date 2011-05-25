@@ -88,4 +88,9 @@ Es la unica nave que puede ser manejada por el jugador.*/
 		}
 		this.determinarPosicion((rectangulo.devolverPosicionX())-1,(rectangulo.devolverPosicionY()));
 	}
+
+	public void recibirChoque() {
+		this.ModificarEnergia( -30 );
+		
+	}
 }
