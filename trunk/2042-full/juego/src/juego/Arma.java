@@ -21,13 +21,13 @@ public abstract class Arma extends ObjetoUbicable {
 		
 		this.intentarMovimiento();
 		if (origenAlgo42 ){
-			Iterator<Nave> i = this.plano.listaNaves.iterator();
+			Iterator<NaveNoOperable> i = ((plano).listaNaves().iterator());
 			
 			while ( i.hasNext() ) {
 				try {
 					this.intentarAtacar( this.plano.algo42 );
 				} catch ( Exception e) {
-					System.out.println("Algo pasó pero no sabemos bien porque");
+					System.out.println("Algo pasï¿½ pero no sabemos bien porque");
 				}					
 			} 
 		} else {
@@ -35,7 +35,7 @@ public abstract class Arma extends ObjetoUbicable {
 			try {
 					this.intentarAtacar( this.plano.algo42 );
 				} catch ( Exception e) {
-					System.out.println("Algo pasó pero no sabemos bien porque");
+					System.out.println("Algo pasï¿½ pero no sabemos bien porque");
 				}
 		}	
 		
@@ -44,7 +44,7 @@ public abstract class Arma extends ObjetoUbicable {
 			try {
 				this.plano.agregarArmaUsada( this );
 			} catch (ArmaNoUsadaError error) {
-				System.out.println("El Juego ha sufrido una fálla irrecuperable");
+				System.out.println("El Juego ha sufrido una fï¿½lla irrecuperable");
 			}
 		}
 	}
@@ -55,7 +55,7 @@ public abstract class Arma extends ObjetoUbicable {
 		return this.usada;
 	}
 	
-	public boolean intentarAtacar(Nave unaNave) throws AlgoSeAtacaASiMismoError, AtaqueEntreNavesNoOperables {
+	public boolean intentarAtacar(Nave unaNave) throws AlgoSeAtacaASiMismoError, AtaqueEntreNavesNoOperables, NaveNoDestruidaError {
 		//Ataca a la nave que recibe por parametro. Devuelve true si el ataque fue efectivo, false en caso contrario
 		if (( unaNave.operable ) && ( origenAlgo42 )) {
 				throw new AlgoSeAtacaASiMismoError("Una nave algo42 no puede atacarse a si misma");
@@ -84,7 +84,7 @@ public abstract class Arma extends ObjetoUbicable {
 			try {
 				this.plano.agregarArmaUsada( this );
 			} catch (ArmaNoUsadaError error) {
-				System.out.println("El Juego ha sufrido una fálla irrecuperable");
+				System.out.println("El Juego ha sufrido una falla irrecuperable");
 			}
 		}
 		if ((this.posicionY() < 0) || (this.posicionY() > y )) {

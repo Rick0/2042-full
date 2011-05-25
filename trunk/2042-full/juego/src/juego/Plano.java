@@ -11,9 +11,9 @@ y armas en juego y se encarga de operar sobre ellas e iterarlas.*/
 	int altura;
 	Algo42 algo42;
 	ArrayList<Arma> listaArmas = new ArrayList<Arma>();
-	ArrayList<Nave> listaNaves = new ArrayList<Nave>();
+	ArrayList<NaveNoOperable> listaNaves = new ArrayList<NaveNoOperable>();
 	ArrayList<Item> listaItems = new ArrayList<Item>();
-	ArrayList<Nave> listaNavesDestruidas = new ArrayList<Nave>();
+	ArrayList<NaveNoOperable> listaNavesDestruidas = new ArrayList<NaveNoOperable>();
 	ArrayList<Item> listaItemsUsados = new ArrayList<Item>();
 	ArrayList<Arma> listaArmasUsadas = listaArmas = new ArrayList<Arma>();
 	Nivel nivel;
@@ -44,7 +44,7 @@ y armas en juego y se encarga de operar sobre ellas e iterarlas.*/
 		algo42=algo;
 	}
 	
-	public void agregarNaveEliminada(Nave nave) throws NaveNoDestruidaError{
+	public void agregarNaveEliminada(NaveNoOperable nave) throws NaveNoDestruidaError{
 	/*Agrega una nave no operable a la lista de naves destruidas*/
 		if(!nave.estadoActualDestruida()){
 			throw new NaveNoDestruidaError("La nave aun no esta destruida");
@@ -68,4 +68,21 @@ y armas en juego y se encarga de operar sobre ellas e iterarlas.*/
 		
 		return algo42;
 	}
+	
+	public ArrayList<Arma> listaArmas(){
+		/*Devuelve una lista con las municiones en juego*/
+
+		return listaArmas;
+	}
+	
+	public ArrayList<NaveNoOperable> listaNavesEliminadas(){
+	/*Devuelve una lista con las naves eliminadas del juego*/
+
+		return listaNavesDestruidas;
+	}
+		
+	public ArrayList<NaveNoOperable> listaNaves(){
+		/*Devuelve una lista con las naves no operables del juego*/
+			return listaNaves;
+		}
 }
