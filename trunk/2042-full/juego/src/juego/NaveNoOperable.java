@@ -24,12 +24,16 @@ lanza un arma, la agrega a la lista de Armas.*/
 			}
 		}
 	
-	public void modificarEnergia(int puntosModificar) throws NaveNoDestruidaError{
+	public void modificarEnergia(int puntosModificar) {
 		/*Recibe una cierta cantidad de puntos y los suma a la energÃ­a de la nave.*/
 
 			energia = energia+puntosModificar;
-			if(energia<=0) {
-				this.destruirse();
+			if(energia <= 0) {
+				try {
+					this.destruirse();
+				} catch ( NaveNoDestruidaError error ) {
+					//La nave no sera destruida
+				}
 			}
 		}
 }

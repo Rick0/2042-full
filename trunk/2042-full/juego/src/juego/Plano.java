@@ -60,17 +60,9 @@ y armas en juego y se encarga de operar sobre ellas e iterarlas.*/
 	}
 
 
-	public void agregarArma(Arma arma) throws ArmaUsadaError {
-		//Agrega una municion al plano.
-		
-		if ( arma.estadoUsado() ){
-			throw new ArmaUsadaError("Esta municion ya fue usada");
-		}
-		this.listaArmas.add( arma);
-		
-	}
-
 	public Algo42 algo42() {
+		return algo42;
+	}
 
 	public void agregarArma(Arma arma) throws ArmaUsadaError {
 		//Agrega una municion al plano.

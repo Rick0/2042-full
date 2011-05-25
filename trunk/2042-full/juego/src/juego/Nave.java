@@ -10,8 +10,6 @@ public abstract class Nave extends ObjetoUbicable {
 	boolean operable;
 	int energia;
 	
-	public abstract void modificarEnergia(int danio) throws NaveNoDestruidaError;
-	
 	public int devolverCantidadEnergia() {
 	/*devuelve la cantidad de energia actual con la que cuenta la nave*/
 
@@ -48,9 +46,10 @@ public abstract class Nave extends ObjetoUbicable {
 				this.destruirse();
 			} catch ( NaveNoDestruidaError excepcion) {
 				//La nave aun tiene energia y nodebe ser destruida
-				return;
+
 			}
 		}
+	}
 
 	public boolean operable(){
 	/*Devuelve true si se trata de una nave operable; false en caso contrario*/
