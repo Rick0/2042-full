@@ -79,4 +79,12 @@ lanza un arma, la agrega a la lista de Armas.*/
 		
 		return puntos;
 	}
+	
+	public void retirarse() {
+	/*Con este metodo, las naves no operables empiezan a retroceder en linea recta 
+	(Es decir, a ir hacia arriba, ya que las naves no operables siempre se mueven
+	de arriba a abajo) hasta salir del area de juego.*/
+	this.determinarPosicion(this.posicionX() , this.posicionY() +1);
+	}
+	
 }
