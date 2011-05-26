@@ -1,6 +1,5 @@
 package juego;
 
-import java.lang.Object;
 import excepciones.*;
 
 public class Laser extends Arma {

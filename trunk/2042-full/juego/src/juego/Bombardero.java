@@ -60,9 +60,21 @@ public class Bombardero extends NaveNoOperable {
 			}
 		}
 	}
+	
 	@Override
 	public void IntentarAccionSobre(Algo42 algo42) {
-		// TODO Auto-generated method stub
+		
+		/*Si la nave esta en la posicion de algo42 lo choca. Lanza
+		una instancia de arma aleatoria (laser, cohete o torpedo) y la agrega a la lista de Armas.*/
+		Arma arma;
+		this.intentarChocar(algo42);
+		arma = this.lanzarArmaAleatoriaHacia(algo42);
+		try {
+			this.plano.agregarArma(arma);
+		} catch (ArmaUsadaError e) {
+			//Si esto sucede el juego ha fallado
+			System.out.println("Falla tecnica, inicie el juego nuevamente");
+		}
 		
 	}
 	public void mover() throws SuperposicionNavesError {
@@ -111,5 +123,40 @@ public class Bombardero extends NaveNoOperable {
 	}
 	this.estaFueraDeArea();
 	}
+	
+	private Cohete dispararCohete() {
+		
+		return new Cohete( this.posicionX(), this.posicionY(), false, this.plano);
+	
+	}
+	
+	private Laser dispararLaser() {
+		
+		return new Laser( this.posicionX(), this.posicionY(), false, this.plano);
+	
+	}
+	
+	private TorpedoRastreador dispararTorpedoHacia(Algo42 unAlgo42) {
+		
+		TorpedoRastreador T =new TorpedoRastreador( this.posicionX(), this.posicionY(), false, this.plano);
+		T.determinarNaveRastreada(unAlgo42);
+		return T;
+	
+	}
+	
+	public Arma lanzarArmaAleatoriaHacia(Algo42 algo42) {
+	/*El bombardero tiene tres tipos de armas distintas para lanzar. Esta funcion crea un arma
+	aleatoria: Busca un numero aleatorio del 1 al 3, si el numero es 1 lanza un laser, si es dos, un cohete
+	y si es 3, un torpedo rastreador.*/
+		int r = new Double(Math.random() * 3).intValue();
 
+		if (r == 1) {
+			return this.dispararLaser();
+		} else if (r == 2) {
+			return this.dispararCohete();
+		} else {
+			return this.dispararTorpedoHacia( this.plano.algo42 );
+		}
+	}
+		
 }

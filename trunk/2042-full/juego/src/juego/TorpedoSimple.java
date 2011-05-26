@@ -1,7 +1,5 @@
 package juego;
 
-import java.lang.Object;
-
 import excepciones.ArmaUsadaError;
 
 public class TorpedoSimple extends Arma {
