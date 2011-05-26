@@ -65,18 +65,12 @@ public class Bombardero extends NaveNoOperable {
 	public void IntentarAccionSobre(Algo42 algo42) {
 		
 		/*Si la nave esta en la posicion de algo42 lo choca. Lanza
-		una instancia de arma aleatoria (laser, cohete o torpedo) y la agrega a la lista de Armas.*/
-		Arma arma;
+		una instancia de arma aleatoria (laser, cohete o torpedo)*/
 		this.intentarChocar(algo42);
-		arma = this.lanzarArmaAleatoriaHacia(algo42);
-		try {
-			this.plano.agregarArma(arma);
-		} catch (ArmaUsadaError e) {
-			//Si esto sucede el juego ha fallado
-			System.out.println("Falla tecnica, inicie el juego nuevamente");
-		}
+		this.lanzarArmaAleatoriaHacia(algo42);
 		
 	}
+	
 	public void mover() throws SuperposicionNavesError {
 		/*El bombardero se mueve en Zig Zag; Primero se mueve 0.5 puntos hacia abajo y hacia la derecha.
 		Cuando ya bajo 10 puntos, empieza a ir 0.5 puntos hacia abajo y hacia la izquierda, hasta bajar

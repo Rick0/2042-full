@@ -19,6 +19,7 @@ public class TorpedoRastreador extends Arma {
 		this.InicializarOrigenAlgo42(origenAlgo);
 		
 	}
+	
 	public void determinarNaveRastreada(Nave unaNave) {
 		//Guarda la nave a la cual rasteara el torpedo. 
 		//Cuando se utilice el metodo mover, el torpedo se movera hacia esa nave
