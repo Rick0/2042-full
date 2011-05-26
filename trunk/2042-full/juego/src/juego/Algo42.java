@@ -1,6 +1,6 @@
 package juego;
 
-import excepciones.AreaInvalidaError;
+import excepciones.*;
 
 public class Algo42 extends Nave {
 /*El algo42 es la nave principal del juego,,
@@ -11,6 +11,36 @@ Es la unica nave que puede ser manejada por el jugador.*/
 	
 	public Algo42() throws AreaInvalidaError{
 		
+	}
+	
+	public void setCohetes(int cantidad) {
+		cohetes = cantidad;
+	}
+	
+	public void dispararCohete() throws ArmaNoDisponibleError {
+		if ( cohetes <=0 ) {
+			throw new ArmaNoDisponibleError("No hay cohetes que lanzar.");
+		}
+		new Cohete( this.posicionX(), this.posicionY(), true, this.plano);
+		cohetes = (cohetes - 1);
+	}
+	
+	public void dispararLaser() {
+
+		new Laser( this.posicionX(), this.posicionY(), true, this.plano);
+
+	}
+	
+	public void dispararTorpedoHacia(Nave unaNave) throws ArmaNoDisponibleError, NaveARastrearError {
+		if (unaNave == this ) { 
+			throw new NaveARastrearError("La nave rastreada no puede ser la misma algo");
+		}
+		if ( torpedos <=0 ) {
+			throw new ArmaNoDisponibleError("No hay torpedos que lanzar.");
+		}
+		TorpedoRastreador T = new TorpedoRastreador(this.posicionX(), this.posicionY(), true, this.plano );
+		T.determinarNaveRastreada( unaNave);
+		torpedos =( torpedos - 1);
 	}
 	
 	public Algo42(int posicion_X,int posicion_Y,Plano planoJuego) throws AreaInvalidaError{
