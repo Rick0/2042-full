@@ -82,5 +82,12 @@ y armas en juego y se encarga de operar sobre ellas e iterarlas.*/
 		this.listaNaves.add( unaNave );
 		
 	}
+	public void agregarItem(Item item) throws ItemUsadoError {
+		// Agrega un item al area de Juego
+		if (item.usado() ){
+			throw new ItemUsadoError("Se trata de agregar al mapa un item usado");
+		}
+		this.listaItems.add(item);
+	}
 
 }

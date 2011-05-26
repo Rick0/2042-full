@@ -74,7 +74,7 @@ public class Avioneta extends NaveNoOperable {
 		//un laser y lo agrega a la lista de Armas."
 			
 			this.intentarChocar(algo42);
-			new Laser( this.posicionX(), this.posicionY(), false, this.plano);
+			this.dispararLaser();
 	}
 
 }

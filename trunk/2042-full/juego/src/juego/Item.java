@@ -14,5 +14,10 @@ public abstract class Item extends ObjetoUbicable {
 
 		return usado;
 	}
+
+	public void noUsado() {
+		// Modifica el estado a no usado
+		usado = false;
+	}
 	
 }
