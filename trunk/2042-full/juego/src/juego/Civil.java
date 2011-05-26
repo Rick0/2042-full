@@ -3,14 +3,26 @@ package juego;
 import excepciones.*;
 
 public class Civil extends NaveNoOperable {
+	
+	public Civil(int posicionX, int posicionY) throws SuperposicionNavesError {
+		//"Inicializa una instancia de Bombardero"
 
-	@Override
-	void IntentarAccionSobre(Algo42 algo42) {
-		// TODO Auto-generated method stub
-
+		puntos = -300;
+		energia = 1;
+		operable = false;
+		rectangulo = new Rectangulo(5, 2, posicionX, posicionY);
+		destruida = false;
+		fueraDeJuego = false;
+		
+		this.determinarPlano(plano);
+		
+		if (this.seSuperponeConOtraNave()) {
+			throw new SuperposicionNavesError("La posición esta ocupada");
+		}
+		plano.agregarNave(this);
 	}
 	
-	private void mover() throws SuperposicionNavesError { 
+	public void mover() throws SuperposicionNavesError { 
 	//La nave civil se mueve hacia abajo.
 
 		this.determinarPosicion( this.posicionX() , this.posicionY() - 1);
@@ -20,7 +32,7 @@ public class Civil extends NaveNoOperable {
 		this.estaFueraDeArea();
 	}
 	
-	private void moverAlternativo() throws SuperposicionNavesError {
+	public void moverAlternativo() throws SuperposicionNavesError {
 	/*Movimiento que se debe llevar a cabo si la funcion intentar movimiento comprueba que el movimiento
 	por defecto provocaria un choque entre naves del mismo tipo. Intenta moverse una
 	posicion hacia atras. Si no puede, se queda quieto.*/
@@ -33,4 +45,9 @@ public class Civil extends NaveNoOperable {
 		this.estaFueraDeArea();
 	}
 	
+	@Override
+	public void IntentarAccionSobre(Algo42 algo42) {
+	//Si la nave esta en la posicion de algo42 lo choca.
+		this.intentarChocar(algo42);
+	}
 }
