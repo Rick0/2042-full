@@ -87,6 +87,29 @@ public class Bombardero extends NaveNoOperable {
 			}
 
 			this.estaFueraDeArea();
-		}
+	}
+	
+	public void moverAlternativo() throws SuperposicionNavesError {
+		
+		/*Movimiento que se debe llevar a cabo si la funcion intentar movimiento comprueba que el movimiento
+		por defecto provocaria un choque entre naves del mismo tipo. Intenta empezar el movimiento en zig zag
+		en el sentido opuesto. Si no puede, se queda quieto.*/
+
+	if ( haciaDer <=10 ) {
+		//"Se estaba moviendo hacia la derecha. Lo envio a la izquierda."
+		this.determinarPosicion(this.posicionX() -1, this.posicionY() -1);
+		haciaDer = 11;
+		haciaIzq = 1;
+	} else {
+		 //Se estaba moviendo hacia la izquierda. Lo envio a la derecha.
+		this.determinarPosicion( this.posicionX() +1,this.posicionY() -1);
+		haciaDer = 1;
+		haciaIzq = 11;
+	}
+	if ( this.seSuperponeConOtraNave() ) {
+				throw new SuperposicionNavesError ("La posicion ya esta ocupada");
+	}
+	this.estaFueraDeArea();
+	}
 
 }
