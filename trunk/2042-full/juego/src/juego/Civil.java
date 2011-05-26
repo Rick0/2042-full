@@ -4,7 +4,7 @@ import excepciones.*;
 
 public class Civil extends NaveNoOperable {
 	
-	public Civil(int posicionX, int posicionY) throws SuperposicionNavesError {
+	public Civil(int posicionX, int posicionY, Plano plano) throws SuperposicionNavesError {
 		//"Inicializa una instancia de Bombardero"
 
 		puntos = -300;
