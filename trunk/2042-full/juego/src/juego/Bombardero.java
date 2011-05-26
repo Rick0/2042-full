@@ -1,8 +1,9 @@
 package juego;
 
 import excepciones.*;
+import juego.NaveNoOperable;
 
-public class Bombardero extends NaveNoOperable{
+public class Bombardero extends NaveNoOperable {
 	int haciaDer, haciaIzq;
 	
 	public Bombardero(int posicionX, int posicionY, Plano plano) throws SuperposicionNavesError{
@@ -64,5 +65,28 @@ public class Bombardero extends NaveNoOperable{
 		// TODO Auto-generated method stub
 		
 	}
+	public void mover() throws SuperposicionNavesError {
+		/*El bombardero se mueve en Zig Zag; Primero se mueve 0.5 puntos hacia abajo y hacia la derecha.
+		Cuando ya bajo 10 puntos, empieza a ir 0.5 puntos hacia abajo y hacia la izquierda, hasta bajar
+		10 puntos mas, y asi sucesivamente.*/
+
+			if ( haciaDer <=10 ) {
+				this.determinarPosicion( this.posicionX() + 1 ,this.posicionY() - 1);
+				haciaDer = (haciaDer + 1);
+			} else {
+				if (haciaIzq  <= 10) {
+					this.determinarPosicion(this.posicionX() - 1,this.posicionY() -1);
+					haciaIzq = (haciaIzq +1);
+				} else {
+					haciaIzq = 0;
+					haciaDer = 0;
+				}
+			}
+			if ( this.seSuperponeConOtraNave() ) {
+				throw new SuperposicionNavesError("La posicion ya esta ocupada.");
+			}
+
+			this.estaFueraDeArea();
+		}
 
 }
