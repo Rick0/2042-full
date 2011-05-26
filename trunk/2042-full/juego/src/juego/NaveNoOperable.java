@@ -74,4 +74,9 @@ lanza un arma, la agrega a la lista de Armas.*/
 	}
 	return false;
 	}
+
+	public int devolverPuntosPorEliminacion() {
+		
+		return puntos;
+	}
 }
