@@ -31,8 +31,8 @@ public class FlotaCazas {
 				n= (n-1);
 				}
 			}
-			array.get(1).determinarPosicion(centroX, centroY);
-			array.get(1).determinarPlano(planoDeJuego);
+			array.get(0).determinarPosicion(centroX, centroY);
+			array.get(0).determinarPlano(planoDeJuego);
 			this.determinarPosicion(centroX, centroY); 
 			this.determinarListaCazas(array);
 	
@@ -76,25 +76,25 @@ public class FlotaCazas {
 	/*Se encarga de analizar la formacion de los cazas, y de ir ubicando nuevos cazas
 	en el plano, si es que todas las lineas de cazas no se mostraron aun- .*/
 
-		if (listaCazas.get(5).avanzo3Pasos() ) {
-			return;
-		}
-		if (listaCazas.get(2).avanzo3Pasos() ) {
-			listaCazas.get(4).determinarPosicion( posicionXOriginal + 10 , posicionYOriginal );
-			listaCazas.get(5).determinarPosicion(posicionXOriginal-10,posicionYOriginal);
-			plano.agregarNave(listaCazas.get(4));
-			plano.agregarNave(listaCazas.get(5));
-			listaCazas.get(4).determinarPlano(plano);
-			listaCazas.get(5).determinarPlano(plano);
+		if (listaCazas.get(4).avanzo3Pasos() ) {
 			return;
 		}
 		if (listaCazas.get(1).avanzo3Pasos() ) {
-			listaCazas.get(3).determinarPosicion(posicionXOriginal + 5, posicionYOriginal );
-			listaCazas.get(2).determinarPosicion(posicionXOriginal - 5, posicionYOriginal);
-			listaCazas.get(3).determinarPlano(plano);
-			listaCazas.get(2).determinarPlano(plano);
-			plano.agregarNave(listaCazas.get(2));
+			listaCazas.get(3).determinarPosicion( posicionXOriginal + 10 , posicionYOriginal );
+			listaCazas.get(4).determinarPosicion(posicionXOriginal-10,posicionYOriginal);
 			plano.agregarNave(listaCazas.get(3));
+			plano.agregarNave(listaCazas.get(4));
+			listaCazas.get(3).determinarPlano(plano);
+			listaCazas.get(4).determinarPlano(plano);
+			return;
+		}
+		if (listaCazas.get(0).avanzo3Pasos() ) {
+			listaCazas.get(2).determinarPosicion(posicionXOriginal + 5, posicionYOriginal );
+			listaCazas.get(1).determinarPosicion(posicionXOriginal - 5, posicionYOriginal);
+			listaCazas.get(2).determinarPlano(plano);
+			listaCazas.get(1).determinarPlano(plano);
+			plano.agregarNave(listaCazas.get(1));
+			plano.agregarNave(listaCazas.get(2));
 		}
 	}
 	
