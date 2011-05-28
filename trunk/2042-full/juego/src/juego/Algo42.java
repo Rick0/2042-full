@@ -126,4 +126,8 @@ Es la unica nave que puede ser manejada por el jugador.*/
 		this.ModificarEnergia( -30 );
 		
 	}
+	public int getCohetes() {
+		
+		return cohetes;
+	}
 }

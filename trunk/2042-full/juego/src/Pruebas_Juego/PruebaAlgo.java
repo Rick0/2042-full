@@ -77,7 +77,7 @@ public class PruebaAlgo extends TestCase{
 	}
 		
 	@Test
-	public void LanzamientoCohetes() throws AreaInvalidaError {
+	public void testLanzamientoCohetes() throws AreaInvalidaError {
 			//Lanzar un cohete deberia levantar error porque un algo42, por defecto, no tiene ni cohetes ni torpedos."
 	Plano plano = new Plano(100,100);
 	Algo42 algo = new Algo42(50,50,plano);
@@ -96,11 +96,81 @@ public class PruebaAlgo extends TestCase{
 	//Ahora si deberia poder disparar."
 	 try {
 		 algo.dispararCohete();
-		 assertEquals(0,0);
-		 //Si esto anda es porque no lanzo excepcion
+		 //Si esto anda es porque no lanzo excepcion y ademas dispara
 	 } catch (ArmaNoDisponibleError error) {}
-	
+	 assertEquals(algo.getCohetes(),3);
 	}
 		
+	public void testLanzamientoLaser() throws AreaInvalidaError {
+		Plano plano = new Plano(100,100);
+		Algo42 algo = new Algo42(50,50,plano);
+		
+		algo.dispararLaser();
+		assertEquals(plano.devolverListaArmas().size() , 1);
+	}
 	
+	public void testLanzamientoTorpedoRastreador() throws AreaInvalidaError,SuperposicionNavesError,
+	NaveARastrearError,ArmaNoDisponibleError {
+		Plano plano = new Plano(100,100);
+		Algo42 algo = new Algo42(50,50,plano);
+		Nave avioneta = new Avioneta(60,70,plano);
+		
+		try {
+		    algo.dispararTorpedoHacia( avioneta );
+		    fail("Deberia haber lanzado una excepcion");
+		}
+		catch (ArmaNoDisponibleError error) {
+			    // si sale por aqui es que la prueba ha ido bien
+		}
+		  
+		try {
+		    algo.dispararTorpedoHacia( algo );
+		    fail("Deberia haber lanzado una excepcion, no se puede disparar a si mismo");
+		}
+		catch (NaveARastrearError error) {
+		   // si sale por aqui es que la prueba ha ido bien
+		}
+		
+		
+		//Le doy cohetes.
+		algo.aumentarArmas(4, 0);
+		//Ahora si deberia poder disparar."
+		try {
+			algo.dispararTorpedoHacia( avioneta );
+			//Si esto anda es porque no lanzo excepcion y ademas dispara
+		} catch (ArmaNoDisponibleError error) {}
+		
+		assertEquals( plano.devolverListaArmas().size(),1);
+	}
+	
+	@Test
+	public void testPosicionIniciialInvalida() {
+		Plano plano = new Plano(100,100);
+		Algo42 algo = null;
+		try {
+			algo = new Algo42(-1,50,plano);
+			fail("No debe poder crearse fuera de los limites del mapa");
+		} catch (AreaInvalidaError error) {}
+		try {
+			algo = new Algo42(101,50,plano);
+			fail("No debe poder crearse fuera de los limites del mapa");
+		} catch (AreaInvalidaError error) {}
+		try {
+			algo = new Algo42(50,-1,plano);
+			fail("No debe poder crearse fuera de los limites del mapa");
+		} catch (AreaInvalidaError error) {}
+		try {
+			algo = new Algo42(50,101,plano);
+			fail("No debe poder crearse fuera de los limites del mapa");
+		} catch (AreaInvalidaError error) {}
+		
+		try {
+			algo = new Algo42(50,50,plano);
+		} catch (AreaInvalidaError error) {}
+		
+		
+		
+		assertEquals("Una vez verificado lo anterior debe poder crearse en una posicion valida",algo.devolverCantidadEnergia(), 100);
+		
+	}
 }

@@ -1,5 +1,6 @@
 package juego;
 
+import java.util.List;
 import java.util.ArrayList;
 import excepciones.*;
 
@@ -88,6 +89,11 @@ y armas en juego y se encarga de operar sobre ellas e iterarlas.*/
 			throw new ItemUsadoError("Se trata de agregar al mapa un item usado");
 		}
 		this.listaItems.add(item);
+	}
+	public List<Arma> devolverListaArmas() {
+		// uso para el programador
+		return listaArmas;
+		
 	}
 
 }
