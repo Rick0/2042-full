@@ -57,6 +57,12 @@ public class Caza extends NaveNoOperable {
 		new TorpedoSimple( this.posicionX(),this.posicionY(), false, this.plano);
 	}
 	
+	public void dispararTorpedoAdaptable() {
+		//Crea una instancia de TorpedoAdaptable en la posicion actual de la nave
+		
+		new TorpedoAdaptable( this.posicionX(),this.posicionY(), false, this.plano);
+	}
+	
 	@Override
 	public void modificarEnergia( int cantidad ) {
 		//Recibe una cierta cantidad de puntos y los suma a la energía de la nave. Ademas,

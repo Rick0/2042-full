@@ -12,7 +12,10 @@ Es la unica nave que puede ser manejada por el jugador.*/
 	public Algo42() throws AreaInvalidaError{
 		
 	}
-	
+	public void quitarMitadEnergia() {
+		//Quita la mitad de la energia de Algo42, perop siempre usando valores enteros.
+		energia = (int)(energia/2);
+	}
 	public void setCohetes(int cantidad) {
 		cohetes = cantidad;
 	}
