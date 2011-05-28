@@ -69,7 +69,7 @@ public class PruebaArmas extends TestCase {
 		Plano plano = new Plano( 100, 100);
 		Laser laser = new Laser(50, 10, false, plano);
 		
-		for (int i=0; i==30; i = i+5) {
+		for (int i=0; i==30; i++) {
 			laser.intentarMovimiento();
 		}
 		

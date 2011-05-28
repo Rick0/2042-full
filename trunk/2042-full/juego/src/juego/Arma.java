@@ -80,7 +80,7 @@ public abstract class Arma extends ObjetoUbicable {
 		x = this.plano.ancho;
 		y = this.plano.altura;
 		if (( this.posicionX() < 0) || ( this.posicionX() > x )) {
-			usada = true;
+			this.usada = true;
 			try {
 				this.plano.agregarArmaUsada( this );
 			} catch (ArmaNoUsadaError error) {
@@ -88,14 +88,14 @@ public abstract class Arma extends ObjetoUbicable {
 			}
 		}
 		if ((this.posicionY() < 0) || (this.posicionY() > y )) {
-			usada = true;
+			this.usada = true;
 			try {
 				this.plano.agregarArmaUsada( this );
 			} catch (ArmaNoUsadaError error) {
 				System.out.println("El Juego ha sufrido una falla irrecuperable");
 			}
 		}
-		if (! this.usada ) {
+		if ( !this.usada ) {
 			this.mover();
 		}
 		
