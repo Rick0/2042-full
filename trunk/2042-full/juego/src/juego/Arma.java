@@ -84,7 +84,7 @@ public abstract class Arma extends ObjetoUbicable {
 			try {
 				this.plano.agregarArmaUsada( this );
 			} catch (ArmaNoUsadaError error) {
-				System.out.println("El Juego ha sufrido una fálla irrecuperable");
+				System.out.println("El Juego ha sufrido una falla irrecuperable");
 			}
 		}
 		if ((this.posicionY() < 0) || (this.posicionY() > y )) {

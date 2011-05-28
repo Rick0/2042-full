@@ -45,8 +45,8 @@ public class Rectangulo {
 		
 		public void determinarPosicion(int posX, int posY){
 		
-			posicionX=posX;
-			posicionY=posY;
+			posicionX = posX;
+			posicionY = posY;
 		}
 		
 		public boolean coincideConPosicionDe(Rectangulo otroRectangulo){
