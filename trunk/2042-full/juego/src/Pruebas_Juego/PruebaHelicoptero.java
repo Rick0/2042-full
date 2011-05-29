@@ -1,0 +1,37 @@
+package Pruebas_Juego;
+
+import excepciones.*;
+import junit.framework.TestCase;
+import juego.*;
+
+public class PruebaHelicoptero extends TestCase {
+	
+	public void testMoverHelicoptero() throws SuperposicionNavesError{
+	/*Prueba los movimientos de los helicopteros.*/
+
+		Plano plano = new Plano (100,100);
+		int pos=95;
+		Helicoptero helicoptero= new Helicoptero (10, 95, plano);
+		
+		for (int i=0; i<20; i++) {
+			helicoptero.mover();
+			pos=pos-1;
+			assertEquals(helicoptero.posicionY(),pos);
+			assertEquals(helicoptero.posicionX(), 10);
+		}
+	}
+	
+	public void testMoverAlternativo() throws SuperposicionNavesError{
+	/*Pruebo que al llamar a la funcion mover alternativo, realice el movimiento esperado en los helicopteros,
+	es decir, el movimiento hacia atras*/
+
+		Plano plano=new Plano(100 , 100);
+		Helicoptero helicoptero= new Helicoptero (30 , 65 , plano);
+		int pos=65;
+		for (int i=0; i<20; i++) {
+				assertEquals((helicoptero.posicionY()), pos);
+				helicoptero.moverAlternativo();
+				pos=pos+1;
+		}
+	}
+}
