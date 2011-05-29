@@ -13,7 +13,7 @@ public abstract class NaveNoOperable extends Nave{
 	
 	abstract void IntentarAccionSobre(Algo42 algo42);
 	/*La nave se mueve y lleva a cabo su funcion: Si esta en la posicion de algo42 lo choca. Si
-lanza un arma, la agrega a la lista de Armas.*/
+	lanza un arma, la agrega a la lista de Armas.*/
 	
 	public void destruirse() throws NaveNoDestruidaError {
 		/*Lleva a cabo las acciones correspondientes si debe destruirse*/

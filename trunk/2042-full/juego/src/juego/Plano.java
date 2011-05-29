@@ -15,7 +15,7 @@ y armas en juego y se encarga de operar sobre ellas e iterarlas.*/
 	ArrayList<Arma> listaArmas = new ArrayList<Arma>();
 	ArrayList<Nave> listaNaves = new ArrayList<Nave>();
 	ArrayList<Item> listaItems = new ArrayList<Item>();
-	ArrayList<Nave> listaNavesDestruidas = new ArrayList<Nave>();
+	ArrayList<NaveNoOperable> listaNavesDestruidas = new ArrayList<NaveNoOperable>();
 	ArrayList<Item> listaItemsUsados = new ArrayList<Item>();
 	ArrayList<Arma> listaArmasUsadas = listaArmas = new ArrayList<Arma>();
 	Nivel nivel;
@@ -45,10 +45,13 @@ y armas en juego y se encarga de operar sobre ellas e iterarlas.*/
 
 		algo42=algo;
 	}
-	public void agregarNaveEliminada(Nave nave) {
 	
+	public void agregarNaveEliminada(Nave nave) {
+	//Agrega una referencia a la nave destruida
+		listaNavesDestruidas.add((NaveNoOperable) nave);
 		
 	}
+	
 	public void agregarArmaUsada(Arma arma) throws ArmaNoUsadaError {
 		
 		//Agrega un arma a la lista de armas usadas
@@ -75,6 +78,7 @@ y armas en juego y se encarga de operar sobre ellas e iterarlas.*/
 		this.listaArmas.add( arma);
 		
 	}
+	
 	public void agregarNave(Nave unaNave) {
 		//Agrega una nave no operable a la lista de naves
 		if ( unaNave.estadoActualDestruida() ) {
@@ -83,6 +87,7 @@ y armas en juego y se encarga de operar sobre ellas e iterarlas.*/
 		this.listaNaves.add( unaNave );
 		
 	}
+	
 	public void agregarItem(Item item) throws ItemUsadoError {
 		// Agrega un item al area de Juego
 		if (item.usado() ){
@@ -90,10 +95,15 @@ y armas en juego y se encarga de operar sobre ellas e iterarlas.*/
 		}
 		this.listaItems.add(item);
 	}
+	
 	public List<Arma> devolverListaArmas() {
 		// uso para el programador
 		return listaArmas;
 		
+	}
+	
+	public ArrayList<NaveNoOperable> devolverListaNavesEliminades() {
+		return this.listaNavesDestruidas;
 	}
 
 }

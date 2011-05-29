@@ -1,7 +1,8 @@
 package juego;
 
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
+
 
 public class Nivel {
 	/*Clase nivel. Se encarga de los puntos del nivel actual, los puntos acumulados y de pasar el nivel*/
@@ -10,9 +11,9 @@ public class Nivel {
 	int numeroNivel;
 	
 	public Nivel(){
-		numeroNivel =1;
-		puntosNivelActual =0;
-		puntosTotales =0;
+		numeroNivel = 1;
+		puntosNivelActual = 0;
+		puntosTotales = 0;
 	}
 	
 	public int devolverNumeroNivel(){
@@ -28,12 +29,12 @@ public class Nivel {
 		return puntosTotales;
 	}
 	
-	public void sumarPuntajeTurno(List<NaveNoOperable> listaEliminados) {
+	public void sumarPuntajeTurno(ArrayList<NaveNoOperable> arrayList) {
 	/*Recibe la lista de enemigos que elimino el algo42 durante un turno
 	y los agrega tanto al puntaje total como al puntaje del nivel actual.
 	Si el puntaje actual es mayor a 1000, avanza un nivel*/
 		NaveNoOperable naveAuxiliar;
-		Iterator<NaveNoOperable> nave = listaEliminados.iterator();
+		Iterator<NaveNoOperable> nave = arrayList.iterator();
 		while (nave.hasNext()) {
 			naveAuxiliar = nave.next();
 			if (naveAuxiliar.estadoActualDestruida() ) {
@@ -46,7 +47,7 @@ public class Nivel {
 	}
 	}
 
-	private boolean avanzarNivel() {
+	public boolean avanzarNivel() {
 		//"Avanza un nivel"
 			if (puntosNivelActual >=1000) {
 				puntosNivelActual = 0;
@@ -57,10 +58,10 @@ public class Nivel {
 		
 	}
 	
-	public boolean actuarCon(List<NaveNoOperable> listaEliminados) {
+	public boolean actuarCon(ArrayList<NaveNoOperable> listaEliminados) {
 	//La accion del nivel consiste en sumar su puntaje e intentar avanzar, si es que se puede"
 
-		this.sumarPuntajeTurno( listaEliminados);
+		this.sumarPuntajeTurno( listaEliminados );
 		return this.avanzarNivel();
 	}
 }
