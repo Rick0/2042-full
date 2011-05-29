@@ -25,11 +25,50 @@ public class PruebaAvioneta extends TestCase{
 			n++;
 			avioneta.mover();
 			posY = (posY - 2);
-			assertTrue("La Avioneta no se mueve en el eje Y", avioneta.posicionY() == posY );
+			assertTrue("La Avioneta se mueve en el eje Y", avioneta.posicionY() == posY );
 		}
 		avioneta.mover();
 		posY = (posY + 2);
 		assertTrue(avioneta.posicionY() == posY);
+	}
+	
+	@Test
+	public void testMoverAvionetaAlternativo() throws SuperposicionNavesError {
+	//Prueba el movimiento alternativo de la avioneta
+		
+		Plano plano = new Plano(100, 100);
+		Avioneta avioneta = new Avioneta(50, 95, plano);
+		
+		int n = 0, posY = 95;
+		
+		while ( n < 10 ) {
+			
+			n = (n + 1);
+			avioneta.mover();
+			posY = (posY - 2);
+			assertEquals( avioneta.posicionY() , posY );
+			
+		}
+		assertEquals( avioneta.posicionY() , 75 );
+		avioneta.moverAlternativo();
+		assertEquals( "La avioneta debe subir dos casillas", avioneta.posicionY(), 77);
+		//Pero al llamar a mover, deberia bajar de nuevo.
+		avioneta.mover();
+		assertEquals( avioneta.posicionY() , 75 );
+		posY = 75;
+		for (int i=1; i < 31; i++) {
+			avioneta.mover();
+			posY = (posY - 2);
+			assertEquals( avioneta.posicionY() , posY );
+		}
+		assertTrue( posY == 15 );
+		//Ahora deberia empezar a subir al llamar a mover
+		avioneta.mover();
+		posY = avioneta.posicionY();
+		assertTrue( posY == 17 );
+		avioneta.moverAlternativo();
+		posY = avioneta.posicionY();
+		assertTrue( posY == 15); //Ahora el mover alternativo deberia ir hacia atras.
 	}
 	
 	@Test

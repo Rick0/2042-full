@@ -49,7 +49,7 @@ public class Avioneta extends NaveNoOperable {
 		this.estaFueraDeArea();
 	}
 	
-	public void moverAternativo() throws SuperposicionNavesError {
+	public void moverAlternativo() throws SuperposicionNavesError {
 		/*Este metodo debe ser llamado cuando, por alguna razon, el movimiento que realiza
 		la nave por defecto no puede ser llevado a cabo.*/
 			
