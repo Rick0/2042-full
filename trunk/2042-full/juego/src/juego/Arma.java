@@ -27,7 +27,7 @@ public abstract class Arma extends ObjetoUbicable {
 				try {
 					this.intentarAtacar( this.plano.algo42 );
 				} catch ( Exception e) {
-					System.out.println("Algo pasó pero no sabemos bien porque");
+					System.out.println("Algo pasï¿½ pero no sabemos bien porque");
 				}					
 			} 
 		} else {
@@ -35,7 +35,7 @@ public abstract class Arma extends ObjetoUbicable {
 			try {
 					this.intentarAtacar( this.plano.algo42 );
 				} catch ( Exception e) {
-					System.out.println("Algo pasó pero no sabemos bien porque");
+					System.out.println("Algo pasï¿½ pero no sabemos bien porque");
 				}
 		}	
 		
@@ -44,7 +44,7 @@ public abstract class Arma extends ObjetoUbicable {
 			try {
 				this.plano.agregarArmaUsada( this );
 			} catch (ArmaNoUsadaError error) {
-				System.out.println("El Juego ha sufrido una fálla irrecuperable");
+				System.out.println("El Juego ha sufrido una fï¿½lla irrecuperable");
 			}
 		}
 	}
@@ -52,7 +52,7 @@ public abstract class Arma extends ObjetoUbicable {
 	public boolean estadoUsado() {
 	//Devuelve true si el arma fue usada
 
-		return this.usada;
+		return (this.usada);
 	}
 	
 	public boolean intentarAtacar(Nave unaNave) throws AlgoSeAtacaASiMismoError, AtaqueEntreNavesNoOperables {
@@ -77,9 +77,9 @@ public abstract class Arma extends ObjetoUbicable {
 		//"El arma cambia su posicion en el plano.
 		//Si el arma sale de los limites del plano, cambia su estado a usada"
 		float x,y;
-		x = this.plano.ancho;
-		y = this.plano.altura;
-		if (( this.posicionX() < 0) || ( this.posicionX() > x )) {
+		x = (this.plano).devolverAncho();
+		y = (this.plano).devolverAltura();
+		if (( (this.posicionX()) < 0) || (( this.posicionX() )> x )) {
 			this.usada = true;
 			try {
 				this.plano.agregarArmaUsada( this );
@@ -87,7 +87,7 @@ public abstract class Arma extends ObjetoUbicable {
 				System.out.println("El Juego ha sufrido una falla irrecuperable");
 			}
 		}
-		if ((this.posicionY() < 0) || (this.posicionY() > y )) {
+		if (((this.posicionY()) < 0) || ((this.posicionY()) > y )) {
 			this.usada = true;
 			try {
 				this.plano.agregarArmaUsada( this );
@@ -95,10 +95,7 @@ public abstract class Arma extends ObjetoUbicable {
 				System.out.println("El Juego ha sufrido una falla irrecuperable");
 			}
 		}
-		if ( !this.usada ) {
-			this.mover();
-		}
-		
+		this.mover();
 	}
 	
 	public void mover() {
@@ -110,8 +107,9 @@ public abstract class Arma extends ObjetoUbicable {
 			this.determinarPosicion( this.posicionX(), (this.posicionY() - 2 ));
 		}
 	}
+	
 	public boolean origenAlgo42() {
-		/*true indica que quien lanzó el arma fue una instancia de Algo42,
+		/*true indica que quien lanzï¿½ el arma fue una instancia de Algo42,
 		false en caso contrario.
 		*/
 		return this.origenAlgo42;

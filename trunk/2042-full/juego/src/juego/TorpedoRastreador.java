@@ -32,48 +32,22 @@ public class TorpedoRastreador extends Arma {
 		//"El torpedo rastreador se mueve de tal forma que se acerque a la nave que persigue" 
 		
 		 if (this.naveRastreada.posicionX() < this.posicionX()) {
-			
-			if (this.naveRastreada.posicionY() == this.posicionY() ) {  
 				
 				this.determinarPosicion( (this.posicionX() - 1) , this.posicionY() );
-			}
-			
-			if ( (this.naveRastreada.posicionY() < this.posicionY() ) ) {  
+		 }
+		 else if( (this.naveRastreada.posicionX() > this.posicionX())) {
 				
-				this.determinarPosicion( (this.posicionX() - 1) , (this.posicionY() - 1) );
-					
-			} else {
-				if (this.naveRastreada.posicionY() > this.posicionY() ) {
-						this.determinarPosicion( (this.posicionX() - 1), (this.posicionY() + 1) );
-				}
-			}
-		} else {
-	
-				if ( this.naveRastreada.posicionX() == this.posicionX() ) {
-					
-					if (this.naveRastreada.posicionY() < this.posicionY() ) {
-						this.determinarPosicion( this.posicionX() , (this.posicionY() + 1) );
-					}
-					} else {	
-						if (this.naveRastreada.posicionY() == this.posicionY() ) {
-						
-							this.determinarPosicion( this.posicionX() , ( this.posicionY() +1 ) );
-						}
-					
-						if (this.naveRastreada.posicionY() > this.posicionY() ) {
-											this.determinarPosicion( this.posicionX() , this.posicionY() +1 );
-						}
-						if (this.naveRastreada.posicionY() == this.posicionY() ) {
-											this.determinarPosicion( this.posicionX() + 1, this.posicionY() );
-						}
-						if (this.naveRastreada.posicionY() < this.posicionY() ) {
-									this.determinarPosicion( this.posicionX() + 1, this.posicionY() - 1);
-						} else {
-											if (this.naveRastreada.posicionY() > this.posicionY() ) {
-												this.determinarPosicion( this.posicionX() + 1, this.posicionY() + 1 );
-											}
-						}
-					}
+				this.determinarPosicion( (this.posicionX() + 1) , this.posicionY() );
+		 }
+		 
+		if ( (this.naveRastreada.posicionY() < this.posicionY() ) ) {  
+				
+				this.determinarPosicion( (this.posicionX()) , (this.posicionY() - 1) );
 		}
-		}	
+		
+		else if( (this.naveRastreada.posicionY() > this.posicionY())) {
+				
+				this.determinarPosicion( (this.posicionX()) , this.posicionY() +1 );
+		 }			
+	}	
 }
