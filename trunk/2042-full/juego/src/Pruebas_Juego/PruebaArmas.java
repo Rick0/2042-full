@@ -36,7 +36,7 @@ public class PruebaArmas extends TestCase {
 		NaveNoOperable civil = new Civil(50,50, plano);
 		try {
 			cohete.intentarAtacar( civil );
-			fail("Debería fallar porque entre enemigos no se atacan");
+			fail("Deberï¿½a fallar porque entre enemigos no se atacan");
 		} catch (AtaqueEntreNavesNoOperables error) {
 			//Se espera que falle
 		}
@@ -67,13 +67,13 @@ public class PruebaArmas extends TestCase {
 	//Prueba que un arma, al salir del plano, pasa su estado a usado.
 
 		Plano plano = new Plano( 100, 100);
-		Laser laser = new Laser(50, 10, false, plano);
+		Laser laser = new Laser(50, 80, false, plano);
 		
-		for (int i=0; i==30; i++) {
+		for (int i=0; i<42; i++) {
 			laser.intentarMovimiento();
+
 		}
-		
-		assertTrue("Salio del mapa, entonces no debe ser usable", laser.estadoUsado() );
-	}
+		assertEquals(laser.estadoUsado(),true);
+		}
 
 }
