@@ -3,6 +3,7 @@ package juego;
 import java.util.Iterator;
 
 import excepciones.NaveNoDestruidaError;
+import excepciones.SuperposicionNavesError;
 
 public abstract class NaveNoOperable extends Nave{
 /*Todas las naves que no pueden ser utilizadas por el jugador deben 
@@ -14,6 +15,45 @@ public abstract class NaveNoOperable extends Nave{
 	abstract void IntentarAccionSobre(Algo42 algo42);
 	/*La nave se mueve y lleva a cabo su funcion: Si esta en la posicion de algo42 lo choca. Si
 	lanza un arma, la agrega a la lista de Armas.*/
+	
+	public abstract void mover() throws SuperposicionNavesError;
+	/*Metodo para cambiar la posicion de la nave.*/
+	
+	public abstract void moverAlternativo() throws SuperposicionNavesError;
+	/*"Este metodo debe ser llamado cuando, por alguna razon, el movimiento que realiza
+	la nave por defecto no puede ser llevado a cabo.*/
+	
+	public void intentarMovimiento(){
+	/*La nave intenta moverse en una posicion diferente valida del plano. 
+	 * Para eso, primero realiza un movimiento por defecto (Implementado 
+	 * en la funcion mover). Si al moverse levanta una excepcion por 
+	 * superponerse con otra nave, uso la funcion moverAlternativo para 
+	 * realizar otro tipo de movimiento. Si sigue levantando error, entonces
+	 * lo deja en su lugar"
+	 */
+		
+		int posx=this.posicionX();
+		int posy=this.posicionY();	
+		try{
+			this.mover();
+		}catch (SuperposicionNavesError e) {
+				/*Si llego a la conclusion de que, moviendolo, causo que se superponga con
+				 * otra nave, lo devuelvo a la posicion original y realizo algun movimiento
+				 *  alternativo.
+				 */
+				this.determinarPosicion(posx, posy);
+				try{
+					this.moverAlternativo();
+				} catch (SuperposicionNavesError e2){ 
+					 /*Si con el movimiento alternativo sigue superponiendose con otra nave,
+					 no le dejo moverse: Lo dejo en la posicion original*/
+					 this.determinarPosicion(posx ,posy);
+				}
+
+		this.estaFueraDeArea();
+		}
+	}
+		
 	
 	public void destruirse() throws NaveNoDestruidaError {
 		/*Lleva a cabo las acciones correspondientes si debe destruirse*/
