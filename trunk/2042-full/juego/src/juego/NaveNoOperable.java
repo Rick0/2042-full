@@ -87,4 +87,12 @@ public abstract class NaveNoOperable extends Nave{
 	this.determinarPosicion(this.posicionX() , this.posicionY() +1);
 	}
 	
+	public boolean estadoActualFueraDeJuego(){
+	/*Devuelve el estado fueraDeJuego , que es un valor booleano.
+	Devuelve true si la nave fue evaluada con la funcion estaFueraDeArea y dio
+	positivo, lo cual significa que la nave esta ocupando un area que no le
+	corresponde.*/
+		return fueraDeJuego;
+	}
+	
 }
