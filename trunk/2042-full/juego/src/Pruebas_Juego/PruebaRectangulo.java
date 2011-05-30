@@ -16,6 +16,10 @@ public class PruebaRectangulo extends TestCase{
 		assertEquals(rectangulo1.coincideConPosicionDe(rectangulo2),true);
 		rectangulo2.determinarPosicion(47, 50);
 		assertEquals(rectangulo1.coincideConPosicionDe(rectangulo2),false);
+		rectangulo2.determinarPosicion(90, 30);
+		assertEquals(rectangulo1.coincideConPosicionDe(rectangulo2),false);
+		rectangulo2.determinarPosicion(30, 90);
+		assertEquals(rectangulo1.coincideConPosicionDe(rectangulo2),false);
 
 	}
 }

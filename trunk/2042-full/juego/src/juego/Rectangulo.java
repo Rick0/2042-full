@@ -59,17 +59,17 @@ public class Rectangulo {
 		
 			otroXComienzo = otroRectangulo.posicionX;
 			otroXFinal = otroXComienzo + otroRectangulo.ancho;
-			XComienzo = otroRectangulo.posicionX;
+			XComienzo = posicionX;
 			XFinal = XComienzo + ancho;
 		
 		
 			if(XComienzo <= otroXComienzo){
-				if (otroXComienzo > XFinal){
+				if (!(otroXComienzo<=XFinal)){
 					return false;
 				}
 			}
 			if (XComienzo >= otroXComienzo){
-				if(XComienzo > otroXFinal){
+				if(!(XComienzo<=otroXFinal)){
 					return false;
 				}
 			}
@@ -79,12 +79,12 @@ public class Rectangulo {
 			YComienzo = posicionY;
 			YFinal = YComienzo + altura;
 			if(YComienzo <= otroYComienzo){
-				if (otroYComienzo > YFinal){
+				if (!(otroYComienzo<=YFinal)){
 					return false;
 				}
 			}
 			if (YComienzo >= otroYComienzo){
-				if (YComienzo > otroYFinal){
+				if (!(YComienzo<=otroYFinal)){
 					return false;
 				}
 			}

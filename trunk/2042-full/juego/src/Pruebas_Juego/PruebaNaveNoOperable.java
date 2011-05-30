@@ -62,23 +62,26 @@ public class PruebaNaveNoOperable extends TestCase {
 		/*Creo otro bombardero para que este por chocarse con el. 
 		 *Tener en cuenta dimensiones del bombardero= 7x7*/
 
-		Bombardero bombardero2= new Bombardero(52.5,81.5, plano);
+		Bombardero bombardero2= new Bombardero(52.0,81.5, plano);
 		bombardero2.intentarMovimiento();
-		bombardero1.intentarMovimiento();
 		/*Segun esto, el bombardero2 deberia haber cambiado su direccion a la izquierda.*/
-		assertEquals(bombardero2.posicionX(),52);
-		assertEquals(bombardero2.posicionY(),81);
+		assertEquals(bombardero2.posicionX(),51.5);
+		assertEquals(bombardero2.posicionY(),81.0);
 		/*Ahora voy a crear una avioneta (dimensiones 3x6)justo debajo del bombardero2 y voy a mover 
 		 * a bombardero1, provocando que no pueda moverse.
 		 */
+		bombardero2.intentarMovimiento();
+		/*Segun esto, el bombardero2 deberia haber cambiado su direccion a la izquierda.*/
+		assertEquals(bombardero2.posicionX(),51.0);
+		assertEquals(bombardero2.posicionY(),80.5);
 		@SuppressWarnings("unused")
 		/*Suprimi un warning, porque este metodo no necesita a la 
 		 * avioneta para nada, por eso el compilador indica warning
 		 */
-		Avioneta avioneta=new Avioneta( 52 , 75 , plano);
+		Avioneta avioneta=new Avioneta( 51 , 74 , plano);
 		bombardero2.intentarMovimiento();
-		assertEquals(bombardero2.posicionX(),52);
-		assertEquals(bombardero2.posicionY(),81);
+		assertEquals(bombardero2.posicionX(),51.0);
+		assertEquals(bombardero2.posicionY(),80.5);
 
 	}
 }
