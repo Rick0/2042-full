@@ -4,11 +4,11 @@ public class ArmaAbandonada extends Item {
 	
 	private int numeroTorpedos, numeroCohetes;
 	
-	public ArmaAbandonada(int posicionX, int posicionY) {
+	public ArmaAbandonada(double d, double e) {
 		usado = false;
 		numeroTorpedos = 2;
 		numeroCohetes = 3;
-		rectangulo = new Rectangulo(3, 3, posicionX, posicionY);
+		rectangulo = new Rectangulo(3, 3, d, e);
 	}
 	
 	void intentarEfectoEn(Algo42 algo42) {

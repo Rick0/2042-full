@@ -39,7 +39,7 @@ public class PruebaAvioneta extends TestCase{
 		Plano plano = new Plano(100, 100);
 		Avioneta avioneta = new Avioneta(50, 95, plano);
 		
-		int n = 0, posY = 95;
+		double n = 0, posY = 95;
 		
 		while ( n < 10 ) {
 			
@@ -49,12 +49,12 @@ public class PruebaAvioneta extends TestCase{
 			assertEquals( avioneta.posicionY() , posY );
 			
 		}
-		assertEquals( avioneta.posicionY() , 75 );
+		assertEquals( avioneta.posicionY() , 75.0 );
 		avioneta.moverAlternativo();
-		assertEquals( "La avioneta debe subir dos casillas", avioneta.posicionY(), 77);
+		assertEquals( "La avioneta debe subir dos casillas", avioneta.posicionY(), 77.0);
 		//Pero al llamar a mover, deberia bajar de nuevo.
 		avioneta.mover();
-		assertEquals( avioneta.posicionY() , 75 );
+		assertEquals( avioneta.posicionY() , 75.0 );
 		posY = 75;
 		for (int i=1; i < 31; i++) {
 			avioneta.mover();
@@ -82,7 +82,7 @@ public class PruebaAvioneta extends TestCase{
 	avioneta.dispararLaser();
 	List<Arma> arma = plano.devolverListaArmas();
 
-	assertEquals( arma.get(0).posicionX(), 20 );
-	assertEquals( arma.get(0).posicionY(), 25 );
+	assertEquals( arma.get(0).posicionX(), 20.0 );
+	assertEquals( arma.get(0).posicionY(), 25.0 );
 	}
 }

@@ -24,15 +24,15 @@ public class PruebaTorpedoRastreador extends TestCase{
 		torpedo.mover();
 		/*Deberia haberse acercado un poco a la avioneta.*/
 		
-		assertEquals((torpedo.posicionX()),61);
-		assertEquals((torpedo.posicionY()),66);
+		assertEquals((torpedo.posicionX()),61.0);
+		assertEquals((torpedo.posicionY()),66.0);
 		
 		for (int i=0; i<10; i++) {
 			torpedo.mover();
 		}
 
 		/*Ahora deberia estar en la misma posicion de la avioneta.*/
-		assertEquals((torpedo.posicionY()),70);
-		assertEquals((torpedo.posicionX()),70);
+		assertEquals((torpedo.posicionY()),70.0);
+		assertEquals((torpedo.posicionX()),70.0);
 	}
 }

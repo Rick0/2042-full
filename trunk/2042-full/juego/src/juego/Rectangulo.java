@@ -7,25 +7,25 @@ public class Rectangulo {
 		
 		int ancho;
 		int altura;
-		int posicionX;
-		int posicionY;
+		double posicionX;
+		double posicionY;
 		
-		public Rectangulo(int alturaR, int anchoR, int posicion_X, int posicion_Y ) {
+		public Rectangulo(int alturaR, int anchoR, double x, double y ) {
 		/*Constructor del rectangulo, recibe su posicion en el espacio y sus dimensiones*/
-			posicionX=posicion_X;
-			posicionY=posicion_Y;
+			posicionX=x;
+			posicionY=y;
 			ancho=anchoR;
 			altura=alturaR;
 			
 		}
 		
-		public int devolverPosicionY() {
+		public double devolverPosicionY() {
 			/*Devuelve la posicion en Y del rectangulo*/
 				return posicionY;
 				
 			}
 		
-		public int devolverPosicionX() {
+		public double devolverPosicionX() {
 			/*Devuelve la posicion en X del rectangulo*/
 				return posicionX;
 				
@@ -43,10 +43,10 @@ public class Rectangulo {
 				
 		}
 		
-		public void determinarPosicion(int posX, int posY){
+		public void determinarPosicion(double posx, double posy){
 		
-			posicionX = posX;
-			posicionY = posY;
+			posicionX = posx;
+			posicionY = posy;
 		}
 		
 		public boolean coincideConPosicionDe(Rectangulo otroRectangulo){
@@ -55,7 +55,7 @@ public class Rectangulo {
 			 * (Es decir, si tienen en comun al menos un punto) o false en caso contrario.
 			 */
 			
-			int otroXComienzo, otroXFinal, XComienzo, XFinal, otroYComienzo, otroYFinal, YComienzo, YFinal;
+			double otroXComienzo, otroXFinal, XComienzo, XFinal, otroYComienzo, otroYFinal, YComienzo, YFinal;
 		
 			otroXComienzo = otroRectangulo.posicionX;
 			otroXFinal = otroXComienzo + otroRectangulo.ancho;

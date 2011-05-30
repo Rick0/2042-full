@@ -3,10 +3,10 @@ package juego;
 import excepciones.ArmaUsadaError;
 
 public class TorpedoSimple extends Arma {
-	public TorpedoSimple (int x, int y, boolean origenAlgo,Plano plano ) {
+	public TorpedoSimple (double d, double f, boolean origenAlgo,Plano plano ) {
 		this.danio = -20;
 		this.usada = false;
-		this.rectangulo = (new Rectangulo(3, 3, x, y ));
+		this.rectangulo = (new Rectangulo(3, 3, d, f ));
 		this.determinarPlano(plano);
 		try {
 			this.plano.agregarArma( this );

@@ -6,7 +6,7 @@ import juego.NaveNoOperable;
 public class Bombardero extends NaveNoOperable {
 	int haciaDer, haciaIzq;
 	
-	public Bombardero(int posicionX, int posicionY, Plano plano) throws SuperposicionNavesError{
+	public Bombardero(double x, double y, Plano plano) throws SuperposicionNavesError{
 		//"Inicializa una instancia de Bombardero"
 
 		this.puntos = 30;
@@ -14,12 +14,12 @@ public class Bombardero extends NaveNoOperable {
 		haciaDer = 0;
 		haciaIzq = 0;
 		operable = false;
-		rectangulo = new Rectangulo(7, 7, posicionX, posicionY);
+		rectangulo = new Rectangulo(7, 7, x, y);
 		destruida = false;
 		fueraDeJuego = false;
 		this.determinarPlano(plano);
 		if (this.seSuperponeConOtraNave()) {
-			throw new SuperposicionNavesError("La posición esta ocupada");
+			throw new SuperposicionNavesError("La posiciï¿½n esta ocupada");
 		}
 		plano.agregarNave(this);
 	}
@@ -35,7 +35,7 @@ public class Bombardero extends NaveNoOperable {
 	
 	@Override
 	public void modificarEnergia( int cantidad ) {
-		//Recibe una cierta cantidad de puntos y los suma a la energía de la nave. Ademas,
+		//Recibe una cierta cantidad de puntos y los suma a la energï¿½a de la nave. Ademas,
 		//si la energia es menor a 0, el bombardero deja un paquete de armas en el escenario de juego"
 		
 		Item itemDejado;

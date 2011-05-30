@@ -12,7 +12,7 @@ public class PruebasCivil extends TestCase {
 	/*Pruebo que al llamar a la funcion mover alternativo, realice el movimiento esperado en las naves civiles,
 	es decir, el movimiento hacia atras*/
 	
-		int pos = 35, i = 0;
+		double pos = 35, i = 0;
 		Plano plano= new Plano( 100, 100);
 		Civil avion = new Civil( 70, 35, plano);
 		while ( i < 20) {	
@@ -28,7 +28,7 @@ public class PruebasCivil extends TestCase {
 		/*Pruebo que al llamar a la funcion mover, realice el movimiento esperado en las naves civiles,
 		es decir, el movimiento hacia adelante.*/
 		
-			int pos = 35, i = 0;
+			double pos = 35, i = 0;
 			Plano plano= new Plano( 100, 100);
 			Civil avion = new Civil( 70, 35, plano);
 			while ( i < 20) {	

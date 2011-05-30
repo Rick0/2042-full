@@ -3,10 +3,10 @@ package juego;
 import excepciones.*;
 
 public class Laser extends Arma {
-	public Laser (int x, int y, boolean origenAlgo,Plano plano ) {
+	public Laser (double d, double f, boolean origenAlgo,Plano plano ) {
 		this.danio = -10;
 		this.usada = false;
-		this.rectangulo = (new Rectangulo(5 , 1, x, y ));
+		this.rectangulo = (new Rectangulo(5 , 1, d, f ));
 		this.determinarPlano(plano);
 		try {
 			this.plano.agregarArma( this );

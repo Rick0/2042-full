@@ -10,14 +10,14 @@ public class PruebaHelicoptero extends TestCase {
 	/*Prueba los movimientos de los helicopteros.*/
 
 		Plano plano = new Plano (100,100);
-		int pos=95;
+		double pos=95;
 		Helicoptero helicoptero= new Helicoptero (10, 95, plano);
 		
 		for (int i=0; i<20; i++) {
 			helicoptero.mover();
 			pos=pos-1;
 			assertEquals(helicoptero.posicionY(),pos);
-			assertEquals(helicoptero.posicionX(), 10);
+			assertEquals(helicoptero.posicionX(), 10.0);
 		}
 	}
 	
@@ -27,7 +27,7 @@ public class PruebaHelicoptero extends TestCase {
 
 		Plano plano=new Plano(100 , 100);
 		Helicoptero helicoptero= new Helicoptero (30 , 65 , plano);
-		int pos=65;
+		double pos=65;
 		for (int i=0; i<20; i++) {
 				assertEquals((helicoptero.posicionY()), pos);
 				helicoptero.moverAlternativo();

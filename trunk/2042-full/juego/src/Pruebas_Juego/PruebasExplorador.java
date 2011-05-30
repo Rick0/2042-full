@@ -28,8 +28,8 @@ public class PruebasExplorador extends TestCase{
 			n = ( n + 1 );
 		}
 		
-		assertEquals( explorador.posicionY() , 62 );
-		assertEquals( explorador.posicionX() , 15 );
+		assertEquals( explorador.posicionY() , 62.0 );
+		assertEquals( explorador.posicionX() , 15.0 );
 	}
 	
 	@Test
@@ -46,8 +46,8 @@ public class PruebasExplorador extends TestCase{
 			explorador.moverAlternativo();
 			n = ( n + 1 );
 		}
-		assertEquals( explorador.posicionX() , 15 );
-		assertEquals( explorador.posicionY() , 108 );
+		assertEquals( explorador.posicionX() , 15.0 );
+		assertEquals( explorador.posicionY() , 108.0 );
 	}
 	
 }

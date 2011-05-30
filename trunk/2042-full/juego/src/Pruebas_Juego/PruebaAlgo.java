@@ -36,8 +36,8 @@ public class PruebaAlgo extends TestCase{
 			  algo.determinarPosicion(0,96);
 		  }
 		  
-		  assertEquals(algo.posicionX(),0);
-		  assertEquals(algo.posicionY(),96);
+		  assertEquals(algo.posicionX(),0.0);
+		  assertEquals(algo.posicionY(),96.0);
 
 		  /*Intentar mover la nave hacia  la izquierda tambien deberia devolver un error del tipo AreaInvalida*/
 		  try{
@@ -57,7 +57,7 @@ public class PruebaAlgo extends TestCase{
 		/*Necesito una instancia de plano, ya que un algo42 es una instancia de ObjetoUbicable.*/
 		Plano plano = new Plano(100,100);
 		Algo42 algo = new Algo42(50,50,plano);
-		int posicionInicial;
+		double posicionInicial;
 		
 		posicionInicial = algo.posicionY();
 		algo.moverAbajo();

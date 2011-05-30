@@ -10,17 +10,17 @@ public abstract class ObjetoUbicable {
 	Rectangulo rectangulo;
 	Plano plano;
 	
-	public void determinarPosicion(int posicionX,int posicionY){
+	public void determinarPosicion(double posx,double posy){
 		/*Ubica el objeto en la posicion determinada*/
-		rectangulo.determinarPosicion(posicionX,posicionY);
+		rectangulo.determinarPosicion(posx,posy);
 	}
 
-	public int posicionX(){
+	public double posicionX(){
 		/*Devuelve la posicion en X del objeto*/
 		return rectangulo.devolverPosicionX();
 	}
 	
-	public int posicionY(){
+	public double posicionY(){
 		/*Devuelve la posicion en Y del objeto*/
 		return rectangulo.devolverPosicionY();
 	}

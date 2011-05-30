@@ -3,10 +3,10 @@ package juego;
 public class TanqueEnergia extends Item {
 	private int aumentoEnergia;
 	
-	public TanqueEnergia(int posicionX, int posicionY) {
+	public TanqueEnergia(double d, double e) {
 		usado = false;
 		aumentoEnergia = 40;
-		rectangulo = new Rectangulo(4, 3, posicionX, posicionY);
+		rectangulo = new Rectangulo(4, 3, d, e);
 	}
 	
 	void intentarEfectoEn(Algo42 algo42) {

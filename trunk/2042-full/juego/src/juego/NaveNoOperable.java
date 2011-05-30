@@ -32,8 +32,8 @@ public abstract class NaveNoOperable extends Nave{
 	 * lo deja en su lugar"
 	 */
 		
-		int posx=this.posicionX();
-		int posy=this.posicionY();	
+		double posx=this.posicionX();
+		double posy=this.posicionY();	
 		try{
 			this.mover();
 		}catch (SuperposicionNavesError e) {

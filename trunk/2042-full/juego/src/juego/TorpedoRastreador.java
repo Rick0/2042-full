@@ -5,10 +5,10 @@ import excepciones.*;
 public class TorpedoRastreador extends Arma {
 	private Nave naveRastreada;
 	
-	public TorpedoRastreador (int x, int y, boolean origenAlgo,Plano plano ) {
+	public TorpedoRastreador (double d, double f, boolean origenAlgo,Plano plano ) {
 		this.danio = -20;
 		this.usada = false;
-		this.rectangulo = (new Rectangulo(2 , 2, x, y ));
+		this.rectangulo = (new Rectangulo(2 , 2, d, f ));
 		this.determinarPlano(plano);
 		try {
 			this.plano.agregarArma( this );
