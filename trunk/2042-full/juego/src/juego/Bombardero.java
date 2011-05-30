@@ -4,7 +4,7 @@ import excepciones.*;
 import juego.NaveNoOperable;
 
 public class Bombardero extends NaveNoOperable {
-	int haciaDer, haciaIzq;
+	double haciaDer, haciaIzq;
 	
 	public Bombardero(double x, double y, Plano plano) throws SuperposicionNavesError{
 		//"Inicializa una instancia de Bombardero"
@@ -76,13 +76,13 @@ public class Bombardero extends NaveNoOperable {
 		Cuando ya bajo 10 puntos, empieza a ir 0.5 puntos hacia abajo y hacia la izquierda, hasta bajar
 		10 puntos mas, y asi sucesivamente.*/
 
-			if ( haciaDer <=10 ) {
-				this.determinarPosicion( this.posicionX() + 1 ,this.posicionY() - 1);
-				haciaDer = (haciaDer + 1);
+			if ( haciaDer <10 ) {
+				this.determinarPosicion( this.posicionX() + 0.5 ,this.posicionY() - 0.5);
+				haciaDer = (haciaDer + 0.5);
 			} else {
 				if (haciaIzq  <= 10) {
-					this.determinarPosicion(this.posicionX() - 1,this.posicionY() -1);
-					haciaIzq = (haciaIzq +1);
+					this.determinarPosicion(this.posicionX() - 0.5,this.posicionY() -0.5);
+					haciaIzq = (haciaIzq +0.5);
 				} else {
 					haciaIzq = 0;
 					haciaDer = 0;
@@ -103,14 +103,14 @@ public class Bombardero extends NaveNoOperable {
 
 	if ( haciaDer <=10 ) {
 		//"Se estaba moviendo hacia la derecha. Lo envio a la izquierda."
-		this.determinarPosicion(this.posicionX() -1, this.posicionY() -1);
-		haciaDer = 11;
-		haciaIzq = 1;
+		this.determinarPosicion(this.posicionX() -0.5, this.posicionY() -0.5);
+		haciaDer = 10.5;
+		haciaIzq = 0.5;
 	} else {
 		 //Se estaba moviendo hacia la izquierda. Lo envio a la derecha.
-		this.determinarPosicion( this.posicionX() +1,this.posicionY() -1);
-		haciaDer = 1;
-		haciaIzq = 11;
+		this.determinarPosicion( this.posicionX() +0.5,this.posicionY() -0.5);
+		haciaDer = 0.5;
+		haciaIzq = 10.5;
 	}
 	if ( this.seSuperponeConOtraNave() ) {
 				throw new SuperposicionNavesError ("La posicion ya esta ocupada");
