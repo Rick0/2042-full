@@ -23,12 +23,12 @@ public class FlotaCazas {
 			
 			while (n < 5) {
 				try {
-					caza = new Caza(0, n+i, planoDeJuego);
-					n = (n+1);
+					caza = new Caza( 0, (n + i) , planoDeJuego);
+					n = ( n + 1 );
 					array.add(caza);
 				} catch (SuperposicionNavesError error){ 
-				i= (i+1);
-				n= (n-1);
+				i = ( i + 1 );
+				n = ( n - 1 );
 				}
 			}
 			array.get(0).determinarPosicion(centroX, centroY);
@@ -48,7 +48,7 @@ public class FlotaCazas {
 	public Caza devolverNaveLider() {
 	//Devuelve la nave lider de la flota de cazas- es decir, la que se encuentra adelante de todas.
 	
-		return listaCazas.get(1);
+		return listaCazas.get(0);
 		
 	}
 	

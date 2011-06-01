@@ -9,6 +9,7 @@ import junit.framework.TestCase;
 
 public class PruebaNaveNoOperable extends TestCase {
 	
+
 	@Test
 	public void testChocar() throws AreaInvalidaError, SuperposicionNavesError{
 	/*Prueba colocar avionetas en distintas posiciones y chocar una instancia de algo42.
@@ -83,5 +84,43 @@ public class PruebaNaveNoOperable extends TestCase {
 		assertEquals(bombardero2.posicionX(),51.0);
 		assertEquals(bombardero2.posicionY(),80.5);
 
+	}
+	
+	@SuppressWarnings("unused")
+	@Test
+	public void testIntentarMoverCivil() throws SuperposicionNavesError {
+	/*Voy a probar el uso de la funcion Intentar mover utilizando una nave civil.
+	Pruebo las alternativas de movimiento del avion civil, dejandole el paso libre y tambien poniendo obstaculos
+	en su camino, para probar que realiza los movimientos correctos*/
+		
+		
+		Plano plano = new Plano( 100 , 100 );
+		Helicoptero helicoptero = new Helicoptero( 30 , 20 , plano );
+		Civil civil = new Civil( 30 , 26 , plano );
+		civil.intentarMovimiento(); //La primera vez que lo mueva, deberia poder moverse hacia adelante normalmente
+		assertEquals((int)civil.posicionY() , 25 ); //Se castea para que no den diferentes 25 y 25.0000000000001
+		civil.intentarMovimiento();
+		assertEquals( (int) civil.posicionY() , 26 ); //Ahora si, la otra nave esta obstaculizando el camino, por eso se va hacia atras.
+		civil.intentarMovimiento();
+		assertEquals((int)civil.posicionY() , 25 ); //Recordar que una nave civil tiene altura 5. Ocupa desde 25 hasta 30
+		/*Ahora voy a crear otra nave, una avioneta, que se ubicara detras de civil. Con esto quiero probar
+		que si todos los caminos estan totalmente obstaculizados, entonces la nave no se mueve.*/
+		Avioneta avioneta = new Avioneta( 30 , 31 , plano ); 
+		civil.intentarMovimiento();
+		assertEquals((int)civil.posicionY() , 25 );
+	}
+	
+	@Test
+	public void testRetirarse() throws SuperposicionNavesError{
+	//Prueba el movimiento para retirarse en una avioneta
+
+		Plano plano = new Plano( 80 , 80 );
+		Avioneta avioneta = new Avioneta( 10 , 10  , plano );
+		int posicion = 10;
+		for ( int i= 1 ; i<5 ; i++) {  
+			avioneta.retirarse();
+			posicion = ( posicion + 1 );
+			assertEquals((int)avioneta.posicionY(), posicion );
+		}
 	}
 }
