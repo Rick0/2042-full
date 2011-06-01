@@ -118,13 +118,13 @@ public class Bombardero extends NaveNoOperable {
 	this.estaFueraDeArea();
 	}
 	
-	private Cohete dispararCohete() {
+	public Cohete dispararCohete() {
 		
 		return new Cohete( this.posicionX(), this.posicionY(), false, this.plano);
 	
 	}
 	
-	private Laser dispararLaser() {
+	public Laser dispararLaser() {
 		
 		return new Laser( this.posicionX(), this.posicionY(), false, this.plano);
 	
