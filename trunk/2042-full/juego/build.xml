@@ -14,7 +14,8 @@
 	</target>
 	
 	<target name="compilar" depends="limpiar">
-  		<mkdir dir="${build.dir}" /> 
+		<mkdir dir="${build.dir}" /> 
+		<javac srcdir="${src.dir}" includeantruntime="true" classpath="${lib.dir}"/>
 		<javac srcdir="${src.dir}" classpath="${lib.dir}" destdir="${build.dir}" />
  	</target>
 
