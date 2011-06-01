@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="iso-8859-1" ?> 
+<project name="TP2-Algo42Full" default="ayuda" basedir=".">
+  
+  	<property name="build.dir" value="bin/" /> 
+  	<property name="src.dir" value="src/" /> 
+  	<property name="lib.dir" value="lib/" />
+  	<property name="doc.dir" value="documentacion/javadoc" />
+  	<property name="zip.name" value="Entrega.zip" />
+	
+	<target name="limpiar">
+		<delete dir = "${build.dir}" />
+		<delete dir = "${doc.dir}" />
+		<delete file= "${zip.name}" />
+	</target>
+	
+	<target name="compilar" depends="limpiar">
+  		<mkdir dir="${build.dir}" /> 
+		<javac srcdir="${src.dir}" classpath="${lib.dir}" destdir="${build.dir}" />
+ 	</target>
+
+	<target name="correr" depends="compilar">
+		<java fork="yes" classname="algo3.Principal">
+			<classpath>	
+				<pathelement path="${build.dir}" />
+				<fileset dir="lib">
+					<include name="**/*.jar"/>
+				</fileset>
+			</classpath>
+		</java>
+  	</target>
+	
+	<target name="corrertests" depends="compilar">	
+		<junit>
+			<classpath>	
+				<pathelement path="${build.dir}" />
+				<fileset dir="lib">
+					<include name="**/*.jar"/>
+				</fileset>
+			</classpath>
+			<formatter type="brief" usefile="false" />
+			<batchtest>
+				<fileset dir="${build.dir}" includes="**/*Test.class" />
+			</batchtest>
+		</junit>
+  	</target>
+
+	<target name="generarjavadocs" depends="limpiar">	
+	  <javadoc packagenames="*"
+	           sourcepath="${src.dir}"
+	           defaultexcludes="yes"
+	           destdir="${doc.dir}"
+	           author="true"
+	           version="true"
+	           use="true"
+	           windowtitle="Proyecto Base Algo3">
+	    <doctitle><![CDATA[<h1>Proyecto Base Algo3</h1>]]></doctitle>
+	  </javadoc>
+	</target>
+	
+	<target name="generarentrega" depends="generarjavadocs">
+		<zip destfile="${zip.name}" basedir="."/>
+		<echo>Archivo ${zip.name} generado.</echo>
+	</target>
+	
+	<target name="ayuda">
+		<echo>ant compilar : compila el programa</echo>
+		<echo>ant corrertests : compila el programa y corre los tests</echo>
+		<echo>ant correr : compila el programa y ejecuta el programa</echo>
+		<echo>ant generarjavadocs : generar los javadocs</echo>
+		<echo>ant generarentrega : genera un zip listo para entregar</echo>
+	</target>
+
+</project>
