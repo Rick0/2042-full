@@ -1,5 +1,8 @@
 package Pruebas_Juego;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import org.junit.Test;
 
 import juego.*;
@@ -178,5 +181,80 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		laserA.mover();
 		assertEquals( (int)laserA.posicionY() , 26); //La avioneta llega hasta 30, y el laser de 26 a 31
 		assertTrue( laserA.intentarAtacar(avioneta) );
+	}
+	
+	@Test
+	public void testUsoYEfectoMunicionesCohetesTorpedos() throws ArmaNoDisponibleError, NaveARastrearError, 
+	AreaInvalidaError, SuperposicionNavesError, AlgoSeAtacaASiMismoError, AtaqueEntreNavesNoOperables {
+
+	/*Prueba el uso de armas y sus efectos en naves. Primero crea una instancia de algo42, que destruye un bombardero.
+	Toma sus armas. Prueba un cohete con una instancia de helicoptero, y luego un torpedo
+	con una instancia de avion civil.*/
+		
+		
+		
+		Plano plano = new Plano( 100 , 100 );
+		Algo42 algo = new Algo42( 50 , 10 , plano); 
+		Bombardero bombardero = new Bombardero( 50 , 30 , plano );
+		//Intentar dejar el arma ahora devuelve error
+		try {
+			bombardero.dejarArma();
+			fail("No puede dejarlporque no murio");
+		} catch (ItemNoDisponibleError error) {
+			//Esto es correcto
+		}
+
+		ArrayList<Arma> listaLaser = new ArrayList<Arma>(); 
+		for ( int i=0 ; i < 5 ; i++ ) {
+			algo.dispararLaser();
+			listaLaser.add( plano.devolverListaArmas().get(i) );
+		}
+		//Lanzo 5 veces el laser porque el bombardero tiene 50 puntos de energia.
+		Arma armaAuxiliar = null;
+		while ( !bombardero.estadoActualDestruida() ) {
+			Iterator<Arma> iterador = listaLaser.iterator();
+			while ( iterador.hasNext() ) {
+				armaAuxiliar = iterador.next();
+				armaAuxiliar.mover();
+				armaAuxiliar.intentarAtacar(bombardero);
+			}
+		}
+		Item item = null;
+		try {
+			item = bombardero.dejarArma();
+		} catch (ItemNoDisponibleError error) {
+			//No puede pasar por la condicion de salida del while
+		}
+		//Intentar tirar el cohete antes de tenerlo deberia levantar un error
+		try {
+			algo.dispararCohete();
+			fail("No puedo tirar cohetes si no los tengo");
+		} catch (ArmaNoDisponibleError error) {}
+		//Me muevo 20 veces para tomar el arma."
+		for (int i=0 ; i < 20 ; i++ ) {
+			algo.moverArriba();
+			item.intentarEfectoEn(algo);
+		}
+		Helicoptero helicoptero = new Helicoptero( 50 , 60 , plano );
+		algo.dispararCohete();
+		Arma cohete = plano.devolverListaArmas().get(5);
+		while ( !helicoptero.estadoActualDestruida() ) {
+			cohete.mover();
+			helicoptero.mover();
+			try {
+				cohete.intentarAtacar(helicoptero);
+			} catch (AlgoSeAtacaASiMismoError error) {
+				//No puede ocurrir
+			}
+			
+		}
+		Civil avion = new Civil( 20 , 90 , plano );
+		algo.dispararTorpedoHacia(avion);
+		Arma TorpedoRastreador = plano.devolverListaArmas().get(6);
+		while ( !avion.estadoActualDestruida() ) {
+			TorpedoRastreador.mover();
+			TorpedoRastreador.intentarAtacar(avion);
+			avion.mover();
+		}
 	}
 }
