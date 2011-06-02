@@ -8,7 +8,7 @@ import excepciones.*;
 public class PruebasExplorador extends TestCase{
 	
 	@Test
-	public void testMoverExplorador() throws SuperposicionNavesError {
+	public void testMoverExplorador() throws SuperposicionNavesError, NaveDestruidaError {
 	/*El explorador se mueve en forma de helice, intentado recorrer toda el area del juego:
 	Por lo tanto, para adaptarse al area de juego de 100x100, sera inicializado con radio=35;
 	De esta manera cubrira casi todo el area en sus giros. Su movimiento
@@ -33,7 +33,7 @@ public class PruebasExplorador extends TestCase{
 	}
 	
 	@Test
-	public void testMoverAlternativo() throws SuperposicionNavesError { 
+	public void testMoverAlternativo() throws SuperposicionNavesError, NaveDestruidaError { 
 	/*Prueba el movimiento alternativo de una nave exploradora.
 	El mover alternativo basicamente hace el mismo giro en posicion contraria.
 	Por lo tanto, estas pruebas haran el giro alternativo desde el principio. Dara media vuelta de helice hacia atras.

@@ -10,7 +10,7 @@ import excepciones.*;
 public class PruebaAvioneta extends TestCase{
 
 	@Test
-	public void testMoverAvioneta() throws SuperposicionNavesError {
+	public void testMoverAvioneta() throws SuperposicionNavesError, NaveDestruidaError {
 	/*Creara una instancia de avioneta, la hara bajar 60 pasos asegurandose de que la posicion
 	en cada punto sea la correcta, y luego se movera una vez mas para corroborar que el movimiento
 	hacia arriba se lleve a cabo.*/
@@ -33,7 +33,7 @@ public class PruebaAvioneta extends TestCase{
 	}
 	
 	@Test
-	public void testMoverAvionetaAlternativo() throws SuperposicionNavesError {
+	public void testMoverAvionetaAlternativo() throws SuperposicionNavesError, NaveDestruidaError {
 	//Prueba el movimiento alternativo de la avioneta
 		
 		Plano plano = new Plano(100, 100);
@@ -72,7 +72,7 @@ public class PruebaAvioneta extends TestCase{
 	}
 	
 	@Test
-	public void testLanzamientoLaser() throws SuperposicionNavesError {
+	public void testLanzamientoLaser() throws SuperposicionNavesError, NaveDestruidaError {
 	//Prueba el lanzamiento de armas laser.
 
 	

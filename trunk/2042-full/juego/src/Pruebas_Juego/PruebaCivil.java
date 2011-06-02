@@ -8,7 +8,7 @@ import excepciones.*;
 public class PruebaCivil extends TestCase {
 	
 	@Test
-	public void testMoverAlternativoAvionCivil() throws SuperposicionNavesError {	
+	public void testMoverAlternativoAvionCivil() throws SuperposicionNavesError, NaveDestruidaError {	
 	/*Pruebo que al llamar a la funcion mover alternativo, realice el movimiento esperado en las naves civiles,
 	es decir, el movimiento hacia atras*/
 	
@@ -24,7 +24,7 @@ public class PruebaCivil extends TestCase {
 	}
 	
 	@Test
-	public void testMoverAvionCivil() throws SuperposicionNavesError {	
+	public void testMoverAvionCivil() throws SuperposicionNavesError, NaveDestruidaError {	
 		/*Pruebo que al llamar a la funcion mover, realice el movimiento esperado en las naves civiles,
 		es decir, el movimiento hacia adelante.*/
 		

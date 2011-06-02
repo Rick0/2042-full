@@ -6,7 +6,7 @@ import juego.*;
 
 public class PruebaHelicoptero extends TestCase {
 	
-	public void testMoverHelicoptero() throws SuperposicionNavesError{
+	public void testMoverHelicoptero() throws SuperposicionNavesError, NaveDestruidaError{
 	/*Prueba los movimientos de los helicopteros.*/
 
 		Plano plano = new Plano (100,100);
@@ -21,7 +21,7 @@ public class PruebaHelicoptero extends TestCase {
 		}
 	}
 	
-	public void testMoverAlternativo() throws SuperposicionNavesError{
+	public void testMoverAlternativo() throws SuperposicionNavesError, NaveDestruidaError{
 	/*Pruebo que al llamar a la funcion mover alternativo, realice el movimiento esperado en los helicopteros,
 	es decir, el movimiento hacia atras*/
 

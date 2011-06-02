@@ -5,6 +5,7 @@ import java.util.List;
 import org.junit.Test;
 
 import excepciones.ItemNoDisponibleError;
+import excepciones.NaveDestruidaError;
 import excepciones.SuperposicionNavesError;
 import juego.*;
 import junit.framework.TestCase;
@@ -12,7 +13,7 @@ import junit.framework.TestCase;
 public class PruebaCazaYFlota extends TestCase {
 	
 	@Test
-	public void testDejarArmas() throws SuperposicionNavesError, ItemNoDisponibleError{
+	public void testDejarArmas() throws SuperposicionNavesError, ItemNoDisponibleError, NaveDestruidaError{
 	/*Prueba que un caza no puede dejar un tanque de energia,
 	cuando esta eliminado, prueba que las coloca en la posicion correcta.*/
 
@@ -39,7 +40,7 @@ public class PruebaCazaYFlota extends TestCase {
 	}
 	
 	@Test
-	public void testLanzamientoTorpedo() throws SuperposicionNavesError { 
+	public void testLanzamientoTorpedo() throws SuperposicionNavesError, NaveDestruidaError { 
 	//Prueba el lanzamiento de torpedos simples"
 
 	
@@ -48,13 +49,13 @@ public class PruebaCazaYFlota extends TestCase {
 		
 		//La responsabilidad del caza es crear un laser y ubicarlo, por lo tanto, solo eso voy a probar en esta prueba unitaria.
 		caza.dispararTorpedo();
-		List<Arma> torpedo = plano.devolverListaArmas(); //Se que sólo hay una
+		List<Arma> torpedo = plano.devolverListaArmas(); //Se que sï¿½lo hay una
 		assertEquals((int)torpedo.get(0).posicionY() , 90 );
 		assertEquals((int)torpedo.get(0).posicionX() , 90 );
 	}
 	
 	@Test
-	public void testMoverCaza() throws SuperposicionNavesError {
+	public void testMoverCaza() throws SuperposicionNavesError, NaveDestruidaError {
 	//Prueba los movimientos de los cazas.
 		
 		int pos = 75;
@@ -68,7 +69,7 @@ public class PruebaCazaYFlota extends TestCase {
 	}
 	
 	@Test
-	public void testMoverAlternativoCaza() throws SuperposicionNavesError {
+	public void testMoverAlternativoCaza() throws SuperposicionNavesError, NaveDestruidaError {
 	//Prueba los movimientos de los cazas.
 		
 		int pos = 75;

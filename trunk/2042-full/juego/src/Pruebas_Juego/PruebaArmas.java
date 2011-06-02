@@ -27,7 +27,7 @@ public class PruebaArmas extends TestCase {
 	
 	@Test
 	public void testAtaqueInvalidoArmaNaveNoOperable() throws
-	AreaInvalidaError, AlgoSeAtacaASiMismoError, SuperposicionNavesError {
+	AreaInvalidaError, AlgoSeAtacaASiMismoError, SuperposicionNavesError, NaveDestruidaError {
 	/*Prueba que un arma que reconoce que su origen no es una algo42, no puede atacar a una nave
 	de tipo no operable (en este caso, una nave civil)*/
 

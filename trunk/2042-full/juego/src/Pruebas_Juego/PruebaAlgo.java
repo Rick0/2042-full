@@ -110,7 +110,7 @@ public class PruebaAlgo extends TestCase{
 	}
 	
 	public void testLanzamientoTorpedoRastreador() throws AreaInvalidaError,SuperposicionNavesError,
-	NaveARastrearError,ArmaNoDisponibleError {
+	NaveARastrearError,ArmaNoDisponibleError, NaveDestruidaError {
 		Plano plano = new Plano(100,100);
 		Algo42 algo = new Algo42(50,50,plano);
 		Nave avioneta = new Avioneta(60,70,plano);

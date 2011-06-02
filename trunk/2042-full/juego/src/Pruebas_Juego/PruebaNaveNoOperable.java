@@ -3,6 +3,7 @@ package Pruebas_Juego;
 import org.junit.Test;
 
 import excepciones.AreaInvalidaError;
+import excepciones.NaveDestruidaError;
 import excepciones.SuperposicionNavesError;
 import juego.*;
 import junit.framework.TestCase;
@@ -11,7 +12,7 @@ public class PruebaNaveNoOperable extends TestCase {
 	
 
 	@Test
-	public void testChocar() throws AreaInvalidaError, SuperposicionNavesError{
+	public void testChocar() throws AreaInvalidaError, SuperposicionNavesError, NaveDestruidaError{
 	/*Prueba colocar avionetas en distintas posiciones y chocar una instancia de algo42.
 	Si el choque se dio, deberia devolver true, o false en caso contrario*/
 	
@@ -27,7 +28,7 @@ public class PruebaNaveNoOperable extends TestCase {
 	}
 	
 	@Test
-	public void testEstaFueraDeArea() throws SuperposicionNavesError{
+	public void testEstaFueraDeArea() throws SuperposicionNavesError, NaveDestruidaError{
 	/*Prueba el metodo esta fuera de area con una avioneta*/
 
 		Plano plano=new Plano ( 80,80);
@@ -46,7 +47,7 @@ public class PruebaNaveNoOperable extends TestCase {
 	}
 	
 	@Test
-	public void testIntentarMoverBombardero() throws SuperposicionNavesError{
+	public void testIntentarMoverBombardero() throws SuperposicionNavesError, NaveDestruidaError{
 	/*Voy a probar el uso de la funcion Intentar mover con un bombardero.*/
 
 		Plano plano=new Plano (100,100);
@@ -88,7 +89,7 @@ public class PruebaNaveNoOperable extends TestCase {
 	
 	@SuppressWarnings("unused")
 	@Test
-	public void testIntentarMoverCivil() throws SuperposicionNavesError {
+	public void testIntentarMoverCivil() throws SuperposicionNavesError, NaveDestruidaError {
 	/*Voy a probar el uso de la funcion Intentar mover utilizando una nave civil.
 	Pruebo las alternativas de movimiento del avion civil, dejandole el paso libre y tambien poniendo obstaculos
 	en su camino, para probar que realiza los movimientos correctos*/
@@ -111,7 +112,7 @@ public class PruebaNaveNoOperable extends TestCase {
 	}
 	
 	@Test
-	public void testRetirarse() throws SuperposicionNavesError{
+	public void testRetirarse() throws SuperposicionNavesError, NaveDestruidaError{
 	//Prueba el movimiento para retirarse en una avioneta
 
 		Plano plano = new Plano( 80 , 80 );

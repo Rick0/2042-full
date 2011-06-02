@@ -12,7 +12,7 @@ import junit.framework.*;
 public class PruebaIntegracionEnIteraciones extends TestCase {
 	
 	@Test
-	public void testChoqueAlgoAvioneta() throws SuperposicionNavesError, AreaInvalidaError {
+	public void testChoqueAlgoAvioneta() throws SuperposicionNavesError, AreaInvalidaError, NaveDestruidaError {
 
 	/*Prueba que realiza un choque entre una instancia de algo42 y una avioneta
 	Los objetos ubicables necesitan un plano donde moverse.*/
@@ -60,7 +60,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 	}
 	
 	@Test
-	public void testInteraccionAlgoYCazaItemsYArmas() throws AreaInvalidaError, SuperposicionNavesError {
+	public void testInteraccionAlgoYCazaItemsYArmas() throws AreaInvalidaError, SuperposicionNavesError, NaveDestruidaError {
 	/*Prueba el uso tanto de los torpedos simples como de los tanques de energia,
 	con una instancia de caza y una nave algo 42.*/
 
@@ -99,7 +99,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		try {
 			item = caza.dejarTanque();
 		} catch (ItemNoDisponibleError error) {
-			//Esto sucede si el caza no ha muerto, pero yo me aseguré de que si lo hizo
+			//Esto sucede si el caza no ha muerto, pero yo me asegurï¿½ de que si lo hizo
 		}
 	
 		//Muevo la nave hacia arriba 76 veces para alcanzar el tanque
@@ -111,7 +111,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 	}
 	
 	@Test
-	public void testInteraccionArmasNavesNoOperables() throws AlgoSeAtacaASiMismoError, SuperposicionNavesError {
+	public void testInteraccionArmasNavesNoOperables() throws AlgoSeAtacaASiMismoError, SuperposicionNavesError, NaveDestruidaError {
 	/*Prueba interacciones entre naves no operables y las armas que ellas mismas lanzan.
 	Prueba que las naves no operables no pueden atacarse entre ellas*/
 
@@ -148,7 +148,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 	}
 	
 	@Test
-	public void testUsoMunicionesLasers() throws AlgoSeAtacaASiMismoError, AtaqueEntreNavesNoOperables, AreaInvalidaError {
+	public void testUsoMunicionesLasers() throws AlgoSeAtacaASiMismoError, AtaqueEntreNavesNoOperables, AreaInvalidaError, NaveDestruidaError {
 
 	//Prueba el uso de municiones. Una avioneta le dispara a un algo42 y visceversa 
 		
@@ -185,7 +185,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 	
 	@Test
 	public void testUsoYEfectoMunicionesCohetesTorpedos() throws ArmaNoDisponibleError, NaveARastrearError, 
-	AreaInvalidaError, SuperposicionNavesError, AlgoSeAtacaASiMismoError, AtaqueEntreNavesNoOperables {
+	AreaInvalidaError, SuperposicionNavesError, AlgoSeAtacaASiMismoError, AtaqueEntreNavesNoOperables, NaveDestruidaError {
 
 	/*Prueba el uso de armas y sus efectos en naves. Primero crea una instancia de algo42, que destruye un bombardero.
 	Toma sus armas. Prueba un cohete con una instancia de helicoptero, y luego un torpedo

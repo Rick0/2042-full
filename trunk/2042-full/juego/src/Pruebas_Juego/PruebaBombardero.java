@@ -2,6 +2,7 @@ package Pruebas_Juego;
 
 import org.junit.Test;
 
+import excepciones.NaveDestruidaError;
 import excepciones.SuperposicionNavesError;
 import junit.framework.TestCase;
 import juego.*;
@@ -9,7 +10,7 @@ import juego.*;
 public class PruebaBombardero extends TestCase{
 	
 	@Test
-	public void testMoverBombardero() throws SuperposicionNavesError{
+	public void testMoverBombardero() throws SuperposicionNavesError, NaveDestruidaError{
 	/*Crea una instancia de bombardero y prueba su movimiento*/
 
 		Plano plano=new Plano(100,100);

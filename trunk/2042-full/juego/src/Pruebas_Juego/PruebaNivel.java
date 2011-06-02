@@ -2,6 +2,7 @@ package Pruebas_Juego;
 
 import org.junit.*;
 
+import excepciones.NaveDestruidaError;
 import excepciones.SuperposicionNavesError;
 import junit.framework.TestCase;
 import juego.*;
@@ -21,7 +22,7 @@ public class PruebaNivel extends TestCase {
 	}
 	
 	@Test
-	public void testAvanzarNiveles() throws SuperposicionNavesError {
+	public void testAvanzarNiveles() throws SuperposicionNavesError, NaveDestruidaError {
 	/*Crea un plano y una lista de naves, a las cuales les modificara la energia para que pasen a estar destruidas.
 	Las naves seran 20 cazas. La destruccion de un caza da 50 puntos; Eliminar 20 da los 1000 puntos necesarios
 	para avanzar de nivel.*/

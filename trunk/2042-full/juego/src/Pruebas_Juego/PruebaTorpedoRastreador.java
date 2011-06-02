@@ -2,6 +2,7 @@ package Pruebas_Juego;
 
 import org.junit.Test;
 
+import excepciones.NaveDestruidaError;
 import excepciones.SuperposicionNavesError;
 
 import junit.framework.TestCase;
@@ -10,7 +11,7 @@ import juego.*;
 public class PruebaTorpedoRastreador extends TestCase{
 	
 	@Test
-	public void testMover() throws SuperposicionNavesError{
+	public void testMover() throws SuperposicionNavesError, NaveDestruidaError{
 	/*Prueba el movimiento de un torpedo rastreador. Un torpedo de este tipo
 	deberia ir acercandose a su objetivo.*/
 
