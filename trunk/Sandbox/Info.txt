@@ -1,9 +1,0 @@
-- Cuando creas un archivo nuevo, a la hora de 'commit' lo tenes que seleccionar. Idem para cuando borran un archivo. Igual creo q el tortoise te avisa.
-
-
-- Ademas, podes tener archivos en la misma carpeta del proyecto, pero que no se suban al repositorio. Para eso tenes que poner al archivo como 'Ignore'.
-
-
-- Cuando hacen 'commit', pueden completar el cuadro de Log que aparece en la parte superior de la ventana, poniendo un resumen de lo que cambiaron, asi los demas saben.
-
-- 
