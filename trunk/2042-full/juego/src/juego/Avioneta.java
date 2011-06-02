@@ -5,7 +5,7 @@ import excepciones.*;
 public class Avioneta extends NaveNoOperable {
 	public int puntosAtras, puntosAdelante;
 	
-	public Avioneta(int posicionX, int posicionY, Plano plano) throws SuperposicionNavesError{
+	public Avioneta(int posicionX, int posicionY, Plano plano) throws SuperposicionNavesError, NaveDestruidaError{
 		//"Inicializa una instancia de Avioneta"
 
 		this.puntos = 20;
@@ -18,7 +18,7 @@ public class Avioneta extends NaveNoOperable {
 		fueraDeJuego = false;
 		this.determinarPlano(plano);
 		if (this.seSuperponeConOtraNave()) {
-			throw new SuperposicionNavesError("La posición esta ocupada");
+			throw new SuperposicionNavesError("La posiciï¿½n esta ocupada");
 		}
 		plano.agregarNave(this);
 	}

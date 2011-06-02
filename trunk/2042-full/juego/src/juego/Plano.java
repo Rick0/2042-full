@@ -46,8 +46,11 @@ y armas en juego y se encarga de operar sobre ellas e iterarlas.*/
 		algo42=algo;
 	}
 	
-	public void agregarNaveEliminada(Nave nave) {
+	public void agregarNaveEliminada(Nave nave) throws NaveNoDestruidaError {
 	//Agrega una referencia a la nave destruida
+	if(!(nave.destruida )){
+		    throw new NaveNoDestruidaError("La nave aun no esta destruida");
+	}
 		listaNavesDestruidas.add((NaveNoOperable) nave);
 		
 	}
@@ -79,10 +82,10 @@ y armas en juego y se encarga de operar sobre ellas e iterarlas.*/
 		
 	}
 	
-	public void agregarNave(Nave unaNave) {
+	public void agregarNave(Nave unaNave) throws NaveDestruidaError {
 		//Agrega una nave no operable a la lista de naves
 		if ( unaNave.estadoActualDestruida() ) {
-			new NaveDestruidaError("La nave esta destruida");
+			throw new NaveDestruidaError("La nave esta destruida");
 		}
 		this.listaNaves.add( unaNave );
 		

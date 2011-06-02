@@ -6,7 +6,7 @@ import juego.NaveNoOperable;
 public class Bombardero extends NaveNoOperable {
 	double haciaDer, haciaIzq;
 	
-	public Bombardero(double x, double y, Plano plano) throws SuperposicionNavesError{
+	public Bombardero(double x, double y, Plano plano) throws SuperposicionNavesError, NaveDestruidaError{
 		//"Inicializa una instancia de Bombardero"
 
 		this.puntos = 30;

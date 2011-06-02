@@ -5,7 +5,7 @@ import excepciones.*;
 public class Helicoptero extends NaveNoOperable {
 
 	
-	public Helicoptero(int posicionX, int posicionY, Plano plano) throws SuperposicionNavesError {
+	public Helicoptero(int posicionX, int posicionY, Plano plano) throws SuperposicionNavesError, NaveDestruidaError {
 		
 		puntos = -200;
 		energia = 1;
@@ -17,7 +17,7 @@ public class Helicoptero extends NaveNoOperable {
 		this.determinarPlano(plano);
 		
 		if (this.seSuperponeConOtraNave()) {
-			throw new SuperposicionNavesError("La posición esta ocupada");
+			throw new SuperposicionNavesError("La posiciï¿½n esta ocupada");
 		}
 		plano.agregarNave(this);
 	}

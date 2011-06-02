@@ -4,7 +4,7 @@ import excepciones.*;
 
 public class Civil extends NaveNoOperable {
 	
-	public Civil(int posicionX, int posicionY, Plano plano) throws SuperposicionNavesError {
+	public Civil(int posicionX, int posicionY, Plano plano) throws SuperposicionNavesError, NaveDestruidaError {
 		//"Inicializa una instancia de Bombardero"
 
 		puntos = -300;
@@ -17,7 +17,7 @@ public class Civil extends NaveNoOperable {
 		this.determinarPlano(plano);
 		
 		if (this.seSuperponeConOtraNave()) {
-			throw new SuperposicionNavesError("La posición esta ocupada");
+			throw new SuperposicionNavesError("La posiciï¿½n esta ocupada");
 		}
 		plano.agregarNave(this);
 	}

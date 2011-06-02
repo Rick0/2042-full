@@ -8,7 +8,7 @@ public class Explorador extends NaveNoOperable {
 	int puntosHaciaAbajo,radio,centroInicialX,centroInicialY;
 	boolean inicializado;
 	
-	public Explorador(int posicionX, int posicionY, int radioDeGiro, Plano plano) throws SuperposicionNavesError {
+	public Explorador(int posicionX, int posicionY, int radioDeGiro, Plano plano) throws SuperposicionNavesError, NaveDestruidaError {
 		//"Inicializa una instancia de Bombardero"
 
 		puntos = 50;
@@ -24,7 +24,7 @@ public class Explorador extends NaveNoOperable {
 		this.determinarRadio( radioDeGiro );
 		this.determinarPosicion( posicionX,posicionY);
 		if (this.seSuperponeConOtraNave()) {
-			throw new SuperposicionNavesError("La posición esta ocupada");
+			throw new SuperposicionNavesError("La posiciï¿½n esta ocupada");
 		}
 		plano.agregarNave(this);
 	}

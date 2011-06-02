@@ -11,7 +11,7 @@ public class FlotaCazas {
 	int posicionXOriginal, posicionYOriginal;
 	Plano plano;
 	
-	public FlotaCazas(int centroX, int centroY, Plano planoDeJuego) {
+	public FlotaCazas(int centroX, int centroY, Plano planoDeJuego) throws NaveDestruidaError {
 		//"Crea una flota, cuyo lider (es decir, la nave que esta adelante de todas) se colocara
 		//en la posicion x,y. "
 			List<Caza> array;
@@ -71,7 +71,7 @@ public class FlotaCazas {
 		
 	}
 	
-	public void PosicionarYUbicarNuevoCaza() {
+	public void PosicionarYUbicarNuevoCaza() throws NaveDestruidaError {
 
 	/*Se encarga de analizar la formacion de los cazas, y de ir ubicando nuevos cazas
 	en el plano, si es que todas las lineas de cazas no se mostraron aun- .*/
