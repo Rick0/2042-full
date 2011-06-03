@@ -1,6 +1,6 @@
 package juego;
 
-import excepciones.NaveNoDestruidaError;
+import juego.excepciones.NaveNoDestruidaError;
 
 public abstract class Nave extends ObjetoUbicable {
 	

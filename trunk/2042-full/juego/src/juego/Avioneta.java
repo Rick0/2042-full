@@ -1,6 +1,6 @@
 package juego;
 
-import excepciones.*;
+import juego.excepciones.*;
 
 public class Avioneta extends NaveNoOperable {
 	public int puntosAtras, puntosAdelante;

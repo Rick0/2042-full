@@ -1,6 +1,6 @@
 package juego;
 
-import excepciones.*;
+import juego.excepciones.*;
 
 public class Algo42 extends Nave {
 /*El algo42 es la nave principal del juego,,

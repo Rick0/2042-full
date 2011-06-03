@@ -1,9 +1,10 @@
 package juego;
 
-import excepciones.*;
 
 import java.util.Iterator;
 import java.util.List;
+
+import juego.excepciones.*;
 
 public abstract class Guia extends NaveNoOperable{
 	List<NaveNoOperable> flota; 

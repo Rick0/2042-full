@@ -1,7 +1,7 @@
 package juego;
 
 //import java.lang.Object;
-import excepciones.*;
+import juego.excepciones.*;
 
 public class Cohete extends Arma {
 	public Cohete (double d, double f, boolean origenAlgo,Plano plano ) {

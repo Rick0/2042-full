@@ -1,6 +1,6 @@
 package juego;
 
-import excepciones.ArmaUsadaError;
+import juego.excepciones.ArmaUsadaError;
 
 public class TorpedoSimple extends Arma {
 	public TorpedoSimple (double d, double f, boolean origenAlgo,Plano plano ) {

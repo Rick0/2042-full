@@ -2,8 +2,9 @@ package juego;
 
 import java.util.Iterator;
 
-import excepciones.NaveNoDestruidaError;
-import excepciones.SuperposicionNavesError;
+import juego.excepciones.NaveNoDestruidaError;
+import juego.excepciones.SuperposicionNavesError;
+
 
 public abstract class NaveNoOperable extends Nave{
 /*Todas las naves que no pueden ser utilizadas por el jugador deben 

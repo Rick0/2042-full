@@ -1,8 +1,8 @@
 package juego;
 
-import excepciones.AlgoSeAtacaASiMismoError;
-import excepciones.ArmaUsadaError;
-import excepciones.AtaqueEntreNavesNoOperables;
+import juego.excepciones.AlgoSeAtacaASiMismoError;
+import juego.excepciones.ArmaUsadaError;
+import juego.excepciones.AtaqueEntreNavesNoOperables;
 
 public class TorpedoAdaptable extends Arma {
 	

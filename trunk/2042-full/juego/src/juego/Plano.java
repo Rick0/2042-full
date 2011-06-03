@@ -2,7 +2,8 @@ package juego;
 
 import java.util.List;
 import java.util.ArrayList;
-import excepciones.*;
+
+import juego.excepciones.*;
 
 
 public class Plano {

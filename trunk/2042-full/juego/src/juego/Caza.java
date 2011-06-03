@@ -1,7 +1,7 @@
 package juego;
 
 
-import excepciones.*;
+import juego.excepciones.*;
 
 public class Caza extends NaveNoOperable {
 	int numero, pasosAvanzados;

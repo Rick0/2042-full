@@ -1,6 +1,6 @@
 package juego;
 
-import excepciones.*;
+import juego.excepciones.*;
 
 public class Laser extends Arma {
 	public Laser (double d, double f, boolean origenAlgo,Plano plano ) {

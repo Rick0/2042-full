@@ -1,7 +1,7 @@
 package juego;
 
-import excepciones.*;
 import juego.NaveNoOperable;
+import juego.excepciones.*;
 
 public class Bombardero extends NaveNoOperable {
 	double haciaDer, haciaIzq;

@@ -1,7 +1,8 @@
 package juego;
 import java.util.Iterator;
 
-import excepciones.*;
+import juego.excepciones.*;
+
 
 public abstract class Arma extends ObjetoUbicable {
 	
