@@ -1,5 +1,6 @@
-package juego;
-import juego.excepciones.ArmaUsadaError;
+package fiuba.algo3.juego;
+import fiuba.algo3.juego.excepciones.ArmaUsadaError;
+
 
 public class Laser extends Arma {
 
