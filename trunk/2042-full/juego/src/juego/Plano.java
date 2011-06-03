@@ -1,15 +1,15 @@
 package juego;
-
 import java.util.List;
 import java.util.ArrayList;
 
 import juego.excepciones.*;
 
 
+/* Maneja el escenario del nivel, contiene listas con las naves, items
+ * y armas en juego y se encarga de operar sobre ellas e iterarlas
+ */
 public class Plano {
-	/*Maneja el escenario del nivel, contiene listas con las naves, items
-y armas en juego y se encarga de operar sobre ellas e iterarlas.*/
-	
+
 	int ancho;
 	int altura;
 	Algo42 algo42;
@@ -20,92 +20,85 @@ y armas en juego y se encarga de operar sobre ellas e iterarlas.*/
 	ArrayList<Item> listaItemsUsados = new ArrayList<Item>();
 	ArrayList<Arma> listaArmasUsadas = listaArmas = new ArrayList<Arma>();
 	Nivel nivel;
-	
-	public Plano(int dimensionX,int dimensionY ) {
-		/*Constructor del plano, recibe sus dimensiones
-		 * Crea sus listas de armas, naves e items, que se
-		 * posicionaran en el plano */
-			ancho=dimensionX;
-			altura=dimensionY;
-			
-		}
-	public int devolverAltura(){
-		/*Devuelve la altura del plano*/
 
+
+	/* Constructor del plano, recibe sus dimensiones
+	 * Crea sus listas de armas, naves e items, que se posicionaran en el plano
+	 */
+	public Plano(int dimensionX,int dimensionY ) {
+		ancho=dimensionX;
+		altura=dimensionY;
+	}
+
+	/* Devuelve la altura del plano */
+	public int devolverAltura() {
 		return altura;
 	}
-	
-	public int devolverAncho(){
-		/*Devuelve el ancho del plano*/
 
+	/* Devuelve el ancho del plano */
+	public int devolverAncho() {
 		return ancho;
 	}
-	
-	public void introducirAlgo(Algo42 algo){
-		/*Introduce un algo42 al plano*/
 
+	/* Introduce un algo42 al plano */
+	public void introducirAlgo(Algo42 algo) {
 		algo42=algo;
 	}
-	
+
+	/* Agrega una referencia a la nave destruida */
 	public void agregarNaveEliminada(Nave nave) throws NaveNoDestruidaError {
-	//Agrega una referencia a la nave destruida
-	if(!(nave.destruida )){
-		    throw new NaveNoDestruidaError("La nave aun no esta destruida");
-	}
+
+		if(!(nave.destruida )){
+			throw new NaveNoDestruidaError("La nave aun no esta destruida");
+		}
 		listaNavesDestruidas.add((NaveNoOperable) nave);
-		
 	}
-	
+
+	/* Agrega un arma a la lista de armas usadas */
 	public void agregarArmaUsada(Arma arma) throws ArmaNoUsadaError {
-		
-		//Agrega un arma a la lista de armas usadas
-		
+
 		if ( !arma.estadoUsado() ) {
 			throw new ArmaNoUsadaError("Esta municion no fue usada");
 		}
-		
 		this.listaArmasUsadas.add( arma );
 	}
-
 
 	public Algo42 algo42() {
 		return algo42;
 	}
 
+	/* Agrega una municion al plano */
 	public void agregarArma(Arma arma) throws ArmaUsadaError {
-		//Agrega una municion al plano.
 
-		
 		if ( arma.estadoUsado() ){
 			throw new ArmaUsadaError("Esta municion ya fue usada");
 		}
 		this.listaArmas.add( arma);
-		
 	}
-	
+
+	/* Agrega una nave no operable a la lista de naves */
 	public void agregarNave(Nave unaNave) throws NaveDestruidaError {
-		//Agrega una nave no operable a la lista de naves
+		
 		if ( unaNave.estadoActualDestruida() ) {
 			throw new NaveDestruidaError("La nave esta destruida");
 		}
 		this.listaNaves.add( unaNave );
-		
 	}
-	
+
+	/* Agrega un item al area de Juego */
 	public void agregarItem(Item item) throws ItemUsadoError {
-		// Agrega un item al area de Juego
+		
 		if (item.usado() ){
 			throw new ItemUsadoError("Se trata de agregar al mapa un item usado");
 		}
 		this.listaItems.add(item);
 	}
-	
+
+	/* Uso para el programador */
 	public List<Arma> devolverListaArmas() {
-		// uso para el programador
 		return listaArmas;
-		
 	}
-	
+
 	public ArrayList<NaveNoOperable> devolverListaNavesEliminades() {
 		return this.listaNavesDestruidas;
 	}
