@@ -1,22 +1,25 @@
 package juego;
-
-
 import java.util.Iterator;
 import java.util.List;
+import juego.excepciones.GuiaNoDestruidaError;
+import juego.excepciones.NaveNoDestruidaError;
 
-import juego.excepciones.*;
 
-public abstract class Guia extends NaveNoOperable{
-	List<NaveNoOperable> flota; 
-	
+public abstract class Guia extends NaveNoOperable {
+
+	List<NaveNoOperable> flota;
+
+
+	/* La nave guia tiene una caracteristica especial: Cuando sus puntos de energia bajan,
+	 * si llegan a ser iguales o menores a cero, llama a la funcion flotaRetroceder. De esa manera,
+	 * las naves de la flota que perdieron su guia, huyen hacia atras
+	 */
 	public void destruirse() throws NaveNoDestruidaError {
-	/*La nave guia tiene una caracteristica especial: Cuando sus puntos de energia bajan,
-	si llegan a ser iguales o menores a cero, llama a la funcion flotaRetroceder; De esa manera,
-	las naves de la flota que perdieron su guia, huyen hacia atras.*/
-		
+
 		if (this.devolverCantidadEnergia() > 0) {
 			throw new NaveNoDestruidaError("La nave aun tiene energia en su tanque");
-		} else {
+		}
+		else {
 			destruida = true;
 			plano.agregarNaveEliminada(this);
 			try {
@@ -26,20 +29,22 @@ public abstract class Guia extends NaveNoOperable{
 			}
 		}
 	}
-	
+
+	/* Todas las naves de la flota actual retroceden. Esta funcion debe ser llamada solamente si
+	 * la nave guia fue destruida. En caso contrario, levanta una excepcion
+	 */
 	public void flotaRetroceder() throws GuiaNoDestruidaError {
-	/*Todas las naves de la flota actual retroceden. Esta funcion debe ser llamada solamente si
-	la nave guia fue destruida; En caso contrario, levanta una excepcion."*/
-		
+
 		if (destruida) {
-			Iterator<NaveNoOperable> cadaNave = flota.iterator();
-			
+
+			Iterator<NaveNoOperable> cadaNave = flota.iterator();			
 			while (cadaNave.hasNext()) {
 				cadaNave.next().retirarse();
 			}
-		} else { 
+		}
+		else {
 			throw new GuiaNoDestruidaError("La nave guia no fue destruida. La flota no tiene por que retirarse");
 		}
 	}
-	
+
 }
