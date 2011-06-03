@@ -1,7 +1,7 @@
-package juego;
-import juego.excepciones.AreaInvalidaError;
-import juego.excepciones.ArmaNoDisponibleError;
-import juego.excepciones.NaveARastrearError;
+package fiuba.algo3.juego;
+import fiuba.algo3.juego.excepciones.AreaInvalidaError;
+import fiuba.algo3.juego.excepciones.ArmaNoDisponibleError;
+import fiuba.algo3.juego.excepciones.NaveARastrearError;
 
 
 /* El Algo42 es la nave principal del juego
