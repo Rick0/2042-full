@@ -1,8 +1,8 @@
-package juego;
+package fiuba.algo3.juego;
 import java.util.Iterator;
 import java.util.List;
-import juego.excepciones.GuiaNoDestruidaError;
-import juego.excepciones.NaveNoDestruidaError;
+import fiuba.algo3.juego.excepciones.GuiaNoDestruidaError;
+import fiuba.algo3.juego.excepciones.NaveNoDestruidaError;
 
 
 public abstract class Guia extends NaveNoOperable {
