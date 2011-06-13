@@ -10,6 +10,7 @@ import fiuba.algo3.juego.modelo.Arma;
 import fiuba.algo3.juego.modelo.Caza;
 import fiuba.algo3.juego.modelo.Item;
 import fiuba.algo3.juego.modelo.Plano;
+import fiuba.algo3.juego.modelo.Punto;
 import fiuba.algo3.juego.modelo.excepciones.ItemNoDisponibleError;
 import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
@@ -25,7 +26,8 @@ public class PruebaCazaYFlota extends TestCase {
 		
 		
 		Plano plano = new Plano( 100 , 100 );
-		Caza caza = new Caza( 50 , 50 , plano);
+		Punto punto= new Punto(50,50);
+		Caza caza = new Caza( punto , plano);
 		
 		/*Un caza es inicializado con 10 puntos de energia. Hasta que no sean iguales o menores que cero,
 		no puede dejar un item.*/
@@ -40,8 +42,8 @@ public class PruebaCazaYFlota extends TestCase {
 		caza.modificarEnergia( -10 );
 		Item item = caza.dejarTanque();
 		
-		assertEquals((int)item.posicionX() , 50 );
-		assertEquals((int)item.posicionY() , 50 );
+		assertEquals(item.devolverPunto().getX() , 50.0 );
+		assertEquals(item.devolverPunto().getY() , 50.0 );
 	}
 	
 	@Test
@@ -50,24 +52,26 @@ public class PruebaCazaYFlota extends TestCase {
 
 	
 		Plano plano = new Plano( 100 , 100 );
-		Caza caza = new Caza( 90 , 90 , plano );
+		Punto posicion= new Punto(90,90);
+		Caza caza = new Caza( posicion, plano );
 		
 		//La responsabilidad del caza es crear un laser y ubicarlo, por lo tanto, solo eso voy a probar en esta prueba unitaria.
 		caza.dispararTorpedo();
-		List<Arma> torpedo = plano.devolverListaArmas(); //Se que s�lo hay una
-		assertEquals((int)torpedo.get(0).posicionY() , 90 );
-		assertEquals((int)torpedo.get(0).posicionX() , 90 );
+		List<Arma> torpedo = plano.devolverListaArmas(); //Se que solo hay una
+		assertEquals(torpedo.get(0).devolverPunto().getY() , 90.0 );
+		assertEquals((int)torpedo.get(0).devolverPunto().getX() , 90 );
 	}
 	
 	@Test
 	public void testMoverCaza() throws SuperposicionNavesError, NaveDestruidaError {
 	//Prueba los movimientos de los cazas.
 		
-		int pos = 75;
+		double pos = 75.0;
 		Plano plano = new Plano( 100 , 100 );
-		Caza caza = new Caza( 70 , 75 , plano ); 
+		Punto punto= new Punto(70,75);
+		Caza caza = new Caza(punto, plano ); 
 		for ( int i = 1 ; i < 20 ; i++ ) {	
-			assertEquals((int)caza.posicionY() , pos );
+			assertEquals(caza.devolverPunto().getY() , pos );
 			caza.mover();
 			pos = ( pos - 1 );
 		}
@@ -77,11 +81,12 @@ public class PruebaCazaYFlota extends TestCase {
 	public void testMoverAlternativoCaza() throws SuperposicionNavesError, NaveDestruidaError {
 	//Prueba los movimientos de los cazas.
 		
-		int pos = 75;
+		double pos = 75.0;
 		Plano plano = new Plano( 100 , 100 );
-		Caza caza = new Caza( 70 , 75 , plano ); 
+		Punto punto= new Punto(70,75);
+		Caza caza = new Caza(punto , plano ); 
 		for ( int i = 1 ; i < 20 ; i++ ) {	
-			assertEquals((int)caza.posicionY() , pos );
+			assertEquals(caza.devolverPunto().getY() , pos );
 			caza.moverAlternativo();
 			pos = ( pos + 1 );
 		}
