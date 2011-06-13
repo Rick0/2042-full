@@ -3,6 +3,7 @@ package fiuba.algo3.juego.pruebas;
 import junit.framework.TestCase;
 import fiuba.algo3.juego.modelo.Helicoptero;
 import fiuba.algo3.juego.modelo.Plano;
+import fiuba.algo3.juego.modelo.Punto;
 import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
@@ -13,14 +14,15 @@ public class PruebaHelicoptero extends TestCase {
 	/*Prueba los movimientos de los helicopteros.*/
 
 		Plano plano = new Plano (100,100);
-		double pos=95;
-		Helicoptero helicoptero= new Helicoptero (10, 95, plano);
+		double pos=95.0;
+		Punto punto=new Punto(10,95);
+		Helicoptero helicoptero= new Helicoptero (punto, plano);
 		
 		for (int i=0; i<20; i++) {
 			helicoptero.mover();
 			pos=pos-1;
-			assertEquals(helicoptero.posicionY(),pos);
-			assertEquals(helicoptero.posicionX(), 10.0);
+			assertEquals(helicoptero.devolverPunto().getY(),pos);
+			assertEquals(helicoptero.devolverPunto().getX(), 10.0);
 		}
 	}
 	
@@ -29,10 +31,11 @@ public class PruebaHelicoptero extends TestCase {
 	es decir, el movimiento hacia atras*/
 
 		Plano plano=new Plano(100 , 100);
-		Helicoptero helicoptero= new Helicoptero (30 , 65 , plano);
+		Punto posicion= new Punto(30,65);
+		Helicoptero helicoptero= new Helicoptero (posicion , plano);
 		double pos=65;
 		for (int i=0; i<20; i++) {
-				assertEquals((helicoptero.posicionY()), pos);
+				assertEquals((helicoptero.devolverPunto().getY()), pos);
 				helicoptero.moverAlternativo();
 				pos=pos+1;
 		}

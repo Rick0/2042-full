@@ -143,7 +143,7 @@ public abstract class NaveNoOperable extends Nave {
 	 * de arriba a abajo) hasta salir del area de juego
 	 */
 	public void retirarse() {
-		Punto nuevaPosicion=new Punto(this.devolverPunto().getX(),this.devolverPunto().getY());
+		Punto nuevaPosicion=new Punto(this.devolverPunto().getX(),this.devolverPunto().getY()+1);
 		this.determinarPosicion(nuevaPosicion);
 	}
 
