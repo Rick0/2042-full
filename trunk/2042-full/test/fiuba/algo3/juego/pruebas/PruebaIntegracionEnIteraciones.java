@@ -22,6 +22,7 @@ import fiuba.algo3.juego.modelo.Helicoptero;
 import fiuba.algo3.juego.modelo.Item;
 import fiuba.algo3.juego.modelo.NaveNoOperable;
 import fiuba.algo3.juego.modelo.Plano;
+import fiuba.algo3.juego.modelo.Punto;
 import fiuba.algo3.juego.modelo.excepciones.AlgoSeAtacaASiMismoError;
 import fiuba.algo3.juego.modelo.excepciones.AreaInvalidaError;
 import fiuba.algo3.juego.modelo.excepciones.ArmaNoDisponibleError;
@@ -44,7 +45,8 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		Plano plano=new Plano(150,150);
 		//Verifico que el nivel se inicializo con los valores correctos
 		assertEquals(plano.devolverNivel(),1 );
-		Algo42 algo= new Algo42 (50, 83 ,plano);
+		Punto posAlgo= new Punto(50,83);
+		Algo42 algo= new Algo42 (posAlgo ,plano);
 		//La idea seria que el algo 42 se inicialice en Y=0 o algun numero menor a 10 (ser ubicados
 		//inicialmente en alturas grandes seria mas propio de naves enemigas) pero lo voy
 		//a inicializar en 83 para no tener que mover tantas veces y acelerar las pruebas
@@ -54,11 +56,12 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		//Creo 5 naves y las ubico.
 		while (n<5){
 			n=n+1;
-			flota.add(new Civil(m,5,plano));
+			flota.add(new Civil((new Punto(m,5)),plano));
 			m=m+10;
 		}
 		//Hago que mi lista de avionetas sea la flota que dirigira la nave guia.
-		Guia guia= new Guia1(flota , 50 , 90 , plano);
+		Punto posicionGuia= new Punto(50,90);
+		Guia guia= new Guia1(flota , posicionGuia , plano);
 		
 		//Comienzan las pruebas de escena actual
 		algo.dispararLaser();
@@ -69,7 +72,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		//cuando el algo42 dispare, va a crear un arma en su posicion, que se va a mover. En el turno siguiente,.
 		//va a disparar de nuevo. En el primer turno, la nave enemiga deberia tener 10 de sus 20 puntos
 		//totales, y en el siguiente deberia estar destruida.
-		assertEquals(guia.posicionY(),89.0 );
+		assertEquals(guia.devolverPunto().getY(),89.0 );
 		//No deberia haber cambios en la nave algo42, porque no se movio
 		//En cambio si deberia haber cambios en la nave guia"
 		assertEquals(algo.devolverCantidadEnergia(),100);
@@ -85,20 +88,22 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 
 	Plano plano = new Plano( 100 , 100 );
 	
-		Avioneta avioneta = new Avioneta( 50 , 30 , plano );
-		Algo42 algo = new Algo42( 50 , 20 , plano );
+		Punto posicionAvioneta= new Punto(50,30);
+		Punto posicionAlgo= new Punto(50,20);
+		Avioneta avioneta = new Avioneta( posicionAvioneta , plano );
+		Algo42 algo = new Algo42( posicionAlgo, plano );
 		
 		avioneta.mover(); //Avioneta posicion Y: 28
-		assertEquals((int) avioneta.posicionY() , 28 );
+		assertEquals((int) avioneta.devolverPunto().getY() , 28 );
 		algo.moverArriba();  //algo posicion Y: 21
-		assertEquals((int) algo.posicionY() , 21 );
+		assertEquals((int) algo.devolverPunto().getY() , 21 );
 		//El algo tiene altura 5, 21+26<28, aun no chocan.
 		assertFalse( avioneta.intentarChocar( algo ) );
 		assertEquals( algo.devolverCantidadEnergia() , 100 );
 		avioneta.mover(); //Avioneta posicion Y: 26
-		assertEquals( (int)avioneta.posicionY() , 26 );
+		assertEquals( (int)avioneta.devolverPunto().getY() , 26 );
 		algo.moverArriba();  //algo posicion Y: 22
-		assertEquals((int) algo.posicionY() , 22 );
+		assertEquals((int) algo.devolverPunto().getY() , 22 );
 		//El algo tiene altura 5, 22+5=27, ya deberian haber chocado
 		assertTrue( avioneta.intentarChocar( algo ) );
 		//Pruebo que la cantidad de energia del algo42 se haya reducido en 30 puntos
@@ -115,7 +120,8 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		
 		
 		Plano plano = new Plano( 100 , 100 );
-		Algo42 algo = new Algo42( 50 , 6 , plano );
+		Punto punto= new Punto(50,6);
+		Algo42 algo = new Algo42(punto, plano );
 		algo.dispararLaser();
 		algo.moverArriba();
 		Arma laser = plano.devolverListaArmas().get(0);
@@ -134,8 +140,10 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		
 		
 		Plano plano = new Plano( 100 , 100 );
-		Algo42 algo = new Algo42( 50 , 5 , plano );
-		Caza caza = new Caza( 50 , 80 , plano );
+		Punto puntoAlgo= new Punto(50,5);
+		Punto puntoCaza= new Punto(50,80);
+		Algo42 algo = new Algo42( puntoAlgo , plano );
+		Caza caza = new Caza( puntoCaza , plano );
 		Item item = null;
 		
 		caza.dispararTorpedo();
@@ -186,7 +194,8 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		
 		Plano plano = new Plano( 100 , 100 );
 		
-		Avioneta avioneta = new Avioneta( 50 , 50 , plano );
+		Punto punto= new Punto(50,50);
+		Avioneta avioneta = new Avioneta( punto , plano );
 		avioneta.dispararLaser();
 		Arma laser = plano.devolverListaArmas().get(0);
 		//Una avioneta es una nave no operable y por lo tanto, no puede atacarse a si misma
@@ -197,15 +206,15 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 			//Es correcto que salga por aca
 		}
 		
-		
-		Bombardero bombardero = new Bombardero( 50 , 58 , plano );
+		Punto posicionBombardero= new Punto(50,58);
+		Bombardero bombardero = new Bombardero( posicionBombardero, plano );
 		Cohete cohete = bombardero.dispararCohete();
 		//Posicion actual del cohete: 60,60. Altura: 4. Al llegar a la posicion correcta, compruebo que levanta error.
 		cohete.mover(); //Posicion En Y= 56. Avioneta ocupa de 50 hacia arriba.
 		cohete.mover(); //Posicion En Y= 54.
 		cohete.mover(); //Posicion En Y= 52.
 		cohete.mover(); //Posicion En Y= 50.
-		assertEquals((int) cohete.posicionY() , 50 );
+		assertEquals((int) cohete.devolverPunto().getY() , 50 );
 		try {
 			cohete.intentarAtacar( avioneta );
 			fail("Naves no operables no pueden atacarse entre si"); 
@@ -223,12 +232,14 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		Plano plano = new Plano( 100 , 100 );
 		Avioneta avioneta = null;
 		try {
-			avioneta = new Avioneta( 50 , 30 , plano );
+			Punto punto= new Punto(50,30);
+			avioneta = new Avioneta( punto, plano );
 		} catch (SuperposicionNavesError e) {
 			// No puede pasar, se crea primera
 			e.printStackTrace();
 		}
-		Algo42 algo = new Algo42( 50 , 22 , plano );
+		Punto posicionAlgo= new Punto(50,22);
+		Algo42 algo = new Algo42( posicionAlgo , plano );
 		algo.dispararLaser();
 		Arma laserA = plano.devolverListaArmas().get(0);
 		avioneta.dispararLaser();
@@ -237,16 +248,16 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		/*Esto crea dos instancias de laser: una con origen Algo42 (que por lo tanto se mueve hacia arriba)
 		y otra con origen nave enemiga, que se mueve hacia abajo.*/
 		laserB.mover();
-		assertEquals( (int)laserB.posicionY() , 28 );// "El algo42 llega hasta 27, y el laser esta entre 33 y 28."
+		assertEquals( (int)laserB.devolverPunto().getY() , 28 );// "El algo42 llega hasta 27, y el laser esta entre 33 y 28."
 		assertFalse( laserB.intentarAtacar(algo) );
 		laserA.mover();
-		assertEquals( (int)laserA.posicionY() , 24 ); //La avioneta llega hasta 30, y el laser de 24 a 29
+		assertEquals( (int)laserA.devolverPunto().getY() , 24 ); //La avioneta llega hasta 30, y el laser de 24 a 29
 		assertFalse( laserA.intentarAtacar(avioneta) );
 		laserB.mover();
-		assertEquals( (int)laserB.posicionY() , 26 ); //l algo42 llega hasta 27, y el laser esta entre 33 y 26.
+		assertEquals( (int)laserB.devolverPunto().getY() , 26 ); //l algo42 llega hasta 27, y el laser esta entre 33 y 26.
 		assertTrue( laserB.intentarAtacar(algo) );
 		laserA.mover();
-		assertEquals( (int)laserA.posicionY() , 26); //La avioneta llega hasta 30, y el laser de 26 a 31
+		assertEquals( (int)laserA.devolverPunto().getY() , 26); //La avioneta llega hasta 30, y el laser de 26 a 31
 		assertTrue( laserA.intentarAtacar(avioneta) );
 	}
 	
@@ -261,8 +272,10 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		
 		
 		Plano plano = new Plano( 100 , 100 );
-		Algo42 algo = new Algo42( 50 , 10 , plano); 
-		Bombardero bombardero = new Bombardero( 50 , 30 , plano );
+		Punto puntoAlgo= new Punto(50,10);
+		Punto puntoBombardero= new Punto(50,30);
+		Algo42 algo = new Algo42(puntoAlgo , plano); 
+		Bombardero bombardero = new Bombardero( puntoBombardero , plano );
 		//Intentar dejar el arma ahora devuelve error
 		try {
 			bombardero.dejarArma();
@@ -302,7 +315,8 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 			algo.moverArriba();
 			item.intentarEfectoEn(algo);
 		}
-		Helicoptero helicoptero = new Helicoptero( 50 , 60 , plano );
+		Punto posicionHelicoptero= new Punto(50,60);
+		Helicoptero helicoptero = new Helicoptero(posicionHelicoptero , plano );
 		algo.dispararCohete();
 		Arma cohete = plano.devolverListaArmas().get(5);
 		while ( !helicoptero.estadoActualDestruida() ) {
@@ -315,7 +329,8 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 			}
 			
 		}
-		Civil avion = new Civil( 20 , 90 , plano );
+		Punto posicionCivil= new Punto(20,90);
+		Civil avion = new Civil( posicionCivil , plano );
 		algo.dispararTorpedoHacia(avion);
 		Arma TorpedoRastreador = plano.devolverListaArmas().get(6);
 		while ( !avion.estadoActualDestruida() ) {
@@ -335,14 +350,16 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		double posYInicial, posYFinal;
 		
 		Plano plano = new Plano( 100 , 100);
+		Punto puntoAlgo= new Punto(50,50);
+		Punto puntoAvioneta= new Punto(10,10);
 		//Se crea un algo porque es requerimiento del plano
-		Algo42 algo42 = new Algo42( 50 , 50 , plano );
-		Avioneta nave = new Avioneta( 10 , 10 , plano );
-		posYInicial = nave.posicionY();
+		Algo42 algo42 = new Algo42( puntoAlgo, plano );
+		Avioneta nave = new Avioneta( puntoAvioneta, plano );
+		posYInicial = nave.devolverPunto().getY();
 		for ( int i = 0 ; i < 9 ; i++ ) {
 			nave.vivir();
 		}
-		posYFinal = nave.posicionY();
+		posYFinal = nave.devolverPunto().getY();
 		assertFalse ("La nave se mueve en eje Y", posYInicial == posYFinal );
 		assertTrue ("La nave crea los disparos", plano.devolverListaArmas().size() == 9 );
 	}
@@ -358,16 +375,18 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		
 		Plano plano = new Plano( 100 , 100);
 		//Se crea un algo porque es requerimiento del plano
-		Algo42 algo42 = new Algo42( 50 , 50 , plano );
-		Explorador nave = new Explorador( 5 , 5 , 10 , plano);
-		posXInicial = nave.posicionX();
-		posYInicial = nave.posicionY();
+		Punto puntoAlgo= new Punto(50,50);
+		Punto puntoExplorador= new Punto(5,5);
+		Algo42 algo42 = new Algo42(puntoAlgo, plano );
+		Explorador nave = new Explorador( puntoExplorador , 10 , plano);
+		posXInicial = nave.devolverPunto().getX();
+		posYInicial = nave.devolverPunto().getY();
 		
 		for ( int i = 0 ; i < 9 ; i++ ) {
 			nave.vivir();
 		}
-		posXFinal = nave.posicionX();
-		posYFinal = nave.posicionY();
+		posXFinal = nave.devolverPunto().getX();
+		posYFinal = nave.devolverPunto().getY();
 		assertFalse ("La nave se mueve en eje X", posYInicial == posYFinal );
 		assertFalse ("La nave se mueve en eje Y", posXInicial == posXFinal );
 		assertTrue ("La nave crea los disparos", plano.devolverListaArmas().size() == 0 );
@@ -377,23 +396,25 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 	@Test
 	public void testVivirBombardero() throws SuperposicionNavesError, NaveDestruidaError, AreaInvalidaError {
 		/*Prueba que al llamar al vivir del Bombardero el mismo se mueva.
-		*Adem�s se verifica que sean creados disparos
+		*Ademas se verifica que sean creados disparos
 		*/
 		
 		double posYInicial, posYFinal, posXInicial, posXFinal;
 		
 		Plano plano = new Plano( 100 , 100);
 		//Se crea un algo porque es requerimiento del plano
-		Algo42 algo42 = new Algo42( 50 , 50 , plano );
-		Bombardero nave = new Bombardero( 10 , 10 , plano );
-		posXInicial = nave.posicionX();
-		posYInicial = nave.posicionY();
+		Punto puntoAlgo= new Punto(50,50);
+		Punto puntoBombardero= new Punto(10,10);
+		Algo42 algo42 = new Algo42(puntoAlgo, plano );
+		Bombardero nave = new Bombardero( puntoBombardero, plano );
+		posXInicial = nave.devolverPunto().getX();
+		posYInicial = nave.devolverPunto().getY();
 		
 		for ( int i = 0 ; i < 9 ; i++ ) {
 			nave.vivir();
 		}
-		posXFinal = nave.posicionX();
-		posYFinal = nave.posicionY();
+		posXFinal = nave.devolverPunto().getX();
+		posYFinal = nave.devolverPunto().getY();
 		assertFalse ("La nave se mueve en eje Y", posYInicial == posYFinal );
 		assertFalse ("La nave se mueve en eje X", posXInicial == posXFinal );
 		assertTrue ("La nave crea los disparos", plano.devolverListaArmas().size() == 9 );
@@ -403,22 +424,24 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 	@Test
 	public void testVivirAvionCivil() throws SuperposicionNavesError, NaveDestruidaError, AreaInvalidaError {
 		/*Prueba que al llamar al vivir del avion civil la misma se mueva.
-		*Adem�s se verifica que los disparos sean creados
+		*Ademas se verifica que los disparos sean creados
 		*/
 		
 		double posYInicial, posYFinal, posXInicial, posXFinal;
 		
 		Plano plano = new Plano( 100 , 100);
 		//Se crea un algo porque es requerimiento del plano
-		Algo42 algo42 = new Algo42( 50 , 50 , plano );
-		Civil nave = new Civil( 10 , 10 , plano );
-		posXInicial = nave.posicionX();
-		posYInicial = nave.posicionY();
+		Punto puntoAlgo= new Punto(50,50);
+		Punto puntoCivil= new Punto(10,10);
+		Algo42 algo42 = new Algo42( puntoAlgo, plano );
+		Civil nave = new Civil( puntoCivil, plano );
+		posXInicial = nave.devolverPunto().getX();
+		posYInicial = nave.devolverPunto().getY();
 		for ( int i = 0 ; i < 9 ; i++ ) {
 			nave.vivir();
 		}
-		posXFinal = nave.posicionX();
-		posYFinal = nave.posicionY();
+		posXFinal = nave.devolverPunto().getX();
+		posYFinal = nave.devolverPunto().getY();
 		
 		assertFalse ("La nave se mueve en eje Y", posYInicial == posYFinal );
 		assertTrue ("La nave no mueve en eje X", posXInicial == posXFinal );
@@ -429,22 +452,24 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 	@Test
 	public void testVivirCaza() throws SuperposicionNavesError, NaveDestruidaError, AreaInvalidaError {
 		/*Prueba que al llamar al vivir del Caza la misma se mueva.
-		*Adem�s se verifica que los disparos sean creados
+		*Ademas se verifica que los disparos sean creados
 		*/
 		
 		double posYInicial, posYFinal, posXInicial, posXFinal;
 		
 		Plano plano = new Plano( 100 , 100);
 		//Se crea un algo porque es requerimiento del plano
-		Algo42 algo42 = new Algo42( 50 , 50 , plano );
-		Caza nave = new Caza( 10 , 10 , plano );
-		posXInicial = nave.posicionX();
-		posYInicial = nave.posicionY();
+		Punto puntoAlgo= new Punto(50,50);
+		Punto puntoCaza= new Punto(10,10);
+		Algo42 algo42 = new Algo42( puntoAlgo, plano );
+		Caza nave = new Caza( puntoCaza, plano );
+		posXInicial = nave.devolverPunto().getX();
+		posYInicial = nave.devolverPunto().getY();
 		for ( int i = 0 ; i < 9 ; i++ ) {
 			nave.vivir();
 		}
-		posXFinal = nave.posicionX();
-		posYFinal = nave.posicionY();
+		posXFinal = nave.devolverPunto().getX();
+		posYFinal = nave.devolverPunto().getY();
 		
 		assertFalse ("La nave se mueve en eje Y", posYInicial == posYFinal );
 		assertTrue ("La nave no mueve en eje X", posXInicial == posXFinal );
@@ -455,23 +480,25 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 	@Test
 	public void testVivirHelicoptero() throws SuperposicionNavesError, NaveDestruidaError, AreaInvalidaError {
 		/*Prueba que al llamar al vivir del Caza la misma se mueva.
-		*Adem�s se verifica que los disparos sean creados
+		*Ademas se verifica que los disparos sean creados
 		*/
 		
 		double posYInicial, posYFinal, posXInicial, posXFinal;
 		
 		Plano plano = new Plano( 100 , 100);
 		//Se crea un algo porque es requerimiento del plano
-		Algo42 algo42 = new Algo42( 50 , 50 , plano );
-		Helicoptero nave = new Helicoptero(10 , 10 , plano);
+		Punto puntoAlgo= new Punto(50,50);
+		Punto puntoHelicoptero= new Punto(10,10);
+		Algo42 algo42 = new Algo42( puntoAlgo , plano );
+		Helicoptero nave = new Helicoptero(puntoHelicoptero , plano);
 		
-		posXInicial = nave.posicionX();
-		posYInicial = nave.posicionY();
+		posXInicial = nave.devolverPunto().getX();
+		posYInicial = nave.devolverPunto().getY();
 		for ( int i = 0 ; i < 7 ; i++ ) {
 			nave.vivir();
 		}
-		posXFinal = nave.posicionX();
-		posYFinal = nave.posicionY();
+		posXFinal = nave.devolverPunto().getX();
+		posYFinal = nave.devolverPunto().getY();
 		
 		assertFalse ("La nave se mueve en eje Y", posYInicial == posYFinal );
 		assertTrue ("La nave No se mueve en eje X", posXInicial == posXFinal );
@@ -489,11 +516,13 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		
 		Plano plano = new Plano( 100 , 100);
 		//Se crea un algo porque es requerimiento del plano
-		Algo42 algo42 = new Algo42( 10 , 50 , plano );
-		Avioneta nave = new Avioneta( 10 , 10 , plano );
+		Punto puntoAlgo= new Punto(10,50);
+		Punto puntoAvioneta= new Punto(10,10);
+		Algo42 algo42 = new Algo42(puntoAlgo, plano );
+		Avioneta nave = new Avioneta( puntoAvioneta , plano );
 		
 		energiaInicial = algo42.devolverCantidadEnergia();
-		nave.vivir();//Se mueve y adem�s crea un disparo
+		nave.vivir();//Se mueve y ademas crea un disparo
 		Arma disparo = plano.devolverListaArmas().get(0);
 		for (int i = 0 ; i < 30 ; i++ ) {
 			disparo.vivir();
