@@ -9,19 +9,15 @@ public abstract class ObjetoUbicable {
 	Rectangulo rectangulo;
 	Plano plano;
 	
-	/* Ubica el objeto en la posicion determinada */
-	public void determinarPosicion(double posx,double posy) {
-		rectangulo.determinarPosicion(posx,posy);
+	/* Ubica el objeto en la posicion determinada, lo cual implica
+	 * cambiar el punto que determina su posicion */
+	public void determinarPosicion(Punto punto) {
+		rectangulo.determinarPosicion(punto);
 	}
 
-	/* Devuelve la posicion en X del objeto */
-	public double posicionX() {
-		return rectangulo.devolverPosicionX();
-	}
-
-	/* Devuelve la posicion en Y del objeto */
-	public double posicionY() {
-		return rectangulo.devolverPosicionY();
+	/* Devuelve la el punto que determina la posicion del objeto */
+	public Punto devolverPunto() {
+		return rectangulo.devolverPuntoIzquierdoInferior();
 	}
 
 	/* Toda instancia de esta clase contiene un rectangulo que representa su figura 

@@ -10,14 +10,14 @@ public class Avioneta extends NaveNoOperable {
 
 
 	/* Inicializa una instancia de Avioneta */
-	public Avioneta(int posicionX, int posicionY, Plano plano) throws SuperposicionNavesError, NaveDestruidaError {
+	public Avioneta(Punto punto, Plano plano) throws SuperposicionNavesError, NaveDestruidaError {
 		
 		this.puntos = 20;
 		energia = 20;
 		puntosAdelante= 0;
 		puntosAtras = 0;
 		operable = false;
-		rectangulo = new Rectangulo(6, 3, posicionX, posicionY);
+		rectangulo = new Rectangulo(6, 3, punto);
 		destruida = false;
 		fueraDeJuego = false;
 		this.determinarPlano(plano);
@@ -29,7 +29,7 @@ public class Avioneta extends NaveNoOperable {
 	}
 
 	public void dispararLaser() {
-		new Laser(this.posicionX(), this.posicionY(), false, this.plano);
+		new Laser(this.devolverPunto(), false, this.plano);
 	}
 
 	/* Metodo para el movimiento de la avioneta. Se mueve 60 puntos hacia adelante, luego 60 hacia atras,
@@ -40,11 +40,13 @@ public class Avioneta extends NaveNoOperable {
 
 		if ( (this.puntosAdelante <= 60) ) {
 			this.puntosAdelante = (this.puntosAdelante + 2);
-			this.determinarPosicion(this.posicionX(), (this.posicionY() - 2) );
+			Punto nuevaPosicion= new Punto(devolverPunto().getX(),devolverPunto().getY()-2);
+			this.determinarPosicion(nuevaPosicion);
 		}
 		else {
 			this.puntosAtras = (this.puntosAtras + 2);
-			this.determinarPosicion( this.posicionX() , (this.posicionY() + 2) );
+			Punto nuevaPosicion= new Punto(devolverPunto().getX(),devolverPunto().getY()+2);
+			this.determinarPosicion(nuevaPosicion);
 			if (this.puntosAtras >= 60) {
 				this.puntosAtras = 0;
 				this.puntosAdelante =0;
@@ -67,11 +69,13 @@ public class Avioneta extends NaveNoOperable {
 			this.puntosAdelante = 0;
 			// Hago que empiece a moverse hacia adelante desde 0,
 			//pero antes lo hago moverse hacia atras, si es que puedo.
-			this.determinarPosicion(this.posicionX(), (this.posicionY() + 2 ) );
+			Punto nuevaPosicion= new Punto(devolverPunto().getX(),devolverPunto().getY()+2);
+			this.determinarPosicion(nuevaPosicion);
 		}
 		else {
 			this.puntosAtras = 0;
-			this.determinarPosicion( this.posicionX(),(this.posicionY() - 2));
+			Punto nuevaPosicion= new Punto(devolverPunto().getX(),devolverPunto().getY()-2);
+			this.determinarPosicion(nuevaPosicion);
 		}
 
 		if ( this.seSuperponeConOtraNave() ) {

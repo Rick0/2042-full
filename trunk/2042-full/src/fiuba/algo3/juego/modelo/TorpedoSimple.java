@@ -4,11 +4,11 @@ import fiuba.algo3.juego.modelo.excepciones.ArmaUsadaError;
 
 public class TorpedoSimple extends Arma {
 
-	public TorpedoSimple (double d, double f, boolean origenAlgo,Plano plano ) {
+	public TorpedoSimple (Punto punto, boolean origenAlgo,Plano plano ) {
 
 		this.danio = -20;
 		this.usada = false;
-		this.rectangulo = (new Rectangulo(3, 3, d, f ));
+		this.rectangulo = (new Rectangulo(3, 3, punto));
 		this.determinarPlano(plano);
 
 		try {

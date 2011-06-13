@@ -5,10 +5,10 @@ public class TanqueEnergia extends Item {
 	private int aumentoEnergia;
 
 
-	public TanqueEnergia(double d, double e) {
+	public TanqueEnergia(Punto punto) {
 		usado = false;
 		aumentoEnergia = 40;
-		rectangulo = new Rectangulo(4, 3, d, e);
+		rectangulo = new Rectangulo(4, 3,punto);
 	}
 
 	/* Recibe una nave tipo Algo42, y le suma energia */

@@ -2,23 +2,35 @@
 package fiuba.algo3.juego.pruebas;
 
 import junit.framework.TestCase;
+import fiuba.algo3.juego.modelo.Punto;
 import fiuba.algo3.juego.modelo.Rectangulo;
 
 public class PruebaRectangulo extends TestCase{
 
 	public void testSuperposicionRectangulos(){
 
-		Rectangulo rectangulo1 = new Rectangulo(10,10,30,30);
-		Rectangulo rectangulo2 = new Rectangulo (10,10,20,20);
+		Punto rectangulo1ExtremoIzqInferior=new Punto(30,30);
+		Punto rectangulo2ExtremoIzqInferior=new Punto(20,20);
+
+		Rectangulo rectangulo1 = new Rectangulo(10,10,rectangulo1ExtremoIzqInferior);
+		Rectangulo rectangulo2 = new Rectangulo (10,10,rectangulo2ExtremoIzqInferior);
 
 		assertEquals(rectangulo1.coincideConPosicionDe(rectangulo2),true);
-		rectangulo2.determinarPosicion(30,30);
+		
+		Punto nuevoPuntoRectangulo1= new Punto(30,30);
+		rectangulo2.determinarPosicion(nuevoPuntoRectangulo1);
 		assertEquals(rectangulo1.coincideConPosicionDe(rectangulo2),true);
-		rectangulo2.determinarPosicion(47, 50);
+		
+		Punto nuevoPuntoRectangulo2= new Punto(47, 50);
+		rectangulo2.determinarPosicion( nuevoPuntoRectangulo2 );
 		assertEquals(rectangulo1.coincideConPosicionDe(rectangulo2),false);
-		rectangulo2.determinarPosicion(90, 30);
+		
+		Punto nPuntoRectangulo2= new Punto(90, 30);
+		rectangulo2.determinarPosicion(nPuntoRectangulo2);
 		assertEquals(rectangulo1.coincideConPosicionDe(rectangulo2),false);
-		rectangulo2.determinarPosicion(30, 90);
+		
+		Punto otroPuntoRectangulo2= new Punto(30, 90);
+		rectangulo2.determinarPosicion(otroPuntoRectangulo2);
 		assertEquals(rectangulo1.coincideConPosicionDe(rectangulo2),false);
 
 	}

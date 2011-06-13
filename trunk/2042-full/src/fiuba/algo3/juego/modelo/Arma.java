@@ -71,7 +71,7 @@ public abstract class Arma extends ObjetoUbicable {
 		x = (this.plano).devolverAncho();
 		y = (this.plano).devolverAltura();
 
-		if (( (this.posicionX()) < 0) || (( this.posicionX() )> x )) {
+		if (( (this.devolverPunto().getX()) < 0) || (( this.devolverPunto().getX() )> x )) {
 			this.usada = true;
 			try {
 				this.plano.agregarArmaUsada( this );
@@ -79,7 +79,7 @@ public abstract class Arma extends ObjetoUbicable {
 				System.out.println("El Juego ha sufrido una falla irrecuperable");
 			}
 		}
-		if (((this.posicionY()) < 0) || ((this.posicionY()) > y )) {
+		if (((this.devolverPunto().getY()) < 0) || ((this.devolverPunto().getY()) > y )) {
 			this.usada = true;
 			try {
 				this.plano.agregarArmaUsada( this );
@@ -94,11 +94,13 @@ public abstract class Arma extends ObjetoUbicable {
 	/* El arma cambia su posicion */
 	public void mover() {
 
+		Punto nuevaPosicion;
 		if (this.origenAlgo42) {
-			this.determinarPosicion( this.posicionX(), (this.posicionY() + 2 ));
+			nuevaPosicion=new Punto(this.devolverPunto().getX(),(this.devolverPunto().getY()) + 2);
 		} else {
-			this.determinarPosicion( this.posicionX(), (this.posicionY() - 2 ));
+			nuevaPosicion=new Punto(this.devolverPunto().getX(),(this.devolverPunto().getY()) - 2);
 		}
+		this.determinarPosicion(nuevaPosicion);
 	}
 
 	/*true indica que quien lanzo el arma fue Algo42,

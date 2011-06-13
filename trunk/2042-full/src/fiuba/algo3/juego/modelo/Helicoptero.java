@@ -7,12 +7,12 @@ import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 public class Helicoptero extends NaveNoOperable {
 
 	/* Instancia un Helicoptero */
-	public Helicoptero(int posicionX, int posicionY, Plano plano) throws SuperposicionNavesError, NaveDestruidaError {
+	public Helicoptero(Punto punto, Plano plano) throws SuperposicionNavesError, NaveDestruidaError {
 		
 		puntos = -200;
 		energia = 1;
 		operable = false;
-		rectangulo = new Rectangulo(4, 4, posicionX, posicionY);
+		rectangulo = new Rectangulo(4, 4, punto);
 		destruida = false;
 		fueraDeJuego = false;
 		this.determinarPlano(plano);
@@ -31,8 +31,8 @@ public class Helicoptero extends NaveNoOperable {
 
 	/* El helicoptero se mueve hacia abajo */
 	public void mover() throws SuperposicionNavesError { 
-	
-		this.determinarPosicion( this.posicionX(), this.posicionY() -1);
+		Punto punto= new Punto (this.devolverPunto().getX(),this.devolverPunto().getY() -1);
+		this.determinarPosicion( punto );
 		if ( this.seSuperponeConOtraNave() ) {
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
 		}
@@ -44,7 +44,8 @@ public class Helicoptero extends NaveNoOperable {
 	 */
 	public void moverAlternativo() throws SuperposicionNavesError { 
 
-		this.determinarPosicion( this.posicionX(), this.posicionY() +1);
+		Punto punto= new Punto (this.devolverPunto().getX(),this.devolverPunto().getY() +1);
+		this.determinarPosicion( punto);
 		if ( this.seSuperponeConOtraNave() ) {
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
 		}

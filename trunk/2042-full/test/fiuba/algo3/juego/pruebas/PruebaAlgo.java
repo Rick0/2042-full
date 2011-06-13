@@ -8,6 +8,7 @@ import fiuba.algo3.juego.modelo.Algo42;
 import fiuba.algo3.juego.modelo.Avioneta;
 import fiuba.algo3.juego.modelo.Nave;
 import fiuba.algo3.juego.modelo.Plano;
+import fiuba.algo3.juego.modelo.Punto;
 import fiuba.algo3.juego.modelo.excepciones.AreaInvalidaError;
 import fiuba.algo3.juego.modelo.excepciones.ArmaNoDisponibleError;
 import fiuba.algo3.juego.modelo.excepciones.NaveARastrearError;
@@ -23,7 +24,8 @@ public class PruebaAlgo extends TestCase{
 		
 		/*Necesito una instancia de plano, ya que un algo42 es una instancia de ObjetoUbicable.*/
 		Plano plano=new Plano(100,100);
-		Algo42 algo=new Algo42(0,96,plano);
+		Punto punto= new Punto(0,96);
+		Algo42 algo=new Algo42(punto,plano);
 
 
 		/*Intentar mover la nave hacia arriba deberia devolver un error del tipo AreaInvalida*/
@@ -37,15 +39,16 @@ public class PruebaAlgo extends TestCase{
 			  }
 
 		  /*Muestro como podria capturar el error del tipo AreaInvalida: simplemente no muevo la nave.*/
+		  Punto puntoOriginal= algo.devolverPunto();
 		  try{
 			algo.moverArriba();
 		  }
 		  catch (AreaInvalidaError e) {
-			  algo.determinarPosicion(0,96);
+			  algo.determinarPosicion(puntoOriginal);
 		  }
 		  
-		  assertEquals(algo.posicionX(),0.0);
-		  assertEquals(algo.posicionY(),96.0);
+		  assertEquals(algo.devolverPunto().getX(),0.0);
+		  assertEquals(algo.devolverPunto().getY(),96.0);
 
 		  /*Intentar mover la nave hacia  la izquierda tambien deberia devolver un error del tipo AreaInvalida*/
 		  try{
@@ -64,31 +67,32 @@ public class PruebaAlgo extends TestCase{
 		
 		/*Necesito una instancia de plano, ya que un algo42 es una instancia de ObjetoUbicable.*/
 		Plano plano = new Plano(100,100);
-		Algo42 algo = new Algo42(50,50,plano);
-		double posicionInicial;
+		Punto punto= new Punto (50,50);
+		Algo42 algo = new Algo42(punto,plano);
 		
-		posicionInicial = algo.posicionY();
+		Punto posicionInicial = algo.devolverPunto();
 		algo.moverAbajo();
-		assert(posicionInicial > algo.posicionY());
+		assertEquals(posicionInicial.getY()-1,algo.devolverPunto().getY());
 		
-		posicionInicial = algo.posicionY();
+		posicionInicial = algo.devolverPunto();
 		algo.moverArriba();
-		assert(posicionInicial < algo.posicionY());
+		assertEquals(posicionInicial.getY()+1 , algo.devolverPunto().getY());
 		
-		posicionInicial = algo.posicionX();
+		posicionInicial = algo.devolverPunto();
 		algo.moverDerecha();
-		assert(posicionInicial < algo.posicionX());
+		assertEquals(posicionInicial.getX() +1, algo.devolverPunto().getX());
 		
-		posicionInicial = algo.posicionX();
+		posicionInicial = algo.devolverPunto();
 		algo.moverDerecha();
-		assert(posicionInicial > algo.posicionX());
+		assertEquals( posicionInicial.getX()+1 , algo.devolverPunto().getX());
 	}
 		
 	@Test
 	public void testLanzamientoCohetes() throws AreaInvalidaError {
 			//Lanzar un cohete deberia levantar error porque un algo42, por defecto, no tiene ni cohetes ni torpedos."
 	Plano plano = new Plano(100,100);
-	Algo42 algo = new Algo42(50,50,plano);
+	Punto punto= new Punto(50,50);
+	Algo42 algo = new Algo42(punto,plano);
 	
 	algo.setCohetes(0);
 	try {
@@ -111,7 +115,8 @@ public class PruebaAlgo extends TestCase{
 		
 	public void testLanzamientoLaser() throws AreaInvalidaError {
 		Plano plano = new Plano(100,100);
-		Algo42 algo = new Algo42(50,50,plano);
+		Punto punto= new Punto(50,50);
+		Algo42 algo = new Algo42(punto,plano);
 		
 		algo.dispararLaser();
 		assertEquals(plano.devolverListaArmas().size() , 1);
@@ -120,8 +125,10 @@ public class PruebaAlgo extends TestCase{
 	public void testLanzamientoTorpedoRastreador() throws AreaInvalidaError,SuperposicionNavesError,
 	NaveARastrearError,ArmaNoDisponibleError, NaveDestruidaError {
 		Plano plano = new Plano(100,100);
-		Algo42 algo = new Algo42(50,50,plano);
-		Nave avioneta = new Avioneta(60,70,plano);
+		Punto posicionAlgo= new Punto(50,50);
+		Punto posicionAvioneta= new Punto(50,50);
+		Algo42 algo = new Algo42(posicionAlgo,plano);
+		Nave avioneta = new Avioneta(posicionAvioneta,plano);
 		
 		try {
 		    algo.dispararTorpedoHacia( avioneta );
@@ -156,24 +163,29 @@ public class PruebaAlgo extends TestCase{
 		Plano plano = new Plano(100,100);
 		Algo42 algo = null;
 		try {
-			algo = new Algo42(-1,50,plano);
+			Punto punto=new Punto(-1,50);
+			algo = new Algo42(punto,plano);
 			fail("No debe poder crearse fuera de los limites del mapa");
 		} catch (AreaInvalidaError error) {}
 		try {
-			algo = new Algo42(101,50,plano);
+			Punto punto=new Punto(101,50);
+			algo = new Algo42(punto,plano);
 			fail("No debe poder crearse fuera de los limites del mapa");
 		} catch (AreaInvalidaError error) {}
 		try {
-			algo = new Algo42(50,-1,plano);
+			Punto punto= new Punto(50,-1);
+			algo = new Algo42(punto,plano);
 			fail("No debe poder crearse fuera de los limites del mapa");
 		} catch (AreaInvalidaError error) {}
 		try {
-			algo = new Algo42(50,101,plano);
+			Punto punto= new Punto(50,101);
+			algo = new Algo42(punto,plano);
 			fail("No debe poder crearse fuera de los limites del mapa");
 		} catch (AreaInvalidaError error) {}
 		
 		try {
-			algo = new Algo42(50,50,plano);
+			Punto punto= new Punto(50,50);
+			algo = new Algo42(punto,plano);
 		} catch (AreaInvalidaError error) {}
 		
 		

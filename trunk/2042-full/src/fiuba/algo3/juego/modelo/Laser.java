@@ -4,11 +4,11 @@ import fiuba.algo3.juego.modelo.excepciones.ArmaUsadaError;
 
 public class Laser extends Arma {
 
-	public Laser (double d, double f, boolean origenAlgo,Plano plano ) {
+	public Laser (Punto punto, boolean origenAlgo,Plano plano ) {
 
 		this.danio = -10;
 		this.usada = false;
-		this.rectangulo = (new Rectangulo(5 , 1, d, f ));
+		this.rectangulo = (new Rectangulo(5 , 1, punto ));
 		this.determinarPlano(plano);
 
 		try {

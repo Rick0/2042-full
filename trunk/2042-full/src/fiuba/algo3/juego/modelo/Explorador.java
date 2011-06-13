@@ -12,7 +12,7 @@ public class Explorador extends NaveNoOperable {
 
 
 	/* Inicializa una instancia de Bombardero */
-	public Explorador(double posicionX, double posicionY, int radioDeGiro, Plano plano) throws SuperposicionNavesError, NaveDestruidaError {
+	public Explorador(Punto punto, int radioDeGiro, Plano plano) throws SuperposicionNavesError, NaveDestruidaError {
 
 		puntos = 50;
 		energia = 30;
@@ -20,12 +20,12 @@ public class Explorador extends NaveNoOperable {
 		puntosHaciaAbajo = 0;
 		anguloActual = 0;
 		operable = false;
-		rectangulo = new Rectangulo(5, 2, posicionX, posicionY);
+		rectangulo = new Rectangulo(5, 2, punto);
 		destruida = false;
 		fueraDeJuego = false;
 		this.determinarPlano(plano);
 		this.determinarRadio( radioDeGiro );
-		this.determinarPosicion( posicionX,posicionY);
+		this.determinarPosicion( punto);
 
 		if (this.seSuperponeConOtraNave()) {
 			throw new SuperposicionNavesError("La posicion esta ocupada");
@@ -46,7 +46,8 @@ public class Explorador extends NaveNoOperable {
 		double  num=((1.000)/12);
 		anguloActual = (anguloActual +num);
 		puntosHaciaAbajo = ( puntosHaciaAbajo + 0.5);
-		this.determinarPosicion( (radio*( (Math.cos( pi * anguloActual)))) + centroInicialX,(centroInicialY - (radio * Math.sin( pi * anguloActual )) - puntosHaciaAbajo) );
+		Punto nuevoPunto= new Punto((radio*( (Math.cos( pi * anguloActual)))) + centroInicialX,(centroInicialY - (radio * Math.sin( pi * anguloActual )) - puntosHaciaAbajo) );
+		this.determinarPosicion(nuevoPunto );
 		if ( this.seSuperponeConOtraNave() ) {
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
 		}
@@ -63,7 +64,8 @@ public class Explorador extends NaveNoOperable {
 		double  num=((1.000)/12);
 		anguloActual = (anguloActual - num);
 		puntosHaciaAbajo = (puntosHaciaAbajo - 0.5);
-		this.determinarPosicion( (radio*( Math.cos( pi *anguloActual ) ) + centroInicialX),(centroInicialY - (radio * Math.sin( pi*anguloActual ) ) - puntosHaciaAbajo) );
+		Punto nuevoPunto= new Punto( (radio*( Math.cos( pi *anguloActual ) ) + centroInicialX),(centroInicialY - (radio * Math.sin( pi*anguloActual ) ) - puntosHaciaAbajo));
+		this.determinarPosicion(nuevoPunto);
 		if (this.seSuperponeConOtraNave() ) {
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
 		}
@@ -79,12 +81,12 @@ public class Explorador extends NaveNoOperable {
 	 * no solo ubica a la nave en su lugar, sino que tambien guarda cual sera el centro de la 
 	 * circunferencia (esta debera tener su centro trasladado a la ubicacion x,y)
 	 */
-	public void determinarPosicion(double posX, double posY) {
+	public void determinarPosicion(Punto punto) {
 
-		this.rectangulo.determinarPosicion(posX, posY);
+		this.rectangulo.determinarPosicion(punto);
 		if (!inicializado) {
-			centroInicialX = ( posX - radio);
-			centroInicialY = posY;
+			centroInicialX = ( (this.devolverPunto().getX()) - radio);
+			centroInicialY = (this.devolverPunto().getY());
 			inicializado = true;
 		}
 	}

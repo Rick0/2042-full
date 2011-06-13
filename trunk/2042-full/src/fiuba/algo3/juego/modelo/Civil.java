@@ -7,12 +7,12 @@ import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 public class Civil extends NaveNoOperable {
 
 	/* Inicializa una instancia de Civil */
-	public Civil(int posicionX, int posicionY, Plano plano) throws SuperposicionNavesError, NaveDestruidaError {
+	public Civil(Punto punto, Plano plano) throws SuperposicionNavesError, NaveDestruidaError {
 
 		puntos = -300;
 		energia = 1;
 		operable = false;
-		rectangulo = new Rectangulo(5, 2, posicionX, posicionY);
+		rectangulo = new Rectangulo(5, 2,punto);
 		destruida = false;
 		fueraDeJuego = false;
 		this.determinarPlano(plano);
@@ -26,7 +26,8 @@ public class Civil extends NaveNoOperable {
 	/* La nave civil se mueve hacia abajo */
 	public void mover() throws SuperposicionNavesError { 
 
-		this.determinarPosicion( this.posicionX() , this.posicionY() - 1);
+		Punto nuevoPunto= new Punto(this.devolverPunto().getX(),this.devolverPunto().getY()-1);
+		this.determinarPosicion( nuevoPunto );
 		if ( this.seSuperponeConOtraNave() ) {
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
 		}
@@ -39,7 +40,8 @@ public class Civil extends NaveNoOperable {
 	 */
 	public void moverAlternativo() throws SuperposicionNavesError {
 
-		this.determinarPosicion( this.posicionX(), (this.posicionY() + 1));
+		Punto nuevoPunto= new Punto(this.devolverPunto().getX(),this.devolverPunto().getY()+1);
+		this.determinarPosicion( nuevoPunto );
 		if (this.seSuperponeConOtraNave() ) {
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
 		}
