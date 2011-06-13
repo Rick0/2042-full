@@ -47,22 +47,21 @@ public abstract class NaveNoOperable extends Nave {
 	 */
 	public void intentarMovimiento() {
 
-		double posx=this.posicionX();
-		double posy=this.posicionY();	
+		Punto puntoOriginal=this.devolverPunto();
 		try {
 			this.mover();
 		} catch (SuperposicionNavesError e) {
 			/*Si llego a la conclusion de que, moviendolo, causo que se superponga con
 			 * otra nave, lo devuelvo a la posicion original y realizo algun movimiento alternativo
 			 */
-			this.determinarPosicion(posx, posy);
+			this.determinarPosicion(puntoOriginal);
 			try {
 				this.moverAlternativo();
 			} catch (SuperposicionNavesError e2){ 
 				 /* Si con el movimiento alternativo sigue superponiendose con otra nave,
 				  * no le dejo moverse: Lo dejo en la posicion original 
 				  */
-				 this.determinarPosicion(posx ,posy);
+				 this.determinarPosicion(puntoOriginal);
 			}
 
 		this.estaFueraDeArea();
@@ -113,7 +112,7 @@ public abstract class NaveNoOperable extends Nave {
 	 */
 	public boolean estaFueraDeArea() {
 
-		if ( (rectangulo.devolverPosicionX() > 100) || (rectangulo.devolverPosicionX() <0 ) || (rectangulo.devolverPosicionY() > 100) || (rectangulo.devolverPosicionY() < 0) ) {
+		if ( (this.devolverPunto().getX() > plano.devolverAncho()) || (this.devolverPunto().getX() <0 ) || (this.devolverPunto().getY() > plano.devolverAltura()) || (devolverPunto().getY() < 0) ) {
 			this.fueraDeJuego = true;
 			return true;
 		}
@@ -144,7 +143,8 @@ public abstract class NaveNoOperable extends Nave {
 	 * de arriba a abajo) hasta salir del area de juego
 	 */
 	public void retirarse() {
-		this.determinarPosicion(this.posicionX() , this.posicionY() +1);
+		Punto nuevaPosicion=new Punto(this.devolverPunto().getX(),this.devolverPunto().getY());
+		this.determinarPosicion(nuevaPosicion);
 	}
 
 	/* Devuelve el estado fueraDeJuego , que es un valor booleano.

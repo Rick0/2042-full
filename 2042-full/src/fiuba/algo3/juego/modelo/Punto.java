@@ -1,5 +1,4 @@
 package fiuba.algo3.juego.modelo;
-import fiuba.algo3.juego.modelo.Rectangulo;
 import static java.lang.Math.sqrt;
 
 
@@ -52,16 +51,6 @@ public class Punto {
 	/* Se compara con otro Punto, retorna True si son iguales */
 	public boolean esIgualA(Punto otroPunto) {
 		return ((this.posicionX == otroPunto.getX()) && (this.posicionY == otroPunto.getY()));
-	}
-
-	/* Se fija si el Punto esta dentro del Rectangulo parametro */
-	public boolean estaDentroDe(Rectangulo unRectangulo) {
-		boolean limiteX, limiteY;
-
-		limiteX = (this.posicionX >= unRectangulo.devolverPosicionX()) && (this.posicionX <= (unRectangulo.devolverPosicionX()+unRectangulo.devolverAncho()));
-		limiteY = (this.posicionY >= unRectangulo.devolverPosicionY()) && (this.posicionY <= (unRectangulo.devolverPosicionY()+unRectangulo.devolverAltura()));
-	
-		return (limiteX && limiteY);
 	}
 
 }

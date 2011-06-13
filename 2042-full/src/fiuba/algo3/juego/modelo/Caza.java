@@ -12,14 +12,14 @@ public class Caza extends NaveNoOperable {
 
 
 	/* Inicializa una instancia de Caza */
-	public Caza(int posicionX, int posicionY, Plano plano) throws SuperposicionNavesError, NaveDestruidaError{
+	public Caza(Punto punto, Plano plano) throws SuperposicionNavesError, NaveDestruidaError{
 
 		numero = 0;
 		puntos = 50;
 		energia = 10;
 		pasosAvanzados = 0;
 		operable = false;
-		rectangulo = new Rectangulo(4, 4, posicionX, posicionY);
+		rectangulo = new Rectangulo(4, 4, punto);
 		destruida = false;
 		fueraDeJuego = false;
 		this.determinarPlano(plano);
@@ -36,7 +36,7 @@ public class Caza extends NaveNoOperable {
 	 */
 	public void intentarAccionSobre(Algo42 algo42) {
 			this.intentarChocar(algo42);
-			new Laser(this.posicionX(),this.posicionY(), false, this.plano);
+			new Laser(this.devolverPunto(), false, this.plano);
 	}
 
 	/* Devuelve true si la nave avanzo 3 pasos o mas */
@@ -54,18 +54,18 @@ public class Caza extends NaveNoOperable {
 		if (! this.destruida) {
 			throw new ItemNoDisponibleError("El caza aun no esta destruido, no puede dejar armas.");
 		}
-		itemDejado = new TanqueEnergia(this.posicionX(), this.posicionY());
+		itemDejado = new TanqueEnergia(this.devolverPunto());
 		return itemDejado;
 	}
 
 	/* Crea una instancia de TorpedoSimple en la posicion actual de la nave */
 	public void dispararTorpedo() {
-		new TorpedoSimple( this.posicionX(),this.posicionY(), false, this.plano);
+		new TorpedoSimple( this.devolverPunto(), false, this.plano);
 	}
 
 	/* Crea una instancia de TorpedoAdaptable en la posicion actual de la nave */
 	public void dispararTorpedoAdaptable() {
-		new TorpedoAdaptable( this.posicionX(),this.posicionY(), false, this.plano);
+		new TorpedoAdaptable( this.devolverPunto(), false, this.plano);
 	}
 
 	@Override
@@ -100,7 +100,8 @@ public class Caza extends NaveNoOperable {
 	/* Los cazas se mueve hacia abajo */
 	public void mover() throws SuperposicionNavesError {
 
-		this.determinarPosicion(this.posicionX(),this.posicionY() - 1);
+		Punto nuevoPunto= new Punto(this.devolverPunto().getX(),this.devolverPunto().getY()-1);
+		this.determinarPosicion(nuevoPunto);
 		pasosAvanzados = (pasosAvanzados + 1); 
 		if (this.seSuperponeConOtraNave() ) {
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
@@ -114,7 +115,8 @@ public class Caza extends NaveNoOperable {
 	 */
 	public void moverAlternativo() throws SuperposicionNavesError {
 
-		this.determinarPosicion(this.posicionX(),this.posicionY() + 1);
+		Punto punto= new Punto(this.devolverPunto().getX(),this.devolverPunto().getY()+1);
+		this.determinarPosicion(punto);
 		pasosAvanzados = (pasosAvanzados + 1); 
 		if (this.seSuperponeConOtraNave() ) {
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");

@@ -12,14 +12,14 @@ public class Bombardero extends NaveNoOperable {
 
 
 	/* Inicializa una instancia de Bombardero */
-	public Bombardero(double x, double y, Plano plano) throws SuperposicionNavesError, NaveDestruidaError {
+	public Bombardero(Punto punto, Plano plano) throws SuperposicionNavesError, NaveDestruidaError {
 
 		this.puntos = 30;
 		energia = 50;
 		haciaDer = 0;
 		haciaIzq = 0;
 		operable = false;
-		rectangulo = new Rectangulo(7, 7, x, y);
+		rectangulo = new Rectangulo(7, 7,punto);
 		destruida = false;
 		fueraDeJuego = false;
 		this.determinarPlano(plano);
@@ -36,7 +36,7 @@ public class Bombardero extends NaveNoOperable {
 		if (!this.destruida) {
 			throw new ItemNoDisponibleError("El bombardero aun no esta destruido, no puede dejar armas");
 		}
-		Item item = new ArmaAbandonada(this.posicionX(), this.posicionY() );
+		Item item = new ArmaAbandonada(this.devolverPunto() );
 		return item;
 	}
 
@@ -85,12 +85,14 @@ public class Bombardero extends NaveNoOperable {
 	public void mover() throws SuperposicionNavesError {
 
 		if ( haciaDer <10 ) {
-			this.determinarPosicion( this.posicionX() + 0.5 ,this.posicionY() - 0.5);
+			Punto nuevoPunto=new Punto(this.devolverPunto().getX()+0.5,this.devolverPunto().getY()-0.5);
+			this.determinarPosicion(nuevoPunto);
 			haciaDer = (haciaDer + 0.5);
 		}
 		else {
 			if (haciaIzq  <= 10) {
-				this.determinarPosicion(this.posicionX() - 0.5,this.posicionY() -0.5);
+				Punto nuevoPunto=new Punto(this.devolverPunto().getX()-0.5,this.devolverPunto().getY()-0.5);
+				this.determinarPosicion(nuevoPunto);
 				haciaIzq = (haciaIzq +0.5);
 			}
 			else {
@@ -113,13 +115,15 @@ public class Bombardero extends NaveNoOperable {
 
 		if ( haciaDer <=10 ) {
 			// Se estaba moviendo hacia la derecha. Lo envio a la izquierda
-			this.determinarPosicion(this.posicionX() -0.5, this.posicionY() -0.5);
+			Punto nuevoPunto=new Punto(this.devolverPunto().getX()-0.5,this.devolverPunto().getY()-0.5);
+			this.determinarPosicion(nuevoPunto);
 			haciaDer = 10.5;
 			haciaIzq = 0.5;
 		}
 		else {
 			 // Se estaba moviendo hacia la izquierda. Lo envio a la derecha
-			this.determinarPosicion( this.posicionX() +0.5,this.posicionY() -0.5);
+			Punto nuevoPunto=new Punto(this.devolverPunto().getX()+0.5,this.devolverPunto().getY()-0.5);
+			this.determinarPosicion(nuevoPunto);
 			haciaDer = 0.5;
 			haciaIzq = 10.5;
 		}
@@ -131,15 +135,15 @@ public class Bombardero extends NaveNoOperable {
 	}
 	
 	public Cohete dispararCohete() {
-		return new Cohete( this.posicionX(), this.posicionY(), false, this.plano);
+		return new Cohete( this.devolverPunto(), false, this.plano);
 	}
 	
 	public Laser dispararLaser() {
-		return new Laser( this.posicionX(), this.posicionY(), false, this.plano);
+		return new Laser( this.devolverPunto(), false, this.plano);
 	}
 	
 	private TorpedoRastreador dispararTorpedoHacia(Algo42 unAlgo42) {
-		TorpedoRastreador T =new TorpedoRastreador( this.posicionX(), this.posicionY(), false, this.plano);
+		TorpedoRastreador T =new TorpedoRastreador( this.devolverPunto(), false, this.plano);
 		T.determinarNaveRastreada(unAlgo42);
 		return T;
 	}

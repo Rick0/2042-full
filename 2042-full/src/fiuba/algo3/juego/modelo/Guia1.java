@@ -13,16 +13,16 @@ import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
  */
 public class Guia1 extends Guia {
 	
-	public Guia1(List<NaveNoOperable> listaNaves,int x,int y, Plano planoJuego) throws NaveDestruidaError{
+	public Guia1(List<NaveNoOperable> listaNaves,Punto punto, Plano planoJuego) throws NaveDestruidaError{
 		puntos=1002;
 		energia=10;
-		rectangulo= new Rectangulo (15,15,x,y);
+		rectangulo= new Rectangulo (15,15,punto);
 		operable=false;
 		fueraDeJuego =false;
 		destruida=false;
 		this.determinarPlano(planoJuego);
 		planoJuego.agregarNave(this);
-		this.determinarPosicion(x,y);
+		this.determinarPosicion(punto);
 		this.recibirFlota(listaNaves);
 	}
 	
@@ -35,7 +35,8 @@ public class Guia1 extends Guia {
 
 	/*Movimiento de la clase guia1. Se mueve hacia abajo*/
 	public void mover() throws SuperposicionNavesError{
-		this.determinarPosicion(this.posicionX(),(this.posicionY()-1));
+		Punto punto=new Punto(this.devolverPunto().getX(),this.devolverPunto().getY()-1);
+		this.determinarPosicion(punto);
 		if (this.seSuperponeConOtraNave()) {
 			throw new SuperposicionNavesError("La posicion ya esta ocupada");
 		}
@@ -48,8 +49,8 @@ public class Guia1 extends Guia {
 	 * posicion hacia atras. Si no puede, se queda quieto."
 	 */
 	public void moverAlternativo() throws SuperposicionNavesError{
-
-		this.determinarPosicion(this.posicionX(),this.posicionY()+1);
+		Punto punto=new Punto(this.devolverPunto().getX(),this.devolverPunto().getY()+1);
+		this.determinarPosicion(punto);
 		if (this.seSuperponeConOtraNave()){
 			throw new SuperposicionNavesError("La posicion ya esta ocupada");		}
 		this.estaFueraDeArea();
@@ -57,7 +58,7 @@ public class Guia1 extends Guia {
 		
 	/*Crea una instancia de laser en la posicion actual de la nave*/
 	public void dispararLaser(){
-		new Laser(this.posicionX(), this.posicionY(), false, plano);
+		new Laser(this.devolverPunto(), false, plano);
 	}
 	
 	/*Recibe una lista de naves, las mismas seran la flota de la guia1*/

@@ -7,11 +7,11 @@ public class TorpedoRastreador extends Arma {
 	private Nave naveRastreada;
 
 
-	public TorpedoRastreador (double d, double f, boolean origenAlgo,Plano plano ) {
+	public TorpedoRastreador (Punto punto, boolean origenAlgo,Plano plano ) {
 
 		this.danio = -20;
 		this.usada = false;
-		this.rectangulo = (new Rectangulo(2 , 2, d, f ));
+		this.rectangulo = (new Rectangulo(2 , 2, punto ));
 		this.determinarPlano(plano);
 
 		try {
@@ -34,18 +34,22 @@ public class TorpedoRastreador extends Arma {
 	/* El torpedo rastreador se mueve de tal forma que se acerque a la nave que persigue */ 
 	public void mover() {
 
-		if (this.naveRastreada.posicionX() < this.posicionX() ) {
-			this.determinarPosicion( (this.posicionX() - 1) , this.posicionY() );
+		if (this.naveRastreada.devolverPunto().getX() < this.devolverPunto().getX() ) {
+			Punto nuevaPosicionX=new Punto(this.devolverPunto().getX() - 1, this.devolverPunto().getY());
+			this.determinarPosicion(nuevaPosicionX);
 		}
-		else if ( (this.naveRastreada.posicionX() > this.posicionX() )) {		
-			this.determinarPosicion( (this.posicionX() + 1) , this.posicionY() );
+		else if ( (this.naveRastreada.devolverPunto().getX() > this.devolverPunto().getX() )) {	
+			Punto nuevaPosicionX=new Punto(this.devolverPunto().getX() + 1, this.devolverPunto().getY());
+			this.determinarPosicion( nuevaPosicionX );
 		}
 
-		if ( (this.naveRastreada.posicionY() < this.posicionY() )) {
-			this.determinarPosicion( (this.posicionX()) , (this.posicionY() - 1) );
+		if ( (this.naveRastreada.devolverPunto().getY() < this.devolverPunto().getY() )) {
+			Punto nuevaPosicionY=new Punto(this.devolverPunto().getX(), this.devolverPunto().getY() -1 );
+			this.determinarPosicion( nuevaPosicionY );
 		}
-		else if ( (this.naveRastreada.posicionY() > this.posicionY() )) {
-			this.determinarPosicion( (this.posicionX()) , this.posicionY() +1 );
+		else if ( (this.naveRastreada.devolverPunto().getY() > this.devolverPunto().getY() )) {
+			Punto nuevaPosicionY=new Punto(this.devolverPunto().getX(), this.devolverPunto().getY() +1 );
+			this.determinarPosicion( nuevaPosicionY);
 		}
 
 	}

@@ -5,11 +5,11 @@ import fiuba.algo3.juego.modelo.excepciones.ArmaUsadaError;
 
 public class Cohete extends Arma {
 
-	public Cohete (double d, double f, boolean origenAlgo,Plano plano ) {
+	public Cohete (Punto punto, boolean origenAlgo,Plano plano ) {
 
 		this.danio = -30;
 		this.usada = false;
-		this.rectangulo = (new Rectangulo(4 , 2, d, f ));
+		this.rectangulo = (new Rectangulo(4 , 2, punto));
 		this.determinarPlano(plano);
 	
 		try {

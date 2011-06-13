@@ -2,31 +2,25 @@ package fiuba.algo3.juego.modelo;
 
 /* Clase rectangulo, crea figuras rectangulares con un determinado ancho
  * y altura, ademas de una posicion en el espacio.
+ * La posicion esta dada por su punto extremo izquierdo inferior.
  */
 public class Rectangulo {
 
 	int ancho;
 	int altura;
-	double posicionX;
-	double posicionY;
+	Punto puntoIzquierdoInferior;
 
 
 	/* Constructor del rectangulo, recibe su posicion en el espacio y sus dimensiones */
-	public Rectangulo(int alturaR, int anchoR, double x, double y ) {
-		posicionX=x;
-		posicionY=y;
+	public Rectangulo(int alturaR, int anchoR, Punto punto ) {
+		puntoIzquierdoInferior= punto;
 		ancho=anchoR;
 		altura=alturaR;
 	}
 
-	/* Devuelve la posicion en Y del rectangulo */
-	public double devolverPosicionY() {
-		return posicionY;
-	}
-
-	/* Devuelve la posicion en X del rectangulo */
-	public double devolverPosicionX() {
-		return posicionX;
+	/* Devuelve el punto que determina la posicion del rectangulo */
+	public Punto devolverPuntoIzquierdoInferior() {
+		return puntoIzquierdoInferior;
 	}
 
 	/* Devuelve la altura del rectangulo */
@@ -39,9 +33,11 @@ public class Rectangulo {
 		return ancho;
 	}
 
-	public void determinarPosicion(double posx, double posy) {
-		posicionX = posx;
-		posicionY = posy;
+	/*Recibe un punto y ese pasa a ser el punto izquierdo inferior
+	 * del rectangulo, que determina su posicion
+	 */
+	public void determinarPosicion(Punto punto) {
+		puntoIzquierdoInferior=punto;
 	}
 
 	/* Compara dos rectangulos y devuelve true si se superponen
@@ -52,9 +48,9 @@ public class Rectangulo {
 
 		double otroXComienzo, otroXFinal, XComienzo, XFinal, otroYComienzo, otroYFinal, YComienzo, YFinal;
 	
-		otroXComienzo = otroRectangulo.posicionX;
+		otroXComienzo = otroRectangulo.devolverPuntoIzquierdoInferior().getX();
 		otroXFinal = otroXComienzo + otroRectangulo.ancho;
-		XComienzo = posicionX;
+		XComienzo = puntoIzquierdoInferior.getX();
 		XFinal = XComienzo + ancho;
 
 
@@ -69,9 +65,9 @@ public class Rectangulo {
 			}
 		}
 
-		otroYComienzo = otroRectangulo.posicionY;
+		otroYComienzo = otroRectangulo.devolverPuntoIzquierdoInferior().getY();
 		otroYFinal = otroYComienzo + otroRectangulo.altura;
-		YComienzo = posicionY;
+		YComienzo = puntoIzquierdoInferior.getY();
 		YFinal = YComienzo + altura;
 		if(YComienzo <= otroYComienzo) {
 			if (!(otroYComienzo <= YFinal)) {

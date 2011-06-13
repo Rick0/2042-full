@@ -5,11 +5,11 @@ public class ArmaAbandonada extends Item {
 	private int numeroTorpedos, numeroCohetes;
 
 
-	public ArmaAbandonada(double d, double e) {
+	public ArmaAbandonada(Punto punto) {
 		usado = false;
 		numeroTorpedos = 2;
 		numeroCohetes = 3;
-		rectangulo = new Rectangulo(3, 3, d, e);
+		rectangulo = new Rectangulo(3, 3, punto);
 	}
 
 	/* Recibe una nave tipo Algo42; y le suma las armas que dejo la nave enemiga */

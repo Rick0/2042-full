@@ -7,11 +7,11 @@ import fiuba.algo3.juego.modelo.excepciones.AtaqueEntreNavesNoOperables;
 
 public class TorpedoAdaptable extends Arma {
 	
-	public TorpedoAdaptable (double d, double f, boolean origenAlgo,Plano plano ) {
+	public TorpedoAdaptable (Punto punto, boolean origenAlgo,Plano plano ) {
 		
 		this.danio = 0;
 		this.usada = false;
-		this.rectangulo = (new Rectangulo(4 , 2, d, f ));
+		this.rectangulo = (new Rectangulo(4 , 2, punto));
 		this.InicializarOrigenAlgo42(origenAlgo);
 		this.determinarPlano(plano);
 
