@@ -7,6 +7,7 @@ import org.junit.Test;
 import fiuba.algo3.juego.modelo.Caza;
 import fiuba.algo3.juego.modelo.Nivel;
 import fiuba.algo3.juego.modelo.Plano;
+import fiuba.algo3.juego.modelo.Punto;
 import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
@@ -41,7 +42,8 @@ public class PruebaNivel extends TestCase {
 			i++;
 			posx = ( posx + 10 );
 			posy = ( posy + 10 );
-			Caza caza = new Caza( posx , posy , plano );
+			Punto punto= new Punto(posx,posy);
+			Caza caza = new Caza( punto , plano );
 			caza.modificarEnergia( -20 ); //Destruyo el caza
 		}
 		assertTrue(plano.devolverListaNavesEliminades().size() > 1);

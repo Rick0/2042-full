@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import fiuba.algo3.juego.modelo.Explorador;
 import fiuba.algo3.juego.modelo.Plano;
+import fiuba.algo3.juego.modelo.Punto;
 import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
@@ -26,14 +27,15 @@ public class PruebasExplorador extends TestCase{
 		//"Creo y ubico la nave en la posicion 50,100"
 		int n = 0;
 		Plano plano = new Plano( 100 , 100 );
-		Explorador explorador = new Explorador( 50 , 100 , 35 , plano); 
+		Punto posicionExplorador= new Punto(50,100);
+		Explorador explorador = new Explorador( posicionExplorador , 35 , plano); 
 		
 		while ( n < 6 ) {
 			explorador.mover();
 			n = ( n + 1 );
 		}
-		assertEquals( (int)(explorador.posicionY()) , 62 );
-		assertEquals( (int)(explorador.posicionX()), 15);
+		assertEquals( (int)(explorador.devolverPunto().getY()) , 62 );
+		assertEquals( (int)(explorador.devolverPunto().getX()), 15);
 	}
 	
 	@Test
@@ -44,14 +46,15 @@ public class PruebasExplorador extends TestCase{
 	*/
 		
 		Plano plano = new Plano( 200 , 100 );
-		Explorador explorador = new Explorador( 50 , 70 , 35 , plano );
+		Punto punto=new Punto(50,70);
+		Explorador explorador = new Explorador( punto, 35 , plano );
 		int n = 0;
 		while ( n < 6 ) {
 			explorador.moverAlternativo();
 			n = ( n + 1 );
 		}
-		assertEquals( (int)explorador.posicionX() , 15 );
-		assertEquals( (int)explorador.posicionY() , 108 );
+		assertEquals( (int)explorador.devolverPunto().getX() , 15 );
+		assertEquals( (int)explorador.devolverPunto().getY() , 108 );
 	}
 	
 }

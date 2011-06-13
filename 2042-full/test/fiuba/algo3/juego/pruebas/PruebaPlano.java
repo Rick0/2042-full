@@ -7,6 +7,7 @@ import org.junit.Test;
 import fiuba.algo3.juego.modelo.Avioneta;
 import fiuba.algo3.juego.modelo.Laser;
 import fiuba.algo3.juego.modelo.Plano;
+import fiuba.algo3.juego.modelo.Punto;
 import fiuba.algo3.juego.modelo.excepciones.AlgoSeAtacaASiMismoError;
 import fiuba.algo3.juego.modelo.excepciones.ArmaNoUsadaError;
 import fiuba.algo3.juego.modelo.excepciones.ArmaUsadaError;
@@ -23,14 +24,16 @@ public class PruebaPlano extends TestCase{
 	/*Prueba que no puede insertarse un arma usada a la lista de armas, ni tampoco un arma no usada a la lista de armas usadas*/
 
 		Plano plano= new Plano ( 100 , 100);
-		Laser arma= new Laser(50,50,true,plano);
+		Punto punto= new Punto(50,50);
+		Laser arma= new Laser(punto,true,plano);
 		try {
 			plano.agregarArmaUsada(arma);
 			fail("El arma no fue usada");
 		} catch ( ArmaNoUsadaError error) {
 			//Se espera que falle
 		}
-		Avioneta avioneta=new Avioneta(  50 , 50  , plano);
+		Punto puntoAvioneta= new Punto(50,50);
+		Avioneta avioneta=new Avioneta( puntoAvioneta , plano);
 		/*Instancie una avioneta solo para poder usar el arma*/
 		arma.intentarAtacar(avioneta);
 		try {
@@ -45,8 +48,9 @@ public class PruebaPlano extends TestCase{
 	/*Prueba que no puede insertarse un nave destruida a la lista de naves,
 	 *  ni tampoco un arma en juego a la lista de naves destruidas*/
 
+		Punto punto= new Punto(50,50);
 		Plano plano= new Plano(100,100);
-		Avioneta avioneta=new Avioneta ( 50 , 50 , plano);
+		Avioneta avioneta=new Avioneta ( punto, plano);
 		try {
 			plano.agregarNaveEliminada(avioneta);
 			fail("La nave no fue destruida");

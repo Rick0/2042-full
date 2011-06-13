@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import fiuba.algo3.juego.modelo.Avioneta;
 import fiuba.algo3.juego.modelo.Plano;
+import fiuba.algo3.juego.modelo.Punto;
 import fiuba.algo3.juego.modelo.TorpedoRastreador;
 import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
@@ -21,22 +22,24 @@ public class PruebaTorpedoRastreador extends TestCase{
 		Plano plano= new Plano( 100 ,100);
 
 		/*Pruebas de lanzamiento de torpedos. Para probarlos, necesito un objetivo.*/
-		Avioneta avioneta=new Avioneta( 70, 70 , plano);
+		Punto posicionAvioneta= new Punto(70,70);
+		Punto posicionTorpedo= new Punto(60,65);
+		Avioneta avioneta=new Avioneta(posicionAvioneta, plano);
 		
-		TorpedoRastreador torpedo= new TorpedoRastreador (60 , 65 , true , plano);
+		TorpedoRastreador torpedo= new TorpedoRastreador (posicionTorpedo, true , plano);
 		torpedo.determinarNaveRastreada( avioneta );
 		torpedo.mover();
 		/*Deberia haberse acercado un poco a la avioneta.*/
 		
-		assertEquals((torpedo.posicionX()),61.0);
-		assertEquals((torpedo.posicionY()),66.0);
+		assertEquals((torpedo.devolverPunto().getX()),61.0);
+		assertEquals((torpedo.devolverPunto().getY()),66.0);
 		
 		for (int i=0; i<10; i++) {
 			torpedo.mover();
 		}
 
 		/*Ahora deberia estar en la misma posicion de la avioneta.*/
-		assertEquals((torpedo.posicionY()),70.0);
-		assertEquals((torpedo.posicionX()),70.0);
+		assertEquals((torpedo.devolverPunto().getY()),70.0);
+		assertEquals((torpedo.devolverPunto().getX()),70.0);
 	}
 }
