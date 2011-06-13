@@ -25,7 +25,6 @@ public class Explorador extends NaveNoOperable {
 		fueraDeJuego = false;
 		this.determinarPlano(plano);
 		this.determinarRadio( radioDeGiro );
-		this.determinarPosicion( punto);
 
 		if (this.seSuperponeConOtraNave()) {
 			throw new SuperposicionNavesError("La posicion esta ocupada");
