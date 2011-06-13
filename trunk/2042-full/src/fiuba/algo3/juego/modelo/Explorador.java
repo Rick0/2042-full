@@ -29,6 +29,7 @@ public class Explorador extends NaveNoOperable {
 		if (this.seSuperponeConOtraNave()) {
 			throw new SuperposicionNavesError("La posicion esta ocupada");
 		}
+		this.determinarPosicion(punto);
 		plano.agregarNave(this);
 	}
 	
