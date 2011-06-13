@@ -22,7 +22,6 @@ public class Guia1 extends Guia {
 		destruida=false;
 		this.determinarPlano(planoJuego);
 		planoJuego.agregarNave(this);
-		this.determinarPosicion(punto);
 		this.recibirFlota(listaNaves);
 	}
 	
