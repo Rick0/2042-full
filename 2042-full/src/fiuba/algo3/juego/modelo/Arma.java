@@ -21,7 +21,7 @@ public abstract class Arma extends ObjetoUbicable {
 		this.origenAlgo42 = verdaderoOFalso;
 	}
 	
-	public void vivir() throws AlgoSeAtacaASiMismoError, AtaqueEntreNavesNoOperables, ArmaNoUsadaError{
+	public void vivir(){
 		
 		this.intentarMovimiento();
 		if(origenAlgo42){
@@ -29,13 +29,34 @@ public abstract class Arma extends ObjetoUbicable {
 
 			while(iteradorNave.hasNext()) {
 			    NaveNoOperable elemento = iteradorNave.next(); 
-			    this.intentarAtacar(elemento);
+			    try {
+					this.intentarAtacar(elemento);
+				} catch (AlgoSeAtacaASiMismoError e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (AtaqueEntreNavesNoOperables e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			} 
 		} else {
-			this.intentarAtacar(plano.algo42);
+			try {
+				this.intentarAtacar(plano.algo42);
+			} catch (AlgoSeAtacaASiMismoError e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (AtaqueEntreNavesNoOperables e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		if(usada){
-			plano.agregarArmaUsada(this);
+			try {
+				plano.agregarArmaUsada(this);
+			} catch (ArmaNoUsadaError e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
