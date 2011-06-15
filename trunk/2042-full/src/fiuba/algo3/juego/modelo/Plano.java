@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import fiuba.algo3.titiritero.Posicionable;
+
 import fiuba.algo3.juego.modelo.excepciones.AlgoSeAtacaASiMismoError;
 import fiuba.algo3.juego.modelo.excepciones.ArmaNoUsadaError;
 import fiuba.algo3.juego.modelo.excepciones.ArmaUsadaError;
@@ -18,7 +20,7 @@ import fiuba.algo3.juego.modelo.excepciones.NaveNoDestruidaError;
 /* Maneja el escenario del nivel, contiene listas con las naves, items
  * y armas en juego y se encarga de operar sobre ellas e iterarlas
  */
-public class Plano {
+public class Plano implements Posicionable {
 
 	int ancho;
 	int altura;
@@ -172,6 +174,23 @@ public class Plano {
 		    listaArmas.remove(elemento);
 		} 
 		nivel.actuarCon( listaNavesDestruidas);
+	}
+
+	
+	
+	/*METODOS PARA IMPLEMENTAR INTERFAZ POSICIONABLE;
+	 * @see fiuba.algo3.titiritero.Posicionable#getX()
+	 * @see fiuba.algo3.titiritero.Posicionable#getY()
+	 */
+	@Override
+	public int getX() {
+		return 0;
+	}
+
+	@Override
+	public int getY() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

@@ -132,4 +132,10 @@ public class Algo42 extends Nave {
 		return cohetes;
 	}
 
+	@Override
+	public void vivir() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
