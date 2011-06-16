@@ -6,7 +6,7 @@ import fiuba.algo3.titiritero.vista.Cuadrado;
 
 public class VistaAlgo extends Cuadrado{
 	public VistaAlgo() {
-		super(3,5);
+		super(20,20);
 		setColor(Color.RED);
 	}
 }

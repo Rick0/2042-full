@@ -111,7 +111,7 @@ public class Algo42 extends Nave {
 		if((this.devolverPunto().getX() + (rectangulo.devolverAncho()))>plano.devolverAncho()){
 			throw new AreaInvalidaError("La nave ya no puede moverse mas hacia la derecha");
 		}
-		Punto nuevaPosicion=new Punto(this.devolverPunto().getX() +1,(this.devolverPunto().getY()));
+		Punto nuevaPosicion=new Punto((this.devolverPunto().getX())+1,(this.devolverPunto().getY()));
 		this.determinarPosicion(nuevaPosicion);
 	}
 
@@ -120,10 +120,10 @@ public class Algo42 extends Nave {
 		if((this.devolverPunto().getX())<=0){
 			throw new AreaInvalidaError("La nave ya no puede moverse mas hacia la izquierda");
 		}
-		Punto nuevaPosicion=new Punto(this.devolverPunto().getX() - 1,(this.devolverPunto().getY()));
+		Punto nuevaPosicion=new Punto((this.devolverPunto().getX()) - 1,(this.devolverPunto().getY()));
 		this.determinarPosicion(nuevaPosicion);
 	}
-
+	
 	public void recibirChoque() {
 		this.ModificarEnergia(-30);
 	}

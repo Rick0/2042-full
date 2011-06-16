@@ -1,4 +1,7 @@
-package fiuba.algo3.juego.controlador;
+package fiuba.algo3.juego.vista;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Event;
 import java.awt.Frame;
 import java.awt.event.KeyEvent;
@@ -8,53 +11,70 @@ import java.awt.event.WindowEvent;
 import fiuba.algo3.juego.modelo.Algo42;
 import fiuba.algo3.juego.modelo.excepciones.AreaInvalidaError;
 import fiuba.algo3.titiritero.ControladorJuego;
-import fiuba.algo3.titiritero.KeyPressedObservador;
+import fiuba.algo3.titiritero.SuperficieDeDibujo;
+import fiuba.algo3.titiritero.vista.Panel;
 
-
-
-public class ControladorMovimientosAlgo extends Frame implements KeyPressedObservador{
+public class VentanaPrincipal extends Frame {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public ControladorMovimientosAlgo(ControladorJuego unControladorJuego,final Algo42 algo) {
+	private ControladorJuego controladorJuego;
+	private Panel panel;
+	public VentanaPrincipal(ControladorJuego unControladorJuego,final Algo42 algo) {
+		this.controladorJuego = unControladorJuego;
+		this.setTitle("Algo42full");
+		this.setSize(500, 500);
+		this.setResizable(false);
+		panel = new Panel(499,499,controladorJuego);
+		this.add(panel,BorderLayout.CENTER);
+		
+		this.setBackground(Color.black);
+		panel.setBackground(Color.black);
 		this.addKeyListener(new KeyListener(){
 
 			@Override
 			public void keyPressed(KeyEvent arg0) {
-				System.out.print(arg0.getKeyCode());
-				int tecla=arg0.getKeyCode();
-				switch(tecla)
-				{
-				case KeyEvent.VK_DOWN://Abajo
+				int opcion=arg0.getKeyCode();
+				if(opcion==KeyEvent.VK_DOWN){
+					//Abajo
+					try {
+						algo.moverAbajo();
+					} catch (AreaInvalidaError e) {
+						System.out.print("Area invalida");
+						// Si hay error de area invalida, que no se mueva.
+					}
+				}
+				if(opcion==KeyEvent.VK_UP){
+				//Arriba
 					try {
 						algo.moverArriba();
 					} catch (AreaInvalidaError e) {
 						System.out.print("Area invalida");
 						// Si hay error de area invalida, que no se mueva.
 					}
-				case KeyEvent.VK_UP://Arriba
-					try {
-						algo.moverAbajo();
-					} catch (AreaInvalidaError e) {
-						System.out.print("Area invalida");
-						// Si hay error de area invalida, que no se mueva.
 				}
-				case 39: //Derecha
-					try {
-						algo.moverDerecha();
-					} catch (AreaInvalidaError e) {
-						System.out.print("Area invalida");
-						// Si hay error de area invalida, que no se mueva.
-					}
-				case KeyEvent.VK_LEFT://IZQUIERDA
+				if(opcion==KeyEvent.VK_LEFT){
+					//izquierda
 					try {
 						algo.moverIzquierda();
 					} catch (AreaInvalidaError e) {
 						System.out.print("Area invalida");
 						// Si hay error de area invalida, que no se mueva.
 					}
+				}
+				if(opcion==KeyEvent.VK_RIGHT){
+					//Derecha
+					try {
+						algo.moverDerecha();
+					} catch (AreaInvalidaError e) {
+						System.out.print("Area invalida");
+						// Si hay error de area invalida, que no se mueva.
+					}
+				}
+				if(opcion==KeyEvent.VK_SPACE){
+					//Disparo
 				}
 			}
 
@@ -70,6 +90,8 @@ public class ControladorMovimientosAlgo extends Frame implements KeyPressedObser
 				
 			}
 			
+			
+			
 		});
 		
 		addWindowListener(new WindowAdapter() {
@@ -83,10 +105,14 @@ public class ControladorMovimientosAlgo extends Frame implements KeyPressedObser
 		System.out.print("tecla");
 		return true;
 	}
-	@Override
 	public void keyPressed(KeyEvent event) {
 		// TODO Auto-generated method stub
 		
 	}
-}
+	
+	public SuperficieDeDibujo getSuperficieDeDibujo() {
+		return this.panel;
+	}
 
+	
+}

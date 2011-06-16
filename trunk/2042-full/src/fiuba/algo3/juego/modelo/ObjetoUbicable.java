@@ -42,7 +42,7 @@ public abstract class ObjetoUbicable implements ObjetoVivo, Posicionable{
 	/*METODOS IMPLEMENTADOS PARA INTERFAZ POSICIONABLE*/
 	
 	public int getY(){
-		return (int)(devolverPunto().getY());
+		return (int)(plano.devolverAltura()-devolverPunto().getY());
 	}
 	
 	
