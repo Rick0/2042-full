@@ -12,7 +12,7 @@ public class Civil extends NaveNoOperable {
 		puntos = -300;
 		energia = 1;
 		operable = false;
-		rectangulo = new Rectangulo(5, 2,punto);
+		rectangulo = new Rectangulo(50, 50, punto);
 		destruida = false;
 		fueraDeJuego = false;
 		this.determinarPlano(plano);

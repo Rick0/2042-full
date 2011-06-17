@@ -27,14 +27,14 @@ public class Algo42 extends Nave {
 
 		if ( ( (punto.getX()<(planoJuego.ancho)) & (punto.getY()<(planoJuego.altura)) )  & ((punto.getY()>=0) & (punto.getX()>=0) ) ) {
 			planoJuego.introducirAlgo(this);
-			rectangulo = new Rectangulo (5,3,punto);
+			rectangulo = new Rectangulo (50,40,punto);
 		}
 		else{
 			throw new AreaInvalidaError("La nave debe ser creada en una posicion valida dentro del area de juego.");
 		}
 	}
 
-	public Algo42() throws AreaInvalidaError{	}
+
 
 	/* Quita la mitad de la energia de Algo42, perop siempre usando valores enteros */
 	public void quitarMitadEnergia() {	

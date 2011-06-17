@@ -19,7 +19,7 @@ public class Bombardero extends NaveNoOperable {
 		haciaDer = 0;
 		haciaIzq = 0;
 		operable = false;
-		rectangulo = new Rectangulo(7, 7,punto);
+		rectangulo = new Rectangulo(65, 65,punto);
 		destruida = false;
 		fueraDeJuego = false;
 		this.determinarPlano(plano);

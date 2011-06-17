@@ -17,7 +17,7 @@ public class Avioneta extends NaveNoOperable {
 		puntosAdelante= 0;
 		puntosAtras = 0;
 		operable = false;
-		rectangulo = new Rectangulo(6, 3, punto);
+		rectangulo = new Rectangulo(60, 55, punto);
 		destruida = false;
 		fueraDeJuego = false;
 		this.determinarPlano(plano);

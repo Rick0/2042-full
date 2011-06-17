@@ -16,7 +16,7 @@ public class Guia1 extends Guia {
 	public Guia1(List<NaveNoOperable> listaNaves,Punto punto, Plano planoJuego) throws NaveDestruidaError{
 		puntos=1002;
 		energia=10;
-		rectangulo= new Rectangulo (15,15,punto);
+		rectangulo= new Rectangulo (150,150,punto);
 		operable=false;
 		fueraDeJuego =false;
 		destruida=false;
