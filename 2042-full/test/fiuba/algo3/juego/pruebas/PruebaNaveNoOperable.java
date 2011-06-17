@@ -24,17 +24,20 @@ public class PruebaNaveNoOperable extends TestCase {
 	/*Prueba colocar avionetas en distintas posiciones y chocar una instancia de algo42.
 	Si el choque se dio, deberia devolver true, o false en caso contrario*/
 	
-	Plano plano= new Plano ( 100 , 100 ); 
+	Plano plano= new Plano ( 1000 , 1000 ); 
 	
-	Punto posicionAvioneta= new Punto(85,85);
+	Punto posicionAvioneta= new Punto(85,135);
 	Punto posicionAlgo= new Punto(85,79);
 	Avioneta avioneta= new Avioneta (posicionAvioneta , plano);
 	Algo42 algo= new Algo42(posicionAlgo , plano);
-	/*Un algo42 tiene altura 5. O sea: va de 79 a 84. Aun no chocan.*/
-	assertEquals(avioneta.intentarChocar(algo),false);
-	avioneta.mover();
+	assertFalse(avioneta.intentarChocar(algo));
+	
+	for ( int i = 0 ; i < 15 ; i++) {
+		algo.moverArriba();
+	}
+	
 	/*Ahora si se produce el choque*/
-	assertEquals(avioneta.intentarChocar(algo),true);
+	assertTrue(avioneta.intentarChocar(algo));
 	}
 	
 	@Test
@@ -61,8 +64,8 @@ public class PruebaNaveNoOperable extends TestCase {
 	public void testIntentarMoverBombardero() throws SuperposicionNavesError, NaveDestruidaError{
 	/*Voy a probar el uso de la funcion Intentar mover con un bombardero.*/
 
-		Plano plano=new Plano (100,100);
-		Punto punto= new Punto(50,92);
+		Plano plano=new Plano (1000 , 1000);
+		Punto punto= new Punto(50 , 92);
 		Bombardero bombardero1 = new Bombardero( punto, plano);
 		for (int i=0; i<20; i++) { 
 			bombardero1.intentarMovimiento();
@@ -110,23 +113,23 @@ public class PruebaNaveNoOperable extends TestCase {
 	en su camino, para probar que realiza los movimientos correctos*/
 		
 		
-		Plano plano = new Plano( 100 , 100 );
-		Punto posicionHelicoptero= new Punto(30,20);
+		Plano plano = new Plano( 1000 , 1000 );
+		Punto posicionHelicoptero = new Punto(5,126);
 		Helicoptero helicoptero = new Helicoptero( posicionHelicoptero , plano );
-		Punto posicionCivil=new Punto(30,26);
+		Punto posicionCivil = new Punto(5,180);
 		Civil civil = new Civil( posicionCivil , plano );
 		civil.intentarMovimiento(); //La primera vez que lo mueva, deberia poder moverse hacia adelante normalmente
-		assertEquals(civil.devolverPunto().getY() , 25.0 ); 
+		assertEquals(civil.devolverPunto().getY() , 179.0 ); 
 		civil.intentarMovimiento();
-		assertEquals(  civil.devolverPunto().getY() , 26.0 ); //Ahora si, la otra nave esta obstaculizando el camino, por eso se va hacia atras.
+		assertEquals(  civil.devolverPunto().getY() , 178.0 ); //Ahora si, la otra nave esta obstaculizando el camino, por eso se va hacia atras.
 		civil.intentarMovimiento();
-		assertEquals(civil.devolverPunto().getY() , 25.0 ); //Recordar que una nave civil tiene altura 5. Ocupa desde 25 hasta 30
+		assertEquals(civil.devolverPunto().getY() , 177.0 ); //Recordar que una nave civil tiene altura 5. Ocupa desde 25 hasta 30
 		/*Ahora voy a crear otra nave, una avioneta, que se ubicara detras de civil. Con esto quiero probar
 		que si todos los caminos estan totalmente obstaculizados, entonces la nave no se mueve.*/
-		Punto punto= new Punto(30,31);
+		Punto punto = new Punto(5,228);
 		Avioneta avioneta = new Avioneta(punto, plano ); 
 		civil.intentarMovimiento();
-		assertEquals(civil.devolverPunto().getY() , 25.0 );
+		assertEquals(civil.devolverPunto().getY() , 177.0 );
 	}
 	
 	@Test
