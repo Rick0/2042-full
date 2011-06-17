@@ -20,7 +20,7 @@ public class Explorador extends NaveNoOperable {
 		puntosHaciaAbajo = 0;
 		anguloActual = 0;
 		operable = false;
-		rectangulo = new Rectangulo(5, 2, punto);
+		rectangulo = new Rectangulo(50, 45, punto);
 		destruida = false;
 		fueraDeJuego = false;
 		this.determinarPlano(plano);

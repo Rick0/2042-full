@@ -12,7 +12,7 @@ public class Helicoptero extends NaveNoOperable {
 		puntos = -200;
 		energia = 1;
 		operable = false;
-		rectangulo = new Rectangulo(4, 4, punto);
+		rectangulo = new Rectangulo(50, 50, punto);
 		destruida = false;
 		fueraDeJuego = false;
 		this.determinarPlano(plano);
