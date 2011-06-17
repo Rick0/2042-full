@@ -189,11 +189,11 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		//Muevo la nave hacia arriba 76 veces para alcanzar el tanque
 		for ( int i = 1 ; i < 30 ; i++ ) { 
 			algo.moverArriba();
-			item.intentarEfectoEn( algo );
+			item.intentarChocar( algo );
 		}
 		assertEquals( algo.devolverCantidadEnergia() , 120 );
 	}
-	
+
 	@Test
 	public void testInteraccionArmasNavesNoOperables() throws AlgoSeAtacaASiMismoError, SuperposicionNavesError, NaveDestruidaError {
 	/*Prueba interacciones entre naves no operables y las armas que ellas mismas lanzan.
@@ -334,7 +334,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		//Me muevo 20 veces para tomar el arma."
 		for (int i=0 ; i < 20 ; i++ ) {
 			algo.moverArriba();
-			item.intentarEfectoEn(algo);
+			item.intentarChocar(algo);
 		}
 		Punto posicionHelicoptero= new Punto(50,200);
 		Helicoptero helicoptero = new Helicoptero(posicionHelicoptero , plano );
@@ -530,8 +530,8 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 	@Test
 	public void testInteraccionAvionetaYAlgo42() throws SuperposicionNavesError, NaveDestruidaError, AreaInvalidaError, AlgoSeAtacaASiMismoError, AtaqueEntreNavesNoOperables, ArmaNoUsadaError {
 		/*Prueba que al llamar al vivir de la avioneta la misma se mueva.
-		*Adem�s se verifica que los disparos sean creados
-		*/
+		 *Ademas se verifica que los disparos sean creados
+		 */
 		
 		int energiaInicial, energiaFinal;
 		
@@ -541,14 +541,14 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		Punto puntoAvioneta= new Punto(10,10);
 		Algo42 algo42 = new Algo42(puntoAlgo, plano );
 		Avioneta nave = new Avioneta( puntoAvioneta , plano );
-		
+
 		energiaInicial = algo42.devolverCantidadEnergia();
 		nave.vivir();//Se mueve y ademas crea un disparo
 		Arma disparo = plano.devolverListaArmas().get(0);
 		for (int i = 0 ; i < 30 ; i++ ) {
 			disparo.vivir();
 		}
-		algo42.recibirChoque();
+		algo42.chocarCon(nave);
 		energiaFinal = algo42.devolverCantidadEnergia();
 		
 		assertTrue ("La energia de algo42 debe bajar", energiaInicial > energiaFinal );

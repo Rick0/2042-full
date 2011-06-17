@@ -19,7 +19,7 @@ public abstract class Nave extends ObjetoUbicable {
 	/* Lleva a cabo las acciones correspondientes si debe destruirse */
 	public void destruirse() throws NaveNoDestruidaError {
 		
-		if ( (this.devolverCantidadEnergia() ) >0 ) {
+		if ( (this.devolverCantidadEnergia()) > 0 ) {
 			throw new NaveNoDestruidaError("La nave aun tiene energia en su tanque");
 		}
 		else {
@@ -49,6 +49,11 @@ public abstract class Nave extends ObjetoUbicable {
 	/* Devuelve true si se trata de una nave operable; false en caso contrario */
 	public boolean esOperable() {
 		return esOperable;
+	}
+
+	/* La nave choca con un arma */
+	public void chocarCon(Arma unArma) {
+		this.modificarEnergia(unArma.getDanio());
 	}
 
 }
