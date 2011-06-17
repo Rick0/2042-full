@@ -19,9 +19,9 @@ public class Explorador extends NaveNoOperable {
 		inicializado = false;
 		puntosHaciaAbajo = 0;
 		anguloActual = 0;
-		operable = false;
+		esOperable = false;
 		rectangulo = new Rectangulo(50, 45, punto);
-		destruida = false;
+		estaDestruida = false;
 		fueraDeJuego = false;
 		this.determinarPlano(plano);
 		this.determinarRadio( radioDeGiro );
@@ -29,7 +29,7 @@ public class Explorador extends NaveNoOperable {
 		if (this.seSuperponeConOtraNave()) {
 			throw new SuperposicionNavesError("La posicion esta ocupada");
 		}
-		this.determinarPosicion(punto);
+		this.cambiarPosicion(punto);
 		plano.agregarNave(this);
 	}
 	
@@ -47,7 +47,7 @@ public class Explorador extends NaveNoOperable {
 		anguloActual = (anguloActual +num);
 		puntosHaciaAbajo = ( puntosHaciaAbajo + 0.5);
 		Punto nuevoPunto= new Punto((radio*( (Math.cos( pi * anguloActual)))) + centroInicialX,(centroInicialY - (radio * Math.sin( pi * anguloActual )) - puntosHaciaAbajo) );
-		this.determinarPosicion(nuevoPunto );
+		this.cambiarPosicion(nuevoPunto );
 		if ( this.seSuperponeConOtraNave() ) {
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
 		}
@@ -65,7 +65,7 @@ public class Explorador extends NaveNoOperable {
 		anguloActual = (anguloActual - num);
 		puntosHaciaAbajo = (puntosHaciaAbajo - 0.5);
 		Punto nuevoPunto= new Punto( (radio*( Math.cos( pi *anguloActual ) ) + centroInicialX),(centroInicialY - (radio * Math.sin( pi*anguloActual ) ) - puntosHaciaAbajo));
-		this.determinarPosicion(nuevoPunto);
+		this.cambiarPosicion(nuevoPunto);
 		if (this.seSuperponeConOtraNave() ) {
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
 		}
@@ -81,9 +81,9 @@ public class Explorador extends NaveNoOperable {
 	 * no solo ubica a la nave en su lugar, sino que tambien guarda cual sera el centro de la 
 	 * circunferencia (esta debera tener su centro trasladado a la ubicacion x,y)
 	 */
-	public void determinarPosicion(Punto punto) {
+	public void cambiarPosicion(Punto punto) {
 
-		this.rectangulo.determinarPosicion(punto);
+		this.rectangulo.cambiarPosicion(punto);
 		if (!inicializado) {
 			centroInicialX = ( (this.devolverPunto().getX()) - radio);
 			centroInicialY = (this.devolverPunto().getY());

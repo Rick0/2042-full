@@ -16,9 +16,9 @@ public class Avioneta extends NaveNoOperable {
 		energia = 20;
 		puntosAdelante= 0;
 		puntosAtras = 0;
-		operable = false;
+		esOperable = false;
 		rectangulo = new Rectangulo(60, 55, punto);
-		destruida = false;
+		estaDestruida = false;
 		fueraDeJuego = false;
 		this.determinarPlano(plano);
 
@@ -41,12 +41,12 @@ public class Avioneta extends NaveNoOperable {
 		if ( (this.puntosAdelante <= 60) ) {
 			this.puntosAdelante = (this.puntosAdelante + 2);
 			Punto nuevaPosicion= new Punto(devolverPunto().getX(),devolverPunto().getY()-2);
-			this.determinarPosicion(nuevaPosicion);
+			this.cambiarPosicion(nuevaPosicion);
 		}
 		else {
 			this.puntosAtras = (this.puntosAtras + 2);
 			Punto nuevaPosicion= new Punto(devolverPunto().getX(),devolverPunto().getY()+2);
-			this.determinarPosicion(nuevaPosicion);
+			this.cambiarPosicion(nuevaPosicion);
 			if (this.puntosAtras >= 60) {
 				this.puntosAtras = 0;
 				this.puntosAdelante =0;
@@ -70,12 +70,12 @@ public class Avioneta extends NaveNoOperable {
 			// Hago que empiece a moverse hacia adelante desde 0,
 			//pero antes lo hago moverse hacia atras, si es que puedo.
 			Punto nuevaPosicion= new Punto(devolverPunto().getX(),devolverPunto().getY()+2);
-			this.determinarPosicion(nuevaPosicion);
+			this.cambiarPosicion(nuevaPosicion);
 		}
 		else {
 			this.puntosAtras = 0;
 			Punto nuevaPosicion= new Punto(devolverPunto().getX(),devolverPunto().getY()-2);
-			this.determinarPosicion(nuevaPosicion);
+			this.cambiarPosicion(nuevaPosicion);
 		}
 
 		if ( this.seSuperponeConOtraNave() ) {

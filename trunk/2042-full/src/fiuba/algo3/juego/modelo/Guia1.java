@@ -17,9 +17,9 @@ public class Guia1 extends Guia {
 		puntos=1002;
 		energia=10;
 		rectangulo= new Rectangulo (150,150,punto);
-		operable=false;
+		esOperable=false;
 		fueraDeJuego =false;
-		destruida=false;
+		estaDestruida=false;
 		this.determinarPlano(planoJuego);
 		planoJuego.agregarNave(this);
 		this.recibirFlota(listaNaves);
@@ -35,7 +35,7 @@ public class Guia1 extends Guia {
 	/*Movimiento de la clase guia1. Se mueve hacia abajo*/
 	public void mover() throws SuperposicionNavesError{
 		Punto punto=new Punto(this.devolverPunto().getX(),this.devolverPunto().getY()-1);
-		this.determinarPosicion(punto);
+		this.cambiarPosicion(punto);
 		if (this.seSuperponeConOtraNave()) {
 			throw new SuperposicionNavesError("La posicion ya esta ocupada");
 		}
@@ -49,7 +49,7 @@ public class Guia1 extends Guia {
 	 */
 	public void moverAlternativo() throws SuperposicionNavesError{
 		Punto punto=new Punto(this.devolverPunto().getX(),this.devolverPunto().getY()+1);
-		this.determinarPosicion(punto);
+		this.cambiarPosicion(punto);
 		if (this.seSuperponeConOtraNave()){
 			throw new SuperposicionNavesError("La posicion ya esta ocupada");		}
 		this.estaFueraDeArea();

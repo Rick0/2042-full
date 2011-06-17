@@ -22,8 +22,8 @@ public class Algo42 extends Nave {
 		energia= 100;
 		torpedos=0;
 		cohetes=0;
-		destruida=false;
-		operable=true;
+		estaDestruida=false;
+		esOperable=true;
 
 		if ( ( (punto.getX()<(planoJuego.ancho)) & (punto.getY()<(planoJuego.altura)) )  & ((punto.getY()>=0) & (punto.getX()>=0) ) ) {
 			planoJuego.introducirAlgo(this);
@@ -81,10 +81,10 @@ public class Algo42 extends Nave {
 	}
 
 	/* Recibe una cierta cantidad de puntos y los suma a la energia de la nave */
-	public void ModificarEnergia (int puntosModificar) {
-		energia = energia+puntosModificar;
+	public void ModificarEnergia (int energiaAModificar) {
+		energia = energia + energiaAModificar;
 		if ( energia <= 0 ) {
-			destruida = true;
+			estaDestruida = true;
 		}
 	}
 
@@ -94,7 +94,7 @@ public class Algo42 extends Nave {
 			throw new AreaInvalidaError("La nave ya no puede moverse mas hacia abajo");
 		}
 		Punto nuevoPunto= new Punto(this.devolverPunto().getX(),(this.devolverPunto().getY()-1));
-		this.determinarPosicion(nuevoPunto);
+		this.cambiarPosicion(nuevoPunto);
 	}
 
 	/* La nave Algo42 se mueve un lugar hacia arriba */
@@ -103,7 +103,7 @@ public class Algo42 extends Nave {
 			throw new AreaInvalidaError("La nave ya no puede moverse mas hacia arriba");
 		}
 		Punto nuevaPosicion=new Punto(this.devolverPunto().getX(),(this.devolverPunto().getY()+ 1));
-		this.determinarPosicion(nuevaPosicion);
+		this.cambiarPosicion(nuevaPosicion);
 	}
 
 	/* La nave Algo42 se mueve un lugar hacia la derecha */
@@ -112,7 +112,7 @@ public class Algo42 extends Nave {
 			throw new AreaInvalidaError("La nave ya no puede moverse mas hacia la derecha");
 		}
 		Punto nuevaPosicion=new Punto((this.devolverPunto().getX())+1,(this.devolverPunto().getY()));
-		this.determinarPosicion(nuevaPosicion);
+		this.cambiarPosicion(nuevaPosicion);
 	}
 
 	/* La nave Algo42 se mueve un lugar hacia la izquierda */
@@ -121,7 +121,7 @@ public class Algo42 extends Nave {
 			throw new AreaInvalidaError("La nave ya no puede moverse mas hacia la izquierda");
 		}
 		Punto nuevaPosicion=new Punto((this.devolverPunto().getX()) - 1,(this.devolverPunto().getY()));
-		this.determinarPosicion(nuevaPosicion);
+		this.cambiarPosicion(nuevaPosicion);
 	}
 	
 	public void recibirChoque() {

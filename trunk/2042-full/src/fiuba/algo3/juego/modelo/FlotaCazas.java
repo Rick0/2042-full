@@ -36,7 +36,7 @@ public class FlotaCazas {
 		}
 
 		Punto punto= new Punto(centroX, centroY);
-		array.get(0).determinarPosicion(punto);
+		array.get(0).cambiarPosicion(punto);
 		array.get(0).determinarPlano(planoDeJuego);
 		this.determinarPosicion(centroX, centroY); 
 		this.determinarListaCazas(array);		
@@ -80,8 +80,8 @@ public class FlotaCazas {
 			Punto punto1=new Punto(posicionXOriginal + 10, posicionYOriginal);
 			Punto punto2=new Punto(posicionXOriginal - 10, posicionYOriginal);
 
-			listaCazas.get(3).determinarPosicion( punto1 );
-			listaCazas.get(4).determinarPosicion( punto2 );
+			listaCazas.get(3).cambiarPosicion( punto1 );
+			listaCazas.get(4).cambiarPosicion( punto2 );
 			plano.agregarNave(listaCazas.get(3));
 			plano.agregarNave(listaCazas.get(4));
 			listaCazas.get(3).determinarPlano(plano);
@@ -91,8 +91,8 @@ public class FlotaCazas {
 		if (listaCazas.get(0).avanzo3Pasos() ) {
 			Punto puntoa=new Punto(posicionXOriginal + 5, posicionYOriginal);
 			Punto puntob=new Punto(posicionXOriginal - 5, posicionYOriginal);
-			listaCazas.get(2).determinarPosicion( puntoa );
-			listaCazas.get(1).determinarPosicion( puntob);
+			listaCazas.get(2).cambiarPosicion( puntoa );
+			listaCazas.get(1).cambiarPosicion( puntob);
 			listaCazas.get(2).determinarPlano(plano);
 			listaCazas.get(1).determinarPlano(plano);
 			plano.agregarNave(listaCazas.get(1));

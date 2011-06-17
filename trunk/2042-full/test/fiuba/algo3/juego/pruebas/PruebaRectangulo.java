@@ -18,19 +18,19 @@ public class PruebaRectangulo extends TestCase{
 		assertEquals(rectangulo1.coincideConPosicionDe(rectangulo2),true);
 		
 		Punto nuevoPuntoRectangulo1= new Punto(30,30);
-		rectangulo2.determinarPosicion(nuevoPuntoRectangulo1);
+		rectangulo2.cambiarPosicion(nuevoPuntoRectangulo1);
 		assertEquals(rectangulo1.coincideConPosicionDe(rectangulo2),true);
 		
 		Punto nuevoPuntoRectangulo2= new Punto(47, 50);
-		rectangulo2.determinarPosicion( nuevoPuntoRectangulo2 );
+		rectangulo2.cambiarPosicion( nuevoPuntoRectangulo2 );
 		assertEquals(rectangulo1.coincideConPosicionDe(rectangulo2),false);
 		
 		Punto nPuntoRectangulo2= new Punto(90, 30);
-		rectangulo2.determinarPosicion(nPuntoRectangulo2);
+		rectangulo2.cambiarPosicion(nPuntoRectangulo2);
 		assertEquals(rectangulo1.coincideConPosicionDe(rectangulo2),false);
 		
 		Punto otroPuntoRectangulo2= new Punto(30, 90);
-		rectangulo2.determinarPosicion(otroPuntoRectangulo2);
+		rectangulo2.cambiarPosicion(otroPuntoRectangulo2);
 		assertEquals(rectangulo1.coincideConPosicionDe(rectangulo2),false);
 
 	}

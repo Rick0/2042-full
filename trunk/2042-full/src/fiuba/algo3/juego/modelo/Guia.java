@@ -22,7 +22,7 @@ public abstract class Guia extends NaveNoOperable {
 			throw new NaveNoDestruidaError("La nave aun tiene energia en su tanque");
 		}
 		else {
-			destruida = true;
+			estaDestruida = true;
 			plano.agregarNaveEliminada(this);
 			try {
 				this.flotaRetroceder();
@@ -37,7 +37,7 @@ public abstract class Guia extends NaveNoOperable {
 	 */
 	public void flotaRetroceder() throws GuiaNoDestruidaError {
 
-		if (destruida) {
+		if (estaDestruida) {
 
 			Iterator<NaveNoOperable> cadaNave = flota.iterator();			
 			while (cadaNave.hasNext()) {

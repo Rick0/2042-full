@@ -36,7 +36,7 @@ public class Rectangulo {
 	/*Recibe un punto y ese pasa a ser el punto izquierdo inferior
 	 * del rectangulo, que determina su posicion
 	 */
-	public void determinarPosicion(Punto punto) {
+	public void cambiarPosicion(Punto punto) {
 		puntoIzquierdoInferior=punto;
 	}
 

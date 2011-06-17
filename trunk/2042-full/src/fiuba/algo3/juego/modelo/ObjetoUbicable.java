@@ -3,6 +3,7 @@ package fiuba.algo3.juego.modelo;
 import fiuba.algo3.titiritero.ObjetoVivo;
 import fiuba.algo3.titiritero.Posicionable;
 
+
 /* Todos los objetos que se pueden ubicar en el escenario de juego 
  * heredan de esta clase: Todos deben tener una instancia de rectangulo
  * que los representa en el espacio y que les da un tamanio y una ubicacion
@@ -11,11 +12,12 @@ public abstract class ObjetoUbicable implements ObjetoVivo, Posicionable{
 
 	Rectangulo rectangulo;
 	Plano plano;
-	
+
+
 	/* Ubica el objeto en la posicion determinada, lo cual implica
 	 * cambiar el punto que determina su posicion */
-	public void determinarPosicion(Punto punto) {
-		rectangulo.determinarPosicion(punto);
+	public void cambiarPosicion(Punto punto) {
+		rectangulo.cambiarPosicion(punto);
 	}
 
 	/* Devuelve la el punto que determina la posicion del objeto */
@@ -38,15 +40,14 @@ public abstract class ObjetoUbicable implements ObjetoVivo, Posicionable{
 	public void determinarPlano(Plano planoDelObjeto) {
 		this.plano = planoDelObjeto;
 	}
-	
-	/*METODOS IMPLEMENTADOS PARA INTERFAZ POSICIONABLE*/
-	
-	public int getY(){
+
+	/* Metodo implementado para la interface Posicionable */
+	public int getY() {
 		return (int)(plano.devolverAltura()-devolverPunto().getY());
 	}
-	
-	
-	public int getX(){
+
+	/* Metodo implementado para la interface Posicionable */
+	public int getX() {
 		return (int)(devolverPunto().getX());
 	}
 

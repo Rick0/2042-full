@@ -18,9 +18,9 @@ public class Caza extends NaveNoOperable {
 		puntos = 50;
 		energia = 10;
 		pasosAvanzados = 0;
-		operable = false;
+		esOperable = false;
 		rectangulo = new Rectangulo(50, 50, punto);
-		destruida = false;
+		estaDestruida = false;
 		fueraDeJuego = false;
 		this.determinarPlano(plano);
 
@@ -51,7 +51,7 @@ public class Caza extends NaveNoOperable {
 	public Item dejarTanque() throws ItemNoDisponibleError {
 		
 		Item itemDejado;
-		if (! this.destruida) {
+		if (! this.estaDestruida) {
 			throw new ItemNoDisponibleError("El caza aun no esta destruido, no puede dejar armas.");
 		}
 		itemDejado = new TanqueEnergia(this.devolverPunto());
@@ -101,7 +101,7 @@ public class Caza extends NaveNoOperable {
 	public void mover() throws SuperposicionNavesError {
 
 		Punto nuevoPunto= new Punto(this.devolverPunto().getX(),this.devolverPunto().getY()-1);
-		this.determinarPosicion(nuevoPunto);
+		this.cambiarPosicion(nuevoPunto);
 		pasosAvanzados = (pasosAvanzados + 1); 
 		if (this.seSuperponeConOtraNave() ) {
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
@@ -116,7 +116,7 @@ public class Caza extends NaveNoOperable {
 	public void moverAlternativo() throws SuperposicionNavesError {
 
 		Punto punto= new Punto(this.devolverPunto().getX(),this.devolverPunto().getY()+1);
-		this.determinarPosicion(punto);
+		this.cambiarPosicion(punto);
 		pasosAvanzados = (pasosAvanzados + 1); 
 		if (this.seSuperponeConOtraNave() ) {
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");

@@ -34,7 +34,7 @@ public class PruebaArmas extends TestCase {
 		Cohete cohete = new Cohete(posicionCohete, true, plano);
 
 		try {
-			cohete.intentarAtacar( algo );
+			cohete.intentarChocar( algo );
 			fail("Algo no puede atacarse a si mismo");
 		} catch ( AlgoSeAtacaASiMismoError error) {
 			//Se espera que falle
@@ -53,7 +53,7 @@ public class PruebaArmas extends TestCase {
 		Cohete cohete = new Cohete(puntoCohete, false, plano);
 		NaveNoOperable civil = new Civil(puntoCivil, plano);
 		try {
-			cohete.intentarAtacar( civil );
+			cohete.intentarChocar( civil );
 			fail("Deberia fallar porque entre enemigos no se atacan");
 		} catch (AtaqueEntreNavesNoOperables error) {
 			//Se espera que falle
@@ -71,7 +71,7 @@ public class PruebaArmas extends TestCase {
 		int posicion = 90;
 		
 		for (int i=1; i == 30; i ++) {
-			laser.intentarMovimiento();
+			laser.intentarMover();
 			posicion = (posicion - 2);
 			
 			assertTrue("La posicion en X no cambia", laser.devolverPunto().getX() == 50);
@@ -90,7 +90,7 @@ public class PruebaArmas extends TestCase {
 		Laser laser = new Laser(punto, false, plano);
 		
 		for (int i=0; i<42; i++) {
-			laser.intentarMovimiento();
+			laser.intentarMover();
 
 		}
 		assertEquals(laser.estadoUsado(),true);

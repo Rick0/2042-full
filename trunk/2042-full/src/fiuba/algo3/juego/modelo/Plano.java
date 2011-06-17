@@ -60,7 +60,7 @@ public class Plano implements Posicionable {
 	/* Agrega una referencia a la nave destruida */
 	public void agregarNaveEliminada(Nave nave) throws NaveNoDestruidaError {
 
-		if(!(nave.destruida )){
+		if(!(nave.estaDestruida )){
 			throw new NaveNoDestruidaError("La nave aun no esta destruida");
 		}
 		listaNavesDestruidas.add((NaveNoOperable) nave);
@@ -176,8 +176,7 @@ public class Plano implements Posicionable {
 		nivel.actuarCon( listaNavesDestruidas);
 	}
 
-	
-	
+
 	/*METODOS PARA IMPLEMENTAR INTERFAZ POSICIONABLE;
 	 * @see fiuba.algo3.titiritero.Posicionable#getX()
 	 * @see fiuba.algo3.titiritero.Posicionable#getY()
@@ -189,7 +188,6 @@ public class Plano implements Posicionable {
 
 	@Override
 	public int getY() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
