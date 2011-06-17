@@ -148,7 +148,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 
 		
 		
-		Plano plano = new Plano( 100 , 100 );
+		Plano plano = new Plano( 1000 , 1000 );
 		Punto puntoAlgo= new Punto(50,5);
 		Punto puntoCaza= new Punto(50,80);
 		Algo42 algo = new Algo42( puntoAlgo , plano );
@@ -183,11 +183,11 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		try {
 			item = caza.dejarTanque();
 		} catch (ItemNoDisponibleError error) {
-			//Esto sucede si el caza no ha muerto, pero yo me asegur� de que si lo hizo
+			//Esto sucede si el caza no ha muerto, pero yo me aseguro de que si lo hizo
 		}
 	
 		//Muevo la nave hacia arriba 76 veces para alcanzar el tanque
-		for ( int i = 1 ; i < 76 ; i++ ) { 
+		for ( int i = 1 ; i < 30 ; i++ ) { 
 			algo.moverArriba();
 			item.intentarEfectoEn( algo );
 		}
