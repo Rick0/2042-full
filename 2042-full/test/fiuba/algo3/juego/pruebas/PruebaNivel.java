@@ -33,15 +33,15 @@ public class PruebaNivel extends TestCase {
 
 		
 		Nivel nivel = new Nivel();
-		Plano plano = new Plano( 200 , 200 );
+		Plano plano = new Plano( 3000 , 3000 );
 		int posx = 0;
 		int posy = 0;
 		assertEquals( nivel.devolverNumeroNivel() , 1 );
-		int i = 0;
+		int i = 1;
 		while ( i < 21 ) {
 			i++;
-			posx = ( posx + 10 );
-			posy = ( posy + 10 );
+			posx = ( posx + 100 );
+			posy = ( posy + 100 );
 			Punto punto= new Punto(posx,posy);
 			Caza caza = new Caza( punto , plano );
 			caza.modificarEnergia( -20 ); //Destruyo el caza

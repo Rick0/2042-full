@@ -65,44 +65,39 @@ public class PruebaNaveNoOperable extends TestCase {
 	/*Voy a probar el uso de la funcion Intentar mover con un bombardero.*/
 
 		Plano plano=new Plano (1000 , 1000);
-		Punto punto= new Punto(50 , 92);
+		Punto punto= new Punto(80 , 92);
 		Bombardero bombardero1 = new Bombardero( punto, plano);
 		for (int i=0; i<20; i++) { 
 			bombardero1.intentarMovimiento();
 		}
-		assertEquals(bombardero1.devolverPunto().getX(),60.0);
+		assertEquals(bombardero1.devolverPunto().getX(),90.0);
 		assertEquals(bombardero1.devolverPunto().getY(),82.0);
 		/*ahora deberia empezar a moverse a la izquierda*/
 		bombardero1.intentarMovimiento();
-		assertEquals(bombardero1.devolverPunto().getX(),59.5);
+		assertEquals(bombardero1.devolverPunto().getX(),89.5);
 		assertEquals(bombardero1.devolverPunto().getY(),81.5);
 		/*Creo otro bombardero para que este por chocarse con el. 
-		 *Tener en cuenta dimensiones del bombardero= 7x7*/
+		 *Tener en cuenta dimensiones del bombardero= 65x65*/
 
-		Punto posicion= new Punto(52.0,81.5);
+		Punto posicion= new Punto(24.0,81.5);
 		Bombardero bombardero2= new Bombardero(posicion, plano);
 		bombardero2.intentarMovimiento();
-		/*Segun esto, el bombardero2 deberia haber cambiado su direccion a la izquierda.*/
-		assertEquals(bombardero2.devolverPunto().getX(),51.5);
-		assertEquals(bombardero2.devolverPunto().getY(),81.0);
-		/*Ahora voy a crear una avioneta (dimensiones 3x6)justo debajo del bombardero2 y voy a mover 
-		 * a bombardero1, provocando que no pueda moverse.
+		bombardero1.intentarMovimiento();
+		assertEquals(bombardero1.devolverPunto().getX(),89.0);
+		assertEquals(bombardero1.devolverPunto().getY(),81.0);
+		/*Ahora el bombardero 1 y dos estan pegados uno al otro. Voy a crear una avioneta al lado de bombardero 1
+		 * con lo cual este quedara totalmente bloqueado y no podra moverse
 		 */
-		bombardero2.intentarMovimiento();
-		/*Segun esto, el bombardero2 deberia haber cambiado su direccion a la izquierda.*/
-		assertEquals(bombardero2.devolverPunto().getX(),51.0);
-		assertEquals(bombardero2.devolverPunto().getY(),80.5);
 
 		/*Suprimi un warning, porque este metodo no necesita a la 
 		 * avioneta para nada, por eso el compilador indica warning
 		 */
-		Punto posAvioneta= new Punto(51,74);
+		Punto posAvioneta = new Punto( 154.3 , 81.5 );
 		@SuppressWarnings("unused")
-		Avioneta avioneta=new Avioneta( posAvioneta , plano);
-		bombardero2.intentarMovimiento();
-		assertEquals(bombardero2.devolverPunto().getX(),51.0);
-		assertEquals(bombardero2.devolverPunto().getY(),80.5);
-
+		Avioneta avioneta = new Avioneta( posAvioneta , plano);
+		bombardero1.intentarMovimiento();
+		assertEquals(bombardero1.devolverPunto().getX(),89.0);//No se movio
+		assertEquals(bombardero1.devolverPunto().getY(),81.0);//No se movio
 	}
 	
 	@SuppressWarnings("unused")
