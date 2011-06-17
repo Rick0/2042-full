@@ -7,7 +7,7 @@ public class Laser extends Arma {
 	public Laser (Punto punto, boolean origenAlgo,Plano plano ) {
 
 		this.danio = -10;
-		this.usada = false;
+		this.fueUsada = false;
 		this.rectangulo = (new Rectangulo(5 , 1, punto ));
 		this.determinarPlano(plano);
 

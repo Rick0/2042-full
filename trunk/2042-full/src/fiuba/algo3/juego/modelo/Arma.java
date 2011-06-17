@@ -7,9 +7,9 @@ import fiuba.algo3.juego.modelo.excepciones.AtaqueEntreNavesNoOperables;
 
 
 public abstract class Arma extends ObjetoUbicable {
-	
+
 	int danio;
-	boolean usada;
+	boolean fueUsada;
 	boolean origenAlgo42;
 
 
@@ -20,10 +20,10 @@ public abstract class Arma extends ObjetoUbicable {
 		this.origenAlgo42 = verdaderoOFalso;
 	}
 	
-	public void vivir(){
-		
+	public void vivir() {
+
 		this.intentarMover();
-		if(origenAlgo42){
+		if(origenAlgo42) {
 			Iterator<NaveNoOperable> iteradorNave = plano.listaNaves.iterator();
 
 			while(iteradorNave.hasNext()) {
@@ -37,8 +37,9 @@ public abstract class Arma extends ObjetoUbicable {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			} 
-		} else {
+			}
+		}
+		else {
 			try {
 				this.intentarChocar(plano.algo42);
 			} catch (AlgoSeAtacaASiMismoError e) {
@@ -49,7 +50,8 @@ public abstract class Arma extends ObjetoUbicable {
 				e.printStackTrace();
 			}
 		}
-		if(usada){
+
+		if(fueUsada) {
 			try {
 				plano.agregarArmaUsada(this);
 			} catch (ArmaNoUsadaError e) {
@@ -58,25 +60,44 @@ public abstract class Arma extends ObjetoUbicable {
 			}
 		}
 	}
-	
+
 	/* Devuelve true si el arma fue usada */
 	public boolean estadoUsado() {
-		return (this.usada);
+		return (this.fueUsada);
 	}
 
 	/* Ataca a la nave que recibe por parametro. Devuelve true si el ataque fue efectivo, false en caso contrario */
-	public boolean intentarChocar(Nave unaNave) throws AlgoSeAtacaASiMismoError, AtaqueEntreNavesNoOperables {
+/*	public boolean intentarChocar(Nave unaNave) throws AlgoSeAtacaASiMismoError, AtaqueEntreNavesNoOperables {
 		
 		if (( unaNave.esOperable ) && ( origenAlgo42 )) {
-				throw new AlgoSeAtacaASiMismoError("Una nave algo42 no puede atacarse a si misma");
+			throw new AlgoSeAtacaASiMismoError("Una nave algo42 no puede atacarse a si misma");
 		}
 		if ((unaNave.esOperable == false ) && ( origenAlgo42 == false )) {
-				throw new AtaqueEntreNavesNoOperables("Una nave no operable no puede atacar a otra del mismo tipo");
+			throw new AtaqueEntreNavesNoOperables("Una nave no operable no puede atacar a otra del mismo tipo");
 		}
 
 		if (unaNave.coincidePosicionCon( this.rectangulo ) && (this.usada == false)) {
 			unaNave.modificarEnergia( danio );
 			this.usada = true;
+			return true;
+		}
+		return false;
+	}
+*/
+
+	/* Ataca a la nave que recibe por parametro. Devuelve true si el ataque fue efectivo, false en caso contrario */
+	public boolean intentarChocar(Nave unaNave) throws AlgoSeAtacaASiMismoError, AtaqueEntreNavesNoOperables {
+		
+		if (( unaNave.esOperable ) && ( origenAlgo42 )) {
+			throw new AlgoSeAtacaASiMismoError("Una nave algo42 no puede atacarse a si misma");
+		}
+		if (( unaNave.esOperable == false ) && ( origenAlgo42 == false )) {
+			throw new AtaqueEntreNavesNoOperables("Una nave no operable no puede atacar a otra del mismo tipo");
+		}
+
+		if (unaNave.coincidePosicionCon(this.rectangulo) && (this.fueUsada == false)) {
+			unaNave.chocarCon(this);
+			this.chocarCon(unaNave);
 			return true;
 		}
 		return false;
@@ -92,7 +113,7 @@ public abstract class Arma extends ObjetoUbicable {
 		y = (this.plano).devolverAltura();
 
 		if (( (this.devolverPunto().getX()) < 0) || (( this.devolverPunto().getX() )> x )) {
-			this.usada = true;
+			this.fueUsada = true;
 			try {
 				this.plano.agregarArmaUsada( this );
 			} catch (ArmaNoUsadaError error) {
@@ -100,7 +121,7 @@ public abstract class Arma extends ObjetoUbicable {
 			}
 		}
 		if (((this.devolverPunto().getY()) < 0) || ((this.devolverPunto().getY()) > y )) {
-			this.usada = true;
+			this.fueUsada = true;
 			try {
 				this.plano.agregarArmaUsada( this );
 			} catch (ArmaNoUsadaError error) {
@@ -128,6 +149,16 @@ public abstract class Arma extends ObjetoUbicable {
 	 */
 	public boolean origenAlgo42() {
 		return this.origenAlgo42;
+	}
+
+	/* Devuelve el danio que inflige el arma */
+	public int getDanio() {
+		return this.danio;
+	}
+
+	/* El arma choca con una nave */
+	public void chocarCon(Nave unaNave) {
+		this.fueUsada = true;
 	}
 
 }

@@ -7,7 +7,7 @@ public class TorpedoSimple extends Arma {
 	public TorpedoSimple (Punto punto, boolean origenAlgo,Plano plano ) {
 
 		this.danio = -20;
-		this.usada = false;
+		this.fueUsada = false;
 		this.rectangulo = (new Rectangulo(3, 3, punto));
 		this.determinarPlano(plano);
 

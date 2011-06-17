@@ -1,7 +1,6 @@
 package fiuba.algo3.juego.modelo;
 
 import java.util.Iterator;
-import fiuba.algo3.juego.modelo.excepciones.NaveNoDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
 
@@ -30,11 +29,10 @@ public abstract class NaveNoOperable extends Nave {
 	/*Cada nave de tipo no operable debe realizar ciertas acciones
 	 * en cada turno, y para eso se llama a este metodo.
 	 * */
-	public void vivir(){
+	public void vivir() {
 		this.intentarMover();
-		this.intentarAccionSobre(plano.algo42());
+		this.intentarAccionSobre(plano.getAlgo42());
 	}
-
 
 	/* La nave intenta moverse en una posicion diferente valida del plano. 
 	 * Para eso, primero realiza un movimiento por defecto (Implementado 
@@ -63,31 +61,6 @@ public abstract class NaveNoOperable extends Nave {
 			}
 
 		this.estaFueraDeArea();
-		}
-	}
-
-	/* Lleva a cabo las acciones correspondientes si debe destruirse */
-	public void destruirse() throws NaveNoDestruidaError {
-		
-		if ( (this.devolverCantidadEnergia())>0 ) {
-			throw new NaveNoDestruidaError("La nave aun tiene energia en su tanque");
-		}
-		else {
-			estaDestruida = true;
-			plano.agregarNaveEliminada(this);
-		}
-	}
-
-	/* Recibe una cierta cantidad de puntos y los suma a la energÃ­a de la nave */
-	public void modificarEnergia(int energiaAModificar) {
-
-		energia = energia + energiaAModificar;
-		if(energia <= 0) {
-			try {
-				this.destruirse();
-			} catch ( NaveNoDestruidaError error ) {
-				//La nave no sera destruida
-			}
 		}
 	}
 
@@ -125,8 +98,8 @@ public abstract class NaveNoOperable extends Nave {
 	public boolean intentarChocar(Algo42 algo42) {
 
 		if (algo42.coincidePosicionCon(this.rectangulo)) {
-			algo42.recibirChoque();
-			estaDestruida = true;
+			algo42.chocarCon(this);
+			this.chocarCon(algo42);
 			return true;
 		}
 		return false;
@@ -149,8 +122,15 @@ public abstract class NaveNoOperable extends Nave {
 	 * Devuelve true si la nave fue evaluada con la funcion estaFueraDeArea y dio
 	 * positivo, lo cual significa que la nave esta ocupando un area que no le corresponde
 	 */
-	public boolean estadoActualFueraDeJuego() {
+	public boolean estaFueraDeJuego() {
 		return fueraDeJuego;
+	}
+
+	/* Una nave no operable choca con Algo42 
+	 * El resultado es que la nave no operable se destruye
+	 */
+	public void chocarCon(Algo42 algo42) {
+		this.estaDestruida = true;
 	}
 
 }

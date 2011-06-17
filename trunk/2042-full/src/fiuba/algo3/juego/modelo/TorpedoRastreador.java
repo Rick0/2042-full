@@ -2,6 +2,7 @@ package fiuba.algo3.juego.modelo;
 
 import fiuba.algo3.juego.modelo.excepciones.ArmaUsadaError;
 
+
 public class TorpedoRastreador extends Arma {
 
 	private Nave naveRastreada;
@@ -10,14 +11,14 @@ public class TorpedoRastreador extends Arma {
 	public TorpedoRastreador (Punto punto, boolean origenAlgo,Plano plano ) {
 
 		this.danio = -20;
-		this.usada = false;
+		this.fueUsada = false;
 		this.rectangulo = (new Rectangulo(2 , 2, punto ));
 		this.determinarPlano(plano);
 
 		try {
 			this.plano.agregarArma( this );
-		} catch (ArmaUsadaError e)
-		{
+		}
+		catch (ArmaUsadaError e) {
 			System.out.println("Se produjo un error irrecuperable");
 		}
 

@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import fiuba.algo3.titiritero.Posicionable;
-
 import fiuba.algo3.juego.modelo.excepciones.AlgoSeAtacaASiMismoError;
 import fiuba.algo3.juego.modelo.excepciones.ArmaNoUsadaError;
 import fiuba.algo3.juego.modelo.excepciones.ArmaUsadaError;
@@ -14,7 +13,6 @@ import fiuba.algo3.juego.modelo.excepciones.ItemNoUsadoError;
 import fiuba.algo3.juego.modelo.excepciones.ItemUsadoError;
 import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.NaveNoDestruidaError;
-
 
 
 /* Maneja el escenario del nivel, contiene listas con las naves, items
@@ -31,13 +29,13 @@ public class Plano implements Posicionable {
 	ArrayList<NaveNoOperable> listaNavesDestruidas = new ArrayList<NaveNoOperable>();
 	ArrayList<Item> listaItemsUsados = new ArrayList<Item>();
 	ArrayList<Arma> listaArmasUsadas = new ArrayList<Arma>();
-	Nivel nivel=new Nivel();
+	Nivel nivel = new Nivel();
 
 
 	/* Constructor del plano, recibe sus dimensiones
 	 * Crea sus listas de armas, naves e items, que se posicionaran en el plano
 	 */
-	public Plano(int dimensionX,int dimensionY ) {
+	public Plano(int dimensionX,int dimensionY) {
 		ancho=dimensionX;
 		altura=dimensionY;
 	}
@@ -53,14 +51,14 @@ public class Plano implements Posicionable {
 	}
 
 	/* Introduce un algo42 al plano */
-	public void introducirAlgo(Algo42 algo) {
+	public void introducirAlgo42(Algo42 algo) {
 		algo42=algo;
 	}
 
 	/* Agrega una referencia a la nave destruida */
 	public void agregarNaveEliminada(Nave nave) throws NaveNoDestruidaError {
 
-		if(!(nave.estaDestruida )){
+		if(!(nave.estaDestruida)) {
 			throw new NaveNoDestruidaError("La nave aun no esta destruida");
 		}
 		listaNavesDestruidas.add((NaveNoOperable) nave);
@@ -75,7 +73,7 @@ public class Plano implements Posicionable {
 		this.listaArmasUsadas.add( arma );
 	}
 
-	public Algo42 algo42() {
+	public Algo42 getAlgo42() {
 		return algo42;
 	}
 
@@ -100,7 +98,7 @@ public class Plano implements Posicionable {
 	/* Agrega un item al area de Juego */
 	public void agregarItem(Item item) throws ItemUsadoError {
 		
-		if (item.usado() ){
+		if (item.fueUsado() ){
 			throw new ItemUsadoError("Se trata de agregar al mapa un item usado");
 		}
 		this.listaItems.add(item);
@@ -118,7 +116,7 @@ public class Plano implements Posicionable {
 	/*Agrega un item del juego a la lista de items usados.*/
 	public void agregarItemUsado(Item item) {
 
-			if(!(item.usado())){
+			if(!(item.fueUsado())){
 				throw new ItemNoUsadoError();
 			}
 			listaItemsUsados.add(item);
@@ -135,7 +133,6 @@ public class Plano implements Posicionable {
 	 * ver si hay alguna accion que realizar. Devuelve la lista 
 	 * de naves que el algo42 elimino*/
 	public void revisarEventos() throws AlgoSeAtacaASiMismoError, AtaqueEntreNavesNoOperables, ArmaNoUsadaError{
-		
 
 		Iterator<Item> iteradorItem = listaItems.iterator();
 		Iterator<Arma> iteradorArmas = listaArmas.iterator();
@@ -144,40 +141,40 @@ public class Plano implements Posicionable {
 		while(iteradorItem.hasNext()) {
 		    Item elemento = iteradorItem.next(); 
 		    elemento.vivir();
-		} 
-		
+		}
+
 		while(iteradorArmas.hasNext()) {
 		    Arma elemento = iteradorArmas.next(); 
 		    elemento.vivir();
-		} 
-		
+		}
+
 		while(iteradorNaveEnemiga.hasNext()) {
 		    NaveNoOperable elemento = iteradorNaveEnemiga.next(); 
 		    elemento.vivir();
-		} 
+		}
 
 		//Eliminacion de naves, armas e items que ya no estan vigentes en el area de juego.
 		Iterator<Arma> iteradorArmasUsadas = listaArmasUsadas.iterator();
-		Iterator<Item> iteradorItemsUsados= listaItemsUsados.iterator();
-		Iterator<NaveNoOperable> iteradorNavesDestruidas= listaNavesDestruidas.iterator();
-		
+		Iterator<Item> iteradorItemsUsados = listaItemsUsados.iterator();
+		Iterator<NaveNoOperable> iteradorNavesDestruidas = listaNavesDestruidas.iterator();
+
 		while(iteradorItemsUsados.hasNext()) {
-			   Item elemento = iteradorItemsUsados.next(); 
-			   listaItems.remove(elemento);
+			Item elemento = iteradorItemsUsados.next(); 
+			listaItems.remove(elemento);
 		} 
 		while(iteradorNavesDestruidas.hasNext()) {
-		   NaveNoOperable elemento = iteradorNavesDestruidas.next(); 
-		   listaNaves.remove(elemento);
+			NaveNoOperable elemento = iteradorNavesDestruidas.next(); 
+			listaNaves.remove(elemento);
 		} 
 		while(iteradorArmasUsadas.hasNext()) {
-		    Arma elemento = iteradorArmasUsadas.next(); 
-		    listaArmas.remove(elemento);
+			Arma elemento = iteradorArmasUsadas.next(); 
+			listaArmas.remove(elemento);
 		} 
-		nivel.actuarCon( listaNavesDestruidas);
+		nivel.actuarCon(listaNavesDestruidas);
 	}
 
 
-	/*METODOS PARA IMPLEMENTAR INTERFAZ POSICIONABLE;
+	/* Metodos para implementar la interfaz Posicionable
 	 * @see fiuba.algo3.titiritero.Posicionable#getX()
 	 * @see fiuba.algo3.titiritero.Posicionable#getY()
 	 */
