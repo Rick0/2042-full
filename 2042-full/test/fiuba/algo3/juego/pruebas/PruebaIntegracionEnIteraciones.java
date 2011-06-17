@@ -135,7 +135,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		algo.moverArriba();
 		Arma laser = plano.devolverListaArmas().get(0);
 		try {
-			laser.intentarAtacar( algo );
+			laser.intentarChocar( algo );
 			fail("Se auto ataca, esto no puede pasar");
 		} catch (AlgoSeAtacaASiMismoError error) {}
 		
@@ -161,7 +161,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		Arma laser = plano.devolverListaArmas().get(1);
 		while ( algo.devolverCantidadEnergia() == 100 ) {
 			try {
-				torpedo.intentarAtacar(algo);
+				torpedo.intentarChocar(algo);
 			} catch (AtaqueEntreNavesNoOperables error) {
 				//NO puede pasar, hay una sola nave no operable!
 			} catch (AlgoSeAtacaASiMismoError error) {
@@ -173,7 +173,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		while ( !caza.estadoActualDestruida() ) {
 			laser.mover();
 			try {
-				laser.intentarAtacar(caza);
+				laser.intentarChocar(caza);
 			} catch (AtaqueEntreNavesNoOperables error) {
 				//NO puede pasar, hay una sola nave no operable!
 			} catch (AlgoSeAtacaASiMismoError error) {
@@ -209,7 +209,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		Arma laser = plano.devolverListaArmas().get(0);
 		//Una avioneta es una nave no operable y por lo tanto, no puede atacarse a si misma
 		try {
-			laser.intentarAtacar(avioneta);
+			laser.intentarChocar(avioneta);
 			fail("No puede atacarse a si misma");
 		} catch (AtaqueEntreNavesNoOperables error) {
 			//Es correcto que salga por aca
@@ -225,7 +225,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		cohete.mover(); //Posicion En Y= 112.
 		assertEquals((int) cohete.devolverPunto().getY() , 112 );
 		try {
-			cohete.intentarAtacar( avioneta );
+			cohete.intentarChocar( avioneta );
 			fail("Naves no operables no pueden atacarse entre si"); 
 		} catch ( AtaqueEntreNavesNoOperables error) {
 			//Debe salir por aca
@@ -253,16 +253,16 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		Arma laserA = plano.devolverListaArmas().get(0);
 		avioneta.dispararLaser();
 		Arma laserB = plano.devolverListaArmas().get(1);
-		assertFalse ( laserB.intentarAtacar( algo ) );
+		assertFalse ( laserB.intentarChocar( algo ) );
 		/*Esto crea dos instancias de laser: una con origen Algo42 (que por lo tanto se mueve hacia arriba)
 		y otra con origen nave enemiga, que se mueve hacia abajo.*/
 		algo.moverArriba();
 		laserB.mover();
 		assertEquals( (int)laserB.devolverPunto().getY() , 118 );
-		assertFalse( laserB.intentarAtacar(algo) );
+		assertFalse( laserB.intentarChocar(algo) );
 		laserA.mover();
 		assertEquals( (int)laserA.devolverPunto().getY() , 52 ); 
-		assertFalse( laserA.intentarAtacar(avioneta) );
+		assertFalse( laserA.intentarChocar(avioneta) );
 		laserB.mover();
 		assertEquals( (int)laserB.devolverPunto().getY() , 116 ); 
 		for ( int i = 1 ; i < 34 ; i++ ) {
@@ -273,13 +273,13 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		assertEquals( (int)laserB.devolverPunto().getY() , 50 );
 		assertEquals ( (int) algo.devolverPunto().getY(), 51 );
 		//LaserB y algo estan ocupando mismas posiciones
-		assertTrue( laserB.intentarAtacar(algo) );
+		assertTrue( laserB.intentarChocar(algo) );
 		for (int i = 1; i<34 ; i++) {
 			laserA.mover();
 			assertEquals( (int)laserA.devolverPunto().getY() , (52+(i*2)));
 		}
 		assertEquals( (int)laserA.devolverPunto().getY() , 118 ); 
-		assertTrue( laserA.intentarAtacar(avioneta) );
+		assertTrue( laserA.intentarChocar(avioneta) );
 	}
 	
 	@Test
@@ -317,7 +317,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 			while ( iterador.hasNext() ) {
 				armaAuxiliar = iterador.next();
 				armaAuxiliar.mover();
-				armaAuxiliar.intentarAtacar(bombardero);
+				armaAuxiliar.intentarChocar(bombardero);
 			}
 		}
 		Item item = null;
@@ -344,7 +344,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 			cohete.mover();
 			helicoptero.mover();
 			try {
-				cohete.intentarAtacar(helicoptero);
+				cohete.intentarChocar(helicoptero);
 			} catch (AlgoSeAtacaASiMismoError error) {
 				//No puede ocurrir
 			}
@@ -356,7 +356,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		Arma TorpedoRastreador = plano.devolverListaArmas().get(6);
 		while ( !avion.estadoActualDestruida() ) {
 			TorpedoRastreador.mover();
-			TorpedoRastreador.intentarAtacar(avion);
+			TorpedoRastreador.intentarChocar(avion);
 			avion.mover();
 		}
 	}

@@ -44,7 +44,7 @@ public class PruebaAlgo extends TestCase{
 			algo.moverArriba();
 		  }
 		  catch (AreaInvalidaError e) {
-			  algo.determinarPosicion(puntoOriginal);
+			  algo.cambiarPosicion(puntoOriginal);
 		  }
 		  
 		  assertEquals(algo.devolverPunto().getX(),0.0);

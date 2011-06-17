@@ -23,12 +23,12 @@ public class TorpedoAdaptable extends Arma {
 	}
 
 	/* Ataca a la nave que recibe por parametro. Devuelve true si el ataque fue efectivo, false en caso contrario */
-	public boolean intentarAtacar(Nave unaNave) throws AlgoSeAtacaASiMismoError, AtaqueEntreNavesNoOperables {
+	public boolean intentarChocar(Nave unaNave) throws AlgoSeAtacaASiMismoError, AtaqueEntreNavesNoOperables {
 
-		if (( unaNave.operable ) && ( origenAlgo42 )) {
+		if (( unaNave.esOperable ) && ( origenAlgo42 )) {
 			throw new AlgoSeAtacaASiMismoError("Una nave algo42 no puede atacarse a si misma");
 		}
-		if ((unaNave.operable == false ) && ( origenAlgo42 == false )) {
+		if ((unaNave.esOperable == false ) && ( origenAlgo42 == false )) {
 			throw new AtaqueEntreNavesNoOperables("Una nave no operable no puede atacar a otra del mismo tipo");
 		}
 

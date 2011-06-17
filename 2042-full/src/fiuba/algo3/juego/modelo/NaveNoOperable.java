@@ -1,10 +1,8 @@
 package fiuba.algo3.juego.modelo;
 
 import java.util.Iterator;
-
 import fiuba.algo3.juego.modelo.excepciones.NaveNoDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
-
 
 
 /*Todas las naves que no pueden ser utilizadas por el jugador deben 
@@ -33,7 +31,7 @@ public abstract class NaveNoOperable extends Nave {
 	 * en cada turno, y para eso se llama a este metodo.
 	 * */
 	public void vivir(){
-		this.intentarMovimiento();
+		this.intentarMover();
 		this.intentarAccionSobre(plano.algo42());
 	}
 
@@ -45,7 +43,7 @@ public abstract class NaveNoOperable extends Nave {
 	 * realizar otro tipo de movimiento. Si sigue levantando error, entonces
 	 * lo deja en su lugar
 	 */
-	public void intentarMovimiento() {
+	public void intentarMover() {
 
 		Punto puntoOriginal=this.devolverPunto();
 		try {
@@ -54,14 +52,14 @@ public abstract class NaveNoOperable extends Nave {
 			/*Si llego a la conclusion de que, moviendolo, causo que se superponga con
 			 * otra nave, lo devuelvo a la posicion original y realizo algun movimiento alternativo
 			 */
-			this.determinarPosicion(puntoOriginal);
+			this.cambiarPosicion(puntoOriginal);
 			try {
 				this.moverAlternativo();
 			} catch (SuperposicionNavesError e2){ 
 				 /* Si con el movimiento alternativo sigue superponiendose con otra nave,
 				  * no le dejo moverse: Lo dejo en la posicion original 
 				  */
-				 this.determinarPosicion(puntoOriginal);
+				 this.cambiarPosicion(puntoOriginal);
 			}
 
 		this.estaFueraDeArea();
@@ -75,15 +73,15 @@ public abstract class NaveNoOperable extends Nave {
 			throw new NaveNoDestruidaError("La nave aun tiene energia en su tanque");
 		}
 		else {
-			destruida = true;
+			estaDestruida = true;
 			plano.agregarNaveEliminada(this);
 		}
 	}
 
 	/* Recibe una cierta cantidad de puntos y los suma a la energÃ­a de la nave */
-	public void modificarEnergia(int puntosModificar) {
+	public void modificarEnergia(int energiaAModificar) {
 
-		energia = energia+puntosModificar;
+		energia = energia + energiaAModificar;
 		if(energia <= 0) {
 			try {
 				this.destruirse();
@@ -128,7 +126,7 @@ public abstract class NaveNoOperable extends Nave {
 
 		if (algo42.coincidePosicionCon(this.rectangulo)) {
 			algo42.recibirChoque();
-			destruida = true;
+			estaDestruida = true;
 			return true;
 		}
 		return false;
@@ -144,7 +142,7 @@ public abstract class NaveNoOperable extends Nave {
 	 */
 	public void retirarse() {
 		Punto nuevaPosicion=new Punto(this.devolverPunto().getX(),this.devolverPunto().getY()+1);
-		this.determinarPosicion(nuevaPosicion);
+		this.cambiarPosicion(nuevaPosicion);
 	}
 
 	/* Devuelve el estado fueraDeJuego , que es un valor booleano.

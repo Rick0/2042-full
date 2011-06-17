@@ -18,9 +18,9 @@ public class Bombardero extends NaveNoOperable {
 		energia = 50;
 		haciaDer = 0;
 		haciaIzq = 0;
-		operable = false;
+		esOperable = false;
 		rectangulo = new Rectangulo(65, 65,punto);
-		destruida = false;
+		estaDestruida = false;
 		fueraDeJuego = false;
 		this.determinarPlano(plano);
 
@@ -33,7 +33,7 @@ public class Bombardero extends NaveNoOperable {
 	/* Crea una instancia de ArmaAbandonada y la devuelve */ 
 	public Item dejarArma() throws ItemNoDisponibleError {
 		
-		if (!this.destruida) {
+		if (!this.estaDestruida) {
 			throw new ItemNoDisponibleError("El bombardero aun no esta destruido, no puede dejar armas");
 		}
 		Item item = new ArmaAbandonada(this.devolverPunto() );
@@ -86,13 +86,13 @@ public class Bombardero extends NaveNoOperable {
 
 		if ( haciaDer <10 ) {
 			Punto nuevoPunto=new Punto(this.devolverPunto().getX()+0.5,this.devolverPunto().getY()-0.5);
-			this.determinarPosicion(nuevoPunto);
+			this.cambiarPosicion(nuevoPunto);
 			haciaDer = (haciaDer + 0.5);
 		}
 		else {
 			if (haciaIzq  <= 10) {
 				Punto nuevoPunto=new Punto(this.devolverPunto().getX()-0.5,this.devolverPunto().getY()-0.5);
-				this.determinarPosicion(nuevoPunto);
+				this.cambiarPosicion(nuevoPunto);
 				haciaIzq = (haciaIzq +0.5);
 			}
 			else {
@@ -116,14 +116,14 @@ public class Bombardero extends NaveNoOperable {
 		if ( haciaDer <=10 ) {
 			// Se estaba moviendo hacia la derecha. Lo envio a la izquierda
 			Punto nuevoPunto=new Punto(this.devolverPunto().getX()-0.5,this.devolverPunto().getY()-0.5);
-			this.determinarPosicion(nuevoPunto);
+			this.cambiarPosicion(nuevoPunto);
 			haciaDer = 10.5;
 			haciaIzq = 0.5;
 		}
 		else {
 			 // Se estaba moviendo hacia la izquierda. Lo envio a la derecha
 			Punto nuevoPunto=new Punto(this.devolverPunto().getX()+0.5,this.devolverPunto().getY()-0.5);
-			this.determinarPosicion(nuevoPunto);
+			this.cambiarPosicion(nuevoPunto);
 			haciaDer = 0.5;
 			haciaIzq = 10.5;
 		}

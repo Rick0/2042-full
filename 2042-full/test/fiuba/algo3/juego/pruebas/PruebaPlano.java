@@ -35,7 +35,7 @@ public class PruebaPlano extends TestCase{
 		Punto puntoAvioneta= new Punto(50,50);
 		Avioneta avioneta=new Avioneta( puntoAvioneta , plano);
 		/*Instancie una avioneta solo para poder usar el arma*/
-		arma.intentarAtacar(avioneta);
+		arma.intentarChocar(avioneta);
 		try {
 			plano.agregarArma(arma);
 			fail("El arma fue usada");

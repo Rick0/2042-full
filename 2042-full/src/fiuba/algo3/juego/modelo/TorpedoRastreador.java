@@ -36,20 +36,20 @@ public class TorpedoRastreador extends Arma {
 
 		if (this.naveRastreada.devolverPunto().getX() < this.devolverPunto().getX() ) {
 			Punto nuevaPosicionX=new Punto(this.devolverPunto().getX() - 1, this.devolverPunto().getY());
-			this.determinarPosicion(nuevaPosicionX);
+			this.cambiarPosicion(nuevaPosicionX);
 		}
 		else if ( (this.naveRastreada.devolverPunto().getX() > this.devolverPunto().getX() )) {	
 			Punto nuevaPosicionX=new Punto(this.devolverPunto().getX() + 1, this.devolverPunto().getY());
-			this.determinarPosicion( nuevaPosicionX );
+			this.cambiarPosicion( nuevaPosicionX );
 		}
 
 		if ( (this.naveRastreada.devolverPunto().getY() < this.devolverPunto().getY() )) {
 			Punto nuevaPosicionY=new Punto(this.devolverPunto().getX(), this.devolverPunto().getY() -1 );
-			this.determinarPosicion( nuevaPosicionY );
+			this.cambiarPosicion( nuevaPosicionY );
 		}
 		else if ( (this.naveRastreada.devolverPunto().getY() > this.devolverPunto().getY() )) {
 			Punto nuevaPosicionY=new Punto(this.devolverPunto().getX(), this.devolverPunto().getY() +1 );
-			this.determinarPosicion( nuevaPosicionY);
+			this.cambiarPosicion( nuevaPosicionY);
 		}
 
 	}

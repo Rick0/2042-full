@@ -11,9 +11,9 @@ public class Helicoptero extends NaveNoOperable {
 		
 		puntos = -200;
 		energia = 1;
-		operable = false;
+		esOperable = false;
 		rectangulo = new Rectangulo(50, 50, punto);
-		destruida = false;
+		estaDestruida = false;
 		fueraDeJuego = false;
 		this.determinarPlano(plano);
 		
@@ -32,7 +32,7 @@ public class Helicoptero extends NaveNoOperable {
 	/* El helicoptero se mueve hacia abajo */
 	public void mover() throws SuperposicionNavesError { 
 		Punto punto= new Punto (this.devolverPunto().getX(),this.devolverPunto().getY() -1);
-		this.determinarPosicion( punto );
+		this.cambiarPosicion( punto );
 		if ( this.seSuperponeConOtraNave() ) {
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
 		}
@@ -45,7 +45,7 @@ public class Helicoptero extends NaveNoOperable {
 	public void moverAlternativo() throws SuperposicionNavesError { 
 
 		Punto punto= new Punto (this.devolverPunto().getX(),this.devolverPunto().getY() +1);
-		this.determinarPosicion( punto);
+		this.cambiarPosicion( punto);
 		if ( this.seSuperponeConOtraNave() ) {
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
 		}

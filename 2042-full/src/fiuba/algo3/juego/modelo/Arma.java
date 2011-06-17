@@ -1,10 +1,9 @@
 package fiuba.algo3.juego.modelo;
-import java.util.Iterator;
 
+import java.util.Iterator;
 import fiuba.algo3.juego.modelo.excepciones.AlgoSeAtacaASiMismoError;
 import fiuba.algo3.juego.modelo.excepciones.ArmaNoUsadaError;
 import fiuba.algo3.juego.modelo.excepciones.AtaqueEntreNavesNoOperables;
-
 
 
 public abstract class Arma extends ObjetoUbicable {
@@ -23,14 +22,14 @@ public abstract class Arma extends ObjetoUbicable {
 	
 	public void vivir(){
 		
-		this.intentarMovimiento();
+		this.intentarMover();
 		if(origenAlgo42){
 			Iterator<NaveNoOperable> iteradorNave = plano.listaNaves.iterator();
 
 			while(iteradorNave.hasNext()) {
 			    NaveNoOperable elemento = iteradorNave.next(); 
 			    try {
-					this.intentarAtacar(elemento);
+					this.intentarChocar(elemento);
 				} catch (AlgoSeAtacaASiMismoError e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -41,7 +40,7 @@ public abstract class Arma extends ObjetoUbicable {
 			} 
 		} else {
 			try {
-				this.intentarAtacar(plano.algo42);
+				this.intentarChocar(plano.algo42);
 			} catch (AlgoSeAtacaASiMismoError e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -66,12 +65,12 @@ public abstract class Arma extends ObjetoUbicable {
 	}
 
 	/* Ataca a la nave que recibe por parametro. Devuelve true si el ataque fue efectivo, false en caso contrario */
-	public boolean intentarAtacar(Nave unaNave) throws AlgoSeAtacaASiMismoError, AtaqueEntreNavesNoOperables {
+	public boolean intentarChocar(Nave unaNave) throws AlgoSeAtacaASiMismoError, AtaqueEntreNavesNoOperables {
 		
-		if (( unaNave.operable ) && ( origenAlgo42 )) {
+		if (( unaNave.esOperable ) && ( origenAlgo42 )) {
 				throw new AlgoSeAtacaASiMismoError("Una nave algo42 no puede atacarse a si misma");
 		}
-		if ((unaNave.operable == false ) && ( origenAlgo42 == false )) {
+		if ((unaNave.esOperable == false ) && ( origenAlgo42 == false )) {
 				throw new AtaqueEntreNavesNoOperables("Una nave no operable no puede atacar a otra del mismo tipo");
 		}
 
@@ -86,7 +85,7 @@ public abstract class Arma extends ObjetoUbicable {
 	/* El arma cambia su posicion en el plano.
 	 * Si el arma sale de los limites del plano, cambia su estado a usada
 	 */
-	public void intentarMovimiento() {
+	public void intentarMover() {
 
 		float x,y;
 		x = (this.plano).devolverAncho();
@@ -121,7 +120,7 @@ public abstract class Arma extends ObjetoUbicable {
 		} else {
 			nuevaPosicion=new Punto(this.devolverPunto().getX(),(this.devolverPunto().getY()) - 2);
 		}
-		this.determinarPosicion(nuevaPosicion);
+		this.cambiarPosicion(nuevaPosicion);
 	}
 
 	/*true indica que quien lanzo el arma fue Algo42,

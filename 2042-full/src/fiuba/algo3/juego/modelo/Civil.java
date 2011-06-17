@@ -11,9 +11,9 @@ public class Civil extends NaveNoOperable {
 
 		puntos = -300;
 		energia = 1;
-		operable = false;
+		esOperable = false;
 		rectangulo = new Rectangulo(50, 50, punto);
-		destruida = false;
+		estaDestruida = false;
 		fueraDeJuego = false;
 		this.determinarPlano(plano);
 		
@@ -27,7 +27,7 @@ public class Civil extends NaveNoOperable {
 	public void mover() throws SuperposicionNavesError { 
 
 		Punto nuevoPunto= new Punto(this.devolverPunto().getX(),this.devolverPunto().getY()-1);
-		this.determinarPosicion( nuevoPunto );
+		this.cambiarPosicion( nuevoPunto );
 		if ( this.seSuperponeConOtraNave() ) {
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
 		}
@@ -41,7 +41,7 @@ public class Civil extends NaveNoOperable {
 	public void moverAlternativo() throws SuperposicionNavesError {
 
 		Punto nuevoPunto= new Punto(this.devolverPunto().getX(),this.devolverPunto().getY()+1);
-		this.determinarPosicion( nuevoPunto );
+		this.cambiarPosicion( nuevoPunto );
 		if (this.seSuperponeConOtraNave() ) {
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
 		}

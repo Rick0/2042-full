@@ -6,8 +6,8 @@ import fiuba.algo3.juego.modelo.excepciones.NaveNoDestruidaError;
 /* Clase de la cual heredan todas las naves del juego */
 public abstract class Nave extends ObjetoUbicable {
 
-	boolean destruida;
-	boolean operable;
+	boolean estaDestruida;
+	boolean esOperable;
 	int energia;
 
 
@@ -23,20 +23,20 @@ public abstract class Nave extends ObjetoUbicable {
 			throw new NaveNoDestruidaError("La nave aun tiene energia en su tanque");
 		}
 		else {
-			destruida = true;
+			estaDestruida = true;
 			plano.agregarNaveEliminada( this );
 		}
 	}
 	
 	/* Devuelve True si la nave esta destruida */
 	public boolean estadoActualDestruida() {
-		return destruida;
+		return estaDestruida;
 	}
 
 	/* Recibe una cierta cantidad de puntos y los suma a la energia de la nave */
-	public void modificarEnergia(int puntosModificar) {
+	public void modificarEnergia(int energiaAModificar) {
 
-		energia = ( energia + puntosModificar );
+		energia = (energia + energiaAModificar);
 		if(energia <= 0) {
 			try {
 				this.destruirse();
@@ -47,8 +47,8 @@ public abstract class Nave extends ObjetoUbicable {
 	}
 
 	/* Devuelve true si se trata de una nave operable; false en caso contrario */
-	public boolean operable() {
-		return operable;
+	public boolean esOperable() {
+		return esOperable;
 	}
 
 }
