@@ -8,7 +8,7 @@ public class VistaPlano extends Cuadrado{
 
 	public VistaPlano() {
 		super(500,500);
-		setColor(Color.WHITE);
+		setColor(Color.BLACK);
 	}
 
 }
