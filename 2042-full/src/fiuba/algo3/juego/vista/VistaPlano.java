@@ -1,14 +1,12 @@
 package fiuba.algo3.juego.vista;
 
-import java.awt.Color;
-import fiuba.algo3.titiritero.vista.Cuadrado;
+import fiuba.algo3.titiritero.vista.Imagen;
 
 
-public class VistaPlano extends Cuadrado{
+public class VistaPlano extends Imagen {
 
 	public VistaPlano() {
-		super(500,500);
-		setColor(Color.BLUE);
+		this.setNombreArchivoImagen("recursos/Plano/Mar.png");
 	}
 
 }
