@@ -84,7 +84,7 @@ public class Algo42 extends Nave {
 		if((this.devolverPunto().getY())<=0){
 			throw new AreaInvalidaError("La nave ya no puede moverse mas hacia abajo");
 		}
-		Punto nuevoPunto= new Punto(this.devolverPunto().getX(),(this.devolverPunto().getY()-1));
+		Punto nuevoPunto= new Punto(this.devolverPunto().getX(),(this.devolverPunto().getY()-2));
 		this.cambiarPosicion(nuevoPunto);
 	}
 
@@ -93,7 +93,7 @@ public class Algo42 extends Nave {
 		if((this.devolverPunto().getY() + (rectangulo.devolverAltura()))>plano.devolverAltura()){
 			throw new AreaInvalidaError("La nave ya no puede moverse mas hacia arriba");
 		}
-		Punto nuevaPosicion=new Punto(this.devolverPunto().getX(),(this.devolverPunto().getY()+ 1));
+		Punto nuevaPosicion=new Punto(this.devolverPunto().getX(),(this.devolverPunto().getY()+ 2));
 		this.cambiarPosicion(nuevaPosicion);
 	}
 
@@ -102,7 +102,7 @@ public class Algo42 extends Nave {
 		if((this.devolverPunto().getX() + (rectangulo.devolverAncho()))>plano.devolverAncho()){
 			throw new AreaInvalidaError("La nave ya no puede moverse mas hacia la derecha");
 		}
-		Punto nuevaPosicion=new Punto((this.devolverPunto().getX())+1,(this.devolverPunto().getY()));
+		Punto nuevaPosicion=new Punto((this.devolverPunto().getX())+2,(this.devolverPunto().getY()));
 		this.cambiarPosicion(nuevaPosicion);
 	}
 
@@ -111,7 +111,7 @@ public class Algo42 extends Nave {
 		if((this.devolverPunto().getX())<=0){
 			throw new AreaInvalidaError("La nave ya no puede moverse mas hacia la izquierda");
 		}
-		Punto nuevaPosicion=new Punto((this.devolverPunto().getX()) - 1,(this.devolverPunto().getY()));
+		Punto nuevaPosicion=new Punto((this.devolverPunto().getX()) - 2,(this.devolverPunto().getY()));
 		this.cambiarPosicion(nuevaPosicion);
 	}
 
