@@ -35,10 +35,8 @@ public class Explorador extends NaveNoOperable {
 	
 	
 	@Override
-	/* Si la nave esta en la posicion de algo42 lo choca */
-	public void intentarAccionSobre(Algo42 algo42) {
-		this.intentarChocar(algo42);
-	}
+	/* El explorador no tiene armas */
+	public void disparar() {	}
 
 	/* El explorador se mueve en circulos */
 	public void mover() throws SuperposicionNavesError { 

@@ -12,7 +12,7 @@ public class Caza extends NaveNoOperable {
 
 
 	/* Inicializa una instancia de Caza */
-	public Caza(Punto punto, Plano plano) throws SuperposicionNavesError, NaveDestruidaError{
+	public Caza(Punto punto, Plano plano) throws SuperposicionNavesError, NaveDestruidaError {
 
 		numero = 0;
 		puntos = 50;
@@ -25,18 +25,24 @@ public class Caza extends NaveNoOperable {
 		this.determinarPlano(plano);
 
 		if (this.seSuperponeConOtraNave()) {
-			throw new SuperposicionNavesError("La posici�n esta ocupada");
+			throw new SuperposicionNavesError("La posicion esta ocupada");
 		}
 		plano.agregarNave(this);
 	}
 
 	@Override
-	/* Si la nave esta en la posicion de algo42 lo choca. Lanza
-	 * un torpedo y lo agrega a la lista de Armas
+	/* Los cazas disparan tanto torpedos simples como torpedos adaptables.
+	 * Hay mas frecuencia de que dispara el torpedo simple
 	 */
-	public void intentarAccionSobre(Algo42 algo42) {
-			this.intentarChocar(algo42);
-			new Laser(this.devolverPunto(), false, this.plano);
+	public void disparar() {
+		int r = new Double(Math.random() * 3).intValue();
+
+		if (r == 1) {
+			this.dispararTorpedoAdaptable();
+		}
+		else {
+			this.dispararTorpedo();
+		}
 	}
 
 	/* Devuelve true si la nave avanzo 3 pasos o mas */
@@ -56,16 +62,6 @@ public class Caza extends NaveNoOperable {
 		}
 		itemDejado = new TanqueEnergia(this.devolverPunto());
 		return itemDejado;
-	}
-
-	/* Crea una instancia de TorpedoSimple en la posicion actual de la nave */
-	public void dispararTorpedo() {
-		new TorpedoSimple( this.devolverPunto(), false, this.plano);
-	}
-
-	/* Crea una instancia de TorpedoAdaptable en la posicion actual de la nave */
-	public void dispararTorpedoAdaptable() {
-		new TorpedoAdaptable( this.devolverPunto(), false, this.plano);
 	}
 
 	@Override

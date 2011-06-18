@@ -11,7 +11,7 @@ public class TorpedoRastreador extends Arma {
 	public TorpedoRastreador (Punto punto, boolean origenAlgo,Plano plano ) {
 
 		this.danio = -20;
-		this.fueUsada = false;
+		this.fueUsado = false;
 		this.rectangulo = (new Rectangulo(2 , 2, punto ));
 		this.determinarPlano(plano);
 

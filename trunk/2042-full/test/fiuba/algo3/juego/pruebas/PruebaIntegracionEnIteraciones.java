@@ -14,7 +14,7 @@ import fiuba.algo3.juego.modelo.Avioneta;
 import fiuba.algo3.juego.modelo.Bombardero;
 import fiuba.algo3.juego.modelo.Caza;
 import fiuba.algo3.juego.modelo.Civil;
-import fiuba.algo3.juego.modelo.Cohete;
+//import fiuba.algo3.juego.modelo.Cohete;
 import fiuba.algo3.juego.modelo.Explorador;
 import fiuba.algo3.juego.modelo.Guia;
 import fiuba.algo3.juego.modelo.Guia1;
@@ -199,8 +199,6 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 	/*Prueba interacciones entre naves no operables y las armas que ellas mismas lanzan.
 	Prueba que las naves no operables no pueden atacarse entre ellas*/
 
-		
-		
 		Plano plano = new Plano( 1000 , 1000 );
 		
 		Punto punto= new Punto(50,50);
@@ -214,10 +212,11 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		} catch (AtaqueEntreNavesNoOperables error) {
 			//Es correcto que salga por aca
 		}
-		
+
 		Punto posicionBombardero= new Punto(50,120);
 		Bombardero bombardero = new Bombardero( posicionBombardero, plano );
-		Cohete cohete = bombardero.dispararCohete();
+		bombardero.dispararCohete();
+		Arma cohete = plano.devolverListaArmas().get(1);
 		//Posicion actual del cohete: 50,120. Altura: 4. Al llegar a la posicion correcta, compruebo que levanta error.
 		cohete.mover(); //Posicion En Y= 118. Avioneta ocupa de 50 hacia arriba.
 		cohete.mover(); //Posicion En Y= 116.
@@ -352,7 +351,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		}
 		Punto posicionCivil= new Punto(20,500);
 		Civil avion = new Civil( posicionCivil , plano );
-		algo.dispararTorpedoHacia(avion);
+		algo.dispararTorpedoRastreadorHacia(avion);
 		Arma TorpedoRastreador = plano.devolverListaArmas().get(6);
 		while ( !avion.estadoActualDestruida() ) {
 			TorpedoRastreador.mover();
@@ -553,4 +552,5 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		
 		assertTrue ("La energia de algo42 debe bajar", energiaInicial > energiaFinal );
 	}
+
 }

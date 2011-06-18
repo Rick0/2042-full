@@ -9,20 +9,40 @@ import fiuba.algo3.juego.modelo.excepciones.AtaqueEntreNavesNoOperables;
 public abstract class Arma extends ObjetoUbicable {
 
 	int danio;
-	boolean fueUsada;
+	boolean fueUsado;
 	boolean origenAlgo42;
 
 
 	/* True indica que quien lanzo el arma fue una instancia de Algo42,
 	 * False en caso contrario
 	 */
-	public void InicializarOrigenAlgo42( boolean verdaderoOFalso) {
+	public void InicializarOrigenAlgo42(boolean verdaderoOFalso) {
 		this.origenAlgo42 = verdaderoOFalso;
 	}
 	
 	public void vivir() {
 
 		this.intentarMover();
+		this.intentarChocar();
+
+		if(fueUsado) {
+			try {
+				plano.agregarArmaUsada(this);
+			} catch (ArmaNoUsadaError e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/* Devuelve true si el arma fue usada */
+	public boolean fueUsado() {
+		return this.fueUsado;
+	}
+
+	/* Dependiendo de que avion disparo el arma, esta buscara aviones para colisionar */
+	private void intentarChocar() {
+
 		if(origenAlgo42) {
 			Iterator<NaveNoOperable> iteradorNave = plano.listaNaves.iterator();
 
@@ -50,40 +70,7 @@ public abstract class Arma extends ObjetoUbicable {
 				e.printStackTrace();
 			}
 		}
-
-		if(fueUsada) {
-			try {
-				plano.agregarArmaUsada(this);
-			} catch (ArmaNoUsadaError e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
 	}
-
-	/* Devuelve true si el arma fue usada */
-	public boolean estadoUsado() {
-		return (this.fueUsada);
-	}
-
-	/* Ataca a la nave que recibe por parametro. Devuelve true si el ataque fue efectivo, false en caso contrario */
-/*	public boolean intentarChocar(Nave unaNave) throws AlgoSeAtacaASiMismoError, AtaqueEntreNavesNoOperables {
-		
-		if (( unaNave.esOperable ) && ( origenAlgo42 )) {
-			throw new AlgoSeAtacaASiMismoError("Una nave algo42 no puede atacarse a si misma");
-		}
-		if ((unaNave.esOperable == false ) && ( origenAlgo42 == false )) {
-			throw new AtaqueEntreNavesNoOperables("Una nave no operable no puede atacar a otra del mismo tipo");
-		}
-
-		if (unaNave.coincidePosicionCon( this.rectangulo ) && (this.usada == false)) {
-			unaNave.modificarEnergia( danio );
-			this.usada = true;
-			return true;
-		}
-		return false;
-	}
-*/
 
 	/* Ataca a la nave que recibe por parametro. Devuelve true si el ataque fue efectivo, false en caso contrario */
 	public boolean intentarChocar(Nave unaNave) throws AlgoSeAtacaASiMismoError, AtaqueEntreNavesNoOperables {
@@ -95,7 +82,7 @@ public abstract class Arma extends ObjetoUbicable {
 			throw new AtaqueEntreNavesNoOperables("Una nave no operable no puede atacar a otra del mismo tipo");
 		}
 
-		if (unaNave.coincidePosicionCon(this.rectangulo) && (this.fueUsada == false)) {
+		if (unaNave.coincidePosicionCon(this.rectangulo) && (this.fueUsado == false)) {
 			unaNave.chocarCon(this);
 			this.chocarCon(unaNave);
 			return true;
@@ -113,7 +100,7 @@ public abstract class Arma extends ObjetoUbicable {
 		y = (this.plano).devolverAltura();
 
 		if (( (this.devolverPunto().getX()) < 0) || (( this.devolverPunto().getX() )> x )) {
-			this.fueUsada = true;
+			this.fueUsado = true;
 			try {
 				this.plano.agregarArmaUsada( this );
 			} catch (ArmaNoUsadaError error) {
@@ -121,7 +108,7 @@ public abstract class Arma extends ObjetoUbicable {
 			}
 		}
 		if (((this.devolverPunto().getY()) < 0) || ((this.devolverPunto().getY()) > y )) {
-			this.fueUsada = true;
+			this.fueUsado = true;
 			try {
 				this.plano.agregarArmaUsada( this );
 			} catch (ArmaNoUsadaError error) {
@@ -158,7 +145,7 @@ public abstract class Arma extends ObjetoUbicable {
 
 	/* El arma choca con una nave */
 	public void chocarCon(Nave unaNave) {
-		this.fueUsada = true;
+		this.fueUsado = true;
 	}
 
 }

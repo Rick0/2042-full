@@ -24,10 +24,8 @@ public class Helicoptero extends NaveNoOperable {
 	}
 
 	@Override
-	/* Si la nave esta en la posicion de algo42 lo choca */
-	public void intentarAccionSobre(Algo42 algo42) {
-		this.intentarChocar(algo42);
-	}
+	/* El helicoptero tiene orden de no disparar */
+	public void disparar() {	}
 
 	/* El helicoptero se mueve hacia abajo */
 	public void mover() throws SuperposicionNavesError { 

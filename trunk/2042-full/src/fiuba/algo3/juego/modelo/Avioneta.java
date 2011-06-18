@@ -28,10 +28,6 @@ public class Avioneta extends NaveNoOperable {
 		plano.agregarNave(this);
 	}
 
-	public void dispararLaser() {
-		new Laser(this.devolverPunto(), false, this.plano);
-	}
-
 	/* Metodo para el movimiento de la avioneta. Se mueve 60 puntos hacia adelante, luego 60 hacia atras,
 	 * y asi sucesivamente. Es la nave mas rapida, por lo cual se mueve dos lugares cada vez que
 	 * este metodo es invocado
@@ -85,11 +81,8 @@ public class Avioneta extends NaveNoOperable {
 	}
 	
 	@Override
-	/* Si la nave esta en la posicion de algo42 lo choca.
-	 * Lanza un laser y lo agrega a la lista de Armas
-	 */
-	void intentarAccionSobre(Algo42 algo42) {
-		this.intentarChocar(algo42);
+	/* La avioneta dispara lasers */
+	public void disparar() {
 		this.dispararLaser();
 	}
 

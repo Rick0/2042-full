@@ -131,7 +131,7 @@ public class PruebaAlgo extends TestCase{
 		Nave avioneta = new Avioneta(posicionAvioneta,plano);
 		
 		try {
-		    algo.dispararTorpedoHacia( avioneta );
+		    algo.dispararTorpedoRastreadorHacia( avioneta );
 		    fail("Deberia haber lanzado una excepcion");
 		}
 		catch (ArmaNoDisponibleError error) {
@@ -139,7 +139,7 @@ public class PruebaAlgo extends TestCase{
 		}
 		  
 		try {
-		    algo.dispararTorpedoHacia( algo );
+		    algo.dispararTorpedoRastreadorHacia( algo );
 		    fail("Deberia haber lanzado una excepcion, no se puede disparar a si mismo");
 		}
 		catch (NaveARastrearError error) {
@@ -151,7 +151,7 @@ public class PruebaAlgo extends TestCase{
 		algo.aumentarArmas(4, 0);
 		//Ahora si deberia poder disparar."
 		try {
-			algo.dispararTorpedoHacia( avioneta );
+			algo.dispararTorpedoRastreadorHacia( avioneta );
 			//Si esto anda es porque no lanzo excepcion y ademas dispara
 		} catch (ArmaNoDisponibleError error) {}
 		
