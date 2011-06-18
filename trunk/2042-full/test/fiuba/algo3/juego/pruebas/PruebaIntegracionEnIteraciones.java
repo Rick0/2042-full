@@ -89,15 +89,15 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 	Plano plano = new Plano( 1000 , 1000 );
 	
 		Punto posicionAvioneta= new Punto(50,85);
-		Punto posicionAlgo= new Punto(50,20);
+		Punto posicionAlgo= new Punto(50,4);
 		Avioneta avioneta = new Avioneta( posicionAvioneta , plano );
 		Algo42 algo = new Algo42( posicionAlgo, plano );
 		
 		avioneta.mover(); //Avioneta posicion Y: 85
 		assertEquals((int) avioneta.devolverPunto().getY() , 83 );
-		algo.moverArriba();  //algo posicion Y: 22
-		assertEquals((int) algo.devolverPunto().getY() , 22);
-		//El algo tiene altura 21, 21+40<83, aun no chocan.
+		algo.moverArriba();  //algo posicion Y: 6
+		assertEquals((int) algo.devolverPunto().getY() , 6);
+		//El algo tiene altura 64, 6+64=70<83, aun no chocan.
 		assertFalse( avioneta.intentarChocar( algo ) );
 		assertEquals( algo.devolverCantidadEnergia() , 100 );
 		avioneta.mover(); //Avioneta posicion Y: 81
@@ -105,12 +105,11 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		avioneta.mover(); //Avioneta posicion Y: 77
 		avioneta.mover(); //Avioneta posicion Y: 75
 		assertEquals( (int)avioneta.devolverPunto().getY() , 75 );
-		algo.moverArriba();  //algo posicion Y: 24
-		algo.moverArriba(); //algo posicion y = 26
-		assertEquals((int) algo.devolverPunto().getY() , 26 );
-		/*El algo tiene altura 26 y la avioneta altura 75, pero esta �ltima se extiende 55 puntos m�s abajo
-		 * de el punto y. Entonces 75 - 55 = 20, y algo 26, van a chocar inminentemente. 
-		 */
+		algo.moverArriba(); // Algo posicion Y= 8, llega a 72
+		algo.moverArriba(); // posicion Y= 10, llega a 74
+		assertEquals((int) algo.devolverPunto().getY() , 10 );
+		//Ahora si se van a chocar.
+		algo.moverArriba();
 		assertTrue( avioneta.intentarChocar( algo ) );
 		//Pruebo que la cantidad de energia del algo42 se haya reducido en 30 puntos
 		assertEquals( algo.devolverCantidadEnergia() , 70 );

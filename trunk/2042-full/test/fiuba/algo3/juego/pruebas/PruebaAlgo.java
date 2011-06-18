@@ -66,7 +66,7 @@ public class PruebaAlgo extends TestCase{
 		/*Prueba que el algo42 pueda moverse a zonas validas*/
 		
 		/*Necesito una instancia de plano, ya que un algo42 es una instancia de ObjetoUbicable.*/
-		Plano plano = new Plano(100,100);
+		Plano plano = new Plano(200,200);
 		Punto punto= new Punto (50,50);
 		Algo42 algo = new Algo42(punto,plano);
 		
