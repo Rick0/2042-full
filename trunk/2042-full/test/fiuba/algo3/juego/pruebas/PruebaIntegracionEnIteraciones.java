@@ -95,8 +95,8 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		
 		avioneta.mover(); //Avioneta posicion Y: 85
 		assertEquals((int) avioneta.devolverPunto().getY() , 83 );
-		algo.moverArriba();  //algo posicion Y: 21
-		assertEquals((int) algo.devolverPunto().getY() , 21 );
+		algo.moverArriba();  //algo posicion Y: 22
+		assertEquals((int) algo.devolverPunto().getY() , 22);
 		//El algo tiene altura 21, 21+40<83, aun no chocan.
 		assertFalse( avioneta.intentarChocar( algo ) );
 		assertEquals( algo.devolverCantidadEnergia() , 100 );
@@ -105,13 +105,10 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		avioneta.mover(); //Avioneta posicion Y: 77
 		avioneta.mover(); //Avioneta posicion Y: 75
 		assertEquals( (int)avioneta.devolverPunto().getY() , 75 );
-		algo.moverArriba();  //algo posicion Y: 22
-		algo.moverArriba();
-		algo.moverArriba();
-		algo.moverArriba();
+		algo.moverArriba();  //algo posicion Y: 24
 		algo.moverArriba(); //algo posicion y = 26
 		assertEquals((int) algo.devolverPunto().getY() , 26 );
-		/*El algo tiene altura 26 y la avioneta altura 75, pero esta última se extiende 55 puntos más abajo
+		/*El algo tiene altura 26 y la avioneta altura 75, pero esta ï¿½ltima se extiende 55 puntos mï¿½s abajo
 		 * de el punto y. Entonces 75 - 55 = 20, y algo 26, van a chocar inminentemente. 
 		 */
 		assertTrue( avioneta.intentarChocar( algo ) );
@@ -270,7 +267,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		}
 		
 		assertEquals( (int)laserB.devolverPunto().getY() , 50 );
-		assertEquals ( (int) algo.devolverPunto().getY(), 51 );
+		assertEquals ( (int) algo.devolverPunto().getY(), 52 );
 		//LaserB y algo estan ocupando mismas posiciones
 		assertTrue( laserB.intentarChocar(algo) );
 		for (int i = 1; i<34 ; i++) {
