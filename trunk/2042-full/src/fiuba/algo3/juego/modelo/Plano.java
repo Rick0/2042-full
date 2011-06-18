@@ -161,15 +161,15 @@ public class Plano implements Posicionable {
 		while(iteradorItemsUsados.hasNext()) {
 			Item elemento = iteradorItemsUsados.next(); 
 			listaItems.remove(elemento);
-		} 
+		}
 		while(iteradorNavesDestruidas.hasNext()) {
 			NaveNoOperable elemento = iteradorNavesDestruidas.next(); 
 			listaNaves.remove(elemento);
-		} 
+		}
 		while(iteradorArmasUsadas.hasNext()) {
 			Arma elemento = iteradorArmasUsadas.next(); 
 			listaArmas.remove(elemento);
-		} 
+		}
 		nivel.actuarCon(listaNavesDestruidas);
 	}
 

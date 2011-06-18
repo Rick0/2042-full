@@ -60,7 +60,7 @@ public class Caza extends NaveNoOperable {
 		if (! this.estaDestruida) {
 			throw new ItemNoDisponibleError("El caza aun no esta destruido, no puede dejar armas.");
 		}
-		itemDejado = new TanqueEnergia(this.devolverPunto());
+		itemDejado = new TanqueEnergia(this.devolverPunto(), this.plano);
 		return itemDejado;
 	}
 

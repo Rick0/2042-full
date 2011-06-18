@@ -36,7 +36,7 @@ public class Bombardero extends NaveNoOperable {
 		if (!this.estaDestruida) {
 			throw new ItemNoDisponibleError("El bombardero aun no esta destruido, no puede dejar armas");
 		}
-		Item item = new ArmaAbandonada(this.devolverPunto() );
+		Item item = new ArmaAbandonada(this.devolverPunto(),this.plano);
 		return item;
 	}
 
@@ -75,8 +75,8 @@ public class Bombardero extends NaveNoOperable {
 	 */
 	public void mover() throws SuperposicionNavesError {
 
-		if ( haciaDer <10 ) {
-			Punto nuevoPunto=new Punto(this.devolverPunto().getX()+0.5,this.devolverPunto().getY()-0.5);
+		if ( haciaDer < 10 ) {
+			Punto nuevoPunto = new Punto(this.devolverPunto().getX()+0.5,this.devolverPunto().getY()-0.5);
 			this.cambiarPosicion(nuevoPunto);
 			haciaDer = (haciaDer + 0.5);
 		}
@@ -84,7 +84,7 @@ public class Bombardero extends NaveNoOperable {
 			if (haciaIzq  <= 10) {
 				Punto nuevoPunto=new Punto(this.devolverPunto().getX()-0.5,this.devolverPunto().getY()-0.5);
 				this.cambiarPosicion(nuevoPunto);
-				haciaIzq = (haciaIzq +0.5);
+				haciaIzq = (haciaIzq + 0.5);
 			}
 			else {
 				haciaIzq = 0;
