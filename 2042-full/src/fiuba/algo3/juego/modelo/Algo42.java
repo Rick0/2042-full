@@ -51,7 +51,7 @@ public class Algo42 extends Nave {
 	/* Crea una instancia de torpedoRastreador; recibe una nave por parametro,
 	 * esa nave sera el objetivo del torpedo
 	 */
-	public void dispararTorpedoHacia(Nave unaNave) throws ArmaNoDisponibleError, NaveARastrearError {
+	public void dispararTorpedoRastreadorHacia(Nave unaNave) throws ArmaNoDisponibleError, NaveARastrearError {
 		if (unaNave == this ) { 
 			throw new NaveARastrearError("La nave rastreada no puede ser la misma algo");
 		}

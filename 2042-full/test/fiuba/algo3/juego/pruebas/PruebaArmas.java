@@ -93,7 +93,7 @@ public class PruebaArmas extends TestCase {
 			laser.intentarMover();
 
 		}
-		assertEquals(laser.estadoUsado(),true);
+		assertEquals(laser.fueUsado(),true);
 		}
 
 }

@@ -1,6 +1,6 @@
 - nunca usar tildes ni eñes, ni en strings ni en comentarios
 
-- indentar como lo indico paez: comentarios de metodos antes de la firma del metodo. si es comentarios de codigo, eso si va adentro del metodo
+- indentar como lo indico nicolas: comentarios de metodos antes de la firma del metodo. si es comentarios de codigo, eso si va adentro del metodo
 
 - siempre usar  /* */  para comentar, aunque el comentario sea de una linea
 
@@ -11,6 +11,8 @@
 	 */
 
 - nunca usar ' ' (espacio) para indentar, siempre usar "Tab"
+
+- en lo posible, usar el genero masculino para los atributos/metodos, si es que no se refieren a algo en particular
 
 - dos renglones de distancia entre atributo/s y metodo/s
 

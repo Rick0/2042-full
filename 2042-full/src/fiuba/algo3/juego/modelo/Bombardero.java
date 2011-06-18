@@ -41,10 +41,10 @@ public class Bombardero extends NaveNoOperable {
 	}
 
 	@Override
-	/* Recibe una cierta cantidad de puntos y los suma a la energ�a de la nave. Ademas,
+	/* Recibe una cierta cantidad de puntos y los suma a la energia de la nave. Ademas,
 	 * si la energia es menor a 0, el bombardero deja un paquete de armas en el escenario de juego
 	 */
-	public void modificarEnergia( int cantidad ) {
+	public void modificarEnergia(int cantidad) {
 
 		Item itemDejado;
 
@@ -69,15 +69,6 @@ public class Bombardero extends NaveNoOperable {
 		}
 	}
 	
-	@Override
-	/* Si la nave esta en la posicion de algo42 lo choca. Lanza
-	 * una instancia de arma aleatoria (laser, cohete o torpedo)
-	 */
-	public void intentarAccionSobre(Algo42 algo42) {
-		this.intentarChocar(algo42);
-		this.lanzarArmaAleatoriaHacia(algo42);
-	}
-
 	/* El bombardero se mueve en Zig Zag; Primero se mueve 0.5 puntos hacia abajo y hacia la derecha.
 	 * Cuando ya bajo 10 puntos, empieza a ir 0.5 puntos hacia abajo y hacia la izquierda, hasta bajar
 	 * 10 puntos mas, y asi sucesivamente
@@ -133,38 +124,24 @@ public class Bombardero extends NaveNoOperable {
 		}
 		this.estaFueraDeArea();
 	}
-	
-	public Cohete dispararCohete() {
-		return new Cohete( this.devolverPunto(), false, this.plano);
-	}
-	
-	public Laser dispararLaser() {
-		return new Laser( this.devolverPunto(), false, this.plano);
-	}
-	
-	private TorpedoRastreador dispararTorpedoHacia(Algo42 unAlgo42) {
-		TorpedoRastreador T =new TorpedoRastreador( this.devolverPunto(), false, this.plano);
-		T.determinarNaveRastreada(unAlgo42);
-		return T;
-	}
 
 	/*El bombardero tiene tres tipos de armas distintas para lanzar. Esta funcion crea un arma
 	 * aleatoria: Busca un numero aleatorio del 1 al 3, si el numero es 1 lanza un laser, si es dos, un cohete
 	 * y si es 3, un torpedo rastreador
 	 */
-	public Arma lanzarArmaAleatoriaHacia(Algo42 algo42) {
+	public void disparar() {
 
 		int r = new Double(Math.random() * 3).intValue();
 
 		if (r == 1) {
-			return this.dispararLaser();
+			this.dispararLaser();
 		}
 		else if (r == 2) {
-			return this.dispararCohete();
+			this.dispararCohete();
 		}
 		else {
-			return this.dispararTorpedoHacia( this.plano.algo42 );
+			this.dispararTorpedoRastreadorHacia(this.plano.getAlgo42());
 		}
 	}
-		
+
 }

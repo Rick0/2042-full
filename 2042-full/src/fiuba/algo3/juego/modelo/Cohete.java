@@ -8,7 +8,7 @@ public class Cohete extends Arma {
 	public Cohete (Punto punto, boolean origenAlgo,Plano plano ) {
 
 		this.danio = -30;
-		this.fueUsada = false;
+		this.fueUsado = false;
 		this.rectangulo = (new Rectangulo(4 , 2, punto));
 		this.determinarPlano(plano);
 	

@@ -24,7 +24,7 @@ public abstract class Nave extends ObjetoUbicable {
 		}
 		else {
 			estaDestruida = true;
-			plano.agregarNaveEliminada( this );
+			plano.agregarNaveEliminada(this);
 		}
 	}
 	

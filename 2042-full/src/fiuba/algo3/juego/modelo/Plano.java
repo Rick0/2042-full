@@ -67,7 +67,7 @@ public class Plano implements Posicionable {
 	/* Agrega un arma a la lista de armas usadas */
 	public void agregarArmaUsada(Arma arma) throws ArmaNoUsadaError {
 
-		if ( !arma.estadoUsado() ) {
+		if ( !arma.fueUsado() ) {
 			throw new ArmaNoUsadaError("Esta municion no fue usada");
 		}
 		this.listaArmasUsadas.add( arma );
@@ -80,7 +80,7 @@ public class Plano implements Posicionable {
 	/* Agrega una municion al plano */
 	public void agregarArma(Arma arma) throws ArmaUsadaError {
 
-		if ( arma.estadoUsado() ){
+		if ( arma.fueUsado() ){
 			throw new ArmaUsadaError("Esta municion ya fue usada");
 		}
 		this.listaArmas.add( arma);

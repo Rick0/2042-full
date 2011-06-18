@@ -13,10 +13,8 @@ public abstract class NaveNoOperable extends Nave {
 	int puntos;
 
 
-	/* La nave se mueve y lleva a cabo su funcion: Si esta en la posicion de algo42 lo choca.
-	 * Si lanza un arma, la agrega a la lista de Armas
-	 */
-	abstract void intentarAccionSobre(Algo42 algo42);
+	/* Dependiendo del tipo de nave, esta disparara armas diferentes */
+	public abstract void disparar();
 
 	/* Metodo para cambiar la posicion de la nave */
 	public abstract void mover() throws SuperposicionNavesError;
@@ -31,7 +29,8 @@ public abstract class NaveNoOperable extends Nave {
 	 * */
 	public void vivir() {
 		this.intentarMover();
-		this.intentarAccionSobre(plano.getAlgo42());
+		this.intentarChocar(this.plano.getAlgo42());
+		this.disparar();
 	}
 
 	/* La nave intenta moverse en una posicion diferente valida del plano. 
@@ -91,9 +90,8 @@ public abstract class NaveNoOperable extends Nave {
 		return false;
 	}
 
-	/* Recibe una nave Algo42 y la choca. Como consecuencia,
-	 * Algo42 pierde puntos 30 de su tanque de energia.
-	 * Ademas, la nave es destruida
+	/* Si la nave choca con Algo42:
+	 * Algo42 pierde energia, y la nave es destruida
 	 */
 	public boolean intentarChocar(Algo42 algo42) {
 
@@ -124,6 +122,32 @@ public abstract class NaveNoOperable extends Nave {
 	 */
 	public boolean estaFueraDeJuego() {
 		return fueraDeJuego;
+	}
+
+	/* La nave dispara un laser */
+	public void dispararLaser() {
+		new Laser(this.devolverPunto(), false, this.plano);
+	}
+
+	/* La nave dispara un cohete */
+	public void dispararCohete() {
+		new Cohete(this.devolverPunto(), false, this.plano);
+	}
+
+	/* La nave dispara un torpedo simple */
+	public void dispararTorpedo() {
+		new TorpedoSimple(this.devolverPunto(), false, this.plano);
+	}
+
+	/* La nave dispara un torpedo adaptable */
+	public void dispararTorpedoAdaptable() {
+		new TorpedoAdaptable(this.devolverPunto(), false, this.plano);
+	}
+
+	/* La nave dispara un torpedo rastreador */
+	public void dispararTorpedoRastreadorHacia(Algo42 unAlgo42) {
+		TorpedoRastreador T = new TorpedoRastreador( this.devolverPunto(), false, this.plano);
+		T.determinarNaveRastreada(unAlgo42);
 	}
 
 	/* Una nave no operable choca con Algo42 

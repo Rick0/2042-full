@@ -8,7 +8,7 @@ public class TorpedoAdaptable extends Arma {
 	public TorpedoAdaptable (Punto punto, boolean origenAlgo,Plano plano ) {
 		
 		this.danio = 0;
-		this.fueUsada = false;
+		this.fueUsado = false;
 		this.rectangulo = (new Rectangulo(4 , 2, punto));
 		this.InicializarOrigenAlgo42(origenAlgo);
 		this.determinarPlano(plano);
