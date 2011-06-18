@@ -27,7 +27,7 @@ public class Algo42 extends Nave {
 
 		if ( ( (punto.getX()<(planoJuego.ancho)) & (punto.getY()<(planoJuego.altura)) )  & ((punto.getY()>=0) & (punto.getX()>=0) ) ) {
 			planoJuego.introducirAlgo42(this);
-			rectangulo = new Rectangulo (50,40,punto);
+			rectangulo = new Rectangulo (64,64,punto);
 		}
 		else{
 			throw new AreaInvalidaError("La nave debe ser creada en una posicion valida dentro del area de juego.");

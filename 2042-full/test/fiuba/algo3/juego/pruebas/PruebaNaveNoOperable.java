@@ -27,7 +27,7 @@ public class PruebaNaveNoOperable extends TestCase {
 	Plano plano= new Plano ( 1000 , 1000 ); 
 	
 	Punto posicionAvioneta= new Punto(85,135);
-	Punto posicionAlgo= new Punto(85,79);
+	Punto posicionAlgo= new Punto(85,70);
 	Avioneta avioneta= new Avioneta (posicionAvioneta , plano);
 	Algo42 algo= new Algo42(posicionAlgo , plano);
 	assertFalse(avioneta.intentarChocar(algo));
