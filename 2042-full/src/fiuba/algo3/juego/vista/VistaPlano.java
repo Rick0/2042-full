@@ -7,6 +7,7 @@ public class VistaPlano extends Imagen {
 
 	public VistaPlano() {
 		this.setNombreArchivoImagen("recursos/Plano/Mar.png");
+	//	this.setNombreArchivoImagen("recursos/Plano/PlanoDinamicoEjemplo/gif/Mar.gif");
 	}
 
 }

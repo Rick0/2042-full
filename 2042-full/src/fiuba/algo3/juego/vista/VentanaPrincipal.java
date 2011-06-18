@@ -10,29 +10,32 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import fiuba.algo3.juego.modelo.Algo42;
 import fiuba.algo3.juego.modelo.excepciones.AreaInvalidaError;
+//import fiuba.algo3.juego.vista.*;
 import fiuba.algo3.titiritero.ControladorJuego;
 import fiuba.algo3.titiritero.SuperficieDeDibujo;
 import fiuba.algo3.titiritero.vista.Panel;
 
 public class VentanaPrincipal extends Frame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private ControladorJuego controladorJuego;
 	private Panel panel;
+
+
 	public VentanaPrincipal(ControladorJuego unControladorJuego,final Algo42 algo) {
+
 		this.controladorJuego = unControladorJuego;
-		this.setTitle("Algo42full");
+		this.setTitle("Algo42-Full");
 		this.setSize(500, 500);
 		this.setResizable(false);
-		panel = new Panel(499,499,controladorJuego);
+		panel = new Panel(500,500,controladorJuego);
 		this.add(panel,BorderLayout.CENTER);
 		
 		this.setBackground(Color.black);
 		panel.setBackground(Color.black);
-		this.addKeyListener(new KeyListener(){
+
+
+		this.addKeyListener(new KeyListener() {
 
 			@Override
 			public void keyPressed(KeyEvent arg0) {
@@ -81,38 +84,34 @@ public class VentanaPrincipal extends Frame {
 			@Override
 			public void keyReleased(KeyEvent arg0) {
 				// TODO Auto-generated method stub
-				
 			}
 
 			@Override
 			public void keyTyped(KeyEvent arg0) {
 				// TODO Auto-generated method stub
-				
 			}
-			
-			
-			
 		});
-		
+
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				dispose();
 				System.exit(0);
 			}			
-		});
+		} );
 	}
+
 	public boolean keydown(Event evt, int x){
 		System.out.print("tecla");
 		return true;
 	}
+
 	public void keyPressed(KeyEvent event) {
 		// TODO Auto-generated method stub
 		
 	}
-	
+
 	public SuperficieDeDibujo getSuperficieDeDibujo() {
 		return this.panel;
 	}
 
-	
 }
