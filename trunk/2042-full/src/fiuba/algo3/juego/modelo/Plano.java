@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import fiuba.algo3.titiritero.ObjetoVivo;
 import fiuba.algo3.titiritero.Posicionable;
-import fiuba.algo3.juego.modelo.excepciones.AlgoSeAtacaASiMismoError;
 import fiuba.algo3.juego.modelo.excepciones.ArmaNoUsadaError;
 import fiuba.algo3.juego.modelo.excepciones.ArmaUsadaError;
-import fiuba.algo3.juego.modelo.excepciones.AtaqueEntreNavesNoOperables;
 import fiuba.algo3.juego.modelo.excepciones.ItemNoUsadoError;
 import fiuba.algo3.juego.modelo.excepciones.ItemUsadoError;
 import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
@@ -18,7 +17,7 @@ import fiuba.algo3.juego.modelo.excepciones.NaveNoDestruidaError;
 /* Maneja el escenario del nivel, contiene listas con las naves, items
  * y armas en juego y se encarga de operar sobre ellas e iterarlas
  */
-public class Plano implements Posicionable {
+public class Plano implements Posicionable ,ObjetoVivo{
 
 	int ancho;
 	int altura;
@@ -108,6 +107,10 @@ public class Plano implements Posicionable {
 	public List<Arma> devolverListaArmas() {
 		return listaArmas;
 	}
+	
+	public ArrayList<NaveNoOperable> devolverListaNaves() {
+		return this.listaNaves;
+	}
 
 	public ArrayList<NaveNoOperable> devolverListaNavesEliminades() {
 		return this.listaNavesDestruidas;
@@ -128,11 +131,43 @@ public class Plano implements Posicionable {
 		return (nivel.devolverNumeroNivel());
 	}
 	
+	public void vivir(){
+		
+		Iterator<NaveNoOperable> iteradorNaveEnemiga = listaNaves.iterator();
+
+		while(iteradorNaveEnemiga.hasNext()) {
+				NaveNoOperable elemento = iteradorNaveEnemiga.next(); 
+				if(elemento.estaFueraDeArea()){
+					listaNavesDestruidas.add(elemento);
+				}
+		}
+
+		//Eliminacion de naves, armas e items que ya no estan vigentes en el area de juego.
+		Iterator<Arma> iteradorArmasUsadas = listaArmasUsadas.iterator();
+		Iterator<Item> iteradorItemsUsados = listaItemsUsados.iterator();
+		Iterator<NaveNoOperable> iteradorNavesDestruidas = listaNavesDestruidas.iterator();
+
+		while(iteradorItemsUsados.hasNext()) {
+			Item elemento = iteradorItemsUsados.next(); 
+			listaItems.remove(elemento);
+		}
+		while(iteradorNavesDestruidas.hasNext()) {
+			NaveNoOperable elemento = iteradorNavesDestruidas.next(); 
+			listaNaves.remove(elemento);
+		}
+		while(iteradorArmasUsadas.hasNext()) {
+			Arma elemento = iteradorArmasUsadas.next(); 
+			listaArmas.remove(elemento);
+		}
+		nivel.actuarCon(listaNavesDestruidas);
+
+	}
+	
 	/*En cada turno, se debe invocar este metodo para revisar 
 	 * las posiciones de las naves, las armas y los items, para 
 	 * ver si hay alguna accion que realizar. Devuelve la lista 
 	 * de naves que el algo42 elimino*/
-	public void revisarEventos() throws AlgoSeAtacaASiMismoError, AtaqueEntreNavesNoOperables, ArmaNoUsadaError{
+	public void revisarEventos(){
 
 		Iterator<Item> iteradorItem = listaItems.iterator();
 		Iterator<Arma> iteradorArmas = listaArmas.iterator();
