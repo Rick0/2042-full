@@ -14,9 +14,10 @@ public class GeneradorControlador {
 	
 	Plano plano;
 	
-	public GeneradorControlador(){
-		plano= new Plano(500,500);
+	public GeneradorControlador(Plano planoObtenido){
+		plano= planoObtenido;
 	}
+	
 	
 	
 	public ControladorJuego generarControlador(){
@@ -53,4 +54,3 @@ public class GeneradorControlador {
 	}
 		
 }
-
