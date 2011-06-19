@@ -28,9 +28,13 @@ public abstract class NaveNoOperable extends Nave {
 	 * en cada turno, y para eso se llama a este metodo.
 	 * */
 	public void vivir() {
+		
 		this.intentarMover();
 		this.intentarChocar(this.plano.getAlgo42());
-		this.disparar();
+		double x = (Math.random() * 30);
+		if(((int)x)==29){
+			this.disparar();
+		}
 	}
 
 	/* La nave intenta moverse en una posicion diferente valida del plano. 

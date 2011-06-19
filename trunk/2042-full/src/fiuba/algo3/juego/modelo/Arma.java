@@ -9,6 +9,7 @@ import fiuba.algo3.juego.modelo.excepciones.AtaqueEntreNavesNoOperables;
 public abstract class Arma extends ObjetoUbicable {
 
 	int danio;
+	public boolean primerTurno=true;
 	boolean fueUsado;
 	boolean origenAlgo42;
 
@@ -38,6 +39,16 @@ public abstract class Arma extends ObjetoUbicable {
 	/* Devuelve true si el arma fue usada */
 	public boolean fueUsado() {
 		return this.fueUsado;
+	}
+	
+	/* Modifica el valor del atributo primerTurno */
+	public void setPrimerTurno(boolean tof) {
+		primerTurno= tof;
+	}
+	
+	/* devuelve el valor del atributo primerTurno */
+	public boolean setPrimerTurno() {
+		return primerTurno;
 	}
 
 	/* Dependiendo de que avion disparo el arma, esta buscara aviones para colisionar */
