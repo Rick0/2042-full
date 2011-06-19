@@ -8,9 +8,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ConcurrentModificationException;
+
 import fiuba.algo3.juego.modelo.Algo42;
 import fiuba.algo3.juego.modelo.excepciones.AreaInvalidaError;
-//import fiuba.algo3.juego.vista.*;
 import fiuba.algo3.titiritero.ControladorJuego;
 import fiuba.algo3.titiritero.SuperficieDeDibujo;
 import fiuba.algo3.titiritero.vista.Panel;
@@ -78,6 +79,12 @@ public class VentanaPrincipal extends Frame {
 				}
 				if(opcion==KeyEvent.VK_SPACE){
 					//Disparo
+					try{
+						algo.dispararLaser();
+					}
+					catch(ConcurrentModificationException e){
+						algo.dispararLaser();
+					}
 				}
 			}
 

@@ -35,8 +35,12 @@ public class Algo42 extends Nave {
 	}
 
 	/* Crea una instancia de laser en la posicion del algo42 */
-	public void dispararLaser() {
-		new Laser( this.devolverPunto(), true, this.plano);
+	public Laser dispararLaser() {
+		int ancho=rectangulo.devolverAncho();
+		int altura= rectangulo.devolverAltura();
+		Punto posLaser= new Punto(this.devolverPunto().getX()+(ancho/2),this.devolverPunto().getY()+altura);
+		Laser l= new Laser(posLaser, true, this.plano);
+		return l;
 	}
 
 	/* Dispara un cohete en la posicion del algo42 */

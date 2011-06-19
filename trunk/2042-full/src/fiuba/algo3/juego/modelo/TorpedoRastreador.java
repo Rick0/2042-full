@@ -6,6 +6,7 @@ import fiuba.algo3.juego.modelo.excepciones.ArmaUsadaError;
 public class TorpedoRastreador extends Arma {
 
 	private Nave naveRastreada;
+	private int turnos=0;
 
 
 	public TorpedoRastreador (Punto punto, boolean origenAlgo,Plano plano ) {
@@ -35,6 +36,10 @@ public class TorpedoRastreador extends Arma {
 	/* El torpedo rastreador se mueve de tal forma que se acerque a la nave que persigue */ 
 	public void mover() {
 
+		turnos= turnos+1;
+		if(turnos>20){
+			this.plano.listaArmasUsadas.add(this);
+		}
 		if (this.naveRastreada.devolverPunto().getX() < this.devolverPunto().getX() ) {
 			Punto nuevaPosicionX=new Punto(this.devolverPunto().getX() - 1, this.devolverPunto().getY());
 			this.cambiarPosicion(nuevaPosicionX);
