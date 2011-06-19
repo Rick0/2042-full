@@ -19,7 +19,11 @@ public class GeneradorControlador {
 	}
 	
 	
-	
+	/*Clase encargada de generar el controlador del juego,
+	 * devuelve el controlador conteniendo el algo42 y una primera flota
+	 * de naves.
+	 * 
+	 */
 	public ControladorJuego generarControlador(){
 
 		ControladorJuego controlador = new ControladorJuego(true);
@@ -28,12 +32,13 @@ public class GeneradorControlador {
 		try {
 			algo42 = new Algo42(posAlgo,plano);
 		} catch (AreaInvalidaError e) {
-			// TODO Auto-generated catch block
+			// No deberia haber creado el algo en una posicion invalida.
 			e.printStackTrace();
 		}
 		VistaPlano vistaPlano = new VistaPlano();
 		controlador.agregarDibujable(vistaPlano);
 		GeneradorFlotas generador= new GeneradorFlotas(plano, controlador);
+		//Aqui el generador recibe su primer flota.
 		generador.generarFlota1();
 		
 		VentanaPrincipal ventana = new VentanaPrincipal(controlador,algo42);
@@ -51,6 +56,5 @@ public class GeneradorControlador {
 		controlador.setIntervaloSimulacion(20);	
 		
 		return controlador;
-	}
-		
+	}		
 }

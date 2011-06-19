@@ -12,6 +12,12 @@ import fiuba.algo3.juego.vista.VistaHelicoptero;
 import fiuba.algo3.titiritero.ControladorJuego;
 import fiuba.algo3.titiritero.ObjetoVivo;
 
+/*Clase encargada de generar las flotas del juego
+ * tendra distintos metodos que crearan distintos tipos de flotas
+ * al crearlas, no solo instanciara las naves
+ * sino que ademas se encargara de crear sus vistas y pasarselas
+ * al controlador como objetos posicionables y vivos
+ */
 public class GeneradorFlotas implements ObjetoVivo {
 	
 	Plano plano;
@@ -24,6 +30,9 @@ public class GeneradorFlotas implements ObjetoVivo {
 		flotaVacia=false;
 	}
 	
+	/*Genera una flota de tipo1,
+	 * que contiene tres helicopteros y
+	 * tres bombarderos*/
 	public void generarFlota1(){
 		int n=0;
 		int posicionHeli= 100;
@@ -67,10 +76,6 @@ public class GeneradorFlotas implements ObjetoVivo {
 	}
 	
 	public void vivir(){
-		if (flotaVacia){
-			//this.generarFlota1();
-			flotaVacia=false;
-		}
 		if ((plano.devolverListaNaves()).isEmpty()){
 			flotaVacia=true;
 		}
