@@ -23,8 +23,7 @@ public class Programa {
 			 */
 			if(!plano.devolverListaNaves().isEmpty()){
 				controlador.comenzarJuego(1);
-				asignadorImagenesArmas.asignarImagenes(plano.devolverListaArmas());
-				
+				asignadorImagenesArmas.asignarImagenes(plano.devolverListaArmas());	
 			}
 			/*Si ya no hay naves, en cambio,
 			 * genero una nueva flota con el generador de naves
