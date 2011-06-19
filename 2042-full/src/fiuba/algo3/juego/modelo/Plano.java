@@ -2,8 +2,6 @@ package fiuba.algo3.juego.modelo;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
-
 import fiuba.algo3.titiritero.ObjetoVivo;
 import fiuba.algo3.titiritero.Posicionable;
 import fiuba.algo3.juego.modelo.excepciones.ArmaNoUsadaError;
@@ -104,7 +102,7 @@ public class Plano implements Posicionable ,ObjetoVivo{
 	}
 
 	/* Uso para el programador */
-	public List<Arma> devolverListaArmas() {
+	public ArrayList<Arma> devolverListaArmas() {
 		return listaArmas;
 	}
 	

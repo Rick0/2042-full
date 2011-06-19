@@ -2,6 +2,7 @@ package fiuba.algo3.juego.programa;
 
 import fiuba.algo3.juego.controlador.GeneradorControlador;
 import fiuba.algo3.juego.modelo.Plano;
+import fiuba.algo3.juego.vista.AsignadorImagenesArmas;
 import fiuba.algo3.titiritero.ControladorJuego;
 
 public class Programa {
@@ -15,12 +16,15 @@ public class Programa {
 		GeneradorControlador generador= new GeneradorControlador(plano);
 		ControladorJuego controlador = generador.generarControlador();
 		GeneradorFlotas generadorFlotas= new GeneradorFlotas(plano,controlador);
+		AsignadorImagenesArmas asignadorImagenesArmas= new AsignadorImagenesArmas (controlador);
 		while (true){
 			/*Si aun hay naves enemigas, no hay necesidad
 			 * de crear una nueva flota
 			 */
 			if(!plano.devolverListaNaves().isEmpty()){
 				controlador.comenzarJuego(1);
+				asignadorImagenesArmas.asignarImagenes(plano.devolverListaArmas());
+				
 			}
 			/*Si ya no hay naves, en cambio,
 			 * genero una nueva flota con el generador de naves
