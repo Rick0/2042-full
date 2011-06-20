@@ -14,7 +14,8 @@ public class Bombardero extends NaveNoOperable {
 	/* Inicializa una instancia de Bombardero */
 	public Bombardero(Punto punto, Plano plano) throws SuperposicionNavesError, NaveDestruidaError {
 
-		this.puntos = 30;
+		super();
+		puntos = 30;
 		energia = 50;
 		haciaDer = 0;
 		haciaIzq = 0;
@@ -131,16 +132,17 @@ public class Bombardero extends NaveNoOperable {
 	 */
 	public void disparar() {
 
-		int r = new Double(Math.random() * 3).intValue();
+		if (velocidadDisparoCont == velocidadDisparo) {
 
-		if (r == 1) {
-			this.dispararLaser();
-		}
-		else if (r == 2) {
-			this.dispararCohete();
-		}
-		else {
-			this.dispararTorpedoRastreadorHacia(this.plano.getAlgo42());
+			int r = new Double(Math.random() * 3).intValue();
+			if (r == 1) {
+				this.dispararLaser();
+			} else if (r == 2) {
+				this.dispararCohete();
+			} else {
+				this.dispararTorpedoRastreadorHacia(this.plano.getAlgo42());
+			}
+			velocidadDisparoCont = 0;
 		}
 	}
 

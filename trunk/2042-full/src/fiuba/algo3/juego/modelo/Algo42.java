@@ -18,6 +18,8 @@ public class Algo42 extends Nave {
 	 */
 	public Algo42(Punto punto,Plano planoJuego) throws AreaInvalidaError {
 
+		velocidadDisparo = 40;
+		velocidadDisparoCont = velocidadDisparo - 1;
 		plano = planoJuego;
 		energia = 100;
 		torpedos = 0;
@@ -35,12 +37,15 @@ public class Algo42 extends Nave {
 	}
 
 	/* Crea una instancia de laser en la posicion del algo42 */
-	public Laser dispararLaser() {
-		int ancho=rectangulo.devolverAncho();
-		int altura= rectangulo.devolverAltura();
-		Punto posLaser= new Punto(this.devolverPunto().getX()+(ancho/2),this.devolverPunto().getY()+altura);
-		Laser l= new Laser(posLaser, true, this.plano);
-		return l;
+	public void dispararLaser() {
+
+		if (velocidadDisparoCont == velocidadDisparo) {
+			int ancho = rectangulo.devolverAncho();
+			int altura = rectangulo.devolverAltura();
+			Punto posLaser= new Punto(this.devolverPunto().getX()+(ancho/2), this.devolverPunto().getY()+altura);
+			new Laser(posLaser, true, this.plano);
+			velocidadDisparoCont = 0;
+		}
 	}
 
 	/* Dispara un cohete en la posicion del algo42 */
@@ -149,7 +154,7 @@ public class Algo42 extends Nave {
 
 	@Override
 	public void vivir() {
-		// TODO Auto-generated method stub
+		this.pasaUnTiempo();
 	}
 
 }

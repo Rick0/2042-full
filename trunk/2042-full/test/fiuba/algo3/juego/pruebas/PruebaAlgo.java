@@ -190,7 +190,7 @@ public class PruebaAlgo extends TestCase{
 		
 		
 		
-		assertEquals("Una vez verificado lo anterior debe poder crearse en una posicion valida",algo.devolverCantidadEnergia(), 100);
+		assertEquals("Una vez verificado lo anterior debe poder crearse en una posicion valida",algo.devolverEnergia(), 100);
 		
 	}
 }

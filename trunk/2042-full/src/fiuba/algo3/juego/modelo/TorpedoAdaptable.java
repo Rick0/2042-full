@@ -24,7 +24,7 @@ public class TorpedoAdaptable extends Arma {
 	@Override
 	/* El danio del torpedo adaptable depende de la energia de Algo42 a la hora de chocar */
 	public int getDanio() {
-		return (int)((this.plano.getAlgo42().devolverCantidadEnergia()) / 2);
+		return (int)((this.plano.getAlgo42().devolverEnergia()) / 2);
 	}
 
 }

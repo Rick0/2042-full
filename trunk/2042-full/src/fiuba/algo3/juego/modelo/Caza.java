@@ -14,6 +14,7 @@ public class Caza extends NaveNoOperable {
 	/* Inicializa una instancia de Caza */
 	public Caza(Punto punto, Plano plano) throws SuperposicionNavesError, NaveDestruidaError {
 
+		super();
 		numero = 0;
 		puntos = 50;
 		energia = 10;
@@ -35,13 +36,16 @@ public class Caza extends NaveNoOperable {
 	 * Hay mas frecuencia de que dispara el torpedo simple
 	 */
 	public void disparar() {
-		int r = new Double(Math.random() * 3).intValue();
 
-		if (r == 1) {
-			this.dispararTorpedoAdaptable();
-		}
-		else {
-			this.dispararTorpedo();
+		if (velocidadDisparoCont == velocidadDisparo) {
+
+			int r = new Double(Math.random() * 3).intValue();
+			if (r == 1) {
+				this.dispararTorpedoAdaptable();
+			} else {
+				this.dispararTorpedo();
+			}
+			velocidadDisparoCont = 0;
 		}
 	}
 
