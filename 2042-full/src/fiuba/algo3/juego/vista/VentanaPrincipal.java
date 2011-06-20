@@ -16,6 +16,7 @@ import fiuba.algo3.titiritero.ControladorJuego;
 import fiuba.algo3.titiritero.SuperficieDeDibujo;
 import fiuba.algo3.titiritero.vista.Panel;
 
+
 public class VentanaPrincipal extends Frame {
 
 	private static final long serialVersionUID = 1L;
@@ -27,9 +28,9 @@ public class VentanaPrincipal extends Frame {
 
 		this.controladorJuego = unControladorJuego;
 		this.setTitle("Algo42-Full");
-		this.setSize(500, 700);
+		this.setSize(500, 650);
 		this.setResizable(false);
-		panel = new Panel(500,700,controladorJuego);
+		panel = new Panel(500, 600,controladorJuego);
 		this.add(panel,BorderLayout.CENTER);
 		
 		this.setBackground(Color.black);
