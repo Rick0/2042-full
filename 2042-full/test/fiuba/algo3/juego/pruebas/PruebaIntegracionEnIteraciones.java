@@ -64,8 +64,10 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		Guia guia= new Guia1(flota , posicionGuia , plano);
 		
 		//Comienzan las pruebas de escena actual
+		algo.modificarVelocidadDisparoCont(algo.devolverVelocidadDisparo());
 		algo.dispararLaser();
 		plano.revisarEventos();
+		
 		//Las armas se mueven dos posiciones por turno; Y el laser tiene una altura de 5 puntos
 		//(o sea que esta de Y=88 a Y=83). Algo42 esta de 83 a 43, va a ser impactado
 		//Ademas la parte inferior de la nave enemiga esta en Y=89; Pero la nave enemiga se mueve.
@@ -73,6 +75,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		//va a disparar de nuevo. En el primer turno, la nave enemiga deberia tener 10 de sus 20 puntos
 		//totales, y en el siguiente deberia estar destruida.
 		assertEquals(guia.devolverPunto().getY(),89.0 );
+		
 		//No deberia haber cambios en la nave algo42, porque no se movio
 		//En cambio si deberia haber cambios en la nave guia"
 		assertEquals(algo.devolverEnergia(),70);//100 es la inicial, pero fue impactado
@@ -127,6 +130,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		Plano plano = new Plano( 100 , 100 );
 		Punto punto= new Punto(50,6);
 		Algo42 algo = new Algo42(punto, plano );
+		algo.modificarVelocidadDisparoCont(algo.devolverVelocidadDisparo());
 		algo.dispararLaser();
 		algo.moverArriba();
 		Arma laser = plano.devolverListaArmas().get(0);
@@ -153,6 +157,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		
 		caza.dispararTorpedo();
 		Arma torpedo = plano.devolverListaArmas().get(0);
+		algo.modificarVelocidadDisparoCont(algo.devolverVelocidadDisparo());
 		algo.dispararLaser();
 		Arma laser = plano.devolverListaArmas().get(1);
 		while ( algo.devolverEnergia() == 100 ) {
@@ -244,8 +249,10 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		}
 		Punto posicionAlgo = new Punto(50,50);
 		Algo42 algo = new Algo42( posicionAlgo , plano );
+		algo.modificarVelocidadDisparoCont(algo.devolverVelocidadDisparo());
 		algo.dispararLaser();
 		Arma laserA = plano.devolverListaArmas().get(0);
+		avioneta.modificarVelocidadDisparoCont(avioneta.devolverVelocidadDisparo());
 		avioneta.dispararLaser();
 		Arma laserB = plano.devolverListaArmas().get(1);
 		assertFalse ( laserB.intentarChocar( algo ) );
@@ -264,7 +271,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 			laserB.mover();
 			assertEquals( (int)laserB.devolverPunto().getY() , (116 - (i*2)) );
 		}
-		
+
 		assertEquals( (int)laserB.devolverPunto().getY() , 50 );
 		assertEquals ( (int) algo.devolverPunto().getY(), 52 );
 		//LaserB y algo estan ocupando mismas posiciones
@@ -302,6 +309,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 
 		ArrayList<Arma> listaLaser = new ArrayList<Arma>(); 
 		for ( int i=0 ; i < 5 ; i++ ) {
+			algo.modificarVelocidadDisparoCont(algo.devolverVelocidadDisparo());
 			algo.dispararLaser();
 			listaLaser.add( plano.devolverListaArmas().get(i) );
 		}

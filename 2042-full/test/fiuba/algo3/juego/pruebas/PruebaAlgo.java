@@ -117,7 +117,7 @@ public class PruebaAlgo extends TestCase{
 		Plano plano = new Plano(100,100);
 		Punto punto= new Punto(50,50);
 		Algo42 algo = new Algo42(punto,plano);
-		
+		algo.modificarVelocidadDisparoCont(algo.devolverVelocidadDisparo());
 		algo.dispararLaser();
 		assertEquals(plano.devolverListaArmas().size() , 1);
 	}
