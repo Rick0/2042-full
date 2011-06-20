@@ -12,7 +12,8 @@ public class Programa {
 	 * Inicializa el juego.
 	 */
 	public static void main(String[] args) {
-		Plano plano= new Plano(500,500);
+
+		Plano plano= new Plano(500,700);
 		GeneradorControlador generador= new GeneradorControlador(plano);
 		ControladorJuego controlador = generador.generarControlador();
 		GeneradorFlotas generadorFlotas= new GeneradorFlotas(plano,controlador);

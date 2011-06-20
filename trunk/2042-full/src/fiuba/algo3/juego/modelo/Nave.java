@@ -63,6 +63,11 @@ public abstract class Nave extends ObjetoUbicable {
 		}
 	}
 
+	/* Modifica el contador de velocidad de disparo de la nave */
+	public void modificarVelocidadDisparoCont(int cont) {
+		velocidadDisparoCont = cont;
+	}
+
 	/* Devuelve true si se trata de una nave operable; false en caso contrario */
 	public boolean esOperable() {
 		return esOperable;
