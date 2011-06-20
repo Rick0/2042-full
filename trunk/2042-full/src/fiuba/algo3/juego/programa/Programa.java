@@ -13,7 +13,7 @@ public class Programa {
 	 */
 	public static void main(String[] args) {
 
-		Plano plano= new Plano(500,700);
+		Plano plano= new Plano(500,600);
 		GeneradorControlador generador= new GeneradorControlador(plano);
 		ControladorJuego controlador = generador.generarControlador();
 		GeneradorFlotas generadorFlotas= new GeneradorFlotas(plano,controlador);
