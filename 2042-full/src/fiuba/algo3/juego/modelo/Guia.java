@@ -18,7 +18,7 @@ public abstract class Guia extends NaveNoOperable {
 	 */
 	public void destruirse() throws NaveNoDestruidaError {
 
-		if (this.devolverCantidadEnergia() > 0) {
+		if (this.devolverEnergia() > 0) {
 			throw new NaveNoDestruidaError("La nave aun tiene energia en su tanque");
 		}
 		else {

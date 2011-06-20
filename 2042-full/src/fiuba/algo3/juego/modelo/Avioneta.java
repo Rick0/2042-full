@@ -11,7 +11,8 @@ public class Avioneta extends NaveNoOperable {
 
 	/* Inicializa una instancia de Avioneta */
 	public Avioneta(Punto punto, Plano plano) throws SuperposicionNavesError, NaveDestruidaError {
-		
+
+		super();
 		this.puntos = 20;
 		energia = 20;
 		puntosAdelante= 0;
@@ -83,7 +84,11 @@ public class Avioneta extends NaveNoOperable {
 	@Override
 	/* La avioneta dispara lasers */
 	public void disparar() {
-		this.dispararLaser();
+
+		if (velocidadDisparoCont == velocidadDisparo) {
+			this.dispararLaser();
+			velocidadDisparoCont = 0;
+		}
 	}
 
 }

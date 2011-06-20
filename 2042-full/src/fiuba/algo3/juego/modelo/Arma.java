@@ -9,7 +9,7 @@ import fiuba.algo3.juego.modelo.excepciones.AtaqueEntreNavesNoOperables;
 public abstract class Arma extends ObjetoUbicable {
 
 	int danio;
-	public boolean primerTurno=true;
+	public boolean primerTurno = true;
 	boolean fueUsado;
 	boolean origenAlgo42;
 
@@ -110,7 +110,7 @@ public abstract class Arma extends ObjetoUbicable {
 		x = (this.plano).devolverAncho();
 		y = (this.plano).devolverAltura();
 
-		if (( (this.devolverPunto().getX()) < 0) || (( this.devolverPunto().getX() )> x )) {
+		if (((this.devolverPunto().getX()) < 0) || (( this.devolverPunto().getX() )> x )) {
 			this.fueUsado = true;
 			try {
 				this.plano.agregarArmaUsada( this );
@@ -135,14 +135,14 @@ public abstract class Arma extends ObjetoUbicable {
 
 		Punto nuevaPosicion;
 		if (this.origenAlgo42) {
-			nuevaPosicion=new Punto(this.devolverPunto().getX(),(this.devolverPunto().getY()) + 2);
+			nuevaPosicion = new Punto(this.devolverPunto().getX(),(this.devolverPunto().getY()) + 2);
 		} else {
-			nuevaPosicion=new Punto(this.devolverPunto().getX(),(this.devolverPunto().getY()) - 2);
+			nuevaPosicion = new Punto(this.devolverPunto().getX(),(this.devolverPunto().getY()) - 2);
 		}
 		this.cambiarPosicion(nuevaPosicion);
 	}
 
-	/*true indica que quien lanzo el arma fue Algo42,
+	/* True indica que quien lanzo el arma fue Algo42,
 	 * false en caso contrario
 	 */
 	public boolean origenAlgo42() {

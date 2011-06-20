@@ -75,8 +75,8 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		assertEquals(guia.devolverPunto().getY(),89.0 );
 		//No deberia haber cambios en la nave algo42, porque no se movio
 		//En cambio si deberia haber cambios en la nave guia"
-		assertEquals(algo.devolverCantidadEnergia(),70);//100 es la inicial, pero fue impactado
-		assertEquals(guia.devolverCantidadEnergia(),0);
+		assertEquals(algo.devolverEnergia(),70);//100 es la inicial, pero fue impactado
+		assertEquals(guia.devolverEnergia(),0);
 		assertTrue(guia.estadoActualDestruida());
 		assertEquals(plano.devolverNivel(),2);
 	}
@@ -99,7 +99,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		assertEquals((int) algo.devolverPunto().getY() , 6);
 		//El algo tiene altura 64, 6+64=70<83, aun no chocan.
 		assertFalse( avioneta.intentarChocar( algo ) );
-		assertEquals( algo.devolverCantidadEnergia() , 100 );
+		assertEquals( algo.devolverEnergia() , 100 );
 		avioneta.mover(); //Avioneta posicion Y: 81
 		avioneta.mover(); //Avioneta posicion Y: 79
 		avioneta.mover(); //Avioneta posicion Y: 77
@@ -112,7 +112,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		algo.moverArriba();
 		assertTrue( avioneta.intentarChocar( algo ) );
 		//Pruebo que la cantidad de energia del algo42 se haya reducido en 30 puntos
-		assertEquals( algo.devolverCantidadEnergia() , 70 );
+		assertEquals( algo.devolverEnergia() , 70 );
 		//Pruebo que la avioneta haya quedado destruida luego del choque
 		assertTrue( avioneta.estadoActualDestruida() );
 	}
@@ -155,7 +155,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		Arma torpedo = plano.devolverListaArmas().get(0);
 		algo.dispararLaser();
 		Arma laser = plano.devolverListaArmas().get(1);
-		while ( algo.devolverCantidadEnergia() == 100 ) {
+		while ( algo.devolverEnergia() == 100 ) {
 			try {
 				torpedo.intentarChocar(algo);
 			} catch (AtaqueEntreNavesNoOperables error) {
@@ -165,7 +165,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 			}
 			torpedo.mover();
 		}
-		assertEquals( algo.devolverCantidadEnergia() , 80 );
+		assertEquals( algo.devolverEnergia() , 80 );
 		while ( !caza.estadoActualDestruida() ) {
 			laser.mover();
 			try {
@@ -187,7 +187,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 			algo.moverArriba();
 			item.intentarChocar( algo );
 		}
-		assertEquals( algo.devolverCantidadEnergia() , 120 );
+		assertEquals( algo.devolverEnergia() , 120 );
 	}
 
 	@Test
@@ -233,7 +233,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 	//Prueba el uso de municiones. Una avioneta le dispara a un algo42 y visceversa 
 		
 		
-		Plano plano = new Plano( 1000 , 1000 );
+		Plano plano = new Plano(1000, 1000);
 		Avioneta avioneta = null;
 		try {
 			Punto punto = new Punto(50,120);
@@ -249,8 +249,8 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		avioneta.dispararLaser();
 		Arma laserB = plano.devolverListaArmas().get(1);
 		assertFalse ( laserB.intentarChocar( algo ) );
-		/*Esto crea dos instancias de laser: una con origen Algo42 (que por lo tanto se mueve hacia arriba)
-		y otra con origen nave enemiga, que se mueve hacia abajo.*/
+		/* Esto crea dos instancias de laser: una con origen Algo42 (que por lo tanto se mueve hacia arriba)
+		 * y otra con origen nave enemiga, que se mueve hacia abajo. */
 		algo.moverArriba();
 		laserB.mover();
 		assertEquals( (int)laserB.devolverPunto().getY() , 118 );
@@ -373,7 +373,8 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		Avioneta nave = new Avioneta( puntoAvioneta, plano );
 		posYInicial = nave.devolverPunto().getY();
 		for ( int i = 0 ; i < 9 ; i++ ) {
-			nave.vivir();
+			nave.dispararLaser();
+			nave.mover();
 		}
 		posYFinal = nave.devolverPunto().getY();
 		assertFalse ("La nave se mueve en eje Y", posYInicial == posYFinal );
@@ -427,7 +428,8 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		posYInicial = nave.devolverPunto().getY();
 		
 		for ( int i = 0 ; i < 9 ; i++ ) {
-			nave.vivir();
+			nave.mover();
+			nave.dispararLaser();
 		}
 		posXFinal = nave.devolverPunto().getX();
 		posYFinal = nave.devolverPunto().getY();
@@ -482,7 +484,8 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		posXInicial = nave.devolverPunto().getX();
 		posYInicial = nave.devolverPunto().getY();
 		for ( int i = 0 ; i < 9 ; i++ ) {
-			nave.vivir();
+			nave.mover();
+			nave.dispararTorpedo();
 		}
 		posXFinal = nave.devolverPunto().getX();
 		posYFinal = nave.devolverPunto().getY();
@@ -537,14 +540,14 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		Algo42 algo42 = new Algo42(puntoAlgo, plano );
 		Avioneta nave = new Avioneta( puntoAvioneta , plano );
 
-		energiaInicial = algo42.devolverCantidadEnergia();
+		energiaInicial = algo42.devolverEnergia();
 		nave.vivir();//Se mueve y ademas crea un disparo
 		Arma disparo = plano.devolverListaArmas().get(0);
 		for (int i = 0 ; i < 30 ; i++ ) {
 			disparo.vivir();
 		}
 		algo42.chocarCon(nave);
-		energiaFinal = algo42.devolverCantidadEnergia();
+		energiaFinal = algo42.devolverEnergia();
 		
 		assertTrue ("La energia de algo42 debe bajar", energiaInicial > energiaFinal );
 	}
