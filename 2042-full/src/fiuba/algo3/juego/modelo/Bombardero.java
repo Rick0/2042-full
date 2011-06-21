@@ -29,6 +29,7 @@ public class Bombardero extends NaveNoOperable {
 			throw new SuperposicionNavesError("La posici�n esta ocupada");
 		}
 		plano.agregarNave(this);
+		plano.agregarObjetoNuevo(this);
 	}
 
 	/* Crea una instancia de ArmaAbandonada y la devuelve */ 

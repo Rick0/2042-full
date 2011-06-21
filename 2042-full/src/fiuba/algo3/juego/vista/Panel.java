@@ -9,11 +9,11 @@ import fiuba.algo3.titiritero.SuperficieDeDibujo;
 
 public class Panel extends java.awt.Panel implements SuperficieDeDibujo {
 
-
 	private static final long serialVersionUID = -5159188497592488407L;
 	private Image imagen;
 
-	// es llamado internamente por el metodo repaint() de la clase Frame
+
+	// Es llamado internamente por el metodo repaint() de la clase Frame
 	public void update(Graphics g) {
 		paint(g);
 	}

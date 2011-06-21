@@ -21,6 +21,7 @@ public class Civil extends NaveNoOperable {
 			throw new SuperposicionNavesError("La posicion esta ocupada");
 		}
 		plano.agregarNave(this);
+		plano.agregarObjetoNuevo(this);
 	}
 
 	/* La nave civil se mueve hacia abajo */

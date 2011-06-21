@@ -1,5 +1,7 @@
 package fiuba.algo3.juego.modelo;
 
+import fiuba.algo3.juego.modelo.excepciones.ItemUsadoError;
+
 
 public class ArmaAbandonada extends Item {
 
@@ -12,6 +14,13 @@ public class ArmaAbandonada extends Item {
 		numeroCohetes  = 5;
 		rectangulo = new Rectangulo(30, 30, punto);
 		plano = unPlano;
+		try {
+			plano.agregarItem(this);
+			plano.agregarObjetoNuevo(this);
+		} catch (ItemUsadoError e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/* Recibe una nave tipo Algo42, y le suma las armas que dejo la nave enemiga */

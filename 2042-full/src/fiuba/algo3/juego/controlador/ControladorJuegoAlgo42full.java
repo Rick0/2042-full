@@ -3,9 +3,11 @@ package fiuba.algo3.juego.controlador;
 import fiuba.algo3.juego.modelo.*;
 //import fiuba.algo3.juego.vista.*;
 import fiuba.algo3.titiritero.*;
+import fiuba.algo3.titiritero.vista.*;
 import fiuba.algo3.titiritero.audio.Reproductor;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -19,9 +21,10 @@ public class ControladorJuegoAlgo42full implements Runnable {
 		this.keyPressedObservadores = new ArrayList<KeyPressedObservador>();
 		this.estaReproductorActivo = activarReproductor;
 		if(this.estaReproductorActivo)
-			this.reproductor = new Reproductor();		
+			this.reproductor = new Reproductor();
+		this.tablaDeVistas = new HashMap<ObjetoUbicable,Imagen>();
 	}
-	
+
 	public boolean estaEnEjecucion(){
 		return this.estaEnEjecucion;
 	}
@@ -146,8 +149,8 @@ public class ControladorJuegoAlgo42full implements Runnable {
 	
 	/**
 	 * Se encarga de derivar el manejo del evento click al objeto vista correspondiente
-	 * @param x posici?n horizontal del mouse
-	 * @param y posici?n vertial del mouse
+	 * @param x posicion horizontal del mouse
+	 * @param y posicion vertial del mouse
 	 */
 	public void despacharMouseClick(int x, int y){
 		MouseClickObservador mouseClickObservador;
@@ -194,6 +197,8 @@ public class ControladorJuegoAlgo42full implements Runnable {
 	private Reproductor reproductor;
 	private Thread hiloAudio;
 	private boolean estaReproductorActivo;
+	private HashMap<ObjetoUbicable,Imagen> tablaDeVistas;
+
 
 	public void run() {
 		this.comenzarJuego();

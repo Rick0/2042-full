@@ -27,6 +27,7 @@ public class Avioneta extends NaveNoOperable {
 			throw new SuperposicionNavesError("La posici�n esta ocupada");
 		}
 		plano.agregarNave(this);
+		plano.agregarObjetoNuevo(this);
 	}
 
 	/* Metodo para el movimiento de la avioneta. Se mueve 60 puntos hacia adelante, luego 60 hacia atras,
