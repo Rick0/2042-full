@@ -35,7 +35,7 @@ public abstract class Nave extends ObjetoUbicable {
 
 	/* Lleva a cabo las acciones correspondientes si debe destruirse */
 	public void destruirse() throws NaveNoDestruidaError {
-		
+
 		if ( (this.devolverEnergia()) > 0 ) {
 			throw new NaveNoDestruidaError("La nave aun tiene energia en su tanque");
 		}
@@ -44,7 +44,7 @@ public abstract class Nave extends ObjetoUbicable {
 			plano.agregarNaveEliminada(this);
 		}
 	}
-	
+
 	/* Devuelve True si la nave esta destruida */
 	public boolean estadoActualDestruida() {
 		return estaDestruida;

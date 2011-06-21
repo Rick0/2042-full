@@ -8,27 +8,26 @@ import fiuba.algo3.juego.programa.GeneradorFlotas;
 import fiuba.algo3.juego.vista.VentanaPrincipal;
 import fiuba.algo3.juego.vista.VistaAlgo42;
 import fiuba.algo3.juego.vista.VistaPlano;
-import fiuba.algo3.titiritero.ControladorJuego;
+
 
 public class GeneradorControlador {
 	
 	Plano plano;
-	
-	public GeneradorControlador(Plano planoObtenido){
-		plano= planoObtenido;
+
+
+	public GeneradorControlador(Plano planoObtenido) {
+		plano = planoObtenido;
 	}
 	
 	
-	/*Clase encargada de generar el controlador del juego,
-	 * devuelve el controlador conteniendo el algo42 y una primera flota
-	 * de naves.
-	 * 
+	/* Clase encargada de generar el controlador del juego,
+	 * devuelve el controlador conteniendo el algo42 y una primera flota de naves.
 	 */
-	public ControladorJuego generarControlador(){
+	public ControladorJuegoAlgo42full generarControlador() {
 
-		ControladorJuego controlador = new ControladorJuego(true);
+		ControladorJuegoAlgo42full controlador = new ControladorJuegoAlgo42full(false);
 		Algo42 algo42 = null;
-		Punto posAlgo = new Punto(200,200);
+		Punto posAlgo = new Punto(250,150);
 		try {
 			algo42 = new Algo42(posAlgo,plano);
 		} catch (AreaInvalidaError e) {
@@ -37,10 +36,11 @@ public class GeneradorControlador {
 		}
 		VistaPlano vistaPlano = new VistaPlano();
 		controlador.agregarDibujable(vistaPlano);
-		GeneradorFlotas generador= new GeneradorFlotas(plano, controlador);
+
+		GeneradorFlotas generador = new GeneradorFlotas(plano, controlador);
 		//Aqui el generador recibe su primer flota.
 		generador.generarFlota1();
-		
+
 		VentanaPrincipal ventana = new VentanaPrincipal(controlador,algo42);
 		controlador.setSuperficieDeDibujo(ventana.getSuperficieDeDibujo());
 		ventana.setVisible(true);
@@ -50,8 +50,8 @@ public class GeneradorControlador {
 		vistaAlgo42.setPosicionable(algo42);
 
 		controlador.agregarDibujable(vistaAlgo42);
-		controlador.agregarObjetoVivo(algo42);
 		controlador.agregarObjetoVivo(plano);
+		controlador.agregarObjetoVivo(algo42);
 		controlador.agregarObjetoVivo(generador);
 		controlador.setIntervaloSimulacion(20);	
 		

@@ -15,7 +15,7 @@ import fiuba.algo3.juego.modelo.excepciones.NaveNoDestruidaError;
 /* Maneja el escenario del nivel, contiene listas con las naves, items
  * y armas en juego y se encarga de operar sobre ellas e iterarlas
  */
-public class Plano implements Posicionable ,ObjetoVivo{
+public class Plano implements Posicionable, ObjetoVivo {
 
 	int ancho;
 	int altura;
@@ -27,14 +27,15 @@ public class Plano implements Posicionable ,ObjetoVivo{
 	ArrayList<Item> listaItemsUsados = new ArrayList<Item>();
 	ArrayList<Arma> listaArmasUsadas = new ArrayList<Arma>();
 	Nivel nivel = new Nivel();
+	ArrayList<ObjetoUbicable> listaObjetosABorrar = new ArrayList<ObjetoUbicable>();
 
 
 	/* Constructor del plano, recibe sus dimensiones
 	 * Crea sus listas de armas, naves e items, que se posicionaran en el plano
 	 */
 	public Plano(int dimensionX,int dimensionY) {
-		ancho=dimensionX;
-		altura=dimensionY;
+		ancho  = dimensionX;
+		altura = dimensionY;
 	}
 
 	/* Devuelve la altura del plano */
@@ -114,6 +115,10 @@ public class Plano implements Posicionable ,ObjetoVivo{
 		return this.listaNavesDestruidas;
 	}
 
+	public ArrayList<ObjetoUbicable> devolverListaObjetosABorrar() {
+		return this.listaObjetosABorrar;
+	}
+
 	/*Agrega un item del juego a la lista de items usados.*/
 	public void agregarItemUsado(Item item) {
 
@@ -125,17 +130,17 @@ public class Plano implements Posicionable ,ObjetoVivo{
 	}
 	
 	/*Devuelve el nivel actual*/
-	public int devolverNivel(){
+	public int devolverNivel() {
 		return (nivel.devolverNumeroNivel());
 	}
 	
-	public void vivir(){
+	public void vivir() {
 		
 		Iterator<NaveNoOperable> iteradorNaveEnemiga = listaNaves.iterator();
 
 		while(iteradorNaveEnemiga.hasNext()) {
 				NaveNoOperable elemento = iteradorNaveEnemiga.next(); 
-				if(elemento.estaFueraDeArea()){
+				if(elemento.estaFueraDeArea()) {
 					listaNavesDestruidas.add(elemento);
 				}
 		}
@@ -148,14 +153,17 @@ public class Plano implements Posicionable ,ObjetoVivo{
 		while(iteradorItemsUsados.hasNext()) {
 			Item elemento = iteradorItemsUsados.next(); 
 			listaItems.remove(elemento);
+			listaObjetosABorrar.add(elemento);
 		}
 		while(iteradorNavesDestruidas.hasNext()) {
 			NaveNoOperable elemento = iteradorNavesDestruidas.next(); 
 			listaNaves.remove(elemento);
+			listaObjetosABorrar.add(elemento);
 		}
 		while(iteradorArmasUsadas.hasNext()) {
 			Arma elemento = iteradorArmasUsadas.next(); 
 			listaArmas.remove(elemento);
+			listaObjetosABorrar.add(elemento);
 		}
 		nivel.actuarCon(listaNavesDestruidas);
 
@@ -165,7 +173,7 @@ public class Plano implements Posicionable ,ObjetoVivo{
 	 * las posiciones de las naves, las armas y los items, para 
 	 * ver si hay alguna accion que realizar. Devuelve la lista 
 	 * de naves que el algo42 elimino*/
-	public void revisarEventos(){
+	public void revisarEventos() {
 
 		Iterator<Item> iteradorItem = listaItems.iterator();
 		Iterator<Arma> iteradorArmas = listaArmas.iterator();
@@ -205,7 +213,6 @@ public class Plano implements Posicionable ,ObjetoVivo{
 		}
 		nivel.actuarCon(listaNavesDestruidas);
 	}
-
 
 	/* Metodos para implementar la interfaz Posicionable
 	 * @see fiuba.algo3.titiritero.Posicionable#getX()

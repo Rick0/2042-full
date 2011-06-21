@@ -9,9 +9,9 @@ import fiuba.algo3.juego.modelo.excepciones.AtaqueEntreNavesNoOperables;
 public abstract class Arma extends ObjetoUbicable {
 
 	int danio;
-	public boolean primerTurno = true;
 	boolean fueUsado;
 	boolean origenAlgo42;
+	public boolean primerTurno = true;
 
 
 	/* True indica que quien lanzo el arma fue una instancia de Algo42,
@@ -43,11 +43,11 @@ public abstract class Arma extends ObjetoUbicable {
 	
 	/* Modifica el valor del atributo primerTurno */
 	public void setPrimerTurno(boolean tof) {
-		primerTurno= tof;
+		primerTurno = tof;
 	}
 	
 	/* devuelve el valor del atributo primerTurno */
-	public boolean setPrimerTurno() {
+	public boolean getPrimerTurno() {
 		return primerTurno;
 	}
 
