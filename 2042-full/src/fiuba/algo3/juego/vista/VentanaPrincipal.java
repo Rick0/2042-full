@@ -12,19 +12,18 @@ import java.util.ConcurrentModificationException;
 
 import fiuba.algo3.juego.modelo.Algo42;
 import fiuba.algo3.juego.modelo.excepciones.AreaInvalidaError;
-import fiuba.algo3.titiritero.ControladorJuego;
+import fiuba.algo3.juego.controlador.*;
 import fiuba.algo3.titiritero.SuperficieDeDibujo;
-import fiuba.algo3.titiritero.vista.Panel;
 
 
 public class VentanaPrincipal extends Frame {
 
 	private static final long serialVersionUID = 1L;
-	private ControladorJuego controladorJuego;
+	private ControladorJuegoAlgo42full controladorJuego;
 	private Panel panel;
 
 
-	public VentanaPrincipal(ControladorJuego unControladorJuego,final Algo42 algo) {
+	public VentanaPrincipal(ControladorJuegoAlgo42full unControladorJuego,final Algo42 algo) {
 
 		this.controladorJuego = unControladorJuego;
 		this.setTitle("Algo42-Full");

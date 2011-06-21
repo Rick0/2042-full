@@ -10,7 +10,7 @@ import fiuba.algo3.titiritero.audio.Reproductor;
 
 /**
  * @author Nicolas
- * Esta clase es la encargada de manejar todo el gameloop. B�sicamente tiene una lista
+ * Esta clase es la encargada de manejar todo el gameloop. Basicamente tiene una lista
  * de ObjetosVivos y una Dibujables que son recorridas en cada gameloop.
  */
 public class ControladorJuego implements Runnable {
@@ -184,7 +184,7 @@ public class ControladorJuego implements Runnable {
 	private Reproductor reproductor;
 	private Thread hiloAudio;
 	private boolean estaReproductorActivo;
-	
+
 	public void run() {
 		this.comenzarJuego();
 	}

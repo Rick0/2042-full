@@ -67,7 +67,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		algo.modificarVelocidadDisparoCont(algo.devolverVelocidadDisparo());
 		algo.dispararLaser();
 		plano.revisarEventos();
-		
+	
 		//Las armas se mueven dos posiciones por turno; Y el laser tiene una altura de 5 puntos
 		//(o sea que esta de Y=88 a Y=83). Algo42 esta de 83 a 43, va a ser impactado
 		//Ademas la parte inferior de la nave enemiga esta en Y=89; Pero la nave enemiga se mueve.

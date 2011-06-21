@@ -9,10 +9,11 @@ import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 import fiuba.algo3.juego.vista.VistaBombardero;
 import fiuba.algo3.juego.vista.VistaHelicoptero;
-import fiuba.algo3.titiritero.ControladorJuego;
+import fiuba.algo3.juego.controlador.*;
 import fiuba.algo3.titiritero.ObjetoVivo;
 
-/*Clase encargada de generar las flotas del juego
+
+/* Clase encargada de generar las flotas del juego
  * tendra distintos metodos que crearan distintos tipos de flotas
  * al crearlas, no solo instanciara las naves
  * sino que ademas se encargara de crear sus vistas y pasarselas
@@ -21,10 +22,10 @@ import fiuba.algo3.titiritero.ObjetoVivo;
 public class GeneradorFlotas implements ObjetoVivo {
 	
 	Plano plano;
-	ControladorJuego controlador;
+	ControladorJuegoAlgo42full controlador;
 	boolean flotaVacia;
 	
-	public GeneradorFlotas(Plano planoJuego, ControladorJuego control){
+	public GeneradorFlotas(Plano planoJuego, ControladorJuegoAlgo42full control){
 		controlador= control;
 		plano= planoJuego;
 		flotaVacia=false;
