@@ -22,7 +22,7 @@ public class Bombardero extends NaveNoOperable {
 		esOperable = false;
 		rectangulo = new Rectangulo(65, 65,punto);
 		estaDestruida = false;
-		fueraDeJuego = false;
+		fueraDelPlano = false;
 		this.determinarPlano(plano);
 
 		if (this.seSuperponeConOtraNave()) {
@@ -38,8 +38,15 @@ public class Bombardero extends NaveNoOperable {
 		if (!this.estaDestruida) {
 			throw new ItemNoDisponibleError("El bombardero aun no esta destruido, no puede dejar armas");
 		}
-		Item item = new ArmaAbandonada(this.devolverPunto(),this.plano);
-		return item;
+
+		Item itemDejado = new ArmaAbandonada(this.devolverPunto(),this.plano);		
+		try {
+			plano.agregarItem(itemDejado);
+			plano.agregarObjetoNuevo(itemDejado);
+		} catch (ItemUsadoError error) {
+			itemDejado.noUsado();
+		}
+		return itemDejado;
 	}
 
 	@Override
@@ -47,8 +54,6 @@ public class Bombardero extends NaveNoOperable {
 	 * si la energia es menor a 0, el bombardero deja un paquete de armas en el escenario de juego
 	 */
 	public void modificarEnergia(int cantidad) {
-
-		Item itemDejado;
 
 		energia = (energia + cantidad);
 		if (energia <= 0) {
@@ -58,15 +63,10 @@ public class Bombardero extends NaveNoOperable {
 				// esto no puede suceder
 			}
 			try {
-				itemDejado = this.dejarArma();
+				this.dejarArma();
 			} catch (ItemNoDisponibleError error) { 
 				// esto no puede suceder
 				return;
-			}
-			try {
-				plano.agregarItem( itemDejado );
-			} catch (ItemUsadoError error) {
-				itemDejado.noUsado();
 			}
 		}
 	}
@@ -97,7 +97,7 @@ public class Bombardero extends NaveNoOperable {
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
 		}
 
-		this.estaFueraDeArea();
+		this.estaFueraDelPlano();
 	}
 
 	/* Movimiento que se debe llevar a cabo si la funcion intentar movimiento comprueba que el movimiento
@@ -124,7 +124,7 @@ public class Bombardero extends NaveNoOperable {
 		if ( this.seSuperponeConOtraNave() ) {
 			throw new SuperposicionNavesError ("La posicion ya esta ocupada");
 		}
-		this.estaFueraDeArea();
+		this.estaFueraDelPlano();
 	}
 
 	/*El bombardero tiene tres tipos de armas distintas para lanzar. Esta funcion crea un arma

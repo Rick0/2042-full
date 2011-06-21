@@ -5,7 +5,7 @@ import fiuba.algo3.juego.modelo.excepciones.ArmaUsadaError;
 
 public class TorpedoAdaptable extends Arma {
 	
-	public TorpedoAdaptable (Punto punto, boolean origenAlgo,Plano plano ) {
+	public TorpedoAdaptable (Punto punto, boolean origenAlgo, Plano plano) {
 		
 		this.danio = 0;
 		this.fueUsado = false;
@@ -14,11 +14,11 @@ public class TorpedoAdaptable extends Arma {
 		this.determinarPlano(plano);
 
 		try {
-			this.plano.agregarArma( this );
+			this.plano.agregarArma(this);
+			this.plano.agregarObjetoNuevo(this);
 		} catch (ArmaUsadaError e) {
 			System.out.println("Se produjo un error irrecuperable");
 		}
-
 	}
 
 	@Override

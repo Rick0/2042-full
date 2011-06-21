@@ -18,7 +18,7 @@ public class Guia1 extends Guia {
 		energia=10;
 		rectangulo= new Rectangulo (150,150,punto);
 		esOperable=false;
-		fueraDeJuego =false;
+		fueraDelPlano =false;
 		estaDestruida=false;
 		this.determinarPlano(planoJuego);
 		planoJuego.agregarNave(this);
@@ -37,7 +37,7 @@ public class Guia1 extends Guia {
 		if (this.seSuperponeConOtraNave()) {
 			throw new SuperposicionNavesError("La posicion ya esta ocupada");
 		}
-		this.estaFueraDeArea();
+		this.estaFueraDelPlano();
 	}
 	
 	/* Movimiento que se debe llevar a cabo si la funcion intentar
@@ -50,7 +50,7 @@ public class Guia1 extends Guia {
 		this.cambiarPosicion(punto);
 		if (this.seSuperponeConOtraNave()){
 			throw new SuperposicionNavesError("La posicion ya esta ocupada");		}
-		this.estaFueraDeArea();
+		this.estaFueraDelPlano();
 	}
 	
 	/* Recibe una lista de naves, las mismas seran la flota de la guia1 */

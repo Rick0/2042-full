@@ -5,6 +5,7 @@ package fiuba.algo3.juego.modelo;
 public abstract class Item extends ObjetoUbicable {
 
 	boolean fueUsado;
+	int tiempoDeVida = 700;
 
 
 	/* Recibe una nave Algo42 (la nave manejada por el usuario)
@@ -13,14 +14,12 @@ public abstract class Item extends ObjetoUbicable {
 	 */
 	public abstract void intentarChocar(Algo42 algo42);
 
-	/*Cada item debe realizar algun efecto en algo42,
-	* dependiendo de que tipo de item sea*/
+	/* Cada item debe realizar algun efecto en algo42,
+	 * dependiendo de que tipo de item sea */
 	public void vivir() {
 
+		this.pasaUnTiempo();
 		this.intentarChocar(plano.getAlgo42());
-		if(fueUsado) {
-			plano.agregarItemUsado(this);
-		}
 	}
 
 	/* Devuelve true si el item ya fue usado, false en caso contrario */
@@ -36,6 +35,21 @@ public abstract class Item extends ObjetoUbicable {
 	/* El item choca con el avion Algo42 */
 	public void chocarCon(Algo42 algo42) {
 		this.fueUsado = true;
+		plano.agregarItemUsado(this);
+	}
+
+	/* Pasa un tiempo, y el tiempo de vida del item decrementa
+	 * Cuando llega a 0, este desaparece del plano
+	 */
+	public void pasaUnTiempo() {
+
+		if (tiempoDeVida <= 0) {
+			this.fueUsado = true;
+			plano.agregarItemUsado(this);
+		}
+		else {
+			tiempoDeVida--;
+		}
 	}
 
 }

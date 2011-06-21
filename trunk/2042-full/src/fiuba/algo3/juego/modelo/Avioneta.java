@@ -20,7 +20,7 @@ public class Avioneta extends NaveNoOperable {
 		esOperable = false;
 		rectangulo = new Rectangulo(60, 55, punto);
 		estaDestruida = false;
-		fueraDeJuego = false;
+		fueraDelPlano = false;
 		this.determinarPlano(plano);
 
 		if (this.seSuperponeConOtraNave()) {
@@ -54,7 +54,7 @@ public class Avioneta extends NaveNoOperable {
 		if (this.seSuperponeConOtraNave()) {
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
 		}
-		this.estaFueraDeArea();
+		this.estaFueraDelPlano();
 	}
 
 	/* Este metodo debe ser llamado cuando, por alguna razon, el movimiento que realiza
@@ -79,7 +79,8 @@ public class Avioneta extends NaveNoOperable {
 		if ( this.seSuperponeConOtraNave() ) {
 			throw new SuperposicionNavesError("La posicion ya esta ocupada");
 		}
-		this.estaFueraDeArea();
+
+		this.estaFueraDelPlano();
 	}
 	
 	@Override
