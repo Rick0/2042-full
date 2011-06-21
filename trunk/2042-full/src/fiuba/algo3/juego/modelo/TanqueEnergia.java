@@ -1,5 +1,7 @@
 package fiuba.algo3.juego.modelo;
 
+import fiuba.algo3.juego.modelo.excepciones.ItemUsadoError;
+
 
 public class TanqueEnergia extends Item {
 
@@ -11,6 +13,13 @@ public class TanqueEnergia extends Item {
 		aumentoEnergia = 40;
 		rectangulo = new Rectangulo(30, 30, punto);
 		plano = unPlano;
+		try {
+			plano.agregarItem(this);
+			plano.agregarObjetoNuevo(this);
+		} catch (ItemUsadoError e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/* Recibe una nave tipo Algo42, y le suma energia */

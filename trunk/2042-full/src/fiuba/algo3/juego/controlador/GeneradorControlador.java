@@ -4,7 +4,7 @@ import fiuba.algo3.juego.modelo.Algo42;
 import fiuba.algo3.juego.modelo.Plano;
 import fiuba.algo3.juego.modelo.Punto;
 import fiuba.algo3.juego.modelo.excepciones.AreaInvalidaError;
-import fiuba.algo3.juego.programa.GeneradorFlotas;
+import fiuba.algo3.juego.controlador.GeneradorFlotas;
 import fiuba.algo3.juego.vista.VentanaPrincipal;
 import fiuba.algo3.juego.vista.VistaAlgo42;
 import fiuba.algo3.juego.vista.VistaPlano;
@@ -35,6 +35,7 @@ public class GeneradorControlador {
 			e.printStackTrace();
 		}
 		VistaPlano vistaPlano = new VistaPlano();
+		vistaPlano.setPosicionable(plano);
 		controlador.agregarDibujable(vistaPlano);
 
 		GeneradorFlotas generador = new GeneradorFlotas(plano, controlador);
@@ -45,7 +46,6 @@ public class GeneradorControlador {
 		controlador.setSuperficieDeDibujo(ventana.getSuperficieDeDibujo());
 		ventana.setVisible(true);
 
-		vistaPlano.setPosicionable(plano);
 		VistaAlgo42 vistaAlgo42 = new VistaAlgo42();
 		vistaAlgo42.setPosicionable(algo42);
 

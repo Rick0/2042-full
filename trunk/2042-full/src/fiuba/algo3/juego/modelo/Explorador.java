@@ -24,13 +24,14 @@ public class Explorador extends NaveNoOperable {
 		estaDestruida = false;
 		fueraDeJuego = false;
 		this.determinarPlano(plano);
-		this.determinarRadio( radioDeGiro );
+		this.determinarRadio(radioDeGiro);
 
 		if (this.seSuperponeConOtraNave()) {
 			throw new SuperposicionNavesError("La posicion esta ocupada");
 		}
 		this.cambiarPosicion(punto);
 		plano.agregarNave(this);
+		plano.agregarObjetoNuevo(this);
 	}
 	
 	

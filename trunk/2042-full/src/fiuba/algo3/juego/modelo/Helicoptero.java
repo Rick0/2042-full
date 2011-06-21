@@ -21,6 +21,7 @@ public class Helicoptero extends NaveNoOperable {
 			throw new SuperposicionNavesError("La posicion esta ocupada");
 		}
 		plano.agregarNave(this);
+		plano.agregarObjetoNuevo(this);
 	}
 
 	@Override

@@ -27,7 +27,8 @@ public class Plano implements Posicionable, ObjetoVivo {
 	ArrayList<Item> listaItemsUsados = new ArrayList<Item>();
 	ArrayList<Arma> listaArmasUsadas = new ArrayList<Arma>();
 	Nivel nivel = new Nivel();
-	ArrayList<ObjetoUbicable> listaObjetosABorrar = new ArrayList<ObjetoUbicable>();
+	ArrayList<ObjetoUbicable> listaObjetosAAgregar = new ArrayList<ObjetoUbicable>();
+	ArrayList<ObjetoUbicable> listaObjetosABorrar  = new ArrayList<ObjetoUbicable>();
 
 
 	/* Constructor del plano, recibe sus dimensiones
@@ -71,6 +72,16 @@ public class Plano implements Posicionable, ObjetoVivo {
 		this.listaArmasUsadas.add( arma );
 	}
 
+	/*Agrega un item del juego a la lista de items usados.*/
+	public void agregarItemUsado(Item item) {
+
+			if(!(item.fueUsado())) {
+				throw new ItemNoUsadoError();
+			}
+			listaItemsUsados.add(item);
+		
+	}
+
 	public Algo42 getAlgo42() {
 		return algo42;
 	}
@@ -102,7 +113,11 @@ public class Plano implements Posicionable, ObjetoVivo {
 		this.listaItems.add(item);
 	}
 
-	/* Uso para el programador */
+	/* Agrega un objeto ubicable a la lista de objetos nuevos */
+	public void agregarObjetoNuevo(ObjetoUbicable objeto) {
+		this.listaObjetosAAgregar.add(objeto);
+	}
+
 	public ArrayList<Arma> devolverListaArmas() {
 		return listaArmas;
 	}
@@ -115,29 +130,25 @@ public class Plano implements Posicionable, ObjetoVivo {
 		return this.listaNavesDestruidas;
 	}
 
+	public ArrayList<ObjetoUbicable> devolverListaObjetosAAgregar() {
+		return this.listaObjetosAAgregar;
+	}
+
 	public ArrayList<ObjetoUbicable> devolverListaObjetosABorrar() {
 		return this.listaObjetosABorrar;
 	}
 
-	/*Agrega un item del juego a la lista de items usados.*/
-	public void agregarItemUsado(Item item) {
-
-			if(!(item.fueUsado())){
-				throw new ItemNoUsadoError();
-			}
-			listaItemsUsados.add(item);
-		
-	}
-	
 	/*Devuelve el nivel actual*/
 	public int devolverNivel() {
 		return (nivel.devolverNumeroNivel());
 	}
 	
 	public void vivir() {
-		
-		Iterator<NaveNoOperable> iteradorNaveEnemiga = listaNaves.iterator();
 
+		this.listaObjetosAAgregar.clear();
+		this.listaObjetosABorrar.clear();
+
+		Iterator<NaveNoOperable> iteradorNaveEnemiga = listaNaves.iterator();
 		while(iteradorNaveEnemiga.hasNext()) {
 				NaveNoOperable elemento = iteradorNaveEnemiga.next(); 
 				if(elemento.estaFueraDeArea()) {
@@ -167,9 +178,12 @@ public class Plano implements Posicionable, ObjetoVivo {
 		}
 		nivel.actuarCon(listaNavesDestruidas);
 
+		listaArmasUsadas.clear();
+		listaItemsUsados.clear();
+		listaNavesDestruidas.clear();
 	}
 	
-	/*En cada turno, se debe invocar este metodo para revisar 
+	/* En cada turno, se debe invocar este metodo para revisar 
 	 * las posiciones de las naves, las armas y los items, para 
 	 * ver si hay alguna accion que realizar. Devuelve la lista 
 	 * de naves que el algo42 elimino*/
