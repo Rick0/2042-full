@@ -20,19 +20,12 @@ public abstract class Arma extends ObjetoUbicable {
 	public void InicializarOrigenAlgo42(boolean verdaderoOFalso) {
 		this.origenAlgo42 = verdaderoOFalso;
 	}
-	
+
 	public void vivir() {
 
-		this.intentarMover();
-		this.intentarChocar();
-
-		if(fueUsado) {
-			try {
-				plano.agregarArmaUsada(this);
-			} catch (ArmaNoUsadaError e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		if (!fueUsado) {
+			this.intentarMover();
+			this.intentarChocar();
 		}
 	}
 
@@ -52,7 +45,7 @@ public abstract class Arma extends ObjetoUbicable {
 	}
 
 	/* Dependiendo de que avion disparo el arma, esta buscara aviones para colisionar */
-	private void intentarChocar() {
+	public void intentarChocar() {
 
 		if(origenAlgo42) {
 			Iterator<NaveNoOperable> iteradorNave = plano.listaNaves.iterator();
@@ -89,11 +82,11 @@ public abstract class Arma extends ObjetoUbicable {
 		if (( unaNave.esOperable ) && ( origenAlgo42 )) {
 			throw new AlgoSeAtacaASiMismoError("Una nave algo42 no puede atacarse a si misma");
 		}
-		if (( unaNave.esOperable == false ) && ( origenAlgo42 == false )) {
+		if (( !unaNave.esOperable ) && ( !origenAlgo42 )) {
 			throw new AtaqueEntreNavesNoOperables("Una nave no operable no puede atacar a otra del mismo tipo");
 		}
 
-		if (unaNave.coincidePosicionCon(this.rectangulo) && (this.fueUsado == false)) {
+		if (unaNave.coincidePosicionCon(this.rectangulo)) {
 			unaNave.chocarCon(this);
 			this.chocarCon(unaNave);
 			return true;
@@ -157,6 +150,12 @@ public abstract class Arma extends ObjetoUbicable {
 	/* El arma choca con una nave */
 	public void chocarCon(Nave unaNave) {
 		this.fueUsado = true;
+		try {
+			plano.agregarArmaUsada(this);
+		} catch (ArmaNoUsadaError e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

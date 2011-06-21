@@ -50,13 +50,13 @@ public class PruebaNaveNoOperable extends TestCase {
 		/*Muevo 5 veces la avioneta; Va de 10 a 0, por lo cual aun esta en el plano del juego*/
 		for (int i=0; i<5; i++) {
 			avioneta.mover();
-			assertEquals(avioneta.estaFueraDeJuego(),false);
-			assertEquals(avioneta.estaFueraDeArea() , false);
+			assertEquals(avioneta.fueraDelPlano(),false);
+			assertEquals(avioneta.estaFueraDelPlano() , false);
 		}
 		/*La muevo una vez mas y ya esta fuera de juego*/
 		avioneta.mover();
-		assertEquals(avioneta.estaFueraDeJuego(),true);
-		assertEquals(avioneta.estaFueraDeArea() ,true);
+		assertEquals(avioneta.fueraDelPlano(),true);
+		assertEquals(avioneta.estaFueraDelPlano() ,true);
 
 	}
 	

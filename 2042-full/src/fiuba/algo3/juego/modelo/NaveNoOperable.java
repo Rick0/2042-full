@@ -1,6 +1,8 @@
 package fiuba.algo3.juego.modelo;
 
 import java.util.Iterator;
+
+import fiuba.algo3.juego.modelo.excepciones.NaveNoDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
 
@@ -9,7 +11,7 @@ import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
  */
 public abstract class NaveNoOperable extends Nave {
 
-	boolean fueraDeJuego;
+	boolean fueraDelPlano;
 	int puntos;
 
 
@@ -48,7 +50,7 @@ public abstract class NaveNoOperable extends Nave {
 	 */
 	public void intentarMover() {
 
-		Punto puntoOriginal=this.devolverPunto();
+		Punto puntoOriginal = this.devolverPunto();
 		try {
 			this.mover();
 		} catch (SuperposicionNavesError e) {
@@ -64,9 +66,9 @@ public abstract class NaveNoOperable extends Nave {
 				  */
 				 this.cambiarPosicion(puntoOriginal);
 			}
-
-		this.estaFueraDeArea();
 		}
+
+		this.estaFueraDelPlano();
 	}
 
 	/* Devuelve true si la posicion de una nave se superpone con alguna otra de la lista */
@@ -86,13 +88,20 @@ public abstract class NaveNoOperable extends Nave {
 	/* Decide si la nave esta fuera de area, es decir si con su movimiento ya llego a una posicion fuera del plano.
 	 * En ese caso, cambia su estado fuera de juego a true 
 	 */
-	public boolean estaFueraDeArea() {
+	public boolean estaFueraDelPlano() {
 
-		if ( (this.devolverPunto().getX() > plano.devolverAncho()) || (this.devolverPunto().getX() <0 ) || (this.devolverPunto().getY() > plano.devolverAltura()) || (devolverPunto().getY() < 0) ) {
-			this.fueraDeJuego = true;
+		if ( (this.devolverPunto().getX() > plano.devolverAncho()) || (this.devolverPunto().getX() < 0 ) || (this.devolverPunto().getY() > plano.devolverAltura()) || (devolverPunto().getY() < 0) ) {
+			this.fueraDelPlano = true;
+			this.estaDestruida = true;
+			try {
+				this.plano.agregarNaveEliminada(this);
+			} catch (NaveNoDestruidaError e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			return true;
 		}
-		this.fueraDeJuego = false;
+		this.fueraDelPlano = false;
 		return false;
 	}
 
@@ -126,8 +135,8 @@ public abstract class NaveNoOperable extends Nave {
 	 * Devuelve true si la nave fue evaluada con la funcion estaFueraDeArea y dio
 	 * positivo, lo cual significa que la nave esta ocupando un area que no le corresponde
 	 */
-	public boolean estaFueraDeJuego() {
-		return fueraDeJuego;
+	public boolean fueraDelPlano() {
+		return fueraDelPlano;
 	}
 
 	/* La nave dispara un laser */
@@ -160,7 +169,14 @@ public abstract class NaveNoOperable extends Nave {
 	 * El resultado es que la nave no operable se destruye
 	 */
 	public void chocarCon(Algo42 algo42) {
-		this.estaDestruida = true;
+
+		this.modificarEnergia(-(this.devolverEnergia()));
+		try {
+			this.destruirse();
+		} catch (NaveNoDestruidaError e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -22,7 +22,7 @@ public class Explorador extends NaveNoOperable {
 		esOperable = false;
 		rectangulo = new Rectangulo(50, 45, punto);
 		estaDestruida = false;
-		fueraDeJuego = false;
+		fueraDelPlano = false;
 		this.determinarPlano(plano);
 		this.determinarRadio(radioDeGiro);
 
@@ -50,7 +50,7 @@ public class Explorador extends NaveNoOperable {
 		if ( this.seSuperponeConOtraNave() ) {
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
 		}
-		this.estaFueraDeArea();
+		this.estaFueraDelPlano();
 	}
 
 	/* Movimiento que se debe llevar a cabo si la funcion 'intentar movimiento' comprueba que el movimiento
@@ -68,7 +68,7 @@ public class Explorador extends NaveNoOperable {
 		if (this.seSuperponeConOtraNave() ) {
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
 		}
-		this.estaFueraDeArea();
+		this.estaFueraDelPlano();
 	}
 
 	/* Determina el radio de giro del explorador */

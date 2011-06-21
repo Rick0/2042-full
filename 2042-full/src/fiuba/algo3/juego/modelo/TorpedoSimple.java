@@ -4,22 +4,20 @@ import fiuba.algo3.juego.modelo.excepciones.ArmaUsadaError;
 
 public class TorpedoSimple extends Arma {
 
-	public TorpedoSimple (Punto punto, boolean origenAlgo,Plano plano ) {
+	public TorpedoSimple (Punto punto, boolean origenAlgo, Plano plano) {
 
 		this.danio = -20;
 		this.fueUsado = false;
 		this.rectangulo = (new Rectangulo(3, 3, punto));
+		this.InicializarOrigenAlgo42(origenAlgo);
 		this.determinarPlano(plano);
 
 		try {
 			this.plano.agregarArma(this);
-		}
-		catch (ArmaUsadaError e) {
+			this.plano.agregarObjetoNuevo(this);
+		} catch (ArmaUsadaError e) {
 			System.out.println("Se produjo un error irrecuperable");
 		}
-
-		this.InicializarOrigenAlgo42(origenAlgo);
-
 	}
 
 }

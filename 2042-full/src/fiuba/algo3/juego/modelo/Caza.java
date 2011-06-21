@@ -22,7 +22,7 @@ public class Caza extends NaveNoOperable {
 		esOperable = false;
 		rectangulo = new Rectangulo(50, 50, punto);
 		estaDestruida = false;
-		fueraDeJuego = false;
+		fueraDelPlano = false;
 		this.determinarPlano(plano);
 
 		if (this.seSuperponeConOtraNave()) {
@@ -62,10 +62,18 @@ public class Caza extends NaveNoOperable {
 	public Item dejarTanque() throws ItemNoDisponibleError {
 		
 		Item itemDejado;
-		if (! this.estaDestruida) {
+		if (!this.estaDestruida) {
 			throw new ItemNoDisponibleError("El caza aun no esta destruido, no puede dejar armas.");
 		}
+
 		itemDejado = new TanqueEnergia(this.devolverPunto(), this.plano);
+		try {
+			plano.agregarItem(itemDejado);
+			plano.agregarObjetoNuevo(itemDejado);
+		} catch (ItemUsadoError error) {
+			itemDejado.noUsado();
+		}
+
 		return itemDejado;
 	}
 
@@ -75,8 +83,6 @@ public class Caza extends NaveNoOperable {
 	 */
 	public void modificarEnergia( int cantidad ) {
 		
-		Item itemDejado;
-
 		energia = (energia + cantidad);
 		if (energia <= 0) {
 			try {
@@ -84,17 +90,14 @@ public class Caza extends NaveNoOperable {
 			} catch (Exception error) { 
 				//esto no puede suceder
 			}
+
 			try {
-				itemDejado = this.dejarTanque();
+				this.dejarTanque();
 			} catch (ItemNoDisponibleError error) { 
 				//esto no puede suceder
 				return;
 			}
-			try {
-				plano.agregarItem( itemDejado );
-			} catch (ItemUsadoError error) {
-				itemDejado.noUsado();
-			}
+
 		}
 	}
 
@@ -107,7 +110,7 @@ public class Caza extends NaveNoOperable {
 		if (this.seSuperponeConOtraNave() ) {
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
 		}
-		this.estaFueraDeArea();
+		this.estaFueraDelPlano();
 	}
 
 	/* Movimiento que se debe llevar a cabo si la funcion intentar movimiento comprueba que el movimiento
@@ -122,7 +125,7 @@ public class Caza extends NaveNoOperable {
 		if (this.seSuperponeConOtraNave() ) {
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
 		}
-		this.estaFueraDeArea();
+		this.estaFueraDelPlano();
 	}
 
 }

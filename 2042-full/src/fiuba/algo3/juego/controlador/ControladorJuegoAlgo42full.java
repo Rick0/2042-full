@@ -132,12 +132,26 @@ public class ControladorJuegoAlgo42full implements Runnable {
 		// Por construccion, el plano siempre se agrega primero, y por ende es el primero de los objetos vivos
 		Plano planoDelJuego = (Plano)(this.objetosVivos.get(0));
 
+	/*	Iterator<ObjetoUbicable> iteradorObjetosAAgregar = planoDelJuego.devolverListaObjetosAAgregar().iterator();
+		while (iteradorObjetosAAgregar.hasNext()) {
+			ObjetoUbicable unObjeto = iteradorObjetosAAgregar.next();
+			this.asignarVista(unObjeto);
+		}
+*/
+
+
 		Iterator<ObjetoUbicable> iteradorObjetosABorrar = planoDelJuego.devolverListaObjetosABorrar().iterator();
-		while(iteradorObjetosABorrar.hasNext()) {
+		while (iteradorObjetosABorrar.hasNext()) {
 			ObjetoUbicable unObjeto = iteradorObjetosABorrar.next();
 			objetosVivos.remove(unObjeto);
 		}
 	}
+
+	/* */
+	/*private void asignarVista(ObjetoUbicable unObjeto) {
+	
+		
+	}*/
 
 	public SuperficieDeDibujo getSuperficieDeDibujo() {
 		return superficieDeDibujo;

@@ -148,13 +148,13 @@ public class Plano implements Posicionable, ObjetoVivo {
 		this.listaObjetosAAgregar.clear();
 		this.listaObjetosABorrar.clear();
 
-		Iterator<NaveNoOperable> iteradorNaveEnemiga = listaNaves.iterator();
+	/*	Iterator<NaveNoOperable> iteradorNaveEnemiga = listaNaves.iterator();
 		while(iteradorNaveEnemiga.hasNext()) {
-				NaveNoOperable elemento = iteradorNaveEnemiga.next(); 
-				if(elemento.estaFueraDeArea()) {
-					listaNavesDestruidas.add(elemento);
-				}
-		}
+			NaveNoOperable elemento = iteradorNaveEnemiga.next(); 
+			if(elemento.estaFueraDelPlano()) {
+				listaNavesDestruidas.add(elemento);
+			}
+		}*/
 
 		//Eliminacion de naves, armas e items que ya no estan vigentes en el area de juego.
 		Iterator<Arma> iteradorArmasUsadas = listaArmasUsadas.iterator();
