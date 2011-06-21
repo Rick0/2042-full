@@ -14,7 +14,7 @@ public class Programa {
 	 */
 	public static void main(String[] args) {
 
-		Plano plano = new Plano(500,600);
+		Plano plano = new Plano(550,570);
 		GeneradorControlador generador = new GeneradorControlador(plano);
 		ControladorJuegoAlgo42full controlador = generador.generarControlador();
 		GeneradorFlotas generadorFlotas = new GeneradorFlotas(plano,controlador);
