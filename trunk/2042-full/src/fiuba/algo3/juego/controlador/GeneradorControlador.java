@@ -4,7 +4,6 @@ import fiuba.algo3.juego.modelo.Algo42;
 import fiuba.algo3.juego.modelo.Plano;
 import fiuba.algo3.juego.modelo.Punto;
 import fiuba.algo3.juego.modelo.excepciones.AreaInvalidaError;
-import fiuba.algo3.juego.controlador.GeneradorFlotas;
 import fiuba.algo3.juego.vista.VentanaPrincipal;
 import fiuba.algo3.juego.vista.VistaAlgo42;
 import fiuba.algo3.juego.vista.VistaPlano;
