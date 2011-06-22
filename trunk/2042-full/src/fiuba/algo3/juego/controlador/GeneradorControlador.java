@@ -38,9 +38,9 @@ public class GeneradorControlador {
 		vistaPlano.setPosicionable(plano);
 		controlador.agregarDibujable(vistaPlano);
 
-		GeneradorFlotas generador = new GeneradorFlotas(plano, controlador);
+	//	GeneradorFlotas generador = new GeneradorFlotas(plano, controlador);
 		//Aqui el generador recibe su primer flota.
-		generador.generarFlota1();
+	//	generador.generarFlota1();
 
 		VentanaPrincipal ventana = new VentanaPrincipal(controlador,algo42);
 		controlador.setSuperficieDeDibujo(ventana.getSuperficieDeDibujo());
@@ -52,7 +52,7 @@ public class GeneradorControlador {
 		controlador.agregarDibujable(vistaAlgo42);
 		controlador.agregarObjetoVivo(algo42);
 		controlador.agregarObjetoVivo(plano);
-		controlador.agregarObjetoVivo(generador);
+	//	controlador.agregarObjetoVivo(generador);
 		controlador.setIntervaloSimulacion(20);	
 		
 		return controlador;

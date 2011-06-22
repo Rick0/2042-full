@@ -49,7 +49,7 @@ public class GeneradorFlotas implements ObjetoVivo {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Punto posBombardero = new Punto(posicionBomb,100);
+			Punto posBombardero = new Punto(posicionBomb,300);
 			Bombardero unBombardero = null;
 			try {
 				unBombardero = new Bombardero(posBombardero, plano);
@@ -106,12 +106,30 @@ public class GeneradorFlotas implements ObjetoVivo {
 		vistaCaza.setPosicionable(unCaza);
 		controlador.agregarDibujable(vistaCaza);
 		controlador.agregarObjetoVivo(unCaza);
+
+
+		Punto posAvioneta = new Punto(450,550);
+		Avioneta unaAvioneta = null;
+		try {
+			unaAvioneta = new Avioneta(posAvioneta,plano);
+		} catch (SuperposicionNavesError e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NaveDestruidaError e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		VistaAvioneta vistaAvioneta = new VistaAvioneta();
+		vistaAvioneta.setPosicionable(unaAvioneta);
+		controlador.agregarDibujable(vistaAvioneta);
+		controlador.agregarObjetoVivo(unaAvioneta);
 	}
-	
+
 	public void vivir(){
 		if ((plano.devolverListaNaves()).isEmpty()) {
 			flotaVacia = true;
 		}
 	}
+
 }
 

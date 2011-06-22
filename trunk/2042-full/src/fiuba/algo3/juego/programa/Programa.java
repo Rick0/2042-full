@@ -18,24 +18,24 @@ public class Programa {
 		GeneradorControlador generador = new GeneradorControlador(plano);
 		ControladorJuegoAlgo42full controlador = generador.generarControlador();
 		GeneradorFlotas generadorFlotas = new GeneradorFlotas(plano,controlador);
-	//	AsignadorImagenesArmas asignadorImagenesArmas = new AsignadorImagenesArmas (controlador);
+		generadorFlotas.generarFlota1();
 
 
-		while (true){
+	//	while (true) {
+
 			/* Si aun hay naves enemigas, no hay necesidad
 			 * de crear una nueva flota
 			 */
-			if (!plano.devolverListaNaves().isEmpty()){
-				controlador.comenzarJuego(1);
-		//		asignadorImagenesArmas.asignarImagenes(plano.devolverListaArmas());	
-			}
+	//		if (!plano.devolverListaNaves().isEmpty()){
+				controlador.comenzarJuego();
+	//		}
 			/* Si ya no hay naves, en cambio,
 			 * genero una nueva flota con el generador de naves
 			 */
-			else {
+	/*		else {
 				generadorFlotas.generarFlota1();
 			}
 		}
-	}
+*/	}
 
 }
