@@ -1,10 +1,16 @@
 package fiuba.algo3.juego.modelo;
 
+import java.io.Serializable;
+
 import fiuba.algo3.juego.modelo.excepciones.ItemUsadoError;
 
 
-public class ArmaAbandonada extends Item {
+public class ArmaAbandonada extends Item implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4277112145617414325L;
 	private int numeroTorpedos, numeroCohetes;
 
 
