@@ -1,22 +1,34 @@
 package fiuba.algo3.juego.modelo;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
-import fiuba.algo3.titiritero.ObjetoVivo;
-import fiuba.algo3.titiritero.Posicionable;
+
 import fiuba.algo3.juego.modelo.excepciones.ArmaNoUsadaError;
 import fiuba.algo3.juego.modelo.excepciones.ArmaUsadaError;
 import fiuba.algo3.juego.modelo.excepciones.ItemNoUsadoError;
 import fiuba.algo3.juego.modelo.excepciones.ItemUsadoError;
 import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.NaveNoDestruidaError;
+import fiuba.algo3.titiritero.ObjetoVivo;
+import fiuba.algo3.titiritero.Posicionable;
 
 
 /* Maneja el escenario del nivel, contiene listas con las naves, items
  * y armas en juego y se encarga de operar sobre ellas e iterarlas
  */
-public class Plano implements Posicionable, ObjetoVivo {
+public class Plano implements Posicionable, ObjetoVivo, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6986081234340150184L;
 	int ancho;
 	int altura;
 	Algo42 algo42;
@@ -141,6 +153,41 @@ public class Plano implements Posicionable, ObjetoVivo {
 	/*Devuelve el nivel actual*/
 	public int devolverNivel() {
 		return (nivel.devolverNumeroNivel());
+	}
+	
+	public void persistir(String archivo) {
+		try {
+			
+			ObjectOutputStream oos = new ObjectOutputStream(
+					new FileOutputStream( archivo ));
+			oos.writeObject(this);
+		
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static Plano restaurar(String archivo) {
+		
+		try {
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(
+					archivo));
+			Plano planoAux = (Plano) ois.readObject();
+			return planoAux;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+		
 	}
 	
 	public void vivir() {
