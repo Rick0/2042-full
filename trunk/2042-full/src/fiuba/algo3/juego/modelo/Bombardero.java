@@ -1,6 +1,7 @@
 package fiuba.algo3.juego.modelo;
 
 import java.io.Serializable;
+import java.util.Random;
 import fiuba.algo3.juego.modelo.excepciones.ItemNoDisponibleError;
 import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
@@ -133,13 +134,17 @@ public class Bombardero extends NaveNoOperable implements Serializable {
 
 		if (velocidadDisparoCont == velocidadDisparo) {
 
-			int r = new Double(Math.random() * 3).intValue();
-			if (r == 1) {
-				this.dispararLaser();
-			} else if (r == 2) {
+			Random generadorRandom = new Random();
+			// Genera un entero que va desde 0 hasta nextInt-1, o sea 3
+			// Hay 50% de que dispare laser, y 25% para cada una de las otras dos armas
+			int i = generadorRandom.nextInt(4);
+
+			if (i == 1) {
+				this.dispararTorpedoRastreadorHacia(this.plano.getAlgo42());
+			} else if (i == 2) {
 				this.dispararCohete();
 			} else {
-				this.dispararTorpedoRastreadorHacia(this.plano.getAlgo42());
+				this.dispararLaser();
 			}
 			velocidadDisparoCont = 0;
 		}

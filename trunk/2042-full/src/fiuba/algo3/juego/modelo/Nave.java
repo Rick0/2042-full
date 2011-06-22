@@ -14,7 +14,7 @@ public abstract class Nave extends ObjetoUbicable {
 
 
 	public Nave() {
-		velocidadDisparo = 80;
+		velocidadDisparo = 120;
 		velocidadDisparoCont = velocidadDisparo - 1;
 	}
 
