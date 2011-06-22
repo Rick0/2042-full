@@ -6,13 +6,21 @@ import fiuba.algo3.titiritero.*;
 import fiuba.algo3.titiritero.vista.*;
 import fiuba.algo3.titiritero.audio.Reproductor;
 import java.awt.event.KeyEvent;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
 
-public class ControladorJuegoAlgo42full implements Runnable {
+public class ControladorJuegoAlgo42full implements Runnable, Serializable {
+
 
 	public ControladorJuegoAlgo42full(boolean activarReproductor, Plano unPlano) {
 		this.objetosVivos = new ArrayList<ObjetoVivo>();
@@ -220,6 +228,35 @@ public class ControladorJuegoAlgo42full implements Runnable {
 		this.keyPressedObservadores.remove(unMouseClickObservador);
 	}
 	
+	public void persistir(String archivo) {
+		try {
+			ObjectOutputStream oos = new ObjectOutputStream(
+					new FileOutputStream( archivo ));
+			oos.writeObject(this);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static ControladorJuegoAlgo42full restaurar(String archivo) {
+		try {
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo));
+			ControladorJuegoAlgo42full controladorAux = (ControladorJuegoAlgo42full) ois.readObject();
+			return controladorAux;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	private long intervaloSimulacion;
 	private boolean estaEnEjecucion;
 	private List<ObjetoVivo> objetosVivos;
@@ -233,6 +270,7 @@ public class ControladorJuegoAlgo42full implements Runnable {
 	private HashMap<ObjetoUbicable,Imagen> tablaDeVistas;
 	private GeneradorDeVista generadorDeVista;
 	private Plano plano;
+	private static final long serialVersionUID = -6401581783523170282L;
 
 
 	public void run() {
