@@ -154,7 +154,10 @@ public class ControladorJuegoAlgo42full implements Runnable {
 		while (iteradorObjetosABorrar.hasNext()) {
 			ObjetoUbicable unObjeto = iteradorObjetosABorrar.next();
 			Imagen unaVista = this.tablaDeVistas.get(unObjeto);
-			this.removerDibujable(unaVista);
+	/*		System.out.println("Se va a borrar un:");
+			System.out.println(unObjeto.getClass());
+			System.out.println(unaVista.getClass());
+	*/		this.removerDibujable(unaVista);
 			this.removerObjetoVivo(unObjeto);
 			this.tablaDeVistas.remove(unObjeto);
 		}

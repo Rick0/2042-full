@@ -91,7 +91,7 @@ public class GeneradorFlotas implements ObjetoVivo {
 		controlador.agregarObjetoVivo(unExplo);
 
 
-		Punto posCaza = new Punto(400,300);
+		Punto posCaza = new Punto(400,450);
 		Caza unCaza = null;
 		try {
 			unCaza = new Caza(posCaza,plano);
