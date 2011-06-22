@@ -40,7 +40,7 @@ public class FlotaCazas implements Serializable{
 			}
 		}
 
-		Punto punto= new Punto(centroX, centroY);
+		Punto punto = new Punto(centroX, centroY);
 		array.get(0).cambiarPosicion(punto);
 		array.get(0).determinarPlano(planoDeJuego);
 		this.determinarPosicion(centroX, centroY); 
@@ -51,7 +51,7 @@ public class FlotaCazas implements Serializable{
 		listaCazas = array;
 	}
 
-	/* Devuelve la nave lider de la flota de cazas- es decir, la que se encuentra adelante de todas */
+	/* Devuelve la nave lider de la flota de cazas, es decir, la que se encuentra adelante de todas */
 	public Caza devolverNaveLider() {
 		return listaCazas.get(0);
 	}
@@ -82,8 +82,8 @@ public class FlotaCazas implements Serializable{
 			return;
 		}
 		if (listaCazas.get(1).avanzo3Pasos() ) {
-			Punto punto1=new Punto(posicionXOriginal + 10, posicionYOriginal);
-			Punto punto2=new Punto(posicionXOriginal - 10, posicionYOriginal);
+			Punto punto1 = new Punto(posicionXOriginal + 10, posicionYOriginal);
+			Punto punto2 = new Punto(posicionXOriginal - 10, posicionYOriginal);
 
 			listaCazas.get(3).cambiarPosicion( punto1 );
 			listaCazas.get(4).cambiarPosicion( punto2 );
@@ -94,8 +94,8 @@ public class FlotaCazas implements Serializable{
 			return;
 		}
 		if (listaCazas.get(0).avanzo3Pasos() ) {
-			Punto puntoa=new Punto(posicionXOriginal + 5, posicionYOriginal);
-			Punto puntob=new Punto(posicionXOriginal - 5, posicionYOriginal);
+			Punto puntoa = new Punto(posicionXOriginal + 5, posicionYOriginal);
+			Punto puntob = new Punto(posicionXOriginal - 5, posicionYOriginal);
 			listaCazas.get(2).cambiarPosicion( puntoa );
 			listaCazas.get(1).cambiarPosicion( puntob);
 			listaCazas.get(2).determinarPlano(plano);

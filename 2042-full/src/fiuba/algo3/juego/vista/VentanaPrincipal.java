@@ -47,7 +47,6 @@ public class VentanaPrincipal extends Frame {
 
 	public void keyPressed(KeyEvent event) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	public SuperficieDeDibujo getSuperficieDeDibujo() {
