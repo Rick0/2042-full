@@ -58,7 +58,7 @@ public class GeneradorDeVista {
 			nombreClaseCompleto = "fiuba.algo3.juego.vista.Vista" + nombreClaseCompleto;
 		}
 
-		System.out.println(nombreClaseCompleto+"\n");
+	//	System.out.println(nombreClaseCompleto+"\n");
 		return nombreClaseCompleto;
 	}
 
