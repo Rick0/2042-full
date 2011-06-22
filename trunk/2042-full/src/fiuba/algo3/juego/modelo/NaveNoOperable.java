@@ -171,12 +171,12 @@ public abstract class NaveNoOperable extends Nave {
 	public void chocarCon(Algo42 algo42) {
 
 		this.modificarEnergia(-(this.devolverEnergia()));
-		try {
+	/*	try {
 			this.destruirse();
 		} catch (NaveNoDestruidaError e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 
 }
