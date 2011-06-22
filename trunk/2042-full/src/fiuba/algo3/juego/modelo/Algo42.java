@@ -1,4 +1,6 @@
 package fiuba.algo3.juego.modelo;
+import java.io.Serializable;
+
 import fiuba.algo3.juego.modelo.excepciones.AreaInvalidaError;
 import fiuba.algo3.juego.modelo.excepciones.ArmaNoDisponibleError;
 import fiuba.algo3.juego.modelo.excepciones.NaveARastrearError;
@@ -7,8 +9,12 @@ import fiuba.algo3.juego.modelo.excepciones.NaveARastrearError;
 /* El Algo42 es la nave principal del juego
  * Es la unica nave que puede ser manejada por el jugador
  */	
-public class Algo42 extends Nave {
+public class Algo42 extends Nave implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3316879072392921990L;
 	int torpedos;
 	int cohetes;
 

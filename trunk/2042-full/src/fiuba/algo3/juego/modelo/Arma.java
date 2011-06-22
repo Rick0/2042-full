@@ -1,13 +1,18 @@
 package fiuba.algo3.juego.modelo;
 
+import java.io.Serializable;
 import java.util.Iterator;
 import fiuba.algo3.juego.modelo.excepciones.AlgoSeAtacaASiMismoError;
 import fiuba.algo3.juego.modelo.excepciones.ArmaNoUsadaError;
 import fiuba.algo3.juego.modelo.excepciones.AtaqueEntreNavesNoOperables;
 
 
-public abstract class Arma extends ObjetoUbicable {
+public abstract class Arma extends ObjetoUbicable implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5055567818102322794L;
 	int danio;
 	boolean fueUsado;
 	boolean origenAlgo42;

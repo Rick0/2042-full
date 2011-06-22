@@ -1,13 +1,19 @@
 package fiuba.algo3.juego.modelo;
 
+import java.io.Serializable;
+
 import fiuba.algo3.juego.modelo.excepciones.ItemNoDisponibleError;
 import fiuba.algo3.juego.modelo.excepciones.ItemUsadoError;
 import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
 
-public class Caza extends NaveNoOperable {
+public class Caza extends NaveNoOperable implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6097375138795523283L;
 	int numero, pasosAvanzados;
 
 
