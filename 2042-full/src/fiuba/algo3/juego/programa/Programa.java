@@ -17,8 +17,13 @@ public class Programa {
 		Plano plano = new Plano(550,570);
 		GeneradorControlador generador = new GeneradorControlador(plano);
 		ControladorJuegoAlgo42full controlador = generador.generarControlador();
-		GeneradorFlotas generadorFlotas = new GeneradorFlotas(plano,controlador);
-		generadorFlotas.generarFlota1();
+
+	//	GeneradorFlotasEjemplo generadorFlotas = new GeneradorFlotasEjemplo(plano,controlador);
+	//	generadorFlotas.generarFlota1();
+
+		GeneradorFlota generadorFlota = new GeneradorFlota(plano);
+		controlador.agregarObjetoVivo(generadorFlota);
+
 
 
 	//	while (true) {

@@ -1,6 +1,7 @@
 package fiuba.algo3.juego.modelo;
 
 import java.io.Serializable;
+import java.util.Random;
 import fiuba.algo3.juego.modelo.excepciones.ItemNoDisponibleError;
 import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
@@ -44,8 +45,12 @@ public class Caza extends NaveNoOperable implements Serializable{
 
 		if (velocidadDisparoCont == velocidadDisparo) {
 
-			int r = new Double(Math.random() * 3).intValue();
-			if (r == 1) {
+			Random generadorRandom = new Random();
+			// Genera un entero que va desde 0 hasta nextInt-1, o sea 2
+			// Hay 66% de que dispare torpedo simple, y 33% para el torpedo adaptable
+			int i = generadorRandom.nextInt(3);
+
+			if (i == 1) {
 				this.dispararTorpedoAdaptable();
 			} else {
 				this.dispararTorpedo();

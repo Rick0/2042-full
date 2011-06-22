@@ -16,14 +16,14 @@ import fiuba.algo3.titiritero.ObjetoVivo;
  * sino que ademas se encargara de crear sus vistas y pasarselas
  * al controlador como objetos posicionables y vivos
  */
-public class GeneradorFlotas implements ObjetoVivo {
-	
+public class GeneradorFlotasEjemplo implements ObjetoVivo {
+
 	Plano plano;
 	ControladorJuegoAlgo42full controlador;
 	boolean flotaVacia;
 
 
-	public GeneradorFlotas(Plano planoJuego, ControladorJuegoAlgo42full control) {
+	public GeneradorFlotasEjemplo(Plano planoJuego, ControladorJuegoAlgo42full control) {
 		controlador = control;
 		plano = planoJuego;
 		flotaVacia = false;

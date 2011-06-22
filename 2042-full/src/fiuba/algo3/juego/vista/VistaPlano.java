@@ -7,13 +7,12 @@ import fiuba.algo3.titiritero.*;
 public class VistaPlano extends Imagen implements ObjetoVivo {
 
 	int frameCont;
-	int velocidadCambio;
+	static int velocidadCambio = 12;
 	int velocidadCambioCont;
 
 
 	public VistaPlano() {
 		this.frameCont = 0;
-		this.velocidadCambio = 12;
 		this.velocidadCambioCont = velocidadCambio;
 		this.setNombreArchivoImagen("recursos/Plano/Mar.png");
 	}
