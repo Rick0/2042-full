@@ -21,7 +21,7 @@ public class Avioneta extends NaveNoOperable implements Serializable {
 		super();
 		this.puntos = 20;
 		energia = 20;
-		puntosAdelante= 0;
+		puntosAdelante = 0;
 		puntosAtras = 0;
 		esOperable = false;
 		rectangulo = new Rectangulo(60, 55, punto);

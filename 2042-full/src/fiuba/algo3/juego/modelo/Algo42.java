@@ -12,6 +12,7 @@ import fiuba.algo3.juego.modelo.excepciones.NaveARastrearError;
 public class Algo42 extends Nave implements Serializable {
 
 	private static final long serialVersionUID = -3316879072392921990L;
+	int movPixel = 5;
 	int torpedos;
 	int cohetes;
 
@@ -87,7 +88,7 @@ public class Algo42 extends Nave implements Serializable {
 	public void modificarEnergia (int energiaAModificar) {
 		energia = energia + energiaAModificar;
 		if ( energia <= 0 ) {
-			estaDestruida = true;
+		//	estaDestruida = true;
 		}
 	}
 
@@ -96,7 +97,7 @@ public class Algo42 extends Nave implements Serializable {
 		if((this.devolverPunto().getY())<=0){
 			throw new AreaInvalidaError("La nave ya no puede moverse mas hacia abajo");
 		}
-		Punto nuevoPunto= new Punto(this.devolverPunto().getX(),(this.devolverPunto().getY()-2));
+		Punto nuevoPunto= new Punto(this.devolverPunto().getX(), (this.devolverPunto().getY() - movPixel));
 		this.cambiarPosicion(nuevoPunto);
 	}
 
@@ -105,7 +106,7 @@ public class Algo42 extends Nave implements Serializable {
 		if((this.devolverPunto().getY() + (rectangulo.devolverAltura()))>plano.devolverAltura()){
 			throw new AreaInvalidaError("La nave ya no puede moverse mas hacia arriba");
 		}
-		Punto nuevaPosicion=new Punto(this.devolverPunto().getX(),(this.devolverPunto().getY()+ 2));
+		Punto nuevaPosicion=new Punto(this.devolverPunto().getX(), (this.devolverPunto().getY() + movPixel));
 		this.cambiarPosicion(nuevaPosicion);
 	}
 
@@ -114,7 +115,7 @@ public class Algo42 extends Nave implements Serializable {
 		if((this.devolverPunto().getX() + (rectangulo.devolverAncho()))>plano.devolverAncho()){
 			throw new AreaInvalidaError("La nave ya no puede moverse mas hacia la derecha");
 		}
-		Punto nuevaPosicion=new Punto((this.devolverPunto().getX())+2,(this.devolverPunto().getY()));
+		Punto nuevaPosicion=new Punto((this.devolverPunto().getX()) + movPixel, (this.devolverPunto().getY()));
 		this.cambiarPosicion(nuevaPosicion);
 	}
 
@@ -123,7 +124,7 @@ public class Algo42 extends Nave implements Serializable {
 		if((this.devolverPunto().getX())<=0){
 			throw new AreaInvalidaError("La nave ya no puede moverse mas hacia la izquierda");
 		}
-		Punto nuevaPosicion=new Punto((this.devolverPunto().getX()) - 2,(this.devolverPunto().getY()));
+		Punto nuevaPosicion=new Punto((this.devolverPunto().getX()) - movPixel,(this.devolverPunto().getY()));
 		this.cambiarPosicion(nuevaPosicion);
 	}
 
@@ -153,6 +154,10 @@ public class Algo42 extends Nave implements Serializable {
 
 	public void setToperdos(int cantidad) {
 		torpedos = cantidad;
+	}
+
+	public int getMovPixel() {
+		return movPixel;
 	}
 
 	@Override

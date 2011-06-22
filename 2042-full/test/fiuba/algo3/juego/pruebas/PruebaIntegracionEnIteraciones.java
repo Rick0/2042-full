@@ -98,8 +98,8 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		
 		avioneta.mover(); //Avioneta posicion Y: 85
 		assertEquals((int) avioneta.devolverPunto().getY() , 83 );
-		algo.moverArriba();  //algo posicion Y: 6
-		assertEquals((int) algo.devolverPunto().getY() , 6);
+		algo.moverArriba();  //algo posicion Y: (4+movPixel)
+		assertEquals((int) algo.devolverPunto().getY() , (int)posicionAlgo.getY()+algo.getMovPixel());
 		//El algo tiene altura 64, 6+64=70<83, aun no chocan.
 		assertFalse( avioneta.intentarChocar( algo ) );
 		assertEquals( algo.devolverEnergia() , 100 );
@@ -110,7 +110,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		assertEquals( (int)avioneta.devolverPunto().getY() , 75 );
 		algo.moverArriba(); // Algo posicion Y= 8, llega a 72
 		algo.moverArriba(); // posicion Y= 10, llega a 74
-		assertEquals((int) algo.devolverPunto().getY() , 10 );
+		assertEquals((int) algo.devolverPunto().getY() , (int)posicionAlgo.getY()+3*(algo.getMovPixel()) );
 		//Ahora si se van a chocar.
 		algo.moverArriba();
 		assertTrue( avioneta.intentarChocar( algo ) );
@@ -241,7 +241,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		Plano plano = new Plano(1000, 1000);
 		Avioneta avioneta = null;
 		try {
-			Punto punto = new Punto(50,120);
+			Punto punto = new Punto(50,122);
 			avioneta = new Avioneta( punto, plano );
 		} catch (SuperposicionNavesError e) {
 			// No puede pasar, se crea primera
@@ -260,25 +260,26 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		 * y otra con origen nave enemiga, que se mueve hacia abajo. */
 		algo.moverArriba();
 		laserB.mover();
-		assertEquals( (int)laserB.devolverPunto().getY() , 118 );
+		assertEquals( (int)laserB.devolverPunto().getY() , 120 );
 		assertFalse( laserB.intentarChocar(algo) );
 		laserA.mover();
-		assertEquals( (int)laserA.devolverPunto().getY() - algo.devolverAltura() , 52 ); 
+		laserA.mover();
+		assertEquals( (int)laserA.devolverPunto().getY() - algo.devolverAltura() , 54 ); 
 		assertTrue( laserA.intentarChocar(avioneta) );
 		laserB.mover();
-		assertEquals( (int)laserB.devolverPunto().getY() , 116 ); 
+		assertEquals( (int)laserB.devolverPunto().getY() , 118 ); 
 		for ( int i = 1 ; i < 34 ; i++ ) {
 			laserB.mover();
-			assertEquals( (int)laserB.devolverPunto().getY() , (116 - (i*2)) );
+			assertEquals( (int)laserB.devolverPunto().getY() , (118 - (i*2)) );
 		}
 
-		assertEquals( (int)laserB.devolverPunto().getY() , 50 );
-		assertEquals ( (int) algo.devolverPunto().getY(), 52 );
+		assertEquals( (int)laserB.devolverPunto().getY() , 52 );
+		assertEquals ( (int)algo.devolverPunto().getY(), (int)posicionAlgo.getY()+algo.getMovPixel());
 		//LaserB y algo estan ocupando mismas posiciones
 		assertTrue( laserB.intentarChocar(algo) );
 		for (int i = 1; i<33; i++) {
 			laserA.mover();
-			assertEquals((int)( laserA.devolverPunto().getY()-algo.devolverAltura()), (52+(i*2)));
+			assertEquals((int)( laserA.devolverPunto().getY()-algo.devolverAltura()), (54+(i*2)));
 		}
 		assertTrue( laserA.intentarChocar(avioneta) );
 	}
