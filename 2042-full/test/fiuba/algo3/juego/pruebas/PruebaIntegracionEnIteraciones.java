@@ -251,9 +251,9 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		Algo42 algo = new Algo42( posicionAlgo , plano );
 		algo.modificarVelocidadDisparoCont(algo.devolverVelocidadDisparo());
 		algo.dispararLaser();
-		Arma laserA = plano.devolverListaArmas().get(0);
 		avioneta.modificarVelocidadDisparoCont(avioneta.devolverVelocidadDisparo());
 		avioneta.dispararLaser();
+		Arma laserA = plano.devolverListaArmas().get(0);
 		Arma laserB = plano.devolverListaArmas().get(1);
 		assertFalse ( laserB.intentarChocar( algo ) );
 		/* Esto crea dos instancias de laser: una con origen Algo42 (que por lo tanto se mueve hacia arriba)
@@ -263,8 +263,8 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		assertEquals( (int)laserB.devolverPunto().getY() , 118 );
 		assertFalse( laserB.intentarChocar(algo) );
 		laserA.mover();
-		assertEquals( (int)laserA.devolverPunto().getY() , 52 ); 
-		assertFalse( laserA.intentarChocar(avioneta) );
+		assertEquals( (int)laserA.devolverPunto().getY() - algo.devolverAltura() , 52 ); 
+		assertTrue( laserA.intentarChocar(avioneta) );
 		laserB.mover();
 		assertEquals( (int)laserB.devolverPunto().getY() , 116 ); 
 		for ( int i = 1 ; i < 34 ; i++ ) {
@@ -276,11 +276,10 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		assertEquals ( (int) algo.devolverPunto().getY(), 52 );
 		//LaserB y algo estan ocupando mismas posiciones
 		assertTrue( laserB.intentarChocar(algo) );
-		for (int i = 1; i<34 ; i++) {
+		for (int i = 1; i<33; i++) {
 			laserA.mover();
-			assertEquals( (int)laserA.devolverPunto().getY() , (52+(i*2)));
+			assertEquals((int)( laserA.devolverPunto().getY()-algo.devolverAltura()), (52+(i*2)));
 		}
-		assertEquals( (int)laserA.devolverPunto().getY() , 118 ); 
 		assertTrue( laserA.intentarChocar(avioneta) );
 	}
 	
