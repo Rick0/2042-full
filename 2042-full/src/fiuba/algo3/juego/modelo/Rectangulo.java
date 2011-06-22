@@ -1,11 +1,17 @@
 package fiuba.algo3.juego.modelo;
 
+import java.io.Serializable;
+
 /* Clase rectangulo, crea figuras rectangulares con un determinado ancho
  * y altura, ademas de una posicion en el espacio.
  * La posicion esta dada por su punto extremo izquierdo inferior.
  */
-public class Rectangulo {
+public class Rectangulo implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7570165435552175963L;
 	int ancho;
 	int altura;
 	Punto puntoIzquierdoInferior;

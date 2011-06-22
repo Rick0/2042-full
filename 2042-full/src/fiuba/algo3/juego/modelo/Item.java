@@ -1,9 +1,15 @@
 package fiuba.algo3.juego.modelo;
 
+import java.io.Serializable;
+
 
 /* Clase abstracta de la cual heredaran los items del juego */
-public abstract class Item extends ObjetoUbicable {
+public abstract class Item extends ObjetoUbicable implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4828893549103315270L;
 	boolean fueUsado;
 	int tiempoDeVida = 700;
 
