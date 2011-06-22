@@ -1,9 +1,16 @@
 package fiuba.algo3.juego.modelo;
 
+import java.io.Serializable;
+
 import fiuba.algo3.juego.modelo.excepciones.ArmaUsadaError;
 
 
-public class Cohete extends Arma {
+public class Cohete extends Arma implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6522154567380001117L;
 
 	public Cohete (Punto punto, boolean origenAlgo, Plano plano) {
 

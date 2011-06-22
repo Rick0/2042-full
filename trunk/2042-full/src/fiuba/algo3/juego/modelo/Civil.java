@@ -1,10 +1,17 @@
 package fiuba.algo3.juego.modelo;
 
+import java.io.Serializable;
+
 import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
 
-public class Civil extends NaveNoOperable {
+public class Civil extends NaveNoOperable implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2718411834744356332L;
 
 	/* Inicializa una instancia de Civil */
 	public Civil(Punto punto, Plano plano) throws SuperposicionNavesError, NaveDestruidaError {

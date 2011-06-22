@@ -1,10 +1,16 @@
 package fiuba.algo3.juego.modelo;
 
+import java.io.Serializable;
+
 import fiuba.algo3.juego.modelo.excepciones.ItemUsadoError;
 
 
-public class TanqueEnergia extends Item {
+public class TanqueEnergia extends Item implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3393360548199229151L;
 	private int aumentoEnergia;
 
 

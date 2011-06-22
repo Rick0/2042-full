@@ -1,12 +1,18 @@
 package fiuba.algo3.juego.modelo;
 import static java.lang.Math.sqrt;
 
+import java.io.Serializable;
+
 
 /* Clase punto
  * Es un par ordenado de numeros (x,y) que designan, generalmente, una localizacion en un plano 2D
  */
-public class Punto {
+public class Punto implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -423117653563270069L;
 	double posicionX;
 	double posicionY;
 

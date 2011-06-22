@@ -1,10 +1,17 @@
 package fiuba.algo3.juego.modelo;
 
+import java.io.Serializable;
+
 import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
 
-public class Helicoptero extends NaveNoOperable {
+public class Helicoptero extends NaveNoOperable implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -288158403144849238L;
 
 	/* Instancia un Helicoptero */
 	public Helicoptero(Punto punto, Plano plano) throws SuperposicionNavesError, NaveDestruidaError {

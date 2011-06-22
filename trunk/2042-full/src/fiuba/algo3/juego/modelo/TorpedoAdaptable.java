@@ -1,10 +1,17 @@
 package fiuba.algo3.juego.modelo;
 
+import java.io.Serializable;
+
 import fiuba.algo3.juego.modelo.excepciones.ArmaUsadaError;
 
 
-public class TorpedoAdaptable extends Arma {
+public class TorpedoAdaptable extends Arma implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4508120870679103213L;
+
 	public TorpedoAdaptable (Punto punto, boolean origenAlgo, Plano plano) {
 		
 		this.danio = 0;
