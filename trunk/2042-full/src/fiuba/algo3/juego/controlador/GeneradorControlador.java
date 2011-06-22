@@ -37,6 +37,7 @@ public class GeneradorControlador {
 		VistaPlano vistaPlano = new VistaPlano();
 		vistaPlano.setPosicionable(plano);
 		controlador.agregarDibujable(vistaPlano);
+		controlador.agregarObjetoVivo(vistaPlano);
 
 	//	GeneradorFlotas generador = new GeneradorFlotas(plano, controlador);
 		//Aqui el generador recibe su primer flota.

@@ -12,7 +12,7 @@ public class TorpedoRastreador extends Arma implements Serializable{
 	 */
 	private static final long serialVersionUID = 2021359934861160328L;
 	private Nave naveRastreada;
-	private int tiempoDeVida = 500;
+	private int tiempoDeVida = 450;
 
 
 	public TorpedoRastreador (Punto punto, boolean origenAlgo, Plano plano) {

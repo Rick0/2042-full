@@ -63,13 +63,13 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 
 	/* Introduce un algo42 al plano */
 	public void introducirAlgo42(Algo42 algo) {
-		algo42=algo;
+		algo42 = algo;
 	}
 
 	/* Agrega una referencia a la nave destruida */
 	public void agregarNaveEliminada(Nave nave) throws NaveNoDestruidaError {
 
-		if(!(nave.estaDestruida)) {
+		if(!nave.estaDestruida) {
 			throw new NaveNoDestruidaError("La nave aun no esta destruida");
 		}
 		listaNavesDestruidas.add((NaveNoOperable) nave);
@@ -81,17 +81,16 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 		if ( !arma.fueUsado() ) {
 			throw new ArmaNoUsadaError("Esta municion no fue usada");
 		}
-		this.listaArmasUsadas.add( arma );
+		this.listaArmasUsadas.add(arma);
 	}
 
 	/*Agrega un item del juego a la lista de items usados.*/
 	public void agregarItemUsado(Item item) {
 
-			if(!(item.fueUsado())) {
-				throw new ItemNoUsadoError();
-			}
-			listaItemsUsados.add(item);
-		
+		if(!item.fueUsado()) {
+			throw new ItemNoUsadoError();
+		}
+		listaItemsUsados.add(item);
 	}
 
 	public Algo42 getAlgo42() {
@@ -101,10 +100,10 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 	/* Agrega una municion al plano */
 	public void agregarArma(Arma arma) throws ArmaUsadaError {
 
-		if ( arma.fueUsado() ){
+		if ( arma.fueUsado() ) {
 			throw new ArmaUsadaError("Esta municion ya fue usada");
 		}
-		this.listaArmas.add( arma);
+		this.listaArmas.add(arma);
 	}
 
 	/* Agrega una nave no operable a la lista de naves */
@@ -119,7 +118,7 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 	/* Agrega un item al area de Juego */
 	public void agregarItem(Item item) throws ItemUsadoError {
 		
-		if (item.fueUsado() ){
+		if (item.fueUsado()) {
 			throw new ItemUsadoError("Se trata de agregar al mapa un item usado");
 		}
 		this.listaItems.add(item);
@@ -172,8 +171,7 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 	public static Plano restaurar(String archivo) {
 		
 		try {
-			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(
-					archivo));
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo));
 			Plano planoAux = (Plano) ois.readObject();
 			return planoAux;
 		} catch (FileNotFoundException e) {
@@ -186,8 +184,6 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 			e.printStackTrace();
 			return null;
 		}
-		
-		
 	}
 	
 	public void vivir() {
@@ -255,8 +251,10 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 		    elemento.vivir();
 		}
 
+		this.vivir();
+
 		//Eliminacion de naves, armas e items que ya no estan vigentes en el area de juego.
-		Iterator<Arma> iteradorArmasUsadas = listaArmasUsadas.iterator();
+	/*	Iterator<Arma> iteradorArmasUsadas = listaArmasUsadas.iterator();
 		Iterator<Item> iteradorItemsUsados = listaItemsUsados.iterator();
 		Iterator<NaveNoOperable> iteradorNavesDestruidas = listaNavesDestruidas.iterator();
 
@@ -272,7 +270,7 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 			Arma elemento = iteradorArmasUsadas.next(); 
 			listaArmas.remove(elemento);
 		}
-		nivel.actuarCon(listaNavesDestruidas);
+		nivel.actuarCon(listaNavesDestruidas);*/
 	}
 
 	/* Metodos para implementar la interfaz Posicionable
