@@ -171,11 +171,14 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 		}
 	}
 
-	/** Le asigne una vista correspondiente al objeto pedido */
+	/** Le asigna una vista correspondiente al objeto pedido */
 	private Imagen asignarVista(ObjetoUbicable unObjeto) {
 
 		Imagen nuevaVista = this.generadorDeVista.devolverVista(unObjeto);
 		nuevaVista.setPosicionable(unObjeto);
+
+		System.out.println(unObjeto.getClass()+"  objeto clase");
+		System.out.println(nuevaVista.getClass()+"  vista clase \n");
 
 		return nuevaVista;
 	}

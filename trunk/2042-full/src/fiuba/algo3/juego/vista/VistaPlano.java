@@ -13,7 +13,7 @@ public class VistaPlano extends Imagen implements ObjetoVivo {
 
 	public VistaPlano() {
 		this.frameCont = 0;
-		this.velocidadCambio = 8;
+		this.velocidadCambio = 12;
 		this.velocidadCambioCont = velocidadCambio;
 		this.setNombreArchivoImagen("recursos/Plano/Mar.png");
 	}
