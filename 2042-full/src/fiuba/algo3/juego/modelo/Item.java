@@ -24,8 +24,10 @@ public abstract class Item extends ObjetoUbicable implements Serializable {
 	 * dependiendo de que tipo de item sea */
 	public void vivir() {
 
-		this.pasaUnTiempo();
-		this.intentarChocar(plano.getAlgo42());
+		if (!fueUsado) {
+			this.pasaUnTiempo();
+			this.intentarChocar(plano.getAlgo42());
+		}
 	}
 
 	/* Devuelve true si el item ya fue usado, false en caso contrario */

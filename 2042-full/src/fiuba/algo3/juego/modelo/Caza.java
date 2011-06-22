@@ -1,9 +1,7 @@
 package fiuba.algo3.juego.modelo;
 
 import java.io.Serializable;
-
 import fiuba.algo3.juego.modelo.excepciones.ItemNoDisponibleError;
-import fiuba.algo3.juego.modelo.excepciones.ItemUsadoError;
 import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
@@ -71,14 +69,7 @@ public class Caza extends NaveNoOperable implements Serializable{
 		if (!this.estaDestruida) {
 			throw new ItemNoDisponibleError("El caza aun no esta destruido, no puede dejar armas.");
 		}
-
 		itemDejado = new TanqueEnergia(this.devolverPunto(), this.plano);
-		try {
-			plano.agregarItem(itemDejado);
-			plano.agregarObjetoNuevo(itemDejado);
-		} catch (ItemUsadoError error) {
-			itemDejado.noUsado();
-		}
 
 		return itemDejado;
 	}
@@ -88,7 +79,7 @@ public class Caza extends NaveNoOperable implements Serializable{
 	/* si la energia es menor a 0, el bombardero deja un paquete de armas en el escenario de juego
 	 */
 	public void modificarEnergia( int cantidad ) {
-		
+
 		energia = (energia + cantidad);
 		if (energia <= 0) {
 			try {

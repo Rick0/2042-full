@@ -1,9 +1,7 @@
 package fiuba.algo3.juego.modelo;
 
 import java.io.Serializable;
-
 import fiuba.algo3.juego.modelo.excepciones.ItemNoDisponibleError;
-import fiuba.algo3.juego.modelo.excepciones.ItemUsadoError;
 import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
@@ -44,14 +42,8 @@ public class Bombardero extends NaveNoOperable implements Serializable {
 		if (!this.estaDestruida) {
 			throw new ItemNoDisponibleError("El bombardero aun no esta destruido, no puede dejar armas");
 		}
-
 		Item itemDejado = new ArmaAbandonada(this.devolverPunto(),this.plano);		
-		try {
-			plano.agregarItem(itemDejado);
-			plano.agregarObjetoNuevo(itemDejado);
-		} catch (ItemUsadoError error) {
-			itemDejado.noUsado();
-		}
+
 		return itemDejado;
 	}
 
