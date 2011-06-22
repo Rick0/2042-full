@@ -42,7 +42,6 @@ public class GeneradorDeVista {
 		int indice, largo, cantidad;
 
 		nombreClaseRaw = unObjeto.getClass().toString();
-
 		indice = nombreClaseRaw.lastIndexOf(".");
 		largo  = nombreClaseRaw.length();
 		cantidad = largo - (indice+1);
@@ -50,19 +49,13 @@ public class GeneradorDeVista {
 		char[] nombreClase = new char[cantidad];
 		nombreClaseRaw.getChars(indice+1, largo, nombreClase, 0);
 		nombreClaseCompleto = new String(nombreClase);
-		System.out.println(nombreClaseCompleto+"\n");
 
-		if ((nombreClaseCompleto == "Laser") || (nombreClaseCompleto == "Cohete") || (nombreClaseCompleto == "TorpedoRastreador")) {
-
-		//	String direccion;
+		if ((nombreClaseCompleto.equals("Laser")) || (nombreClaseCompleto.equals("Cohete")) || (nombreClaseCompleto.equals("TorpedoRastreador"))) {
 			if (((Arma)unObjeto).origenAlgo42()) { nombreClaseCompleto = ("fiuba.algo3.juego.vista.Vista" + nombreClaseCompleto + "HaciaArriba"); }
 			else { nombreClaseCompleto = ("fiuba.algo3.juego.vista.Vista" + nombreClaseCompleto + "HaciaAbajo"); }
-
-		//	nombreClaseCompleto = "fiuba.algo3.juego.vista.Vista" + nombreClaseCompleto + direccion;
 		}
 		else {
 			nombreClaseCompleto = "fiuba.algo3.juego.vista.Vista" + nombreClaseCompleto;
-			System.out.println("Entra aca?"+"\n");
 		}
 
 		System.out.println(nombreClaseCompleto+"\n");

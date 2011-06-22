@@ -11,9 +11,6 @@ import fiuba.algo3.juego.modelo.excepciones.NaveARastrearError;
  */	
 public class Algo42 extends Nave implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -3316879072392921990L;
 	int torpedos;
 	int cohetes;
@@ -48,7 +45,7 @@ public class Algo42 extends Nave implements Serializable {
 		if (velocidadDisparoCont == velocidadDisparo) {
 			int ancho = rectangulo.devolverAncho();
 			int altura = rectangulo.devolverAltura();
-			Punto posLaser= new Punto(this.devolverPunto().getX()+(ancho/2), this.devolverPunto().getY()+altura);
+			Punto posLaser = new Punto(this.devolverPunto().getX()+(ancho/2), this.devolverPunto().getY()+altura);
 			new Laser(posLaser, true, this.plano);
 			velocidadDisparoCont = 0;
 		}
