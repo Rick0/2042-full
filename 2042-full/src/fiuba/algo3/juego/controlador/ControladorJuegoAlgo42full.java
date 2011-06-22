@@ -1,7 +1,7 @@
 package fiuba.algo3.juego.controlador;
 
 import fiuba.algo3.juego.modelo.*;
-//import fiuba.algo3.juego.vista.*;
+import fiuba.algo3.juego.vista.*;
 import fiuba.algo3.titiritero.*;
 import fiuba.algo3.titiritero.vista.*;
 import fiuba.algo3.titiritero.audio.Reproductor;
@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ControladorJuegoAlgo42full implements Runnable {
 
-	public ControladorJuegoAlgo42full(boolean activarReproductor){
+	public ControladorJuegoAlgo42full(boolean activarReproductor, Plano unPlano) {
 		this.objetosVivos = new ArrayList<ObjetoVivo>();
 		this.dibujables = new ArrayList<Dibujable>();
 		this.mouseClickObservadores = new ArrayList<MouseClickObservador>();
@@ -23,6 +23,8 @@ public class ControladorJuegoAlgo42full implements Runnable {
 		if(this.estaReproductorActivo)
 			this.reproductor = new Reproductor();
 		this.tablaDeVistas = new HashMap<ObjetoUbicable,Imagen>();
+		this.generadorDeVista = new GeneradorDeVista();
+		this.plano = unPlano;
 	}
 
 	public boolean estaEnEjecucion(){
@@ -31,7 +33,7 @@ public class ControladorJuegoAlgo42full implements Runnable {
 	
 	public void comenzarJuego(){
 		estaEnEjecucion = true;
-		try{
+		try {
 			while(estaEnEjecucion){
 				simular();
 				actualizarPlano();
@@ -61,9 +63,10 @@ public class ControladorJuegoAlgo42full implements Runnable {
 	public void comenzarJuego(int cantidadDeCiclos){
 		int contador = 0;
 		estaEnEjecucion = true;
-		try{
+		try {
 			while(contador < cantidadDeCiclos && estaEnEjecucion){
 				simular();
+				actualizarPlano();
 				dibujar();
 				Thread.sleep(intervaloSimulacion);
 				contador++;
@@ -127,31 +130,44 @@ public class ControladorJuegoAlgo42full implements Runnable {
 		}
 	}
 
+	/** Asigna vista a los objetos nuevos, como tambien los agrega a la lista de objetos vivos y dibujables.
+	 *  Borra vistas de objetos destruidos, y los saca de la lista de objetos vivos y dibujables.
+	 */
 	public void actualizarPlano() {
 
-		// Por construccion, el plano siempre se agrega primero, y por ende es el primero de los objetos vivos
-		Plano planoDelJuego = (Plano)(this.objetosVivos.get(0));
+	//	System.out.println(objetosVivos.toString());
+	//	Por construccion, el plano siempre se agrega primero, y por ende es el primero de los objetos vivos
+	//	Plano planoDelJuego = (Plano)(this.objetosVivos.get(9));
 
-	/*	Iterator<ObjetoUbicable> iteradorObjetosAAgregar = planoDelJuego.devolverListaObjetosAAgregar().iterator();
+		Plano planoDelJuego = this.plano;
+	
+		Iterator<ObjetoUbicable> iteradorObjetosAAgregar = planoDelJuego.devolverListaObjetosAAgregar().iterator();
 		while (iteradorObjetosAAgregar.hasNext()) {
 			ObjetoUbicable unObjeto = iteradorObjetosAAgregar.next();
-			this.asignarVista(unObjeto);
+			Imagen unaVista = this.asignarVista(unObjeto);
+			this.tablaDeVistas.put(unObjeto,unaVista);
+			this.agregarDibujable(unaVista);
+			this.agregarObjetoVivo(unObjeto);
 		}
-*/
-
 
 		Iterator<ObjetoUbicable> iteradorObjetosABorrar = planoDelJuego.devolverListaObjetosABorrar().iterator();
 		while (iteradorObjetosABorrar.hasNext()) {
 			ObjetoUbicable unObjeto = iteradorObjetosABorrar.next();
-			objetosVivos.remove(unObjeto);
+			Imagen unaVista = this.tablaDeVistas.get(unObjeto);
+			this.removerDibujable(unaVista);
+			this.removerObjetoVivo(unObjeto);
+			this.tablaDeVistas.remove(unObjeto);
 		}
 	}
 
-	/* */
-	/*private void asignarVista(ObjetoUbicable unObjeto) {
-	
-		
-	}*/
+	/** Le asigne una vista correspondiente al objeto pedido */
+	private Imagen asignarVista(ObjetoUbicable unObjeto) {
+
+		Imagen nuevaVista = this.generadorDeVista.devolverVista(unObjeto);
+		nuevaVista.setPosicionable(unObjeto);
+
+		return nuevaVista;
+	}
 
 	public SuperficieDeDibujo getSuperficieDeDibujo() {
 		return superficieDeDibujo;
@@ -212,6 +228,8 @@ public class ControladorJuegoAlgo42full implements Runnable {
 	private Thread hiloAudio;
 	private boolean estaReproductorActivo;
 	private HashMap<ObjetoUbicable,Imagen> tablaDeVistas;
+	private GeneradorDeVista generadorDeVista;
+	private Plano plano;
 
 
 	public void run() {
@@ -222,5 +240,6 @@ public class ControladorJuegoAlgo42full implements Runnable {
 		if(!this.estaReproductorActivo)
 			throw new OperacionNoValida();
 		return this.reproductor;
-	}	
+	}
+
 }

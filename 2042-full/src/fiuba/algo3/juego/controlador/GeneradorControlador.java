@@ -25,7 +25,7 @@ public class GeneradorControlador {
 	 */
 	public ControladorJuegoAlgo42full generarControlador() {
 
-		ControladorJuegoAlgo42full controlador = new ControladorJuegoAlgo42full(false);
+		ControladorJuegoAlgo42full controlador = new ControladorJuegoAlgo42full(false, this.plano);
 		Algo42 algo42 = null;
 		Punto posAlgo = new Punto(250,150);
 		try {
@@ -50,8 +50,8 @@ public class GeneradorControlador {
 		vistaAlgo42.setPosicionable(algo42);
 
 		controlador.agregarDibujable(vistaAlgo42);
-		controlador.agregarObjetoVivo(plano);
 		controlador.agregarObjetoVivo(algo42);
+		controlador.agregarObjetoVivo(plano);
 		controlador.agregarObjetoVivo(generador);
 		controlador.setIntervaloSimulacion(20);	
 		
