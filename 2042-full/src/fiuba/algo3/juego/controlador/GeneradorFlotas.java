@@ -89,11 +89,28 @@ public class GeneradorFlotas implements ObjetoVivo {
 		vistaExplo.setPosicionable(unExplo);
 		controlador.agregarDibujable(vistaExplo);
 		controlador.agregarObjetoVivo(unExplo);
+
+
+		Punto posCaza = new Punto(400,300);
+		Caza unCaza = null;
+		try {
+			unCaza = new Caza(posCaza,plano);
+		} catch (SuperposicionNavesError e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NaveDestruidaError e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		VistaCaza vistaCaza = new VistaCaza();
+		vistaCaza.setPosicionable(unCaza);
+		controlador.agregarDibujable(vistaCaza);
+		controlador.agregarObjetoVivo(unCaza);
 	}
 	
 	public void vivir(){
-		if ((plano.devolverListaNaves()).isEmpty()){
-			flotaVacia=true;
+		if ((plano.devolverListaNaves()).isEmpty()) {
+			flotaVacia = true;
 		}
 	}
 }

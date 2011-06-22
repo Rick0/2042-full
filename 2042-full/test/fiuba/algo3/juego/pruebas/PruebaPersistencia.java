@@ -34,6 +34,6 @@ public class PruebaPersistencia extends TestCase {
 		plano.persistir(archivo);
 		Plano planoRestaurado = Plano.restaurar(archivo);
 		
-		assertTrue((plano == planoRestaurado));
+		assertTrue(plano == planoRestaurado);
 	}
 }
