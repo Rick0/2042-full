@@ -1,26 +1,73 @@
 package fiuba.algo3.juego.vista;
 
 import fiuba.algo3.juego.modelo.*;
-//import fiuba.algo3.titiritero.*;
 import fiuba.algo3.titiritero.vista.*;
 
 
 /* Devuelve una vista dependiendo del objeto ubicable que se le pase */
-public class FactoryVista {
+public class GeneradorDeVista {
 
-	public FactoryVista() {
+	public GeneradorDeVista() {
 	}
 
+	/* Devuelve una vista dependiendo del objeto ubicable que se le pase */
+	@SuppressWarnings("rawtypes")
 	public Imagen devolverVista(ObjetoUbicable unObjeto) {
-	
-		Imagen nuevaVista = null;
-	//	String objetoClass = unObjeto.getClass().toString();
 
+		String nombreClase = this.convertirANombreClase(unObjeto);
+		Class claseVistaAInstanciar = null;
+		Object nuevaVista = null;
 
+		try {
+			claseVistaAInstanciar = Class.forName(nombreClase);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 
-		return nuevaVista;
+		try {
+			nuevaVista = claseVistaAInstanciar.newInstance();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+
+		return (Imagen)nuevaVista;
 	}
 
+	/* Este metodo obtiene el nombre de la clase del objeto que se le pase */
+	public String convertirANombreClase(ObjetoUbicable unObjeto) {
+
+		String nombreClaseRaw, nombreClaseCompleto;
+		int indice, largo, cantidad;
+
+		nombreClaseRaw = unObjeto.getClass().toString();
+
+		indice = nombreClaseRaw.lastIndexOf(".");
+		largo  = nombreClaseRaw.length();
+		cantidad = largo - (indice+1);
+
+		char[] nombreClase = new char[cantidad];
+		nombreClaseRaw.getChars(indice+1, largo, nombreClase, 0);
+		nombreClaseCompleto = new String(nombreClase);
+		System.out.println(nombreClaseCompleto+"\n");
+
+		if ((nombreClaseCompleto == "Laser") || (nombreClaseCompleto == "Cohete") || (nombreClaseCompleto == "TorpedoRastreador")) {
+
+		//	String direccion;
+			if (((Arma)unObjeto).origenAlgo42()) { nombreClaseCompleto = ("fiuba.algo3.juego.vista.Vista" + nombreClaseCompleto + "HaciaArriba"); }
+			else { nombreClaseCompleto = ("fiuba.algo3.juego.vista.Vista" + nombreClaseCompleto + "HaciaAbajo"); }
+
+		//	nombreClaseCompleto = "fiuba.algo3.juego.vista.Vista" + nombreClaseCompleto + direccion;
+		}
+		else {
+			nombreClaseCompleto = "fiuba.algo3.juego.vista.Vista" + nombreClaseCompleto;
+			System.out.println("Entra aca?"+"\n");
+		}
+
+		System.out.println(nombreClaseCompleto+"\n");
+		return nombreClaseCompleto;
+	}
 
 	// Version anterior
 /*	public Imagen devolverVista(ObjetoUbicable unObjeto) {
@@ -72,24 +119,5 @@ public class FactoryVista {
 
 		return nuevaVista;
 	}*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

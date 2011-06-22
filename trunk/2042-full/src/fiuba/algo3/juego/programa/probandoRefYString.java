@@ -11,6 +11,7 @@ public class probandoRefYString {
 	/**
 	 * @param args
 	 */
+	@SuppressWarnings("rawtypes")
 	public static void main(String[] args) {
 
 		Plano bbb = new Plano(444,444);

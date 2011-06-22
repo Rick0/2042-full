@@ -21,16 +21,15 @@ public class GeneradorFlotas implements ObjetoVivo {
 	Plano plano;
 	ControladorJuegoAlgo42full controlador;
 	boolean flotaVacia;
-	
-	public GeneradorFlotas(Plano planoJuego, ControladorJuegoAlgo42full control){
-		controlador= control;
-		plano= planoJuego;
-		flotaVacia=false;
+
+
+	public GeneradorFlotas(Plano planoJuego, ControladorJuegoAlgo42full control) {
+		controlador = control;
+		plano = planoJuego;
+		flotaVacia = false;
 	}
 	
-	/*Genera una flota de tipo1,
-	 * que contiene tres helicopteros y
-	 * tres bombarderos*/
+	/* Genera una flota de tipo1, que contiene tres helicopteros y tres bombarderos */
 	public void generarFlota1() {
 
 		int n = 0;
