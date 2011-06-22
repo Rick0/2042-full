@@ -16,6 +16,7 @@ public abstract class ObjetoUbicable implements ObjetoVivo, Posicionable{
 
 	/* Ubica el objeto en la posicion determinada, lo cual implica
 	 * cambiar el punto que determina su posicion */
+	
 	public void cambiarPosicion(Punto punto) {
 		rectangulo.cambiarPosicion(punto);
 	}
@@ -39,6 +40,12 @@ public abstract class ObjetoUbicable implements ObjetoVivo, Posicionable{
 	 */
 	public void determinarPlano(Plano planoDelObjeto) {
 		this.plano = planoDelObjeto;
+	}
+	
+	/*Devuelve la altura del objeto ubicable*/
+	public int devolverAltura(){
+		return rectangulo.altura;
+		
 	}
 
 	/* Metodo implementado para la interface Posicionable */
