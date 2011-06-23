@@ -54,7 +54,7 @@ public class GeneradorControlador {
 		vistaAlgo42.setPosicionable(algo42);
 		TextoVida textoVida = new TextoVida("Energia:"+"100", algo42);
 		VistaVidaTexto vida = new VistaVidaTexto(textoVida);
-		vida.setPosicionable(new PuntoEntero(10,20));
+		vida.setPosicionable(new PuntoEntero(400,520));
 		
 		controlador.agregarDibujable(vida);
 		controlador.agregarDibujable(vistaAlgo42);
