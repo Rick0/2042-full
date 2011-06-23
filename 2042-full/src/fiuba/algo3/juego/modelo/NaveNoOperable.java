@@ -12,7 +12,7 @@ public abstract class NaveNoOperable extends Nave {
 
 	boolean fueraDelPlano;
 	int puntos;
-	public boolean tengoQueHuir=false;
+	public boolean tengoQueHuir = false;
 	
 	public void huir(){
 		tengoQueHuir=true;
@@ -40,15 +40,18 @@ public abstract class NaveNoOperable extends Nave {
 	 * */
 	public void vivir() {
 
-		if(tengoQueHuir){
-			this.retirarse();
-			this.intentarChocar(this.plano.getAlgo42());
-		}
-		else{
-			this.intentarMover();
-			this.intentarChocar(this.plano.getAlgo42());
-			this.pasaUnTiempo();
-			this.disparar();
+		if (!estaDestruida) {
+
+			if (tengoQueHuir) {
+				this.retirarse();
+				this.intentarChocar(this.plano.getAlgo42());
+			}
+			else {
+				this.intentarMover();
+				this.intentarChocar(this.plano.getAlgo42());
+				this.pasaUnTiempo();
+				this.disparar();
+			}
 		}
 	}
 
@@ -181,12 +184,6 @@ public abstract class NaveNoOperable extends Nave {
 	public void chocarCon(Algo42 algo42) {
 
 		this.modificarEnergia(-(this.devolverEnergia()));
-	/*	try {
-			this.destruirse();
-		} catch (NaveNoDestruidaError e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
 	}
 
 }
