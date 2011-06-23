@@ -13,15 +13,14 @@ public abstract class NaveNoOperable extends Nave {
 	boolean fueraDelPlano;
 	int puntos;
 	public boolean tengoQueHuir = false;
-	
-	public void huir(){
-		tengoQueHuir=true;
-		
-	}
 
 
 	public NaveNoOperable() {
 		super();
+	}
+
+	public void huir() {
+		tengoQueHuir = true;
 	}
 
 	/* Dependiendo del tipo de nave, esta disparara armas diferentes */
@@ -37,7 +36,7 @@ public abstract class NaveNoOperable extends Nave {
 
 	/*Cada nave de tipo no operable debe realizar ciertas acciones
 	 * en cada turno, y para eso se llama a este metodo.
-	 * */
+	 */
 	public void vivir() {
 
 		if (!estaDestruida) {
@@ -140,7 +139,7 @@ public abstract class NaveNoOperable extends Nave {
 	 * de arriba a abajo) hasta salir del area de juego
 	 */
 	public void retirarse() {
-		Punto nuevaPosicion=new Punto(this.devolverPunto().getX(),this.devolverPunto().getY()+1);
+		Punto nuevaPosicion = new Punto(this.devolverPunto().getX(),this.devolverPunto().getY()+1);
 		this.cambiarPosicion(nuevaPosicion);
 	}
 
