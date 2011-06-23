@@ -10,6 +10,7 @@ import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
  * el funcionamiento de una nave guia y probarlo. Sera usada en las pruebas del nivel. 
  * Solo tiene 10 puntos de energia, asi que es facilmente eliminable.
  */
+
 public class Guia1 extends Guia {
 
 	public Guia1(List<NaveNoOperable> listaNaves,Punto punto, Plano planoJuego) throws NaveDestruidaError{
