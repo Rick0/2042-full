@@ -29,6 +29,7 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 	int ancho;
 	int altura;
 	int vidas;
+	
 	Algo42 algo42;
 	ArrayList<Arma> listaArmas = new ArrayList<Arma>();
 	ArrayList<NaveNoOperable> listaNaves = new ArrayList<NaveNoOperable>();
@@ -47,7 +48,7 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 	public Plano(int dimensionX,int dimensionY) {
 		ancho  = dimensionX;
 		altura = dimensionY;
-		vidas = 3;
+		this.setVidas(3);
 	}
 
 	/* Devuelve la altura del plano */
@@ -174,6 +175,14 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public int getVidas() {
+		return vidas;
+	}
+
+	public void setVidas(int vidas) {
+		this.vidas = vidas;
 	}
 	
 	public static Plano restaurar(String archivo) {
