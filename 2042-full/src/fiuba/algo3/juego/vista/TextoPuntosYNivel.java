@@ -25,7 +25,7 @@ public class TextoPuntosYNivel implements ObjetoDeTexto, ObjetoVivo{
 
 		@Override
 		public void vivir() {
-			this.setTexto("Nivel: "+Modelo.devolverNumeroNivel()+""+" ll Puntos: "+
+			this.setTexto("Nivel: "+Modelo.devolverNumeroNivel()+""+"   Puntos: "+
 					Modelo.devolverPuntuacionTotal()+"");
 			
 		}
