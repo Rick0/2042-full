@@ -40,6 +40,8 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 	Nivel nivel = new Nivel();
 	ArrayList<ObjetoUbicable> listaObjetosAAgregar = new ArrayList<ObjetoUbicable>();
 	ArrayList<ObjetoUbicable> listaObjetosABorrar  = new ArrayList<ObjetoUbicable>();
+	boolean juegoPerdido;
+	boolean juegoGanado;
 
 
 	/* Constructor del plano, recibe sus dimensiones
@@ -49,6 +51,8 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 		ancho  = dimensionX;
 		altura = dimensionY;
 		this.setVidas(3);
+		juegoPerdido = false;
+		juegoGanado = false;
 	}
 
 	/* Devuelve la altura del plano */
@@ -93,8 +97,20 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 		listaItemsUsados.add(item);
 	}
 
+	/* Devuelve la unica nave operable, el Algo42 */
 	public Algo42 getAlgo42() {
 		return algo42;
+	}
+
+	/* Decrece una vida del juego, consecuencia de que se destruyo el Algo42 
+	 * Si se pierden las 3 vidas, se pierde el juego
+	 */
+	public void perderUnaVida() {
+
+		vidas = vidas - 1;
+		if ((vidas <= 0) && (!juegoGanado)) {
+			juegoPerdido = true;
+		}
 	}
 
 	/* Agrega una municion al plano */
