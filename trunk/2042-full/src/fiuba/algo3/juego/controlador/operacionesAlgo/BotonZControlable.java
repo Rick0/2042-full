@@ -21,8 +21,7 @@ public class BotonZControlable implements Controlable {
 		try {
 			algo.dispararCohete();
 		} catch (ArmaNoDisponibleError e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//Si no tiene el arma, que no haga nada.
 		}
 	}
 

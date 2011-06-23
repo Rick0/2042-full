@@ -31,11 +31,8 @@ public class BotonXControlable implements Controlable {
 			try {
 				algo.dispararTorpedoRastreadorHacia(listaNavesEnemigas.get(0));
 			} catch (ArmaNoDisponibleError e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//Si no tiene el arma, que no haga nada.
 			} catch (NaveARastrearError e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		}
 	}
