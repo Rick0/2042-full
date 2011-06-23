@@ -56,6 +56,7 @@ public class GeneradorFlota implements ObjetoVivo {
 		try {
 			guia = new Guia1(lista, posNave,this.plano);
 		} catch (NaveDestruidaError e) {
+			System.out.print("entre");
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
