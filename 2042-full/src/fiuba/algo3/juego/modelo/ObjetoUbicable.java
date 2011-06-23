@@ -16,7 +16,6 @@ public abstract class ObjetoUbicable implements ObjetoVivo, Posicionable{
 
 	/* Ubica el objeto en la posicion determinada, lo cual implica
 	 * cambiar el punto que determina su posicion */
-	
 	public void cambiarPosicion(Punto punto) {
 		rectangulo.cambiarPosicion(punto);
 	}
@@ -30,8 +29,13 @@ public abstract class ObjetoUbicable implements ObjetoVivo, Posicionable{
 	 * Este metodo devuelve true si la posicion del objeto ubicable se superpone en 
 	 * al menos un punto con el rectangulo que recibe por parametro
 	 */
-	public boolean coincidePosicionCon( Rectangulo figuraRectangulo) {
+	public boolean coincidePosicionCon(Rectangulo figuraRectangulo) {
 		return (this.rectangulo.coincideConPosicionDe( figuraRectangulo ));
+	}
+
+	/* Devuelve el plano en la cual se encuentra el objeto ubicable */
+	public Plano devolverPlano() {
+		return this.plano;
 	}
 
 	/* Toda instancia de objeto ubicable esta contenida en un plano. Para permitir la interaccion entre objetos

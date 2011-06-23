@@ -64,16 +64,16 @@ public class Algo42 extends Nave implements Serializable {
 	 * esa nave sera el objetivo del torpedo
 	 */
 	public void dispararTorpedoRastreadorHacia(Nave unaNave) throws ArmaNoDisponibleError, NaveARastrearError {
-		if (unaNave == this ) { 
+		if (unaNave == this) { 
 			throw new NaveARastrearError("La nave rastreada no puede ser la misma algo");
 		}
-		if ( torpedos <=0 ) {
+		if (torpedos <= 0) {
 			throw new ArmaNoDisponibleError("No hay torpedos que lanzar.");
 		}
 
-		TorpedoRastreador unTorpedo = new TorpedoRastreador(this.devolverPunto(), true, this.plano );
-		unTorpedo.determinarNaveRastreada( unaNave);
-		torpedos = ( torpedos - 1);
+		TorpedoRastreador unTorpedo = new TorpedoRastreador(this.devolverPunto(), true, this.plano);
+		unTorpedo.determinarNaveRastreada(unaNave);
+		torpedos = (torpedos - 1);
 	}
 
 	/* Aumenta las cantidades de torpedos y cohetes recibidos por parametro */

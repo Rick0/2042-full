@@ -12,8 +12,7 @@ public class BarraControlable implements Controlable {
 		algo = algo42;
 	}
 
-	/*Si el usuario oprime la barra espaciadora,
-	 *el algo42 lanzara un arma laser
+	/** Si el usuario oprime la barra espaciadora, el algo42 lanzara un arma laser
 	 * @see fiuba.algo3.juego.controlador.operacionesAlgo.Controlable#activarEfecto()
 	 */
 	@Override
