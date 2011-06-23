@@ -22,8 +22,8 @@ public class VentanaPrincipal extends Frame {
 	public VentanaPrincipal(ControladorJuegoAlgo42full unControladorJuego,final Algo42 algo) {
 
 		this.controladorJuego = unControladorJuego;
-		this.setTitle("Algo42-Full");
-		this.setSize(550,570);
+		this.setTitle("Algo42 - Full");
+		this.setSize(550,600);
 		this.setResizable(false);
 		panel = new Panel(550, 570,controladorJuego);
 		this.add(panel,BorderLayout.CENTER);
