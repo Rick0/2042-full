@@ -44,7 +44,7 @@ public class Nivel implements Serializable{
 		while (nave.hasNext()) {
 			naveAuxiliar = nave.next();
 			if (naveAuxiliar.estadoActualDestruida() ) {
-				puntosNivelActual = (puntosNivelActual + naveAuxiliar.devolverPuntosPorEliminacion() );
+				puntosNivelActual = ( puntosNivelActual + naveAuxiliar.devolverPuntosPorEliminacion() );
 				puntosTotales = ( puntosTotales + naveAuxiliar.devolverPuntosPorEliminacion() );
 			}
 		}
@@ -56,7 +56,7 @@ public class Nivel implements Serializable{
 	/* Avanza un nivel */
 	public boolean avanzarNivel() {
 
-		if (puntosNivelActual >=1000) {
+		if (puntosNivelActual >= 1000) {
 			puntosNivelActual = 0;
 			numeroNivel = (numeroNivel + 1);
 			return true;
