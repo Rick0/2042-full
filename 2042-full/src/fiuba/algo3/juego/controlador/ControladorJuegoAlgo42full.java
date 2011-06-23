@@ -54,10 +54,10 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 		}
 	}
 
-	public void comenzarJuegoAsyn(){
+	public void comenzarJuegoAsyn() {
 		Thread thread = new Thread(this);
 		thread.start();
-		if(this.estaReproductorActivo){
+		if (this.estaReproductorActivo) {
 			this.reproductor.encender();
 			this.hiloAudio =  new Thread(this.reproductor);
 			this.hiloAudio.start();
@@ -160,10 +160,7 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 		while (iteradorObjetosABorrar.hasNext()) {
 			ObjetoUbicable unObjeto = iteradorObjetosABorrar.next();
 			Imagen unaVista = this.tablaDeVistas.get(unObjeto);
-	/*		System.out.println("Se va a borrar un:");
-			System.out.println(unObjeto.getClass());
-			System.out.println(unaVista.getClass());
-	*/		this.removerDibujable(unaVista);
+			this.removerDibujable(unaVista);
 			this.removerObjetoVivo(unObjeto);
 			this.tablaDeVistas.remove(unObjeto);
 		}
@@ -175,10 +172,6 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 
 		Imagen nuevaVista = this.generadorDeVista.devolverVista(unObjeto);
 		nuevaVista.setPosicionable(unObjeto);
-
-	//	System.out.println(unObjeto.getClass()+"  objeto clase");
-	//	System.out.println(nuevaVista.getClass()+"  vista clase \n");
-
 		return nuevaVista;
 	}
 
@@ -232,8 +225,7 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 	
 	public void persistir(String archivo) {
 		try {
-			ObjectOutputStream oos = new ObjectOutputStream(
-					new FileOutputStream( archivo ));
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream( archivo ));
 			oos.writeObject(this);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

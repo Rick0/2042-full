@@ -40,13 +40,13 @@ public class GeneradorFlota implements ObjetoVivo {
 		this.actualizarCantidadNaves();
 
 
-		if (necesitoJefe && (velocidadSpawnearCont == velocidadSpawnear)) {
+	/*	if (necesitoJefe && (velocidadSpawnearCont == velocidadSpawnear)) {
 			this.generarJefe(lista);
 			this.velocidadSpawnearCont = 0;
 			necesitoJefe = false;
 		}
-		if ((tengoQueGenerar) && (velocidadSpawnearCont == velocidadSpawnear) && (cantidadNaves < 11)) {
-			lista = this.generarFlotaAlfa();
+	*/	if ((tengoQueGenerar) && (velocidadSpawnearCont == velocidadSpawnear) && (cantidadNaves < 11)) {
+			/*lista = */this.generarFlotaAlfa();
 			this.velocidadSpawnearCont = 0;
 			necesitoJefe = true;
 		}
@@ -67,20 +67,20 @@ public class GeneradorFlota implements ObjetoVivo {
 	}
 	
 	/* Genera una flota alfa, compuesto integramente por bombarderos, los aviones enemigos mas poderosos */
-	private ArrayList<NaveNoOperable>  generarFlotaAlfa() {
+	private void  generarFlotaAlfa() {
 
 		Random generadorRandom = new Random();
 		int navesACrear = 5;
 		int posRandom = generadorRandom.nextInt(20);
 		int posEnX = posRandom + 5;
-		ArrayList<NaveNoOperable> lista= new ArrayList<NaveNoOperable>();
+	//	ArrayList<NaveNoOperable> lista= new ArrayList<NaveNoOperable>();
 
 		while (navesACrear > 0) {
 
 			Punto posNave = new Punto(posEnX, this.posEnY);
 			try {
-				Bombardero b= new Bombardero(posNave, this.plano);
-				lista.add(b);
+				/*Bombardero b = */new Bombardero(posNave, this.plano);
+		//		lista.add(b);
 			} catch (SuperposicionNavesError e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -92,7 +92,6 @@ public class GeneradorFlota implements ObjetoVivo {
 			posEnX = posEnX + 110;
 			navesACrear--;		
 		}
-		return lista;
 	}
 
 	/* Genera una flota beta, compuesto integramente por exploradores */

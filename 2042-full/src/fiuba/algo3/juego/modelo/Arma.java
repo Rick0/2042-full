@@ -13,7 +13,6 @@ public abstract class Arma extends ObjetoUbicable implements Serializable {
 	int danio;
 	boolean fueUsado;
 	boolean origenAlgo42;
-	public boolean primerTurno = true;
 
 
 	/* True indica que quien lanzo el arma fue una instancia de Algo42,
@@ -34,16 +33,6 @@ public abstract class Arma extends ObjetoUbicable implements Serializable {
 	/* Devuelve true si el arma fue usada */
 	public boolean fueUsado() {
 		return this.fueUsado;
-	}
-	
-	/* Modifica el valor del atributo primerTurno */
-	public void setPrimerTurno(boolean tof) {
-		primerTurno = tof;
-	}
-	
-	/* devuelve el valor del atributo primerTurno */
-	public boolean getPrimerTurno() {
-		return primerTurno;
 	}
 
 	/* Dependiendo de que avion disparo el arma, esta buscara aviones para colisionar */

@@ -169,6 +169,14 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 		return this.listaObjetosABorrar;
 	}
 
+	public boolean noHayNavesEnemigas() {
+
+		if (listaNaves.size() > 0) {
+			return true;
+		}
+		return false;
+	}
+
 	/*Devuelve el nivel actual*/
 	public int devolverNumeroDeNivel() {
 		return (nivel.devolverNumeroNivel());
@@ -179,12 +187,11 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 	}
 	
 	public void persistir(String archivo) {
+
 		try {
-			
 			ObjectOutputStream oos = new ObjectOutputStream(
-					new FileOutputStream( archivo ));
+			new FileOutputStream( archivo ));
 			oos.writeObject(this);
-		
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -254,7 +261,7 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 	/* En cada turno, se debe invocar este metodo para revisar 
 	 * las posiciones de las naves, las armas y los items, para 
 	 * ver si hay alguna accion que realizar. Devuelve la lista 
-	 * de naves que el algo42 elimino*/
+	 * de naves que el algo42 elimino */
 	public void revisarEventos() {
 
 		Iterator<Item> iteradorItem = listaItems.iterator();
@@ -277,25 +284,6 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 		}
 
 		this.vivir();
-
-		//Eliminacion de naves, armas e items que ya no estan vigentes en el area de juego.
-	/*	Iterator<Arma> iteradorArmasUsadas = listaArmasUsadas.iterator();
-		Iterator<Item> iteradorItemsUsados = listaItemsUsados.iterator();
-		Iterator<NaveNoOperable> iteradorNavesDestruidas = listaNavesDestruidas.iterator();
-
-		while(iteradorItemsUsados.hasNext()) {
-			Item elemento = iteradorItemsUsados.next(); 
-			listaItems.remove(elemento);
-		}
-		while(iteradorNavesDestruidas.hasNext()) {
-			NaveNoOperable elemento = iteradorNavesDestruidas.next(); 
-			listaNaves.remove(elemento);
-		}
-		while(iteradorArmasUsadas.hasNext()) {
-			Arma elemento = iteradorArmasUsadas.next(); 
-			listaArmas.remove(elemento);
-		}
-		nivel.actuarCon(listaNavesDestruidas);*/
 	}
 
 	/* Metodos para implementar la interfaz Posicionable
