@@ -151,6 +151,11 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 			ObjetoUbicable unObjeto = iteradorObjetosAAgregar.next();
 			Imagen unaVista = this.asignarVista(unObjeto);
 			this.tablaDeVistas.put(unObjeto,unaVista);
+
+			if (unaVista.getClass().toString().equals("class fiuba.algo3.juego.vista.VistaNaveExplosion")) {
+				this.agregarObjetoVivo((ObjetoVivo)unaVista);
+			}
+
 			this.agregarDibujable(unaVista);
 			this.agregarObjetoVivo(unObjeto);
 		}
@@ -272,7 +277,7 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 	}
 
 	public Reproductor getReproductorDeAudio() {
-		if(!this.estaReproductorActivo)
+		if (!this.estaReproductorActivo)
 			throw new OperacionNoValida();
 		return this.reproductor;
 	}

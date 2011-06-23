@@ -129,7 +129,10 @@ public class Algo42 extends Nave implements Serializable {
 
 		energia = energia + energiaAModificar;
 		if ( energia <= 0 ) {
+
 			this.estaDestruida = true;
+			new NaveExplosion(this.devolverPunto(), this.plano);
+
 			this.resetearAlgo42();
 			this.plano.perderUnaVida();
 		}
