@@ -103,7 +103,6 @@ public abstract class NaveNoOperable extends Nave {
 
 		if ( (this.devolverPunto().getX() > plano.devolverAncho()) || (this.devolverPunto().getX() < 0 ) || (this.devolverPunto().getY() > plano.devolverAltura()) || (devolverPunto().getY() < 0) ) {
 			this.fueraDelPlano = true;
-			this.estaDestruida = true;
 			try {
 				this.plano.agregarNaveEliminada(this);
 			} catch (NaveNoDestruidaError e) {

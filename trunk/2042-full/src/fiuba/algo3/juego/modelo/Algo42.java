@@ -63,7 +63,7 @@ public class Algo42 extends Nave implements Serializable {
 
 		if (velocidadDisparoCoheteCont == velocidadDisparoCohete) {
 
-			if ( cohetes <=0 ) {
+			if ( cohetes <= 0 ) {
 				throw new ArmaNoDisponibleError("No hay cohetes que lanzar.");
 			}
 
