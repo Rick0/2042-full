@@ -1,5 +1,6 @@
 package fiuba.algo3.juego.controlador;
 
+import java.util.ArrayList;
 import java.util.Random;
 import fiuba.algo3.juego.modelo.*;
 import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
@@ -13,10 +14,11 @@ public class GeneradorFlota implements ObjetoVivo {
 
 	Plano plano;
 	int cantidadNaves;
-	static int velocidadSpawnear = 225;
+	static int velocidadSpawnear = 800;
 	int velocidadSpawnearCont;
 	boolean tengoQueGenerar;
 	int posEnY;
+	boolean necesitoJefe=false;
 
 
 	public GeneradorFlota(Plano planoJuego) {
@@ -34,27 +36,48 @@ public class GeneradorFlota implements ObjetoVivo {
 
 		this.pasaUnTiempo();
 		this.actualizarCantidadNaves();
+		ArrayList<NaveNoOperable> lista = null;
 
-		if ((tengoQueGenerar) && (velocidadSpawnearCont == velocidadSpawnear) && (cantidadNaves < 11)) {
-
-			this.generarFlotaAlfa();
+		if(necesitoJefe && (velocidadSpawnearCont == velocidadSpawnear) ){
+			this.generarJefe(lista);
 			this.velocidadSpawnearCont = 0;
+			necesitoJefe=true;
+		}
+		if ((tengoQueGenerar) && (velocidadSpawnearCont == velocidadSpawnear) && (cantidadNaves < 11)) {
+			lista=this.generarFlotaAlfa();
+			this.velocidadSpawnearCont = 0;
+			necesitoJefe=true;
 		}
 	}
 
+	private Guia1 generarJefe(ArrayList<NaveNoOperable> lista) {
+		Punto posNave = new Punto(150, this.posEnY);
+		Guia1 guia = null;
+		try {
+			guia = new Guia1(lista, posNave,this.plano);
+		} catch (NaveDestruidaError e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return guia;
+		
+	}
+	
 	/* Genera una flota alfa, compuesto integramente por bombarderos, los aviones enemigos mas poderosos */
-	public void generarFlotaAlfa() {
+	private ArrayList<NaveNoOperable>  generarFlotaAlfa() {
 
 		Random generadorRandom = new Random();
 		int navesACrear = 5;
 		int posRandom = generadorRandom.nextInt(20);
 		int posEnX = posRandom + 5;
+		ArrayList<NaveNoOperable> lista= new ArrayList<NaveNoOperable>();
 
 		while (navesACrear > 0) {
 
 			Punto posNave = new Punto(posEnX, this.posEnY);
 			try {
-				new Bombardero(posNave, this.plano);
+				Bombardero b= new Bombardero(posNave, this.plano);
+				lista.add(b);
 			} catch (SuperposicionNavesError e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -66,6 +89,7 @@ public class GeneradorFlota implements ObjetoVivo {
 			posEnX = posEnX + 110;
 			navesACrear--;		
 		}
+		return lista;
 	}
 
 	/* Genera una flota beta, compuesto integramente por exploradores */
