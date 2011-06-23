@@ -40,8 +40,8 @@ public abstract class Guia extends NaveNoOperable {
 
 			Iterator<NaveNoOperable> cadaNave = flota.iterator();			
 			while (cadaNave.hasNext()) {
-				cadaNave.next().retirarse();
-			}
+				((NaveNoOperable) cadaNave).huir();
+				}
 		}
 		else {
 			throw new GuiaNoDestruidaError("La nave guia no fue destruida. La flota no tiene por que retirarse");
