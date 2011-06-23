@@ -117,6 +117,7 @@ public class Algo42 extends Nave implements Serializable {
 		energia = 100;
 		torpedos = 0;
 		cohetes = 0;
+		estaDestruida = false;
 
 		Punto posInicial = new Punto(((this.plano.devolverAncho())/2)-32, (this.plano.devolverAltura()/6));
 		rectangulo.cambiarPosicion(posInicial);
@@ -128,6 +129,7 @@ public class Algo42 extends Nave implements Serializable {
 
 		energia = energia + energiaAModificar;
 		if ( energia <= 0 ) {
+			this.estaDestruida = true;
 			this.resetearAlgo42();
 			this.plano.perderUnaVida();
 		}

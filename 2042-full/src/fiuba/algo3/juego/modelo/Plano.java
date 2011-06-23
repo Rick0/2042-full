@@ -29,7 +29,6 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 	int ancho;
 	int altura;
 	int vidas;
-	
 	Algo42 algo42;
 	ArrayList<Arma> listaArmas = new ArrayList<Arma>();
 	ArrayList<NaveNoOperable> listaNaves = new ArrayList<NaveNoOperable>();
@@ -241,7 +240,11 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 			listaArmas.remove(elemento);
 			listaObjetosABorrar.add(elemento);
 		}
+
 		nivel.actuarCon(listaNavesDestruidas);
+		if ((nivel.devolverNumeroNivel() >= 15) && (!juegoPerdido)) {
+			juegoGanado = true;
+		}
 
 		listaArmasUsadas.clear();
 		listaItemsUsados.clear();
