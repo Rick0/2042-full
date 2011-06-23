@@ -152,8 +152,12 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 	}
 
 	/*Devuelve el nivel actual*/
-	public int devolverNivel() {
+	public int devolverNumeroDeNivel() {
 		return (nivel.devolverNumeroNivel());
+	}
+	
+	public Nivel devolverNivel() {
+		return this.nivel;
 	}
 	
 	public void persistir(String archivo) {

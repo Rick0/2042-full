@@ -44,7 +44,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		
 		Plano plano=new Plano(1000,1000);
 		//Verifico que el nivel se inicializo con los valores correctos
-		assertEquals(plano.devolverNivel(),1 );
+		assertEquals(plano.devolverNumeroDeNivel(),1 );
 		Punto posAlgo= new Punto(50,83);
 		Algo42 algo= new Algo42 (posAlgo ,plano);
 		//La idea seria que el algo 42 se inicialice en Y=0 o algun numero menor a 10 (ser ubicados
@@ -81,7 +81,7 @@ public class PruebaIntegracionEnIteraciones extends TestCase {
 		assertEquals(algo.devolverEnergia(),70);//100 es la inicial, pero fue impactado
 		assertEquals(guia.devolverEnergia(),0);
 		assertTrue(guia.estadoActualDestruida());
-		assertEquals(plano.devolverNivel(),2);
+		assertEquals(plano.devolverNumeroDeNivel(),2);
 	}
 	
 	/*Prueba que realiza un choque entre una instancia de algo42 y una avioneta
