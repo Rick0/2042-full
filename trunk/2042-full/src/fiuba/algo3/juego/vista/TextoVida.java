@@ -25,7 +25,7 @@ public class TextoVida implements ObjetoDeTexto, ObjetoVivo{
 
 	@Override
 	public void vivir() {
-		this.setTexto(Modelo.devolverEnergia()+"");
+		this.setTexto("Energia: "+Modelo.devolverEnergia()+"");
 		
 	}
 
