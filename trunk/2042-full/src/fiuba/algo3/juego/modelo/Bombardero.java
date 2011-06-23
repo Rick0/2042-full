@@ -36,7 +36,7 @@ public class Bombardero extends NaveNoOperable implements Serializable {
 
 	/* Crea una instancia de ArmaAbandonada y la devuelve */ 
 	public Item dejarArma() throws ItemNoDisponibleError {
-		
+
 		if (!this.estaDestruida) {
 			throw new ItemNoDisponibleError("El bombardero aun no esta destruido, no puede dejar armas");
 		}
@@ -53,11 +53,13 @@ public class Bombardero extends NaveNoOperable implements Serializable {
 
 		energia = (energia + cantidad);
 		if (energia <= 0) {
+
 			try {
 				this.destruirse();
 			} catch (Exception error) { 
 				// esto no puede suceder
 			}
+
 			try {
 				this.dejarArma();
 			} catch (ItemNoDisponibleError error) { 
