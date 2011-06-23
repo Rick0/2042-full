@@ -5,7 +5,7 @@ import java.awt.Font;
 
 public class TextoDinamico extends Texto {
 	
-	private ObjetoDeTexto objetoDeTexto;
+	protected ObjetoDeTexto objetoDeTexto;
 
 	public TextoDinamico(ObjetoDeTexto objetoDeTexto) {
 		super();
