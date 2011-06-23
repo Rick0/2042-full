@@ -60,10 +60,10 @@ public class GeneradorControlador {
 		
 		TextoPuntosYNivel textoPuntosYNivel = new TextoPuntosYNivel("Nivel: 1 Puntos: 0", plano.devolverNivel() );
 		VistaVidaTexto vistaTextoPuntosYNivel = new VistaVidaTexto(textoPuntosYNivel);
-		vistaTextoPuntosYNivel.setPosicionable(new PuntoEntero(180,20));
+		vistaTextoPuntosYNivel.setPosicionable(new PuntoEntero(220,20));
 		TextoVidas textoVidas = new TextoVidas("Vidas: 3",plano);
 		VistaVidaTexto vistaVidas = new VistaVidaTexto(textoVidas);
-		vistaVidas.setPosicionable(new PuntoEntero(2,20));
+		vistaVidas.setPosicionable(new PuntoEntero(130,20));
 		
 		controlador.agregarDibujable(vida);
 		controlador.agregarDibujable(vistaVidas);
