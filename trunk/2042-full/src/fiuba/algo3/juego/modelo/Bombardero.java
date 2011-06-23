@@ -28,7 +28,7 @@ public class Bombardero extends NaveNoOperable implements Serializable {
 		this.determinarPlano(plano);
 
 		if (this.seSuperponeConOtraNave()) {
-			throw new SuperposicionNavesError("La posici�n esta ocupada");
+			throw new SuperposicionNavesError("La posicion esta ocupada");
 		}
 		plano.agregarNave(this);
 		plano.agregarObjetoNuevo(this);

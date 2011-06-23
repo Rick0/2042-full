@@ -121,9 +121,14 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 		this.listaItems.add(item);
 	}
 
-	/* Agrega un objeto ubicable a la lista de objetos nuevos */
+	/* Agrega un objeto nuevo a la lista de objetos nuevos */
 	public void agregarObjetoNuevo(ObjetoUbicable objeto) {
 		this.listaObjetosAAgregar.add(objeto);
+	}
+
+	/* Agrega un objeto destruido a la lista de objetos a borrar */
+	public void agregarObjetoDestruido(ObjetoUbicable objeto) {
+		this.listaObjetosABorrar.add(objeto);
 	}
 
 	public ArrayList<Arma> devolverListaArmas() {
@@ -182,19 +187,11 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 			return null;
 		}
 	}
-	
+
 	public void vivir() {
 
-		this.listaObjetosAAgregar.clear();
-		this.listaObjetosABorrar.clear();
-
-	/*	Iterator<NaveNoOperable> iteradorNaveEnemiga = listaNaves.iterator();
-		while(iteradorNaveEnemiga.hasNext()) {
-			NaveNoOperable elemento = iteradorNaveEnemiga.next(); 
-			if(elemento.estaFueraDelPlano()) {
-				listaNavesDestruidas.add(elemento);
-			}
-		}*/
+	//	this.listaObjetosAAgregar.clear();
+	//	this.listaObjetosABorrar.clear();
 
 		//Eliminacion de naves, armas e items que ya no estan vigentes en el area de juego.
 		Iterator<Arma> iteradorArmasUsadas = listaArmasUsadas.iterator();
@@ -222,7 +219,7 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 		listaItemsUsados.clear();
 		listaNavesDestruidas.clear();
 	}
-	
+
 	/* En cada turno, se debe invocar este metodo para revisar 
 	 * las posiciones de las naves, las armas y los items, para 
 	 * ver si hay alguna accion que realizar. Devuelve la lista 
