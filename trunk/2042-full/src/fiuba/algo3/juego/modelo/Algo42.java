@@ -1,6 +1,6 @@
 package fiuba.algo3.juego.modelo;
-import java.io.Serializable;
 
+import java.io.Serializable;
 import fiuba.algo3.juego.modelo.excepciones.AreaInvalidaError;
 import fiuba.algo3.juego.modelo.excepciones.ArmaNoDisponibleError;
 import fiuba.algo3.juego.modelo.excepciones.NaveARastrearError;

@@ -9,9 +9,6 @@ import fiuba.algo3.juego.modelo.excepciones.AtaqueEntreNavesNoOperables;
 
 public abstract class Arma extends ObjetoUbicable implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5055567818102322794L;
 	int danio;
 	boolean fueUsado;

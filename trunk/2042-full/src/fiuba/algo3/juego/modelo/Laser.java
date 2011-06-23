@@ -1,15 +1,13 @@
 package fiuba.algo3.juego.modelo;
 
 import java.io.Serializable;
-
 import fiuba.algo3.juego.modelo.excepciones.ArmaUsadaError;
+
 
 public class Laser extends Arma implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -7667054506616914306L;
+
 
 	public Laser (Punto punto, boolean origenAlgo,Plano plano ) {
 

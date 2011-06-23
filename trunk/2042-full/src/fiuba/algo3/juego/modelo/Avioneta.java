@@ -1,16 +1,12 @@
 package fiuba.algo3.juego.modelo;
 
 import java.io.Serializable;
-
 import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
 
 public class Avioneta extends NaveNoOperable implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4601764551109182837L;
 	public int puntosAtras, puntosAdelante;
 

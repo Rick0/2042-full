@@ -1,7 +1,6 @@
 package fiuba.algo3.juego.modelo;
 
 import java.util.List;
-
 import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
@@ -12,14 +11,14 @@ import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
  * Solo tiene 10 puntos de energia, asi que es facilmente eliminable.
  */
 public class Guia1 extends Guia {
-	
+
 	public Guia1(List<NaveNoOperable> listaNaves,Punto punto, Plano planoJuego) throws NaveDestruidaError{
-		puntos=1002;
-		energia=10;
-		rectangulo= new Rectangulo (150,150,punto);
-		esOperable=false;
-		fueraDelPlano =false;
-		estaDestruida=false;
+		puntos = 1002;
+		energia = 10;
+		rectangulo = new Rectangulo (150,150,punto);
+		esOperable = false;
+		fueraDelPlano = false;
+		estaDestruida = false;
 		this.determinarPlano(planoJuego);
 		planoJuego.agregarNave(this);
 		this.recibirFlota(listaNaves);
@@ -31,7 +30,7 @@ public class Guia1 extends Guia {
 	}
 
 	/* Movimiento de la clase guia1. Se mueve hacia abajo */
-	public void mover() throws SuperposicionNavesError{
+	public void mover() throws SuperposicionNavesError {
 		Punto punto=new Punto(this.devolverPunto().getX(),this.devolverPunto().getY()-1);
 		this.cambiarPosicion(punto);
 		if (this.seSuperponeConOtraNave()) {
@@ -45,10 +44,10 @@ public class Guia1 extends Guia {
 	 * un choque entre naves del mismo tipo. Intenta moverse una 
 	 * posicion hacia atras. Si no puede, se queda quieto "
 	 */
-	public void moverAlternativo() throws SuperposicionNavesError{
+	public void moverAlternativo() throws SuperposicionNavesError {
 		Punto punto=new Punto(this.devolverPunto().getX(),this.devolverPunto().getY()+1);
 		this.cambiarPosicion(punto);
-		if (this.seSuperponeConOtraNave()){
+		if (this.seSuperponeConOtraNave()) {
 			throw new SuperposicionNavesError("La posicion ya esta ocupada");		}
 		this.estaFueraDelPlano();
 	}

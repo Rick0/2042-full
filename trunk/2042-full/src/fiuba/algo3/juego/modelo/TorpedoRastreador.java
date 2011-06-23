@@ -1,18 +1,14 @@
 package fiuba.algo3.juego.modelo;
 
 import java.io.Serializable;
-
 import fiuba.algo3.juego.modelo.excepciones.ArmaUsadaError;
 
 
 public class TorpedoRastreador extends Arma implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2021359934861160328L;
 	private Nave naveRastreada;
-	private int tiempoDeVida = 450;
+	private int tiempoDeVida = 400;
 
 
 	public TorpedoRastreador (Punto punto, boolean origenAlgo, Plano plano) {

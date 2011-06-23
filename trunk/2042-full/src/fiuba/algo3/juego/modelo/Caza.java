@@ -9,9 +9,6 @@ import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
 public class Caza extends NaveNoOperable implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6097375138795523283L;
 	int numero, pasosAvanzados;
 
