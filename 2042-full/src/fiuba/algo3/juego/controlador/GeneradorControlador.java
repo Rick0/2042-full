@@ -5,6 +5,7 @@ import fiuba.algo3.juego.modelo.Plano;
 import fiuba.algo3.juego.modelo.Punto;
 import fiuba.algo3.juego.modelo.excepciones.AreaInvalidaError;
 import fiuba.algo3.juego.vista.PuntoEntero;
+import fiuba.algo3.juego.vista.TextoPuntosYNivel;
 import fiuba.algo3.juego.vista.TextoVidaEInventario;
 import fiuba.algo3.juego.vista.VentanaPrincipal;
 import fiuba.algo3.juego.vista.VistaAlgo42;
@@ -56,8 +57,14 @@ public class GeneradorControlador {
 		VistaVidaTexto vida = new VistaVidaTexto(textoVida);
 		vida.setPosicionable(new PuntoEntero(2,520));
 		
+		TextoPuntosYNivel textoPuntosYNivel = new TextoPuntosYNivel("Nivel: 1 Puntos: 0", plano.devolverNivel() );
+		VistaVidaTexto vistaTextoPuntosYNivel = new VistaVidaTexto(textoPuntosYNivel);
+		vistaTextoPuntosYNivel.setPosicionable(new PuntoEntero(2,495));
+		
 		controlador.agregarDibujable(vida);
 		controlador.agregarDibujable(vistaAlgo42);
+		controlador.agregarDibujable(vistaTextoPuntosYNivel);
+		controlador.agregarObjetoVivo(textoPuntosYNivel);
 		controlador.agregarObjetoVivo(algo42);
 		controlador.agregarObjetoVivo(textoVida);
 		controlador.agregarObjetoVivo(plano);
