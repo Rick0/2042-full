@@ -38,7 +38,7 @@ public abstract class Guia extends NaveNoOperable {
 
 		if (estaDestruida) {
 
-			Iterator<NaveNoOperable> iteradorNaves = flota.iterator();			
+			Iterator<NaveNoOperable> iteradorNaves = flota.iterator();
 			while (iteradorNaves.hasNext()) {
 				NaveNoOperable unaNave = iteradorNaves.next();
 				unaNave.huir();

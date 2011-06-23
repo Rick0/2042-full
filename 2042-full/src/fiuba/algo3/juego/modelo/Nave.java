@@ -40,7 +40,6 @@ public abstract class Nave extends ObjetoUbicable {
 			throw new NaveNoDestruidaError("La nave aun tiene energia en su tanque");
 		}
 		else {
-			System.out.println("nave destruida 1");
 			estaDestruida = true;
 			plano.agregarNaveEliminada(this);
 	//		new NaveExplosion(this.devolverPunto(), this.plano);

@@ -14,11 +14,11 @@ public class GeneradorFlota implements ObjetoVivo {
 
 	Plano plano;
 	int cantidadNaves;
-	static int velocidadSpawnear = 800;
+	static int velocidadSpawnear = 250;
 	int velocidadSpawnearCont;
 	boolean tengoQueGenerar;
 	int posEnY;
-	boolean necesitoJefe=false;
+	boolean necesitoJefe;
 
 
 	public GeneradorFlota(Plano planoJuego) {
@@ -27,6 +27,7 @@ public class GeneradorFlota implements ObjetoVivo {
 		velocidadSpawnearCont = velocidadSpawnear;
 		tengoQueGenerar = true;
 		posEnY = (this.plano.devolverAltura()-10);
+		necesitoJefe = false;
 
 		this.actualizarCantidadNaves();
 	}
@@ -38,20 +39,21 @@ public class GeneradorFlota implements ObjetoVivo {
 		this.actualizarCantidadNaves();
 		ArrayList<NaveNoOperable> lista = null;
 
-		if(necesitoJefe && (velocidadSpawnearCont == velocidadSpawnear) ){
+		if (necesitoJefe && (velocidadSpawnearCont == velocidadSpawnear)) {
 			this.generarJefe(lista);
+			System.out.println("generar jefe");
 			this.velocidadSpawnearCont = 0;
-			necesitoJefe=true;
+			necesitoJefe = true;
 		}
 		if ((tengoQueGenerar) && (velocidadSpawnearCont == velocidadSpawnear) && (cantidadNaves < 11)) {
-			lista=this.generarFlotaAlfa();
+			lista = this.generarFlotaAlfa();
 			this.velocidadSpawnearCont = 0;
-			necesitoJefe=true;
+			necesitoJefe = true;
 		}
 	}
 
 	private Guia1 generarJefe(ArrayList<NaveNoOperable> lista) {
-		Punto posNave = new Punto(150, this.posEnY);
+		Punto posNave = new Punto(150, this.posEnY-200);
 		Guia1 guia = null;
 		try {
 			guia = new Guia1(lista, posNave,this.plano);

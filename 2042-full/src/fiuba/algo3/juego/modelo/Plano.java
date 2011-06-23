@@ -28,6 +28,7 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 	private static final long serialVersionUID = -6986081234340150184L;
 	int ancho;
 	int altura;
+	int vidas;
 	Algo42 algo42;
 	ArrayList<Arma> listaArmas = new ArrayList<Arma>();
 	ArrayList<NaveNoOperable> listaNaves = new ArrayList<NaveNoOperable>();
@@ -46,6 +47,7 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 	public Plano(int dimensionX,int dimensionY) {
 		ancho  = dimensionX;
 		altura = dimensionY;
+		vidas = 3;
 	}
 
 	/* Devuelve la altura del plano */
