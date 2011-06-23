@@ -19,6 +19,7 @@ public class GeneradorFlota implements ObjetoVivo {
 	boolean tengoQueGenerar;
 	int posEnY;
 	boolean necesitoJefe;
+	ArrayList<NaveNoOperable> lista;
 
 
 	public GeneradorFlota(Plano planoJuego) {
@@ -37,13 +38,12 @@ public class GeneradorFlota implements ObjetoVivo {
 
 		this.pasaUnTiempo();
 		this.actualizarCantidadNaves();
-		ArrayList<NaveNoOperable> lista = null;
+
 
 		if (necesitoJefe && (velocidadSpawnearCont == velocidadSpawnear)) {
 			this.generarJefe(lista);
-			System.out.println("generar jefe");
 			this.velocidadSpawnearCont = 0;
-			necesitoJefe = true;
+			necesitoJefe = false;
 		}
 		if ((tengoQueGenerar) && (velocidadSpawnearCont == velocidadSpawnear) && (cantidadNaves < 11)) {
 			lista = this.generarFlotaAlfa();
