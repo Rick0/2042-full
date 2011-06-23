@@ -42,6 +42,7 @@ public abstract class NaveNoOperable extends Nave {
 
 		if(tengoQueHuir){
 			this.retirarse();
+			this.intentarChocar(this.plano.getAlgo42());
 		}
 		else{
 			this.intentarMover();
