@@ -55,11 +55,11 @@ public class GeneradorControlador {
 		vistaAlgo42.setPosicionable(algo42);
 		TextoVidaEInventario textoVida = new TextoVidaEInventario("Energia:"+"100", algo42);
 		VistaVidaTexto vida = new VistaVidaTexto(textoVida);
-		vida.setPosicionable(new PuntoEntero(2,520));
+		vida.setPosicionable(new PuntoEntero(75,520));
 		
 		TextoPuntosYNivel textoPuntosYNivel = new TextoPuntosYNivel("Nivel: 1 Puntos: 0", plano.devolverNivel() );
 		VistaVidaTexto vistaTextoPuntosYNivel = new VistaVidaTexto(textoPuntosYNivel);
-		vistaTextoPuntosYNivel.setPosicionable(new PuntoEntero(2,495));
+		vistaTextoPuntosYNivel.setPosicionable(new PuntoEntero(180,20));
 		
 		controlador.agregarDibujable(vida);
 		controlador.agregarDibujable(vistaAlgo42);
