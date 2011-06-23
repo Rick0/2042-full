@@ -42,11 +42,6 @@ public class GeneradorControlador {
 		vistaPlano.setPosicionable(plano);
 		controlador.agregarDibujable(vistaPlano);
 		controlador.agregarObjetoVivo(vistaPlano);
-		
-
-	//	GeneradorFlotas generador = new GeneradorFlotas(plano, controlador);
-		//Aqui el generador recibe su primer flota.
-	//	generador.generarFlota1();
 
 		VentanaPrincipal ventana = new VentanaPrincipal(controlador,algo42);
 		controlador.setSuperficieDeDibujo(ventana.getSuperficieDeDibujo());
@@ -54,9 +49,10 @@ public class GeneradorControlador {
 
 		VistaAlgo42 vistaAlgo42 = new VistaAlgo42();
 		vistaAlgo42.setPosicionable(algo42);
-		TextoVidaEInventario textoVida = new TextoVidaEInventario("Energia:"+"100", algo42);
-		VistaVidaTexto vida = new VistaVidaTexto(textoVida);
-		vida.setPosicionable(new PuntoEntero(75,520));
+
+		TextoVidaEInventario textoEnergia = new TextoVidaEInventario("Energia:"+"100", algo42);
+		VistaVidaTexto energia = new VistaVidaTexto(textoEnergia);
+		energia.setPosicionable(new PuntoEntero(75,560));
 		
 		TextoPuntosYNivel textoPuntosYNivel = new TextoPuntosYNivel("Nivel: 1 Puntos: 0", plano.devolverNivel() );
 		VistaVidaTexto vistaTextoPuntosYNivel = new VistaVidaTexto(textoPuntosYNivel);
@@ -65,16 +61,15 @@ public class GeneradorControlador {
 		VistaVidaTexto vistaVidas = new VistaVidaTexto(textoVidas);
 		vistaVidas.setPosicionable(new PuntoEntero(130,20));
 		
-		controlador.agregarDibujable(vida);
+		controlador.agregarDibujable(energia);
 		controlador.agregarDibujable(vistaVidas);
 		controlador.agregarDibujable(vistaAlgo42);
 		controlador.agregarDibujable(vistaTextoPuntosYNivel);
 		controlador.agregarObjetoVivo(textoPuntosYNivel);
 		controlador.agregarObjetoVivo(algo42);
-		controlador.agregarObjetoVivo(textoVida);
+		controlador.agregarObjetoVivo(textoEnergia);
 		controlador.agregarObjetoVivo(textoVidas);
 		controlador.agregarObjetoVivo(plano);
-	//	controlador.agregarObjetoVivo(generador);
 		controlador.setIntervaloSimulacion(20);	
 		
 		return controlador;
