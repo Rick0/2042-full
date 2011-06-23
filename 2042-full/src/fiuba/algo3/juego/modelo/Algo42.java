@@ -106,12 +106,30 @@ public class Algo42 extends Nave implements Serializable {
 		this.cohetes = (this.cohetes + cantidadCohetes);
 	}
 
+	/* Este metodo se llama cuando se destruye el Algo42
+	 * Este metodo lo resetea, dejandolo con sus valores iniciales
+	 */
+	private void resetearAlgo42() {
+
+		velocidadDisparoCont = velocidadDisparo;
+		velocidadDisparoCoheteCont = velocidadDisparoCohete;
+		velocidadDisparoTorpedoCont = velocidadDisparoTorpedo;
+		energia = 100;
+		torpedos = 0;
+		cohetes = 0;
+
+		Punto posInicial = new Punto(((this.plano.devolverAncho())/2)-32, (this.plano.devolverAltura()/6));
+		rectangulo.cambiarPosicion(posInicial);
+	}
+
 	@Override
 	/* Recibe una cierta cantidad de puntos y los suma a la energia de la nave */
 	public void modificarEnergia (int energiaAModificar) {
+
 		energia = energia + energiaAModificar;
 		if ( energia <= 0 ) {
-		//	estaDestruida = true;
+			this.resetearAlgo42();
+			this.plano.perderUnaVida();
 		}
 	}
 
