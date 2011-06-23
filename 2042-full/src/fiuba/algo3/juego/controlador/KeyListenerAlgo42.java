@@ -41,8 +41,10 @@ public class KeyListenerAlgo42 implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		int opcion=arg0.getKeyCode();
-		Controlable tecla= hash.get(opcion);
-		tecla.activarEfecto();
+		if(hash.containsKey(opcion)){
+			Controlable tecla= hash.get(opcion);
+			tecla.activarEfecto();
+		}
 	}
 
 	@Override
