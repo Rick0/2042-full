@@ -25,9 +25,6 @@ import fiuba.algo3.titiritero.Posicionable;
  */
 public class Plano implements Posicionable, ObjetoVivo, Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6986081234340150184L;
 	int ancho;
 	int altura;

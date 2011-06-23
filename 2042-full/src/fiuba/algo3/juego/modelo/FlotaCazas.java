@@ -3,16 +3,12 @@ package fiuba.algo3.juego.modelo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
 
 public class FlotaCazas implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -4108150044663064255L;
 	List<Caza> listaCazas, flotasMostradas;
 	int posicionXOriginal, posicionYOriginal;

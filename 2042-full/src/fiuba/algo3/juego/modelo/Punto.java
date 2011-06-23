@@ -1,6 +1,6 @@
 package fiuba.algo3.juego.modelo;
-import static java.lang.Math.sqrt;
 
+import static java.lang.Math.sqrt;
 import java.io.Serializable;
 
 
@@ -9,9 +9,6 @@ import java.io.Serializable;
  */
 public class Punto implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -423117653563270069L;
 	double posicionX;
 	double posicionY;

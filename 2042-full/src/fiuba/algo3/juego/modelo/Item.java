@@ -6,12 +6,9 @@ import java.io.Serializable;
 /* Clase abstracta de la cual heredaran los items del juego */
 public abstract class Item extends ObjetoUbicable implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -4828893549103315270L;
 	boolean fueUsado;
-	int tiempoDeVida = 600;
+	int tiempoDeVida = 500;
 
 
 	/* Recibe una nave Algo42 (la nave manejada por el usuario)

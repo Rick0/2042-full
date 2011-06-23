@@ -1,16 +1,12 @@
 package fiuba.algo3.juego.modelo;
 
 import java.io.Serializable;
-
 import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
 
 public class Explorador extends NaveNoOperable implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6855917678225418172L;
 	double anguloActual;
 	double puntosHaciaAbajo,radio,centroInicialX,centroInicialY;

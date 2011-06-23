@@ -9,9 +9,6 @@ import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
 public class Bombardero extends NaveNoOperable implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -7505650596285382873L;
 	double haciaDer, haciaIzq;
 

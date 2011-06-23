@@ -1,7 +1,6 @@
 package fiuba.algo3.juego.modelo;
 
 import java.util.Iterator;
-
 import fiuba.algo3.juego.modelo.excepciones.NaveNoDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 

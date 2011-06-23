@@ -8,9 +8,6 @@ import java.util.Iterator;
 /* Clase nivel. Se encarga de los puntos del nivel actual, los puntos acumulados y de pasar el nivel */
 public class Nivel implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 47192090769295819L;
 	int puntosNivelActual;
 	int puntosTotales;
