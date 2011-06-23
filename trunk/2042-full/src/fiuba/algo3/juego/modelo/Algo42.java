@@ -42,7 +42,6 @@ public class Algo42 extends Nave implements Serializable {
 
 	/* Crea una instancia de laser en la posicion del algo42 */
 	public void dispararLaser() {
-
 		if (velocidadDisparoCont == velocidadDisparo) {
 			int ancho = rectangulo.devolverAncho();
 			int altura = rectangulo.devolverAltura();

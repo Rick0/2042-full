@@ -51,7 +51,9 @@ public class GeneradorDeVista {
 		nombreClaseCompleto = new String(nombreClase);
 
 		if ((nombreClaseCompleto.equals("Laser")) || (nombreClaseCompleto.equals("Cohete")) || (nombreClaseCompleto.equals("TorpedoRastreador"))) {
-			if (((Arma)unObjeto).origenAlgo42()) { nombreClaseCompleto = ("fiuba.algo3.juego.vista.Vista" + nombreClaseCompleto + "HaciaArriba"); }
+			if (((Arma) unObjeto).origenAlgo42()) {
+				nombreClaseCompleto = ("fiuba.algo3.juego.vista.Vista" + nombreClaseCompleto + "HaciaArriba"); 
+				}
 			else { nombreClaseCompleto = ("fiuba.algo3.juego.vista.Vista" + nombreClaseCompleto + "HaciaAbajo"); }
 		}
 		else {
