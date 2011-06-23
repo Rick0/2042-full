@@ -26,7 +26,7 @@ public class TextoVidaEInventario implements ObjetoDeTexto, ObjetoVivo{
 	@Override
 	public void vivir() {
 		this.setTexto("Energia: "+Modelo.devolverEnergia()+""+
-				" ll Cohetes: "+Modelo.getCohetes()+""+" ll Torpedos: "+
+				"   Cohetes: "+Modelo.getCohetes()+""+"   Torpedos: "+
 				Modelo.getTorpedos()+"");
 		
 	}
