@@ -4,9 +4,12 @@ import fiuba.algo3.juego.modelo.Algo42;
 import fiuba.algo3.juego.modelo.Plano;
 import fiuba.algo3.juego.modelo.Punto;
 import fiuba.algo3.juego.modelo.excepciones.AreaInvalidaError;
+import fiuba.algo3.juego.vista.PuntoEntero;
+import fiuba.algo3.juego.vista.TextoVida;
 import fiuba.algo3.juego.vista.VentanaPrincipal;
 import fiuba.algo3.juego.vista.VistaAlgo42;
 import fiuba.algo3.juego.vista.VistaPlano;
+import fiuba.algo3.juego.vista.VistaVidaTexto;
 
 
 public class GeneradorControlador {
@@ -37,6 +40,7 @@ public class GeneradorControlador {
 		vistaPlano.setPosicionable(plano);
 		controlador.agregarDibujable(vistaPlano);
 		controlador.agregarObjetoVivo(vistaPlano);
+		
 
 	//	GeneradorFlotas generador = new GeneradorFlotas(plano, controlador);
 		//Aqui el generador recibe su primer flota.
@@ -48,9 +52,14 @@ public class GeneradorControlador {
 
 		VistaAlgo42 vistaAlgo42 = new VistaAlgo42();
 		vistaAlgo42.setPosicionable(algo42);
-
+		TextoVida textoVida = new TextoVida("Energia:"+"100", algo42);
+		VistaVidaTexto vida = new VistaVidaTexto(textoVida);
+		vida.setPosicionable(new PuntoEntero(10,20));
+		
+		controlador.agregarDibujable(vida);
 		controlador.agregarDibujable(vistaAlgo42);
 		controlador.agregarObjetoVivo(algo42);
+		controlador.agregarObjetoVivo(textoVida);
 		controlador.agregarObjetoVivo(plano);
 	//	controlador.agregarObjetoVivo(generador);
 		controlador.setIntervaloSimulacion(20);	
