@@ -66,7 +66,7 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 	/* Agrega una referencia a la nave destruida */
 	public void agregarNaveEliminada(Nave nave) throws NaveNoDestruidaError {
 
-		if(!nave.estaDestruida) {
+		if (((!nave.estaDestruida) && (!((NaveNoOperable)nave).fueraDelPlano))) {
 			throw new NaveNoDestruidaError("La nave aun no esta destruida");
 		}
 		listaNavesDestruidas.add((NaveNoOperable) nave);
