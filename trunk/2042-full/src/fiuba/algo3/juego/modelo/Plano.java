@@ -190,9 +190,6 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 
 	public void vivir() {
 
-	//	this.listaObjetosAAgregar.clear();
-	//	this.listaObjetosABorrar.clear();
-
 		//Eliminacion de naves, armas e items que ya no estan vigentes en el area de juego.
 		Iterator<Arma> iteradorArmasUsadas = listaArmasUsadas.iterator();
 		Iterator<Item> iteradorItemsUsados = listaItemsUsados.iterator();
