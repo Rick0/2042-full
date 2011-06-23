@@ -12,6 +12,12 @@ public abstract class NaveNoOperable extends Nave {
 
 	boolean fueraDelPlano;
 	int puntos;
+	public boolean tengoQueHuir=false;
+	
+	public void huir(){
+		tengoQueHuir=true;
+		
+	}
 
 
 	public NaveNoOperable() {
@@ -34,6 +40,9 @@ public abstract class NaveNoOperable extends Nave {
 	 * */
 	public void vivir() {
 
+		if(tengoQueHuir){
+			this.retirarse();
+		}
 		this.intentarMover();
 		this.intentarChocar(this.plano.getAlgo42());
 		this.pasaUnTiempo();
