@@ -37,7 +37,7 @@ public class PruebaPersistencia extends TestCase {
 		//Como un plano no puede ser igual a otro, compruebo que todos sus atributos sean iguales 
 		assertTrue("Altura del plano" , plano.devolverAltura() == planoRestaurado.devolverAltura() );
 		assertTrue("Ancho del plano" , plano.devolverAncho() == planoRestaurado.devolverAncho() );
-		assertTrue("Nilvel del plano" , plano.devolverNivel() == planoRestaurado.devolverNivel() );
+		assertTrue("Nilvel del plano" , plano.devolverNumeroDeNivel() == planoRestaurado.devolverNumeroDeNivel() );
 		assertTrue("Lista de armas del plano" , plano.devolverListaArmas().size() == planoRestaurado.devolverListaArmas().size() );
 		assertTrue("Lista de Naves del plano" , plano.devolverListaNaves().size() == planoRestaurado.devolverListaNaves().size() );
 		assertTrue("Lista de naves eliminadas del plano" , plano.devolverListaNavesEliminades().size() == planoRestaurado.devolverListaNavesEliminades().size() );
