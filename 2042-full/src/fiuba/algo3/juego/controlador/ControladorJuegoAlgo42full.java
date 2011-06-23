@@ -144,11 +144,8 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 	public void actualizarPlano() {
 
 	//	System.out.println(objetosVivos.toString());
-	//	Por construccion, el plano siempre se agrega primero, y por ende es el primero de los objetos vivos
-	//	Plano planoDelJuego = (Plano)(this.objetosVivos.get(9));
-
 		Plano planoDelJuego = this.plano;
-	
+
 		Iterator<ObjetoUbicable> iteradorObjetosAAgregar = planoDelJuego.devolverListaObjetosAAgregar().iterator();
 		while (iteradorObjetosAAgregar.hasNext()) {
 			ObjetoUbicable unObjeto = iteradorObjetosAAgregar.next();
@@ -157,6 +154,7 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 			this.agregarDibujable(unaVista);
 			this.agregarObjetoVivo(unObjeto);
 		}
+		planoDelJuego.devolverListaObjetosAAgregar().clear();
 
 		Iterator<ObjetoUbicable> iteradorObjetosABorrar = planoDelJuego.devolverListaObjetosABorrar().iterator();
 		while (iteradorObjetosABorrar.hasNext()) {
@@ -169,6 +167,7 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 			this.removerObjetoVivo(unObjeto);
 			this.tablaDeVistas.remove(unObjeto);
 		}
+		planoDelJuego.devolverListaObjetosABorrar().clear();
 	}
 
 	/** Le asigna una vista correspondiente al objeto pedido */
@@ -177,8 +176,8 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 		Imagen nuevaVista = this.generadorDeVista.devolverVista(unObjeto);
 		nuevaVista.setPosicionable(unObjeto);
 
-		System.out.println(unObjeto.getClass()+"  objeto clase");
-		System.out.println(nuevaVista.getClass()+"  vista clase \n");
+	//	System.out.println(unObjeto.getClass()+"  objeto clase");
+	//	System.out.println(nuevaVista.getClass()+"  vista clase \n");
 
 		return nuevaVista;
 	}
