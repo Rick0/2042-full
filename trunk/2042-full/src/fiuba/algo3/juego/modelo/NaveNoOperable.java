@@ -43,10 +43,12 @@ public abstract class NaveNoOperable extends Nave {
 		if(tengoQueHuir){
 			this.retirarse();
 		}
-		this.intentarMover();
-		this.intentarChocar(this.plano.getAlgo42());
-		this.pasaUnTiempo();
-		this.disparar();
+		else{
+			this.intentarMover();
+			this.intentarChocar(this.plano.getAlgo42());
+			this.pasaUnTiempo();
+			this.disparar();
+		}
 	}
 
 	/* La nave intenta moverse en una posicion diferente valida del plano. 
