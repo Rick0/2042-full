@@ -42,7 +42,7 @@ public abstract class Nave extends ObjetoUbicable {
 		else {
 			estaDestruida = true;
 			plano.agregarNaveEliminada(this);
-	//		new NaveExplosion(this.devolverPunto(), this.plano);
+			new NaveExplosion(this.devolverPunto(), this.plano);
 		}
 	}
 

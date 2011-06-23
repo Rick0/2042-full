@@ -52,7 +52,7 @@ public class GeneradorFlota implements ObjetoVivo {
 		}
 	}
 
-	private Guia1 generarJefe(ArrayList<NaveNoOperable> lista) {
+/*	private Guia1 generarJefe(ArrayList<NaveNoOperable> lista) {
 		Punto posNave = new Punto(150, this.posEnY-200);
 		Guia1 guia = null;
 		try {
@@ -62,9 +62,9 @@ public class GeneradorFlota implements ObjetoVivo {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return guia;
-		
-	}
+
+		return guia;		
+	}*/
 	
 	/* Genera una flota alfa, compuesto integramente por bombarderos, los aviones enemigos mas poderosos */
 	private void  generarFlotaAlfa() {

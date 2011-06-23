@@ -7,7 +7,7 @@ import fiuba.algo3.titiritero.*;
 public class VistaNaveExplosion extends Imagen implements ObjetoVivo {
 
 	int frameCont;
-	static int velocidadCambio = 5;
+	static int velocidadCambio = 4;
 	int velocidadCambioCont;
 
 

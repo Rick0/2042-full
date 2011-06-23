@@ -4,15 +4,14 @@ package fiuba.algo3.juego.modelo;
 /* Explosion de cualquier nave */
 public class NaveExplosion extends ObjetoUbicable {
 
-	int tiempoDeVida = 14;
+	int tiempoDeVida = 24;
 
 
 	public NaveExplosion(Punto punto, Plano unPlano) {
 
 		this.rectangulo = new Rectangulo(33, 33, punto);
-		this.determinarPlano(plano);
+		this.determinarPlano(unPlano);
 		this.plano.agregarObjetoNuevo(this);
-		System.out.println("explosion");
 	}
 
 	@Override
@@ -32,4 +31,3 @@ public class NaveExplosion extends ObjetoUbicable {
 	}
 
 }
-//new NaveExplosion(this.devolverPunto(), this.plano);
