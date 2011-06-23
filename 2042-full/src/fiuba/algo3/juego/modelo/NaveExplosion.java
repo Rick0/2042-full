@@ -12,7 +12,7 @@ public class NaveExplosion extends ObjetoUbicable {
 		this.rectangulo = new Rectangulo(33, 33, punto);
 		this.determinarPlano(plano);
 		this.plano.agregarObjetoNuevo(this);
-		System.out.println("explosionnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
+		System.out.println("explosion");
 	}
 
 	@Override
