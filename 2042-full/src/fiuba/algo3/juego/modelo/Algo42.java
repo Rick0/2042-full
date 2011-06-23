@@ -15,6 +15,10 @@ public class Algo42 extends Nave implements Serializable {
 	int movPixel = 5;
 	int torpedos;
 	int cohetes;
+	static int velocidadDisparoCohete = 20;
+	int velocidadDisparoCoheteCont;
+	static int velocidadDisparoTorpedo = 20;
+	int velocidadDisparoTorpedoCont;
 
 
 	/* Crea una nueva instancia de algo42, con ubicacion(determinada por un punto),
@@ -23,7 +27,9 @@ public class Algo42 extends Nave implements Serializable {
 	public Algo42(Punto punto,Plano planoJuego) throws AreaInvalidaError {
 
 		velocidadDisparo = 40;
-		velocidadDisparoCont = velocidadDisparo - 1;
+		velocidadDisparoCont = velocidadDisparo;
+		velocidadDisparoCoheteCont = velocidadDisparoCohete;
+		velocidadDisparoTorpedoCont = velocidadDisparoTorpedo;
 		plano = planoJuego;
 		energia = 100;
 		torpedos = 0;
@@ -43,9 +49,10 @@ public class Algo42 extends Nave implements Serializable {
 	/* Crea una instancia de laser en la posicion del algo42 */
 	public void dispararLaser() {
 		if (velocidadDisparoCont == velocidadDisparo) {
+
 			int ancho = rectangulo.devolverAncho();
 			int altura = rectangulo.devolverAltura();
-			Punto posLaser = new Punto(this.devolverPunto().getX()+(ancho/2), this.devolverPunto().getY()+altura);
+			Punto posLaser = new Punto(this.devolverPunto().getX()+(ancho/2)-9, this.devolverPunto().getY()+altura);
 			new Laser(posLaser, true, this.plano);
 			velocidadDisparoCont = 0;
 		}
@@ -53,27 +60,44 @@ public class Algo42 extends Nave implements Serializable {
 
 	/* Dispara un cohete en la posicion del algo42 */
 	public void dispararCohete() throws ArmaNoDisponibleError {
-		if ( cohetes <=0 ) {
-			throw new ArmaNoDisponibleError("No hay cohetes que lanzar.");
+
+		if (velocidadDisparoCoheteCont == velocidadDisparoCohete) {
+
+			if ( cohetes <=0 ) {
+				throw new ArmaNoDisponibleError("No hay cohetes que lanzar.");
+			}
+
+			int ancho = rectangulo.devolverAncho();
+			int altura = rectangulo.devolverAltura();
+			Punto posCohete = new Punto(this.devolverPunto().getX()+(ancho/2)-9, this.devolverPunto().getY()+altura);
+			new Cohete(posCohete, true, this.plano);
+			cohetes = (cohetes - 1);
+			velocidadDisparoCoheteCont = 0;
 		}
-		new Cohete( this.devolverPunto(), true, this.plano);
-		cohetes = (cohetes - 1);
 	}
 
 	/* Crea una instancia de torpedoRastreador; recibe una nave por parametro,
 	 * esa nave sera el objetivo del torpedo
 	 */
 	public void dispararTorpedoRastreadorHacia(Nave unaNave) throws ArmaNoDisponibleError, NaveARastrearError {
-		if (unaNave == this) { 
-			throw new NaveARastrearError("La nave rastreada no puede ser la misma algo");
-		}
-		if (torpedos <= 0) {
-			throw new ArmaNoDisponibleError("No hay torpedos que lanzar.");
-		}
 
-		TorpedoRastreador unTorpedo = new TorpedoRastreador(this.devolverPunto(), true, this.plano);
-		unTorpedo.determinarNaveRastreada(unaNave);
-		torpedos = (torpedos - 1);
+		if (velocidadDisparoTorpedoCont == velocidadDisparoTorpedo) {
+
+			if (unaNave == this) { 
+				throw new NaveARastrearError("La nave rastreada no puede ser la misma algo");
+			}
+			if (torpedos <= 0) {
+				throw new ArmaNoDisponibleError("No hay torpedos que lanzar.");
+			}
+
+			int ancho = rectangulo.devolverAncho();
+			int altura = rectangulo.devolverAltura();
+			Punto posTorpedo = new Punto(this.devolverPunto().getX()+(ancho/2)-9, this.devolverPunto().getY()+altura);
+			TorpedoRastreador unTorpedo = new TorpedoRastreador(posTorpedo, true, this.plano);
+			unTorpedo.determinarNaveRastreada(unaNave);
+			torpedos = (torpedos - 1);
+			velocidadDisparoTorpedoCont = 0;
+		}
 	}
 
 	/* Aumenta las cantidades de torpedos y cohetes recibidos por parametro */
@@ -162,6 +186,21 @@ public class Algo42 extends Nave implements Serializable {
 	@Override
 	public void vivir() {
 		this.pasaUnTiempo();
+	}
+
+	@Override
+	/* En cada instante, se actualiza el contador de velocidad de disparo de las 3 armas */
+	public void pasaUnTiempo() {
+
+		if (velocidadDisparoCont < velocidadDisparo) {
+			velocidadDisparoCont++;
+		}
+		if (velocidadDisparoCoheteCont < velocidadDisparoCohete) {
+			velocidadDisparoCoheteCont++;
+		}
+		if (velocidadDisparoTorpedoCont < velocidadDisparoTorpedo) {
+			velocidadDisparoTorpedoCont++;
+		}
 	}
 
 }
