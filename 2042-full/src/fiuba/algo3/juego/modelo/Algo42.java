@@ -26,7 +26,7 @@ public class Algo42 extends Nave implements Serializable {
 	 */
 	public Algo42(Punto punto,Plano planoJuego) throws AreaInvalidaError {
 
-		velocidadDisparo = 40;
+		velocidadDisparo = 25;
 		velocidadDisparoCont = velocidadDisparo;
 		velocidadDisparoCoheteCont = velocidadDisparoCohete;
 		velocidadDisparoTorpedoCont = velocidadDisparoTorpedo;

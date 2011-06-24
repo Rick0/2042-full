@@ -7,7 +7,7 @@ import fiuba.algo3.titiritero.*;
 public class VistaNaveExplosion extends Imagen implements ObjetoVivo {
 
 	int frameCont;
-	static int velocidadCambio = 4;
+	static int velocidadCambio = 3;
 	int velocidadCambioCont;
 
 
@@ -30,12 +30,12 @@ public class VistaNaveExplosion extends Imagen implements ObjetoVivo {
 
 		if (velocidadCambioCont == velocidadCambio) {
 
-			if (frameCont < 6) {
+			if (frameCont < 7) {
 				frameCont++;
 				this.setNombreArchivoImagen("recursos/Nave/Explosion/Explosion"+frameCont+".png");
 			}
 			else {
-				this.setNombreArchivoImagen("recursos/Nave/Explosion/Explosion5.png");
+				this.setNombreArchivoImagen("recursos/Nave/Explosion/Explosion6.png");
 			}
 
 			velocidadCambioCont = 0;

@@ -165,6 +165,16 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 		while (iteradorObjetosABorrar.hasNext()) {
 			ObjetoUbicable unObjeto = iteradorObjetosABorrar.next();
 			Imagen unaVista = this.tablaDeVistas.get(unObjeto);
+
+			if (unaVista != null) {
+				if (unaVista.getClass().toString().equals("class fiuba.algo3.juego.vista.VistaNaveExplosion")) {
+					this.removerObjetoVivo((ObjetoVivo)unaVista);
+				}
+			}
+			else {
+				System.out.println("Vista apunta a null...");
+			}
+
 			this.removerDibujable(unaVista);
 			this.removerObjetoVivo(unObjeto);
 			this.tablaDeVistas.remove(unObjeto);

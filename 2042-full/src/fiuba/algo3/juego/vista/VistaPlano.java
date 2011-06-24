@@ -7,7 +7,7 @@ import fiuba.algo3.titiritero.*;
 public class VistaPlano extends Imagen implements ObjetoVivo {
 
 	int frameCont;
-	static int velocidadCambio = 12;
+	static int velocidadCambio = 7;
 	int velocidadCambioCont;
 
 
