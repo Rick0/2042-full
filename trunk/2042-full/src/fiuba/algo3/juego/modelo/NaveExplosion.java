@@ -4,7 +4,7 @@ package fiuba.algo3.juego.modelo;
 /* Explosion de cualquier nave */
 public class NaveExplosion extends ObjetoUbicable {
 
-	int tiempoDeVida = 24;
+	int tiempoDeVida = 22;
 
 
 	public NaveExplosion(Punto punto, Plano unPlano) {
