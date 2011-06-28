@@ -1,75 +1,40 @@
-<?xml version="1.0" encoding="iso-8859-1" ?>
-<!DOCTYPE project>
-<project name="TP2-Algo42Full" default="ayuda" basedir=".">
-  
-  	<property name="build.dir" value="bin/" /> 
-  	<property name="src.dir" value="src/" /> 
-  	<property name="lib.dir" value="lib/" />
-  	<property name="doc.dir" value="documentacion/javadoc" />
-  	<property name="zip.name" value="Entrega.zip" />
+<project name="Algo2042" basedir="." default="ejecutar.tests">
+	<property name="build" location="build" />
+	<property name="lib" location="lib" />
 	
-	<target name="limpiar">
-		<delete dir = "${build.dir}" />
-		<delete dir = "${doc.dir}" />
-		<delete file= "${zip.name}" />
+	<path id="classpath">
+		<fileset dir="${lib}">
+			<include name="*.jar" />
+		</fileset>
+		 <pathelement location="${build}\app" />
+		 <pathelement location="${build}\tests" />
+	</path>
+	
+	<target name="setup">
+		<delete dir="${build}" />
+		<mkdir dir="${build}"/>
+		<mkdir dir="${build}\app"/>
+		<mkdir dir="${build}\tests"/>
 	</target>
-	
-	<target name="compilar" depends="limpiar">
-		<mkdir dir="${build.dir}" /> 
-		<javac srcdir="${src.dir}" includeantruntime="true" classpath="${lib.dir}"/>
-		<javac srcdir="${src.dir}" classpath="${lib.dir}" destdir="${build.dir}" />
- 	</target>
+		
+	<target name="compilar.aplicacion" depends="setup">
+		<javac srcdir="src" destdir="${build}\app"></javac>
+	</target>
+ 
+	<target name="compilar.tests" depends="compilar.aplicacion">
+		<javac srcdir="test" destdir="${build}\tests">
+			<classpath refid="classpath" />
+		</javac>
+	</target>
 
-	<target name="correr" depends="compilar">
-		<java fork="yes" classname="algo3.Principal">
-			<classpath>	
-				<pathelement path="${build.dir}" />
-				<fileset dir="lib">
-					<include name="**/*.jar"/>
-				</fileset>
-			</classpath>
-		</java>
-  	</target>
-	
-	<target name="corrertests" depends="compilar">	
-		<junit>
-			<classpath>	
-				<pathelement path="${build.dir}" />
-				<fileset dir="lib">
-					<include name="**/*.jar"/>
-				</fileset>
-			</classpath>
+	<target name="ejecutar.tests" depends="compilar.tests">
+		<junit failureProperty="test.failure" >
+			<classpath refid="classpath" />
 			<formatter type="brief" usefile="false" />
 			<batchtest>
-				<fileset dir="${build.dir}" includes="**/*Test.class" />
+				<fileset dir="${build}\tests" includes="**/*Test.class" />
 			</batchtest>
 		</junit>
-  	</target>
-
-	<target name="generarjavadocs" depends="limpiar">	
-	  <javadoc packagenames="*"
-	           sourcepath="${src.dir}"
-	           defaultexcludes="yes"
-	           destdir="${doc.dir}"
-	           author="true"
-	           version="true"
-	           use="true"
-	           windowtitle="Proyecto Base Algo3">
-	    <doctitle><![CDATA[<h1>Proyecto Base Algo3</h1>]]></doctitle>
-	  </javadoc>
-	</target>
-	
-	<target name="generarentrega" depends="generarjavadocs">
-		<zip destfile="${zip.name}" basedir="."/>
-		<echo>Archivo ${zip.name} generado.</echo>
-	</target>
-	
-	<target name="ayuda">
-		<echo>ant compilar : compila el programa</echo>
-		<echo>ant corrertests : compila el programa y corre los tests</echo>
-		<echo>ant correr : compila el programa y ejecuta el programa</echo>
-		<echo>ant generarjavadocs : generar los javadocs</echo>
-		<echo>ant generarentrega : genera un zip listo para entregar</echo>
-	</target>
-
+		<fail message="Pruebas fallidas" if="test.failure" />
+  </target>	
 </project>
