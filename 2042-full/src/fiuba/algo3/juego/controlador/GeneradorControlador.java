@@ -6,12 +6,12 @@ import fiuba.algo3.juego.modelo.Punto;
 import fiuba.algo3.juego.modelo.excepciones.AreaInvalidaError;
 import fiuba.algo3.juego.vista.PuntoEntero;
 import fiuba.algo3.juego.vista.TextoPuntosYNivel;
-import fiuba.algo3.juego.vista.TextoVidaEInventario;
+import fiuba.algo3.juego.vista.TextoEnergiaEInventario;
 import fiuba.algo3.juego.vista.TextoVidas;
 import fiuba.algo3.juego.vista.VentanaPrincipal;
 import fiuba.algo3.juego.vista.VistaAlgo42;
 import fiuba.algo3.juego.vista.VistaPlano;
-import fiuba.algo3.juego.vista.VistaVidaTexto;
+import fiuba.algo3.juego.vista.VistaEnergiaEInventario;
 
 
 public class GeneradorControlador {
@@ -46,28 +46,31 @@ public class GeneradorControlador {
 		VentanaPrincipal ventana = new VentanaPrincipal(controlador,algo42);
 		controlador.setSuperficieDeDibujo(ventana.getSuperficieDeDibujo());
 		ventana.setVisible(true);
+		ventana.setAlwaysOnTop(true);
+		ventana.setEnabled(true);
+		ventana.enableInputMethods(true);
 
 		VistaAlgo42 vistaAlgo42 = new VistaAlgo42();
 		vistaAlgo42.setPosicionable(algo42);
 
-		TextoVidaEInventario textoEnergia = new TextoVidaEInventario("Energia:"+"100", algo42);
-		VistaVidaTexto energia = new VistaVidaTexto(textoEnergia);
+		TextoEnergiaEInventario textoEnergiaEInventario = new TextoEnergiaEInventario("Energia:"+"100", algo42);
+		VistaEnergiaEInventario energia = new VistaEnergiaEInventario(textoEnergiaEInventario);
 		energia.setPosicionable(new PuntoEntero(75,560));
 		
 		TextoPuntosYNivel textoPuntosYNivel = new TextoPuntosYNivel("Nivel: 1 Puntos: 0", plano.devolverNivel() );
-		VistaVidaTexto vistaTextoPuntosYNivel = new VistaVidaTexto(textoPuntosYNivel);
+		VistaEnergiaEInventario vistaTextoPuntosYNivel = new VistaEnergiaEInventario(textoPuntosYNivel);
 		vistaTextoPuntosYNivel.setPosicionable(new PuntoEntero(220,20));
 		TextoVidas textoVidas = new TextoVidas("Vidas: 3",plano);
-		VistaVidaTexto vistaVidas = new VistaVidaTexto(textoVidas);
-		vistaVidas.setPosicionable(new PuntoEntero(130,20));
+		VistaEnergiaEInventario vistaCantidadVidas = new VistaEnergiaEInventario(textoVidas);
+		vistaCantidadVidas.setPosicionable(new PuntoEntero(130,20));
 		
 		controlador.agregarDibujable(energia);
-		controlador.agregarDibujable(vistaVidas);
+		controlador.agregarDibujable(vistaCantidadVidas);
 		controlador.agregarDibujable(vistaAlgo42);
 		controlador.agregarDibujable(vistaTextoPuntosYNivel);
 		controlador.agregarObjetoVivo(textoPuntosYNivel);
 		controlador.agregarObjetoVivo(algo42);
-		controlador.agregarObjetoVivo(textoEnergia);
+		controlador.agregarObjetoVivo(textoEnergiaEInventario);
 		controlador.agregarObjetoVivo(textoVidas);
 		controlador.agregarObjetoVivo(plano);
 		controlador.setIntervaloSimulacion(20);	
