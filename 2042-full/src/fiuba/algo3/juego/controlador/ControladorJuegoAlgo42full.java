@@ -47,6 +47,9 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 				actualizarPlano();
 				dibujar();
 				Thread.sleep(intervaloSimulacion);
+				if( plano.getVidas()<0 ) {
+					this.detenerJuego();
+				}
 			}
 		}
 		catch (Exception e) {
@@ -239,6 +242,7 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 	}
 	
 	public void persistir(String archivo) {
+		this.detenerJuego();
 		try {
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream( archivo ));
 			oos.writeObject(this);
