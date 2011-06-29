@@ -100,7 +100,7 @@ public class VentanaPrincipal extends JFrame {
 					GeneradorFlota generadorFlota = new GeneradorFlota(plano);
 					controlador.agregarObjetoVivo(generadorFlota);
 
-					controlador.comenzarJuego();
+					controlador.comenzarJuegoAsyn();
 				}
 			});
 		}
