@@ -22,7 +22,7 @@ public class VentanaPrincipal extends JFrame {
 	private JPanel jPanel = null;
 	private JButton jButtonJuegoNuevo = null;
 	private JButton jButtonRestaurar = null;
-	private JButton jButtonMaximos = null;
+	private JButton jButtonSalir = null;
 	private JLabel jLabelTitulo = null;
 
 	/**
@@ -74,7 +74,7 @@ public class VentanaPrincipal extends JFrame {
 			jPanel.setBackground(Color.WHITE);
 			jPanel.add(getJButtonJuegoNuevo(), null);
 			jPanel.add(getJButtonRestaurar(), null);
-			jPanel.add(getJButtonMaximos(), null);
+			jPanel.add(getJButtonSalir(), null);
 			jPanel.add(jLabelTitulo, null);
 		}
 		return jPanel;
@@ -116,28 +116,36 @@ public class VentanaPrincipal extends JFrame {
 		if (jButtonRestaurar == null) {
 			jButtonRestaurar = new JButton();
 			jButtonRestaurar.setBounds(new Rectangle(112, 153, 153, 26));
+			jButtonRestaurar.setText("Restaurar");
+			jButtonRestaurar.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					System.out.println("Restaurar()");
+					ControladorJuegoAlgo42full controlador = ControladorJuegoAlgo42full.restaurar("savegame.dat"); 
+					controlador.comenzarJuegoAsyn();
+				}
+			});
 		}
 		return jButtonRestaurar;
 	}
 
 	/**
-	 * This method initializes jButtonMaximos	
+	 * This method initializes jButtonSalir	
 	 * 	
 	 * @return javax.swing.JButton	
 	 */
-	private JButton getJButtonMaximos() {
-		if (jButtonMaximos == null) {
-			jButtonMaximos = new JButton();
-			jButtonMaximos.setBounds(new Rectangle(112, 200, 153, 26));
-			jButtonMaximos.setText("Salir");
-			jButtonMaximos.addActionListener(new java.awt.event.ActionListener() {
+	private JButton getJButtonSalir() {
+		if (jButtonSalir == null) {
+			jButtonSalir = new JButton();
+			jButtonSalir.setBounds(new Rectangle(112, 200, 153, 26));
+			jButtonSalir.setText("Salir");
+			jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					System.out.println("Salir");
 					System.exit( 0 );
 				}
 			});
 		}
-		return jButtonMaximos;
+		return jButtonSalir;
 	}
 
 }  //  @jve:decl-index=0:visual-constraint="10,10"
