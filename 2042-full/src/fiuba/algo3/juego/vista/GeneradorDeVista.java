@@ -11,7 +11,7 @@ public class GeneradorDeVista {
 	}
 
 	/* Devuelve una vista dependiendo del objeto ubicable que se le pase */
-	@SuppressWarnings({ "rawtypes" })
+	@SuppressWarnings({ "unchecked" })
 	public Imagen devolverVista(ObjetoUbicable unObjeto) {
 
 		String nombreClase = this.convertirANombreClase(unObjeto);
