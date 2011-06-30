@@ -1,4 +1,4 @@
-package fiuba.algo3.juego.pruebas;
+package fiuba.algo3.juego.test;
 
 import java.util.ArrayList;
 import java.util.Iterator;

@@ -1,4 +1,4 @@
-package fiuba.algo3.juego.pruebas;
+package fiuba.algo3.juego.test;
 
 import junit.framework.TestCase;
 import fiuba.algo3.juego.modelo.Helicoptero;
