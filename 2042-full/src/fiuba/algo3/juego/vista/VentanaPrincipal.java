@@ -33,6 +33,7 @@ public class VentanaPrincipal extends Frame {
 		panel.setBackground(Color.black);
 
 		this.addKeyListener(new KeyListenerAlgo42(algo));
+		this.addKeyListener(new KeyListnerOpciones(controladorJuego));
 		
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {

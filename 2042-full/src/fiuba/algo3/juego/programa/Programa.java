@@ -16,7 +16,7 @@ public class Programa {
 		controlador.agregarObjetoVivo(generadorFlota);
 
 		controlador.comenzarJuego();*/
-		new VentanaPrincipal();
+		new VentanaInicial();
 	}
 
 }
