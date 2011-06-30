@@ -14,7 +14,7 @@ import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
 
-public class PruebaAvioneta extends TestCase{
+public class AvionetaTest extends TestCase{
 
 	@Test
 	public void testMoverAvioneta() throws SuperposicionNavesError, NaveDestruidaError {

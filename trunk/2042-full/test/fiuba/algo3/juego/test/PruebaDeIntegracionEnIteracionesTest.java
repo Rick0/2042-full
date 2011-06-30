@@ -34,7 +34,7 @@ import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
 
-public class PruebaIntegracionEnIteraciones extends TestCase {
+public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 	
 	/*Prueba bastantes aspectos del juego: la creacion de niveles, manejo del area del juego,
 	algunas funciones basicas del algo 42 y de las naves enemigas, y de la nave que las guia*/

@@ -13,7 +13,7 @@ import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
 
-public class PruebaPersistencia extends TestCase {
+public class PersistenciaTest extends TestCase {
 	
 	@Test
 	@SuppressWarnings("unused")
