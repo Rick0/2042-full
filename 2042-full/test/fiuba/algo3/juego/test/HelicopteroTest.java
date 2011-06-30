@@ -8,7 +8,7 @@ import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
 
-public class PruebaHelicoptero extends TestCase {
+public class HelicopteroTest extends TestCase {
 	
 	public void testMoverHelicoptero() throws SuperposicionNavesError, NaveDestruidaError{
 	/*Prueba los movimientos de los helicopteros.*/

@@ -16,7 +16,7 @@ import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
 
-public class PruebaNaveNoOperable extends TestCase {
+public class NaveNoOperableTest extends TestCase {
 	
 
 	@Test

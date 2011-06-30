@@ -5,7 +5,7 @@ import junit.framework.TestCase;
 import fiuba.algo3.juego.modelo.Punto;
 import fiuba.algo3.juego.modelo.Rectangulo;
 
-public class PruebaRectangulo extends TestCase{
+public class RectanguloTest extends TestCase{
 
 	public void testSuperposicionRectangulos(){
 

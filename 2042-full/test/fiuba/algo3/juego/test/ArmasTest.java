@@ -19,7 +19,7 @@ import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
 
-public class PruebaArmas extends TestCase {
+public class ArmasTest extends TestCase {
 
 	@Test
 	public void testAtaqueInvalidoArmaAlgo42() throws AtaqueEntreNavesNoOperables, AreaInvalidaError{
