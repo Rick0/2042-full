@@ -56,10 +56,11 @@ public class GeneradorFlota implements ObjetoVivo {
 			Random generadorRandom = new Random();
 			int i = generadorRandom.nextInt(tablaGeneradorFlotas.size());
 			GenerarFlota unGeneradorFlota = tablaGeneradorFlotas.get(i);
+		//	GenerarFlota unGeneradorFlota = tablaGeneradorFlotas.get(13);
 			unGeneradorFlota.generar();
 
 			this.velocidadSpawnearCont = 0;
-			necesitoJefe = true;
+			this.necesitoJefe = true;
 		}
 	}
 
@@ -76,13 +77,6 @@ public class GeneradorFlota implements ObjetoVivo {
 
 		return guia;		
 	}*/
-
-	/* Genera una flota epsilon, 4 naves al azar, tanto enemigas como neutrales */
-	public void generarFlotaEpsilon() {
-
-		// place holder
-
-	}
 
 	/* En cada instante, se actualiza el contador de velocidad de generar flota */
 	public void pasaUnTiempo() {
@@ -114,18 +108,37 @@ public class GeneradorFlota implements ObjetoVivo {
 
 			GenerarFlota generarFlotaAlfa = new GenerarFlotaAlfa(this.posEnY, this.plano);
 			GenerarFlota generarFlotaBeta = new GenerarFlotaBeta(this.posEnY, this.plano);
-		//	GenerarFlota generarFlotaDelta = new GenerarFlotaDelta(this.posEnY, this.plano);
 			GenerarFlota generarFlotaGamma = new GenerarFlotaGamma(this.posEnY, this.plano);
+		//	GenerarFlota generarFlotaDelta = new GenerarFlotaDelta(this.posEnY, this.plano);
+
 			GenerarFlota generarFlotaOmega = new GenerarFlotaOmega(this.posEnY, this.plano);
+			GenerarFlota generarFlotaEpsilon = new GenerarFlotaEpsilon(this.posEnY, this.plano);
+			GenerarFlota generarFlotaUpsilon = new GenerarFlotaUpsilon(this.posEnY, this.plano);
+			
+			GenerarFlota generarFlotaMu = new GenerarFlotaMu(this.posEnY, this.plano);
+			GenerarFlota generarFlotaNu = new GenerarFlotaNu(this.posEnY, this.plano);
 
 
 			tablaGeneradorFlotas.put(0, generarFlotaAlfa);
 			tablaGeneradorFlotas.put(1, generarFlotaBeta);
-		//	tablaGeneradorFlotas.put(2, generarFlotaDelta);
 			tablaGeneradorFlotas.put(2, generarFlotaGamma);
+		//	tablaGeneradorFlotas.put(3, generarFlotaDelta);
+
 			tablaGeneradorFlotas.put(3, generarFlotaOmega);
 			tablaGeneradorFlotas.put(4, generarFlotaOmega);
 			tablaGeneradorFlotas.put(5, generarFlotaOmega);
+			tablaGeneradorFlotas.put(6, generarFlotaOmega);
+			tablaGeneradorFlotas.put(7, generarFlotaEpsilon);
+			tablaGeneradorFlotas.put(8, generarFlotaEpsilon);
+			tablaGeneradorFlotas.put(9, generarFlotaUpsilon);
+
+			tablaGeneradorFlotas.put(10, generarFlotaMu);
+			tablaGeneradorFlotas.put(11, generarFlotaMu);
+			tablaGeneradorFlotas.put(12, generarFlotaMu);
+			tablaGeneradorFlotas.put(13, generarFlotaNu);
+			tablaGeneradorFlotas.put(14, generarFlotaNu);
+			tablaGeneradorFlotas.put(15, generarFlotaNu);
+
 		}
 	}
 
