@@ -149,4 +149,9 @@ public abstract class Arma extends ObjetoUbicable implements Serializable {
 		}
 	}
 
+	/* El arma pasa a estar usado */
+	public void pasaAEstarUsado() {
+		this.fueUsado = true;
+	}
+
 }

@@ -103,10 +103,26 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 
 	/* Decrece una vida del juego, consecuencia de que se destruyo el Algo42 
 	 * Si se pierden las 3 vidas, se pierde el juego
+	 * Se borran todas las armas en el plano cuando muere Algo42
 	 */
 	public void perderUnaVida() {
 
 		vidas = vidas - 1;
+
+		Iterator<Arma> iteradorArmas = listaArmas.iterator();
+		while(iteradorArmas.hasNext()) {
+		    Arma unArma = iteradorArmas.next(); 
+		    if (!unArma.fueUsado()) {
+				unArma.pasaAEstarUsado();
+				try {
+					this.agregarArmaUsada(unArma);
+				} catch (ArmaNoUsadaError e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
 		if ((vidas <= 0) && (!juegoGanado)) {
 			juegoPerdido = true;
 		}
