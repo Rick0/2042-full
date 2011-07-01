@@ -26,6 +26,25 @@ public class KeyListenerAlgo42 implements KeyListener {
 		hash = cargarDiccionarioControles();
 	}
 
+	@Override
+	public synchronized void keyPressed(KeyEvent arg0) {
+		int opcion = arg0.getKeyCode();
+		if (hash.containsKey(opcion)) {
+			Controlable tecla = hash.get(opcion);
+			tecla.activarEfecto();
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+	}
+
 	private HashMap<Integer, Controlable> cargarDiccionarioControles() {
 
 		HashMap<Integer, Controlable> diccionario = new HashMap<Integer, Controlable>();
@@ -49,25 +68,6 @@ public class KeyListenerAlgo42 implements KeyListener {
 		diccionario.put(KeyEvent.VK_Z, botonZControlable);
 
 		return diccionario;
-	}
-
-	@Override
-	public synchronized void keyPressed(KeyEvent arg0) {
-		int opcion = arg0.getKeyCode();
-		if (hash.containsKey(opcion)) {
-			Controlable tecla = hash.get(opcion);
-			tecla.activarEfecto();
-		}
-	}
-
-	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
 	}
 
 }

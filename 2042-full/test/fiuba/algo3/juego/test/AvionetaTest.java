@@ -20,12 +20,12 @@ public class AvionetaTest extends TestCase{
 	 */
 	public void testMoverAvioneta() throws SuperposicionNavesError, NaveDestruidaError {
 
-		Plano plano = new Plano(100, 100);
-		Punto punto= new Punto(50,95);
+		Plano plano = new Plano(500, 500);
+		Punto punto= new Punto(50,450);
 		Avioneta avioneta = new Avioneta(punto, plano);
 		
-		int n = 0, posY = 95;
-		while ( n < 31 ) {
+		int n = 0, posY = 450;
+		while ( n < ((avioneta.devolverPuntosAdelante())/2)+1 ) {
 			n++;
 			avioneta.mover();
 			posY = (posY - 2);
@@ -35,15 +35,15 @@ public class AvionetaTest extends TestCase{
 		posY = (posY + 2);
 		assertTrue(avioneta.devolverPunto().getY() == posY);
 	}
-	
+
 	@Test
 	/* Prueba el movimiento alternativo de la avioneta */
 	public void testMoverAvionetaAlternativo() throws SuperposicionNavesError, NaveDestruidaError {
 
-		Plano plano = new Plano(100, 100);
-		Punto punto= new Punto(50,95);
+		Plano plano = new Plano(500, 500);
+		Punto punto= new Punto(50,450);
 		Avioneta avioneta = new Avioneta(punto, plano);
-		double n = 0, posY = 95;
+		double n = 0, posY = 450;
 		
 		while ( n < 10 ) {
 			
@@ -53,32 +53,26 @@ public class AvionetaTest extends TestCase{
 			assertEquals( avioneta.devolverPunto().getY() , posY );
 		}
 
-		assertEquals( avioneta.devolverPunto().getY() , 75.0 );
+		assertEquals( avioneta.devolverPunto().getY() , 430.0 );
 		avioneta.moverAlternativo();
-		assertEquals( "La avioneta debe subir dos casillas", avioneta.devolverPunto().getY(), 77.0);
+		assertEquals( "La avioneta debe subir dos casillas", avioneta.devolverPunto().getY(), 432.0);
 		//Pero al llamar a mover, deberia bajar de nuevo.
 		avioneta.mover();
-		assertEquals( avioneta.devolverPunto().getY() , 75.0 );
-		posY = 75;
+		assertEquals( avioneta.devolverPunto().getY() , 430.0 );
+		posY = avioneta.devolverPunto().getY();
 
-		for (int i=1; i < 31; i++) {
+		for (int i=1; i < ((avioneta.devolverPuntosAdelante())/2)+1; i++) {
 			avioneta.mover();
 			posY = (posY - 2);
 			assertEquals( avioneta.devolverPunto().getY(), posY );
 		}
-		assertTrue( posY == 15 );
+		assertTrue( posY == avioneta.devolverPunto().getY() );
 
 		//Ahora deberia empezar a subir al llamar a mover
 		avioneta.mover();
-		posY = avioneta.devolverPunto().getY();
-		assertTrue( posY == 17 );
-		avioneta.moverAlternativo();
-		posY = avioneta.devolverPunto().getY();
-
-		//Ahora el mover alternativo deberia ir hacia atras.
-		assertTrue( posY == 15);
+		assertTrue( posY+2 == avioneta.devolverPunto().getY() );
 	}
-	
+
 	@Test
 	/* Prueba el lanzamiento de armas laser */
 	public void testLanzamientoLaser() throws SuperposicionNavesError, NaveDestruidaError {
