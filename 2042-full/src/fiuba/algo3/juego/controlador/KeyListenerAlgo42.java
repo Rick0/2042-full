@@ -52,7 +52,7 @@ public class KeyListenerAlgo42 implements KeyListener {
 	}
 
 	@Override
-	public void keyPressed(KeyEvent arg0) {
+	public synchronized void keyPressed(KeyEvent arg0) {
 		int opcion = arg0.getKeyCode();
 		if (hash.containsKey(opcion)) {
 			Controlable tecla = hash.get(opcion);

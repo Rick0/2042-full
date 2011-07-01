@@ -8,10 +8,13 @@ import fiuba.algo3.juego.controlador.operacionesAlgo.Controlable;
 import fiuba.algo3.juego.controlador.operacionesJuego.BotonGControlable;
 import fiuba.algo3.juego.controlador.operacionesJuego.BotonPControlable;
 
+
 public class KeyListnerOpciones implements KeyListener {
+
 	private HashMap<Integer, Controlable> hash;
 	private ControladorJuegoAlgo42full controlador;
-	
+
+
 	public KeyListnerOpciones(ControladorJuegoAlgo42full ctrl) {
 		controlador = ctrl;
 		hash = this.cargarDiccionarioControles();
@@ -37,17 +40,14 @@ public class KeyListnerOpciones implements KeyListener {
 		}
 	}
 
-
 	@Override
 	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 	}
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 
 }
