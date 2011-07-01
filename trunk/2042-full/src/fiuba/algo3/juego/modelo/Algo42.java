@@ -19,6 +19,7 @@ public class Algo42 extends Nave implements Serializable {
 	int velocidadDisparoCoheteCont;
 	static int velocidadDisparoTorpedo = 20;
 	int velocidadDisparoTorpedoCont;
+	static int energiaMaxima = 100;
 
 
 	/* Crea una nueva instancia de algo42, con ubicacion(determinada por un punto),
@@ -31,7 +32,7 @@ public class Algo42 extends Nave implements Serializable {
 		velocidadDisparoCoheteCont = velocidadDisparoCohete;
 		velocidadDisparoTorpedoCont = velocidadDisparoTorpedo;
 		plano = planoJuego;
-		energia = 100;
+		energia = energiaMaxima;
 		torpedos = 0;
 		cohetes = 0;
 		estaDestruida = false;
@@ -128,7 +129,12 @@ public class Algo42 extends Nave implements Serializable {
 	public void modificarEnergia (int energiaAModificar) {
 
 		energia = energia + energiaAModificar;
-		if ( energia <= 0 ) {
+
+		if (energia > energiaMaxima) {
+			energia = energiaMaxima;
+		}
+
+		if (energia <= 0) {
 
 			this.estaDestruida = true;
 			new NaveExplosion(this.devolverPunto(), this.plano);
