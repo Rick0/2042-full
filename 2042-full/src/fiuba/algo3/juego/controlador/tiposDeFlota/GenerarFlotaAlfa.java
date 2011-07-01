@@ -8,10 +8,7 @@ import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
 
-public class GenerarFlotaAlfa implements GenerarFlota {
-
-	int posEnY;
-	Plano plano;
+public class GenerarFlotaAlfa extends GenerarFlota {
 
 
 	public GenerarFlotaAlfa(int posEnY, Plano unPlano) {
@@ -26,7 +23,7 @@ public class GenerarFlotaAlfa implements GenerarFlota {
 		Random generadorRandom = new Random();
 		int navesACrear = 5;
 		int posRandom = generadorRandom.nextInt(20);
-		int posEnX = posRandom + 5;
+		posEnX = posRandom + 5;
 	//	ArrayList<NaveNoOperable> lista= new ArrayList<NaveNoOperable>();
 
 		while (navesACrear > 0) {

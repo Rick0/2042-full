@@ -7,10 +7,7 @@ import fiuba.algo3.juego.modelo.Plano;
 //import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
 
-public class GenerarFlotaDelta implements GenerarFlota {
-
-	int posEnY;
-	Plano plano;
+public class GenerarFlotaDelta extends GenerarFlota {
 
 
 	public GenerarFlotaDelta(int posEnY, Plano unPlano) {
