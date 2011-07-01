@@ -35,14 +35,15 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 		this.plano = unPlano;
 	}
 
-	public boolean estaEnEjecucion(){
+	public boolean estaEnEjecucion() {
 		return this.estaEnEjecucion;
 	}
 	
-	public void comenzarJuego(){
+	public void comenzarJuego() {
 		estaEnEjecucion = true;
 		try {
-			while(estaEnEjecucion){
+			while(estaEnEjecucion) {
+				revisarEstadoJuego();
 				simular();
 				actualizarPlano();
 				dibujar();
@@ -68,11 +69,12 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 	 * Le da comienzo al juego poniendo en marcha el gameloop.
 	 * @param cantidadDeCiclos cantidad de ciclos que debe correr el gameloop..  
 	 */
-	public void comenzarJuego(int cantidadDeCiclos){
+	public void comenzarJuego(int cantidadDeCiclos) {
 		int contador = 0;
 		estaEnEjecucion = true;
 		try {
-			while(contador < cantidadDeCiclos && estaEnEjecucion){
+			while(contador < cantidadDeCiclos && estaEnEjecucion) {
+				revisarEstadoJuego();
 				simular();
 				actualizarPlano();
 				dibujar();
@@ -88,7 +90,7 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 	/**
 	 * Detiene el juego provocando la salida del gameloop.
 	 */
-	public void detenerJuego(){
+	public void detenerJuego() {
 		this.estaEnEjecucion = false;
 		if(reproductor!=null)
 			this.reproductor.apagar();
@@ -141,7 +143,7 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 	/** Asigna vista a los objetos nuevos, como tambien los agrega a la lista de objetos vivos y dibujables.
 	 *  Borra vistas de objetos destruidos, y los saca de la lista de objetos vivos y dibujables.
 	 */
-	public synchronized void actualizarPlano() {
+	private synchronized void actualizarPlano() {
 
 	//	System.out.println(objetosVivos.toString());
 		Plano planoDelJuego = this.plano;
@@ -182,6 +184,22 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 		planoDelJuego.devolverListaObjetosABorrar().clear();
 	}
 
+	/**Revisa si se ha ganado o perdido el juego.
+	 * Perder el juego tiene prioridad por sobre ganarlo, asi que se revisa primero.
+	 */
+	private void revisarEstadoJuego() {
+
+		if (plano.devolverEstadoJuegoPerdido()) {
+			estaEnEjecucion = false;
+			// poner imagen o ventana de "Perdiste  -  y si tiene un nuevo highscore, poder guardarlo"
+		}
+
+		if (plano.devolverEstadoJuegoGanado()) {
+			estaEnEjecucion = false;
+			// por ahora la condicion de ganar es una arbitraria, llegar al nivel 15
+		}
+	}
+
 	/** Le asigna una vista correspondiente al objeto pedido */
 	private Imagen asignarVista(ObjetoUbicable unObjeto) {
 
@@ -203,7 +221,7 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 	 * @param x posicion horizontal del mouse
 	 * @param y posicion vertial del mouse
 	 */
-	public void despacharMouseClick(int x, int y){
+	public void despacharMouseClick(int x, int y) {
 		MouseClickObservador mouseClickObservador;
 		Iterator<MouseClickObservador> iterador = this.mouseClickObservadores.iterator();
 		while(iterador.hasNext()){
@@ -266,7 +284,8 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 			return null;
 		}
 	}
-	
+
+	private static final long serialVersionUID = -6401581783523170282L;
 	private long intervaloSimulacion;
 	private boolean estaEnEjecucion;
 	private List<ObjetoVivo> objetosVivos;
@@ -280,7 +299,6 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 	private HashMap<ObjetoUbicable,Imagen> tablaDeVistas;
 	private GeneradorDeVista generadorDeVista;
 	private Plano plano;
-	private static final long serialVersionUID = -6401581783523170282L;
 
 
 	public synchronized void run() {

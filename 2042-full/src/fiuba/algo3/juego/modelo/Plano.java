@@ -206,7 +206,15 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 	public void setVidas(int vidas) {
 		this.vidas = vidas;
 	}
-	
+
+	public boolean devolverEstadoJuegoGanado() {
+		return juegoGanado;
+	}
+
+	public boolean devolverEstadoJuegoPerdido() {
+		return juegoPerdido;
+	}
+
 	public static Plano restaurar(String archivo) {
 		
 		try {

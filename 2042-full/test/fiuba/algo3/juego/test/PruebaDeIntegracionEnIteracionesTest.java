@@ -192,7 +192,7 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 			algo.moverArriba();
 			item.intentarChocar( algo );
 		}
-		assertEquals( algo.devolverEnergia() , 120 );
+		assertEquals( algo.devolverEnergia() , 100 );
 	}
 
 	@Test
