@@ -2,9 +2,11 @@ package fiuba.algo3.juego.controlador;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.HashMap;
+
+import fiuba.algo3.juego.controlador.tiposDeFlota.GenerarFlota;
+import fiuba.algo3.juego.controlador.tiposDeFlota.*;
 import fiuba.algo3.juego.modelo.*;
-import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
-import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 import fiuba.algo3.titiritero.ObjetoVivo;
 
 
@@ -20,6 +22,7 @@ public class GeneradorFlota implements ObjetoVivo {
 	int posEnY;
 	boolean necesitoJefe;
 	ArrayList<NaveNoOperable> lista;
+	HashMap<Integer, GenerarFlota> tablaGeneradorFlotas;
 
 
 	public GeneradorFlota(Plano planoJuego) {
@@ -29,6 +32,9 @@ public class GeneradorFlota implements ObjetoVivo {
 		tengoQueGenerar = true;
 		posEnY = (this.plano.devolverAltura()-10);
 		necesitoJefe = false;
+
+		this.tablaGeneradorFlotas = new HashMap<Integer, GenerarFlota>();
+		this.inicializarTablaGenerarFlota();
 
 		this.actualizarCantidadNaves();
 	}
@@ -45,8 +51,13 @@ public class GeneradorFlota implements ObjetoVivo {
 			this.velocidadSpawnearCont = 0;
 			necesitoJefe = false;
 		}
-	*/	if ((tengoQueGenerar) && (velocidadSpawnearCont == velocidadSpawnear) && (cantidadNaves < 11)) {
-			/*lista = */this.generarFlotaGamma();
+	*/	if ((tengoQueGenerar) && (velocidadSpawnearCont == velocidadSpawnear) && (cantidadNaves < 10)) {
+
+			Random generadorRandom = new Random();
+			int i = generadorRandom.nextInt(tablaGeneradorFlotas.size());
+			GenerarFlota unGeneradorFlota = tablaGeneradorFlotas.get(i);
+			unGeneradorFlota.generar();
+
 			this.velocidadSpawnearCont = 0;
 			necesitoJefe = true;
 		}
@@ -65,96 +76,6 @@ public class GeneradorFlota implements ObjetoVivo {
 
 		return guia;		
 	}*/
-	
-	/* Genera una flota alfa, compuesto integramente por bombarderos, los aviones enemigos mas poderosos */
-	public void generarFlotaAlfa() {
-
-		Random generadorRandom = new Random();
-		int navesACrear = 5;
-		int posRandom = generadorRandom.nextInt(20);
-		int posEnX = posRandom + 5;
-	//	ArrayList<NaveNoOperable> lista= new ArrayList<NaveNoOperable>();
-
-		while (navesACrear > 0) {
-
-			Punto posNave = new Punto(posEnX, this.posEnY);
-			try {
-				/*Bombardero b = */new Bombardero(posNave, this.plano);
-		//		lista.add(b);
-			} catch (SuperposicionNavesError e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (NaveDestruidaError e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			posEnX = posEnX + 110;
-			navesACrear--;		
-		}
-	}
-
-	/* Genera una flota beta, compuesto integramente por exploradores */
-	public void generarFlotaBeta() {
-
-		Random generadorRandom = new Random();
-		int navesACrear = 3;
-		int posRandom = generadorRandom.nextInt(50);
-		int posEnX = posRandom + 70;
-
-		while (navesACrear > 0) {
-
-			Punto posNave = new Punto(posEnX, (this.posEnY-60));
-			try {
-				new Explorador(posNave, 35, this.plano);
-			} catch (SuperposicionNavesError e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (NaveDestruidaError e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			posEnX = posEnX + 150;
-			navesACrear--;		
-		}
-	}
-
-	/* Genera una flota delta, compuesto integramente por cazas, que se mueven conjuntamente en forma de V */
-	public void generarFlotaDelta() {
-
-		// usar flota cazas
-
-	}
-
-	/* Genera una flota gamma, compuesto integramente por avionetas */
-	public void generarFlotaGamma() {
-
-		// hay q poner el movarriba mov abajo a mas de 60, a: (int)(plano.getLargo()*0,9)
-		// y q se puedan irse del plano
-		Random generadorRandom = new Random();
-		int navesACrear = generadorRandom.nextInt(2);
-		navesACrear = navesACrear + 3;
-		int posRandom = generadorRandom.nextInt(20);
-		int posEnX = posRandom + 5;
-
-		while (navesACrear > 0) {
-
-			Punto posNave = new Punto(posEnX, this.posEnY);
-			try {
-				new Avioneta(posNave, this.plano);
-			} catch (SuperposicionNavesError e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (NaveDestruidaError e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-			posEnX = posEnX + 115;
-			navesACrear--;		
-		}
-	}
 
 	/* Genera una flota omega, 4 naves enemigas al azar */
 	public void generarFlotaOmega() {
@@ -191,6 +112,24 @@ public class GeneradorFlota implements ObjetoVivo {
 	public void actualizarCantidadNaves() {
 
 		this.cantidadNaves = this.plano.devolverListaNaves().size();
+	}
+
+	/* Inicializa la tabla de las diferentes flotas que se pueden crear */
+	public void inicializarTablaGenerarFlota() {
+
+		if (tablaGeneradorFlotas.isEmpty()) {
+
+			GenerarFlota generarFlotaAlfa = new GenerarFlotaAlfa(this.posEnY, this.plano);
+			GenerarFlota generarFlotaBeta = new GenerarFlotaBeta(this.posEnY, this.plano);
+		//	GenerarFlota generarFlotaDelta = new GenerarFlotaDelta(this.posEnY, this.plano);
+			GenerarFlota generarFlotaGamma = new GenerarFlotaGamma(this.posEnY, this.plano);
+
+
+			tablaGeneradorFlotas.put(0, generarFlotaAlfa);
+			tablaGeneradorFlotas.put(1, generarFlotaBeta);
+		//	tablaGeneradorFlotas.put(2, generarFlotaDelta);
+			tablaGeneradorFlotas.put(2, generarFlotaGamma);
+		}
 	}
 
 }

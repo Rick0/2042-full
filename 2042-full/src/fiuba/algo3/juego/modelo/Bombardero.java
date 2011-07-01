@@ -125,23 +125,20 @@ public class Bombardero extends NaveNoOperable implements Serializable {
 		this.estaFueraDelPlano();
 	}
 
-	/*El bombardero tiene tres tipos de armas distintas para lanzar. Esta funcion crea un arma
-	 * aleatoria: Busca un numero aleatorio del 1 al 3, si el numero es 1 lanza un laser, si es dos, un cohete
-	 * y si es 3, un torpedo rastreador
-	 */
+	/* El bombardero tiene tres tipos de armas distintas para lanzar. Esta funcion crea un arma aleatoria */
 	public void disparar() {
 
 		if (velocidadDisparoCont == velocidadDisparo) {
 
 			Random generadorRandom = new Random();
-			// Genera un entero que va desde 0 hasta nextInt-1, o sea 3
-			// Hay 50% de que dispare laser, y 25% para cada una de las otras dos armas
-			int i = generadorRandom.nextInt(4);
+			// Genera un entero que va desde 0 hasta nextInt-1
+			// Torpedo rastreador tiene el menor % de ser disparado
+			int i = generadorRandom.nextInt(9);
 
-			if (i == 1) {
-				this.dispararTorpedoRastreadorHacia(this.plano.getAlgo42());
-			} else if (i == 2) {
+			if (i <= 2) {
 				this.dispararCohete();
+			} else if (i == 3) {
+				this.dispararTorpedoRastreadorHacia(this.plano.getAlgo42());
 			} else {
 				this.dispararLaser();
 			}

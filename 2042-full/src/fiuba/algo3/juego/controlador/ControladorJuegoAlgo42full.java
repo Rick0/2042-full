@@ -47,9 +47,6 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 				actualizarPlano();
 				dibujar();
 				Thread.sleep(intervaloSimulacion);
-				if( plano.getVidas()<0 ) {
-					this.detenerJuego();
-				}
 			}
 		}
 		catch (Exception e) {
@@ -144,7 +141,7 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 	/** Asigna vista a los objetos nuevos, como tambien los agrega a la lista de objetos vivos y dibujables.
 	 *  Borra vistas de objetos destruidos, y los saca de la lista de objetos vivos y dibujables.
 	 */
-	public void actualizarPlano() {
+	public synchronized void actualizarPlano() {
 
 	//	System.out.println(objetosVivos.toString());
 		Plano planoDelJuego = this.plano;
@@ -286,7 +283,7 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 	private static final long serialVersionUID = -6401581783523170282L;
 
 
-	public void run() {
+	public synchronized void run() {
 		this.comenzarJuego();
 	}
 
