@@ -43,11 +43,11 @@ public class Caza extends NaveNoOperable implements Serializable{
 		if (velocidadDisparoCont == velocidadDisparo) {
 
 			Random generadorRandom = new Random();
-			// Genera un entero que va desde 0 hasta nextInt-1, o sea 2
-			// Hay 66% de que dispare torpedo simple, y 33% para el torpedo adaptable
-			int i = generadorRandom.nextInt(3);
+			// Genera un entero que va desde 0 hasta nextInt-1, o sea 3
+			// Hay 75% de que dispare torpedo simple, y 25% para el torpedo adaptable
+			int i = generadorRandom.nextInt(4);
 
-			if (i == 1) {
+			if (i == 0) {
 				this.dispararTorpedoAdaptable();
 			} else {
 				this.dispararTorpedo();
