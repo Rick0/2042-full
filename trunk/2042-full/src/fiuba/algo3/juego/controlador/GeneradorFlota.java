@@ -46,7 +46,7 @@ public class GeneradorFlota implements ObjetoVivo {
 			necesitoJefe = false;
 		}
 	*/	if ((tengoQueGenerar) && (velocidadSpawnearCont == velocidadSpawnear) && (cantidadNaves < 11)) {
-			/*lista = */this.generarFlotaAlfa();
+			/*lista = */this.generarFlotaGamma();
 			this.velocidadSpawnearCont = 0;
 			necesitoJefe = true;
 		}
@@ -67,7 +67,7 @@ public class GeneradorFlota implements ObjetoVivo {
 	}*/
 	
 	/* Genera una flota alfa, compuesto integramente por bombarderos, los aviones enemigos mas poderosos */
-	private void  generarFlotaAlfa() {
+	public void generarFlotaAlfa() {
 
 		Random generadorRandom = new Random();
 		int navesACrear = 5;

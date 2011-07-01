@@ -8,7 +8,9 @@ import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 public class Avioneta extends NaveNoOperable implements Serializable {
 
 	private static final long serialVersionUID = 4601764551109182837L;
-	public int puntosAtras, puntosAdelante;
+	public int puntosAtrasCont, puntosAdelanteCont;
+	static int puntosAdelante = 400;
+	static int puntosAtras = 300;
 
 
 	/* Inicializa una instancia de Avioneta */
@@ -17,8 +19,8 @@ public class Avioneta extends NaveNoOperable implements Serializable {
 		super();
 		this.puntos = 20;
 		energia = 20;
-		puntosAdelante = 0;
-		puntosAtras = 0;
+		puntosAdelanteCont = 0;
+		puntosAtrasCont = 0;
 		esOperable = false;
 		rectangulo = new Rectangulo(60, 55, punto);
 		estaDestruida = false;
@@ -38,18 +40,18 @@ public class Avioneta extends NaveNoOperable implements Serializable {
 	 */
 	public void mover() throws SuperposicionNavesError {
 
-		if ( (this.puntosAdelante <= 60) ) {
-			this.puntosAdelante = (this.puntosAdelante + 2);
+		if ( (this.puntosAdelanteCont <= puntosAdelante) ) {
+			this.puntosAdelanteCont = (this.puntosAdelanteCont + 2);
 			Punto nuevaPosicion= new Punto(devolverPunto().getX(),devolverPunto().getY()-2);
 			this.cambiarPosicion(nuevaPosicion);
 		}
 		else {
-			this.puntosAtras = (this.puntosAtras + 2);
+			this.puntosAtrasCont = (this.puntosAtrasCont + 2);
 			Punto nuevaPosicion= new Punto(devolverPunto().getX(),devolverPunto().getY()+2);
 			this.cambiarPosicion(nuevaPosicion);
-			if (this.puntosAtras >= 60) {
-				this.puntosAtras = 0;
-				this.puntosAdelante =0;
+			if (this.puntosAtrasCont >= puntosAtras) {
+				this.puntosAtrasCont = 0;
+				this.puntosAdelanteCont =0;
 			}
 		}
 
@@ -64,16 +66,16 @@ public class Avioneta extends NaveNoOperable implements Serializable {
 	 */
 	public void moverAlternativo() throws SuperposicionNavesError {
 
-		if (this.puntosAdelante < 62) {
-			this.puntosAtras = 0;
-			this.puntosAdelante = 0;
+		if (this.puntosAdelanteCont < (puntosAdelante+2)) {
+			this.puntosAtrasCont = 0;
+			this.puntosAdelanteCont = 0;
 			// Hago que empiece a moverse hacia adelante desde 0,
-			//pero antes lo hago moverse hacia atras, si es que puedo.
+			// pero antes lo hago moverse hacia atras, si es que puedo.
 			Punto nuevaPosicion= new Punto(devolverPunto().getX(),devolverPunto().getY()+2);
 			this.cambiarPosicion(nuevaPosicion);
 		}
 		else {
-			this.puntosAtras = 0;
+			this.puntosAtrasCont = 0;
 			Punto nuevaPosicion= new Punto(devolverPunto().getX(),devolverPunto().getY()-2);
 			this.cambiarPosicion(nuevaPosicion);
 		}
@@ -93,6 +95,14 @@ public class Avioneta extends NaveNoOperable implements Serializable {
 			this.dispararLaser();
 			velocidadDisparoCont = 0;
 		}
+	}
+
+	public int devolverPuntosAdelante() {
+		return puntosAdelante;
+	}
+
+	public int devolverPuntosAtras() {
+		return puntosAtras;
 	}
 
 }
