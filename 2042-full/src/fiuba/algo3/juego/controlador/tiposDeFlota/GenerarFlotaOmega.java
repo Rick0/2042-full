@@ -25,7 +25,7 @@ public class GenerarFlotaOmega implements GenerarFlota {
 
 		Random generadorRandom = new Random();
 	//	int navesACrear = 4;
-		int posRandom = generadorRandom.nextInt(30);
+		int posRandom = generadorRandom.nextInt(50);
 		int posEnX = posRandom + 70;
 
 		Punto posNave1 = new Punto(posEnX, (this.posEnY)-60);
@@ -38,7 +38,7 @@ public class GenerarFlotaOmega implements GenerarFlota {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		posEnX = posEnX + 120;
+		posEnX = posEnX + 110;
 
 		Punto posNave2 = new Punto(posEnX, (this.posEnY));
 		try {
@@ -50,7 +50,7 @@ public class GenerarFlotaOmega implements GenerarFlota {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		posEnX = posEnX + 120;
+		posEnX = posEnX + 110;
 
 		Punto posNave3 = new Punto(posEnX, (this.posEnY));
 		try {
@@ -62,7 +62,7 @@ public class GenerarFlotaOmega implements GenerarFlota {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		posEnX = posEnX + 120;
+		posEnX = posEnX + 110;
 
 		Punto posNave4 = new Punto(posEnX, (this.posEnY));
 		try {
