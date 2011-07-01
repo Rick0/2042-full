@@ -1,13 +1,15 @@
-
 package fiuba.algo3.juego.test;
 
+import org.junit.Test;
 import junit.framework.TestCase;
 import fiuba.algo3.juego.modelo.Punto;
 import fiuba.algo3.juego.modelo.Rectangulo;
 
+
 public class RectanguloTest extends TestCase{
 
-	public void testSuperposicionRectangulos(){
+	@Test
+	public void testSuperposicionRectangulos() {
 
 		Punto rectangulo1ExtremoIzqInferior=new Punto(30,30);
 		Punto rectangulo2ExtremoIzqInferior=new Punto(20,20);
@@ -32,6 +34,6 @@ public class RectanguloTest extends TestCase{
 		Punto otroPuntoRectangulo2= new Punto(30, 90);
 		rectangulo2.cambiarPosicion(otroPuntoRectangulo2);
 		assertEquals(rectangulo1.coincideConPosicionDe(rectangulo2),false);
-
 	}
+
 }

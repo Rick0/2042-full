@@ -1,9 +1,7 @@
 package fiuba.algo3.juego.test;
 
 import junit.framework.TestCase;
-
 import org.junit.Test;
-
 import fiuba.algo3.juego.modelo.Algo42;
 import fiuba.algo3.juego.modelo.Explorador;
 import fiuba.algo3.juego.modelo.Plano;
@@ -44,4 +42,5 @@ public class PersistenciaTest extends TestCase {
 		assertTrue("Lista de objetos a agregar del plano" , plano.devolverListaObjetosAAgregar().size() == planoRestaurado.devolverListaObjetosAAgregar().size() );
 		assertTrue("Lista de objetos a borrar del plano" , plano.devolverListaObjetosABorrar().size() == planoRestaurado.devolverListaObjetosABorrar().size() );
 	}
+
 }

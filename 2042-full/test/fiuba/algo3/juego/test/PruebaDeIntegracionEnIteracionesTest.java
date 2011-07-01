@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import junit.framework.TestCase;
-
 import org.junit.Test;
 
 import fiuba.algo3.juego.modelo.Algo42;
@@ -35,11 +34,10 @@ import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
 
 public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
-	
-	/*Prueba bastantes aspectos del juego: la creacion de niveles, manejo del area del juego,
-	algunas funciones basicas del algo 42 y de las naves enemigas, y de la nave que las guia*/
-	
+
 	@Test
+	/* Prueba bastantes aspectos del juego: la creacion de niveles, manejo del area del juego,
+	 * algunas funciones basicas del algo 42 y de las naves enemigas, y de la nave que las guia */
 	public void testEventos() throws AreaInvalidaError, SuperposicionNavesError, NaveDestruidaError, AlgoSeAtacaASiMismoError, AtaqueEntreNavesNoOperables, ArmaNoUsadaError{
 		
 		Plano plano=new Plano(1000,1000);
@@ -47,18 +45,21 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 		assertEquals(plano.devolverNumeroDeNivel(),1 );
 		Punto posAlgo= new Punto(50,83);
 		Algo42 algo= new Algo42 (posAlgo ,plano);
+
 		//La idea seria que el algo 42 se inicialice en Y=0 o algun numero menor a 10 (ser ubicados
 		//inicialmente en alturas grandes seria mas propio de naves enemigas) pero lo voy
 		//a inicializar en 83 para no tener que mover tantas veces y acelerar las pruebas
 		List<NaveNoOperable> flota = new ArrayList<NaveNoOperable>();
 		int n=0;
 		int m=10;
+
 		//Creo 5 naves y las ubico.
 		while (n<5){
 			n=n+1;
 			flota.add(new Civil((new Punto(m,5)),plano));
 			m=m+60;
 		}
+
 		//Hago que mi lista de avionetas sea la flota que dirigira la nave guia.
 		Punto posicionGuia= new Punto(50,90);
 		Guia guia= new Guia1(flota , posicionGuia , plano);
@@ -84,14 +85,13 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 		assertTrue(guia.estadoActualDestruida());
 		assertEquals(plano.devolverNumeroDeNivel(),2);
 	*/}
-	
+
+	@Test
 	/*Prueba que realiza un choque entre una instancia de algo42 y una avioneta
 	Los objetos ubicables necesitan un plano donde moverse.*/
-	@Test
 	public void testChoqueAlgoAvioneta() throws SuperposicionNavesError, AreaInvalidaError, NaveDestruidaError {
 
-	Plano plano = new Plano( 1000 , 1000 );
-	
+		Plano plano = new Plano( 1000 , 1000 );
 		Punto posicionAvioneta= new Punto(50,85);
 		Punto posicionAlgo= new Punto(50,4);
 		Avioneta avioneta = new Avioneta( posicionAvioneta , plano );
@@ -122,12 +122,10 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 	}
 	
 	@Test
+	/* Prueba interacciones entre naves algo42 y las armas que ellas mismas lanzan.
+	 * Prueba que las naves algo42 no pueden atacarse a si mismas */
 	public void testInteraccionAlgo42ArmasPropias() throws AreaInvalidaError, AtaqueEntreNavesNoOperables {
-	/*Prueba interacciones entre naves algo42 y las armas que ellas mismas lanzan.
-	Prueba que las naves algo42 no pueden atacarse a si mismas.*/
 
-		
-		
 		Plano plano = new Plano( 100 , 100 );
 		Punto punto= new Punto(50,6);
 		Algo42 algo = new Algo42(punto, plano );
@@ -135,20 +133,18 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 		algo.dispararLaser();
 		algo.moverArriba();
 		Arma laser = plano.devolverListaArmas().get(0);
+
 		try {
 			laser.intentarChocar( algo );
 			fail("Se auto ataca, esto no puede pasar");
 		} catch (AlgoSeAtacaASiMismoError error) {}
-		
 	}
 	
 	@Test
+	/* Prueba el uso tanto de los torpedos simples como de los tanques de energia,
+	 * con una instancia de caza y una nave algo 42 */
 	public void testInteraccionAlgoYCazaItemsYArmas() throws AreaInvalidaError, SuperposicionNavesError, NaveDestruidaError {
-	/*Prueba el uso tanto de los torpedos simples como de los tanques de energia,
-	con una instancia de caza y una nave algo 42.*/
 
-		
-		
 		Plano plano = new Plano( 1000 , 1000 );
 		Punto puntoAlgo= new Punto(50,5);
 		Punto puntoCaza= new Punto(50,80);
@@ -161,6 +157,7 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 		algo.modificarVelocidadDisparoCont(algo.devolverVelocidadDisparo());
 		algo.dispararLaser();
 		Arma laser = plano.devolverListaArmas().get(1);
+
 		while ( algo.devolverEnergia() == 100 ) {
 			try {
 				torpedo.intentarChocar(algo);
@@ -172,6 +169,7 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 			torpedo.mover();
 		}
 		assertEquals( algo.devolverEnergia() , 80 );
+
 		while ( !caza.estadoActualDestruida() ) {
 			laser.mover();
 			try {
@@ -182,6 +180,7 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 				//Los objetos son distintos
 			}
 		}
+
 		try {
 			item = caza.dejarTanque();
 		} catch (ItemNoDisponibleError error) {
@@ -197,16 +196,16 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 	}
 
 	@Test
+	/* Prueba interacciones entre naves no operables y las armas que ellas mismas lanzan.
+	 * Prueba que las naves no operables no pueden atacarse entre ellas */
 	public void testInteraccionArmasNavesNoOperables() throws AlgoSeAtacaASiMismoError, SuperposicionNavesError, NaveDestruidaError {
-	/*Prueba interacciones entre naves no operables y las armas que ellas mismas lanzan.
-	Prueba que las naves no operables no pueden atacarse entre ellas*/
 
 		Plano plano = new Plano( 1000 , 1000 );
-		
 		Punto punto= new Punto(50,50);
 		Avioneta avioneta = new Avioneta( punto , plano );
 		avioneta.dispararLaser();
 		Arma laser = plano.devolverListaArmas().get(0);
+
 		//Una avioneta es una nave no operable y por lo tanto, no puede atacarse a si misma
 		try {
 			laser.intentarChocar(avioneta);
@@ -225,6 +224,7 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 		cohete.mover(); //Posicion En Y= 114.
 		cohete.mover(); //Posicion En Y= 112.
 		assertEquals((int) cohete.devolverPunto().getY() , 112 );
+
 		try {
 			cohete.intentarChocar( avioneta );
 			fail("Naves no operables no pueden atacarse entre si"); 
@@ -234,11 +234,9 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 	}
 	
 	@Test
+	/* Prueba el uso de municiones. Una avioneta le dispara a un algo42 y visceversa */
 	public void testUsoMunicionesLasers() throws AlgoSeAtacaASiMismoError, AtaqueEntreNavesNoOperables, AreaInvalidaError, NaveDestruidaError {
 
-	//Prueba el uso de municiones. Una avioneta le dispara a un algo42 y visceversa 
-		
-		
 		Plano plano = new Plano(1000, 1000);
 		Avioneta avioneta = null;
 		try {
@@ -248,6 +246,7 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 			// No puede pasar, se crea primera
 			e.printStackTrace();
 		}
+
 		Punto posicionAlgo = new Punto(50,50);
 		Algo42 algo = new Algo42( posicionAlgo , plano );
 		algo.modificarVelocidadDisparoCont(algo.devolverVelocidadDisparo());
@@ -257,6 +256,7 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 		Arma laserA = plano.devolverListaArmas().get(0);
 		Arma laserB = plano.devolverListaArmas().get(1);
 		assertFalse ( laserB.intentarChocar( algo ) );
+
 		/* Esto crea dos instancias de laser: una con origen Algo42 (que por lo tanto se mueve hacia arriba)
 		 * y otra con origen nave enemiga, que se mueve hacia abajo. */
 		algo.moverArriba();
@@ -286,20 +286,16 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 	}
 	
 	@Test
-	public void testUsoYEfectoMunicionesCohetesTorpedos() throws ArmaNoDisponibleError, NaveARastrearError, 
-	AreaInvalidaError, SuperposicionNavesError, AlgoSeAtacaASiMismoError, AtaqueEntreNavesNoOperables, NaveDestruidaError {
+	/* Prueba el uso de armas y sus efectos en naves. Primero crea una instancia de algo42, que destruye un bombardero.
+	 * Toma sus armas. Prueba un cohete con una instancia de helicoptero, y luego un torpedo con una instancia de avion civil */
+	public void testUsoYEfectoMunicionesCohetesTorpedos() throws ArmaNoDisponibleError, NaveARastrearError,	AreaInvalidaError, SuperposicionNavesError, AlgoSeAtacaASiMismoError, AtaqueEntreNavesNoOperables, NaveDestruidaError {
 
-	/*Prueba el uso de armas y sus efectos en naves. Primero crea una instancia de algo42, que destruye un bombardero.
-	Toma sus armas. Prueba un cohete con una instancia de helicoptero, y luego un torpedo
-	con una instancia de avion civil.*/
-		
-		
-		
 		Plano plano = new Plano( 1000 , 1000 );
 		Punto puntoAlgo= new Punto(50,10);
 		Punto puntoBombardero= new Punto(50,30);
 		Algo42 algo = new Algo42(puntoAlgo , plano); 
 		Bombardero bombardero = new Bombardero( puntoBombardero , plano );
+
 		//Intentar dejar el arma ahora devuelve error
 		try {
 			bombardero.dejarArma();
@@ -314,6 +310,7 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 			algo.dispararLaser();
 			listaLaser.add( plano.devolverListaArmas().get(i) );
 		}
+
 		//Lanzo 5 veces el laser porque el bombardero tiene 50 puntos de energia.
 		Arma armaAuxiliar = null;
 		while ( !bombardero.estadoActualDestruida() ) {
@@ -325,21 +322,25 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 			}
 		}
 		Item item = null;
+
 		try {
 			item = bombardero.dejarArma();
 		} catch (ItemNoDisponibleError error) {
 			//No puede pasar por la condicion de salida del while
 		}
+
 		//Intentar tirar el cohete antes de tenerlo deberia levantar un error
 		try {
 			algo.dispararCohete();
 			fail("No puedo tirar cohetes si no los tengo");
 		} catch (ArmaNoDisponibleError error) {}
+
 		//Me muevo 20 veces para tomar el arma."
 		for (int i=0 ; i < 20 ; i++ ) {
 			algo.moverArriba();
 			item.intentarChocar(algo);
 		}
+
 		Punto posicionHelicoptero= new Punto(50,200);
 		Helicoptero helicoptero = new Helicoptero(posicionHelicoptero , plano );
 		algo.dispararCohete();
@@ -352,8 +353,8 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 			} catch (AlgoSeAtacaASiMismoError error) {
 				//No puede ocurrir
 			}
-			
 		}
+
 		Punto posicionCivil= new Punto(20,500);
 		Civil avion = new Civil( posicionCivil , plano );
 		algo.dispararTorpedoRastreadorHacia(avion);
@@ -367,20 +368,20 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 	
 	@SuppressWarnings("unused")
 	@Test
+	/*Prueba que al llamar al vivir de la avioneta la misma se mueva.
+	 *Ademas se verifica que los disparos sean creados */
 	public void testVivirAvioneta() throws SuperposicionNavesError, NaveDestruidaError, AreaInvalidaError {
-		/*Prueba que al llamar al vivir de la avioneta la misma se mueva.
-		*Adem�s se verifica que los disparos sean creados
-		*/
-		
+
 		double posYInicial, posYFinal;
-		
 		Plano plano = new Plano( 100 , 100);
 		Punto puntoAlgo= new Punto(50,50);
 		Punto puntoAvioneta= new Punto(10,10);
+
 		//Se crea un algo porque es requerimiento del plano
 		Algo42 algo42 = new Algo42( puntoAlgo, plano );
 		Avioneta nave = new Avioneta( puntoAvioneta, plano );
 		posYInicial = nave.devolverPunto().getY();
+
 		for ( int i = 0 ; i < 9 ; i++ ) {
 			nave.dispararLaser();
 			nave.mover();
@@ -392,14 +393,13 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 	
 	@SuppressWarnings("unused")
 	@Test
+	/* Prueba que al llamar al vivir del explorador el mismo se mueva.
+	 * Adem�s se verifica que no sean creados disparos */
 	public void testVivirExplorador() throws SuperposicionNavesError, NaveDestruidaError, AreaInvalidaError {
-		/*Prueba que al llamar al vivir del explorador el mismo se mueva.
-		*Adem�s se verifica que no sean creados disparos
-		*/
-		
+
 		double posYInicial, posYFinal, posXInicial, posXFinal;
-		
 		Plano plano = new Plano( 100 , 100);
+
 		//Se crea un algo porque es requerimiento del plano
 		Punto puntoAlgo= new Punto(50,50);
 		Punto puntoExplorador= new Punto(5,5);
@@ -420,14 +420,13 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 	
 	@SuppressWarnings("unused")
 	@Test
+	/* Prueba que al llamar al vivir del Bombardero el mismo se mueva.
+	 * Ademas se verifica que sean creados disparos */
 	public void testVivirBombardero() throws SuperposicionNavesError, NaveDestruidaError, AreaInvalidaError {
-		/*Prueba que al llamar al vivir del Bombardero el mismo se mueva.
-		*Ademas se verifica que sean creados disparos
-		*/
-		
+
 		double posYInicial, posYFinal, posXInicial, posXFinal;
-		
 		Plano plano = new Plano( 100 , 100);
+
 		//Se crea un algo porque es requerimiento del plano
 		Punto puntoAlgo= new Punto(50,50);
 		Punto puntoBombardero= new Punto(10,10);
@@ -449,14 +448,13 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 	
 	@SuppressWarnings("unused")
 	@Test
+	/* Prueba que al llamar al vivir del avion civil la misma se mueva.
+	 * Ademas se verifica que los disparos sean creados */
 	public void testVivirAvionCivil() throws SuperposicionNavesError, NaveDestruidaError, AreaInvalidaError {
-		/*Prueba que al llamar al vivir del avion civil la misma se mueva.
-		*Ademas se verifica que los disparos sean creados
-		*/
-		
+
 		double posYInicial, posYFinal, posXInicial, posXFinal;
-		
 		Plano plano = new Plano( 100 , 100);
+
 		//Se crea un algo porque es requerimiento del plano
 		Punto puntoAlgo= new Punto(50,50);
 		Punto puntoCivil= new Punto(10,10);
@@ -477,14 +475,13 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 	
 	@SuppressWarnings("unused")
 	@Test
+	/* Prueba que al llamar al vivir del Caza la misma se mueva.
+	 * Ademas se verifica que los disparos sean creados */
 	public void testVivirCaza() throws SuperposicionNavesError, NaveDestruidaError, AreaInvalidaError {
-		/*Prueba que al llamar al vivir del Caza la misma se mueva.
-		*Ademas se verifica que los disparos sean creados
-		*/
-		
+
 		double posYInicial, posYFinal, posXInicial, posXFinal;
-		
 		Plano plano = new Plano( 100 , 100);
+
 		//Se crea un algo porque es requerimiento del plano
 		Punto puntoAlgo= new Punto(50,50);
 		Punto puntoCaza= new Punto(10,10);
@@ -506,14 +503,13 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 	
 	@SuppressWarnings("unused")
 	@Test
+	/* Prueba que al llamar al vivir del Caza la misma se mueva.
+	 * Ademas se verifica que los disparos sean creados */
 	public void testVivirHelicoptero() throws SuperposicionNavesError, NaveDestruidaError, AreaInvalidaError {
-		/*Prueba que al llamar al vivir del Caza la misma se mueva.
-		*Ademas se verifica que los disparos sean creados
-		*/
-		
+
 		double posYInicial, posYFinal, posXInicial, posXFinal;
-		
 		Plano plano = new Plano( 100 , 100);
+
 		//Se crea un algo porque es requerimiento del plano
 		Punto puntoAlgo= new Punto(50,50);
 		Punto puntoHelicoptero= new Punto(10,10);
@@ -532,17 +528,15 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 		assertTrue ("La nave No se mueve en eje X", posXInicial == posXFinal );
 		assertTrue ("La nave crea disparos", plano.devolverListaArmas().size() == 0 );
 	}
-	
-	
+
 	@Test
+	/* Prueba que al llamar al vivir de la avioneta la misma se mueva.
+	 * Ademas se verifica que los disparos sean creados */
 	public void testInteraccionAvionetaYAlgo42() throws SuperposicionNavesError, NaveDestruidaError, AreaInvalidaError, AlgoSeAtacaASiMismoError, AtaqueEntreNavesNoOperables, ArmaNoUsadaError {
-		/*Prueba que al llamar al vivir de la avioneta la misma se mueva.
-		 *Ademas se verifica que los disparos sean creados
-		 */
-		
+
 		int energiaInicial, energiaFinal;
-		
 		Plano plano = new Plano( 100 , 100);
+
 		//Se crea un algo porque es requerimiento del plano
 		Punto puntoAlgo= new Punto(10,50);
 		Punto puntoAvioneta= new Punto(10,10);

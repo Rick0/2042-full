@@ -1,11 +1,8 @@
 package fiuba.algo3.juego.test;
 
 import java.util.List;
-
 import junit.framework.TestCase;
-
 import org.junit.Test;
-
 import fiuba.algo3.juego.modelo.Arma;
 import fiuba.algo3.juego.modelo.Caza;
 import fiuba.algo3.juego.modelo.Item;
@@ -19,12 +16,10 @@ import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 public class CazaYFlotaTest extends TestCase {
 	
 	@Test
+	/* Prueba que un caza no puede dejar un tanque de energia,
+	 * cuando esta eliminado, prueba que las coloca en la posicion correcta. */
 	public void testDejarArmas() throws SuperposicionNavesError, ItemNoDisponibleError, NaveDestruidaError{
-	/*Prueba que un caza no puede dejar un tanque de energia,
-	cuando esta eliminado, prueba que las coloca en la posicion correcta.*/
 
-		
-		
 		Plano plano = new Plano( 100 , 100 );
 		Punto punto= new Punto(50,50);
 		Caza caza = new Caza( punto , plano);
@@ -35,10 +30,8 @@ public class CazaYFlotaTest extends TestCase {
 			caza.dejarTanque();
 			fail("NO ha muerto, no puede dejar un item");
 		} catch (ItemNoDisponibleError error) {}
-		
-		
+
 		//Modifico su energia y ahora si deberia crearlo, y en la posicion del caza"
-		
 		caza.modificarEnergia( -10 );
 		Item item = caza.dejarTanque();
 		
@@ -47,10 +40,9 @@ public class CazaYFlotaTest extends TestCase {
 	}
 	
 	@Test
+	/* Prueba el lanzamiento de torpedos simples */
 	public void testLanzamientoTorpedo() throws SuperposicionNavesError, NaveDestruidaError { 
-	//Prueba el lanzamiento de torpedos simples"
 
-	
 		Plano plano = new Plano( 100 , 100 );
 		Punto posicion= new Punto(90,90);
 		Caza caza = new Caza( posicion, plano );
@@ -63,9 +55,9 @@ public class CazaYFlotaTest extends TestCase {
 	}
 	
 	@Test
+	/* Prueba los movimientos de los cazas. */
 	public void testMoverCaza() throws SuperposicionNavesError, NaveDestruidaError {
-	//Prueba los movimientos de los cazas.
-		
+
 		double pos = 75.0;
 		Plano plano = new Plano( 100 , 100 );
 		Punto punto= new Punto(70,75);
@@ -78,9 +70,9 @@ public class CazaYFlotaTest extends TestCase {
 	}
 	
 	@Test
+	/* Prueba los movimientos de los cazas. */
 	public void testMoverAlternativoCaza() throws SuperposicionNavesError, NaveDestruidaError {
-	//Prueba los movimientos de los cazas.
-		
+
 		double pos = 75.0;
 		Plano plano = new Plano( 100 , 100 );
 		Punto punto= new Punto(70,75);
@@ -91,5 +83,5 @@ public class CazaYFlotaTest extends TestCase {
 			pos = ( pos + 1 );
 		}
 	}
-	
+
 }
