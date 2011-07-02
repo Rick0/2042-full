@@ -18,8 +18,8 @@ public class Rectangulo implements Serializable{
 	/* Constructor del rectangulo, recibe su posicion en el espacio y sus dimensiones */
 	public Rectangulo(int alturaR, int anchoR, Punto punto ) {
 		puntoIzquierdoInferior= punto;
-		ancho=anchoR;
-		altura=alturaR;
+		ancho  = anchoR;
+		altura = alturaR;
 	}
 
 	/* Devuelve el punto que determina la posicion del rectangulo */
@@ -57,8 +57,7 @@ public class Rectangulo implements Serializable{
 		XComienzo = puntoIzquierdoInferior.getX();
 		XFinal = XComienzo + ancho;
 
-
-		if(XComienzo <= otroXComienzo) {
+		if (XComienzo <= otroXComienzo) {
 			if (!(otroXComienzo <= XFinal)) {
 				return false;
 			}
@@ -73,7 +72,8 @@ public class Rectangulo implements Serializable{
 		otroYFinal = otroYComienzo + otroRectangulo.altura;
 		YComienzo = puntoIzquierdoInferior.getY();
 		YFinal = YComienzo + altura;
-		if(YComienzo <= otroYComienzo) {
+
+		if (YComienzo <= otroYComienzo) {
 			if (!(otroYComienzo <= YFinal)) {
 				return false;
 			}
@@ -83,8 +83,8 @@ public class Rectangulo implements Serializable{
 				return false;
 			}
 		}
-		return true;
 
+		return true;
 	}
 
 }

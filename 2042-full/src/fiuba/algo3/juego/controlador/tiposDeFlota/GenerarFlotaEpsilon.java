@@ -17,14 +17,13 @@ public class GenerarFlotaEpsilon extends GenerarFlota {
 	public void generar() {
 
 		Random generadorRandom = new Random();
-		int posRandom = generadorRandom.nextInt(40);
-		this.posEnX = posRandom + 70;
+		this.posEnX = generadorRandom.nextInt(40) + 60;
 		int navesACrear = 4;
 
 		while (navesACrear > 0) {
 
 			this.generarNaveAlAzar();
-			this.posEnX = posEnX + 110;
+			this.posEnX = posEnX + 60 + generadorRandom.nextInt(60);
 			navesACrear--;
 		}
 	}

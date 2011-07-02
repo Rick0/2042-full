@@ -56,7 +56,7 @@ public class GeneradorFlota implements ObjetoVivo {
 			Random generadorRandom = new Random();
 			int i = generadorRandom.nextInt(tablaGeneradorFlotas.size());
 			GenerarFlota unGeneradorFlota = tablaGeneradorFlotas.get(i);
-		//	GenerarFlota unGeneradorFlota = tablaGeneradorFlotas.get(13);
+		//	GenerarFlota unGeneradorFlota = tablaGeneradorFlotas.get(20);
 			unGeneradorFlota.generar();
 
 			this.velocidadSpawnearCont = 0;
@@ -113,31 +113,41 @@ public class GeneradorFlota implements ObjetoVivo {
 
 			GenerarFlota generarFlotaOmega = new GenerarFlotaOmega(this.posEnY, this.plano);
 			GenerarFlota generarFlotaEpsilon = new GenerarFlotaEpsilon(this.posEnY, this.plano);
-			GenerarFlota generarFlotaUpsilon = new GenerarFlotaUpsilon(this.posEnY, this.plano);
-			
+			GenerarFlota generarFlotaUpsilon = new GenerarFlotaUpsilon(this.posEnY, this.plano);			
 			GenerarFlota generarFlotaMu = new GenerarFlotaMu(this.posEnY, this.plano);
 			GenerarFlota generarFlotaNu = new GenerarFlotaNu(this.posEnY, this.plano);
 
+			GenerarFlota generarFlotaZeta = new GenerarFlotaZeta(this.posEnY, this.plano);
+			GenerarFlota generarFlotaEta = new GenerarFlotaEta(this.posEnY, this.plano);
+			GenerarFlota generarFlotaTheta = new GenerarFlotaTheta(this.posEnY, this.plano);
 
-			tablaGeneradorFlotas.put(0, generarFlotaAlfa);
-			tablaGeneradorFlotas.put(1, generarFlotaBeta);
-			tablaGeneradorFlotas.put(2, generarFlotaGamma);
-		//	tablaGeneradorFlotas.put(3, generarFlotaDelta);
 
-			tablaGeneradorFlotas.put(3, generarFlotaOmega);
-			tablaGeneradorFlotas.put(4, generarFlotaOmega);
-			tablaGeneradorFlotas.put(5, generarFlotaOmega);
-			tablaGeneradorFlotas.put(6, generarFlotaOmega);
-			tablaGeneradorFlotas.put(7, generarFlotaEpsilon);
-			tablaGeneradorFlotas.put(8, generarFlotaEpsilon);
-			tablaGeneradorFlotas.put(9, generarFlotaUpsilon);
+			int i = 0;
+			tablaGeneradorFlotas.put(i, generarFlotaAlfa);	i++;
+			tablaGeneradorFlotas.put(i, generarFlotaBeta);	i++;
+			tablaGeneradorFlotas.put(i, generarFlotaGamma);	i++;
+		//	tablaGeneradorFlotas.put(i, generarFlotaDelta);	i++;
 
-			tablaGeneradorFlotas.put(10, generarFlotaMu);
-			tablaGeneradorFlotas.put(11, generarFlotaMu);
-			tablaGeneradorFlotas.put(12, generarFlotaMu);
-			tablaGeneradorFlotas.put(13, generarFlotaNu);
-			tablaGeneradorFlotas.put(14, generarFlotaNu);
-			tablaGeneradorFlotas.put(15, generarFlotaNu);
+			tablaGeneradorFlotas.put(i, generarFlotaOmega);	i++;
+			tablaGeneradorFlotas.put(i, generarFlotaOmega);	i++;
+			tablaGeneradorFlotas.put(i, generarFlotaOmega);	i++;
+			tablaGeneradorFlotas.put(i, generarFlotaOmega);	i++;
+			tablaGeneradorFlotas.put(i, generarFlotaEpsilon);	i++;
+			tablaGeneradorFlotas.put(i, generarFlotaEpsilon);	i++;
+			tablaGeneradorFlotas.put(i, generarFlotaUpsilon);	i++;
+
+			tablaGeneradorFlotas.put(i, generarFlotaMu);	i++;
+			tablaGeneradorFlotas.put(i, generarFlotaMu);	i++;
+			tablaGeneradorFlotas.put(i, generarFlotaMu);	i++;
+			tablaGeneradorFlotas.put(i, generarFlotaMu);	i++;
+			tablaGeneradorFlotas.put(i, generarFlotaNu);	i++;
+			tablaGeneradorFlotas.put(i, generarFlotaNu);	i++;
+			tablaGeneradorFlotas.put(i, generarFlotaNu);	i++;
+			tablaGeneradorFlotas.put(i, generarFlotaNu);	i++;
+
+			tablaGeneradorFlotas.put(i, generarFlotaZeta);	i++;
+			tablaGeneradorFlotas.put(i, generarFlotaEta);	i++;
+			tablaGeneradorFlotas.put(i, generarFlotaTheta);	i++;
 		}
 	}
 
