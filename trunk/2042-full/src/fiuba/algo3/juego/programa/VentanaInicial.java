@@ -1,14 +1,10 @@
 package fiuba.algo3.juego.programa;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Rectangle;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 
 import fiuba.algo3.juego.controlador.ControladorJuegoAlgo42full;
 import fiuba.algo3.juego.controlador.GeneradorControlador;
@@ -24,7 +20,6 @@ public class VentanaInicial extends JFrame {
 	private JButton jButtonJuegoNuevo = null;
 	private JButton jButtonRestaurar = null;
 	private JButton jButtonSalir = null;
-	private JLabel jLabelTitulo = null;
 
 
 	/**
@@ -42,6 +37,8 @@ public class VentanaInicial extends JFrame {
 	 */
 	private void initialize() {
 		this.setSize(550, 570);
+		this.setResizable(false);
+		this.setSize(550, 570);
 		this.setContentPane(getJContentPane());
 		this.setTitle("Algo 2042 Full");
 	}
@@ -53,7 +50,7 @@ public class VentanaInicial extends JFrame {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
-			jContentPane = new JPanel();
+			jContentPane = new JPanelConFondo();
 			jContentPane.setLayout(new BorderLayout());
 			jContentPane.add(getJPanel(), BorderLayout.CENTER);
 		}
@@ -67,17 +64,11 @@ public class VentanaInicial extends JFrame {
 	 */
 	private JPanel getJPanel() {
 		if (jPanel == null) {
-			jLabelTitulo = new JLabel();
-			jLabelTitulo.setBounds(new Rectangle(27, 15, 332, 61));
-			jLabelTitulo.setFont(new Font("Arial", 2, 48));
-			jLabelTitulo.setText("Algo 2042 Full");
-			jPanel = new JPanel();
+			jPanel = new JPanelConFondo();
 			jPanel.setLayout(null);
-			jPanel.setBackground(Color.WHITE);
 			jPanel.add(getJButtonJuegoNuevo(), null);
 			jPanel.add(getJButtonRestaurar(), null);
 			jPanel.add(getJButtonSalir(), null);
-			jPanel.add(jLabelTitulo, null);
 		}
 		return jPanel;
 	}
@@ -90,8 +81,8 @@ public class VentanaInicial extends JFrame {
 	private JButton getJButtonJuegoNuevo() {
 		if (jButtonJuegoNuevo == null) {
 			jButtonJuegoNuevo = new JButton();
-			jButtonJuegoNuevo.setBounds(new Rectangle(112, 105, 153, 26));
 			jButtonJuegoNuevo.setText("Juego Nuevo");
+			jButtonJuegoNuevo.setBounds(new java.awt.Rectangle(239,402,113,25));
 			jButtonJuegoNuevo.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					System.out.println("Comenzar Juego");
@@ -117,8 +108,8 @@ public class VentanaInicial extends JFrame {
 	private JButton getJButtonRestaurar() {
 		if (jButtonRestaurar == null) {
 			jButtonRestaurar = new JButton();
-			jButtonRestaurar.setBounds(new Rectangle(112, 153, 153, 26));
 			jButtonRestaurar.setText("Restaurar");
+			jButtonRestaurar.setBounds(new java.awt.Rectangle(239,442,113,25));
 			jButtonRestaurar.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					System.out.println("Restaurar()");
@@ -138,8 +129,8 @@ public class VentanaInicial extends JFrame {
 	private JButton getJButtonSalir() {
 		if (jButtonSalir == null) {
 			jButtonSalir = new JButton();
-			jButtonSalir.setBounds(new Rectangle(112, 200, 153, 26));
 			jButtonSalir.setText("Salir");
+			jButtonSalir.setBounds(new java.awt.Rectangle(239,482,113,25));
 			jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					System.out.println("Salir");
