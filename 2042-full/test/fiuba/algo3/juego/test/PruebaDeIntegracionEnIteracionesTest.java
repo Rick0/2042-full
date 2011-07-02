@@ -100,7 +100,7 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 		avioneta.mover(); //Avioneta posicion Y: 85
 		assertEquals((int) avioneta.devolverPunto().getY() , 83 );
 		algo.moverArriba();  //algo posicion Y: (4+movPixel)
-		assertEquals((int) algo.devolverPunto().getY() , (int)posicionAlgo.getY()+algo.getMovPixel());
+		assertEquals((int) algo.devolverPunto().getY() , (int)posicionAlgo.getY()+algo.devolverCantidadAMover());
 		//El algo tiene altura 64, 6+64=70<83, aun no chocan.
 		assertFalse( avioneta.intentarChocar( algo ) );
 		assertEquals( algo.devolverEnergia() , 100 );
@@ -111,7 +111,7 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 		assertEquals( (int)avioneta.devolverPunto().getY() , 75 );
 		algo.moverArriba(); // Algo posicion Y= 8, llega a 72
 		algo.moverArriba(); // posicion Y= 10, llega a 74
-		assertEquals((int) algo.devolverPunto().getY() , (int)posicionAlgo.getY()+3*(algo.getMovPixel()) );
+		assertEquals((int) algo.devolverPunto().getY() , (int)posicionAlgo.getY()+3*(algo.devolverCantidadAMover()) );
 		//Ahora si se van a chocar.
 		algo.moverArriba();
 		assertTrue( avioneta.intentarChocar( algo ) );
@@ -220,7 +220,7 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 		Arma cohete = plano.devolverListaArmas().get(1);
 		//Posicion actual del cohete: 50,120. Altura: 4. Al llegar a la posicion correcta, compruebo que levanta error.
 		cohete.mover(); //Posicion En Y= 114. Avioneta ocupa de 50 hacia arriba.
-		assertEquals((int) cohete.devolverPunto().getY() , 114 );
+		assertEquals((int)cohete.devolverPunto().getY() , (120 - cohete.devolverCantidadAMover()) );
 
 		try {
 			cohete.intentarChocar( avioneta );
@@ -251,38 +251,40 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 		avioneta.modificarVelocidadDisparoCont(avioneta.devolverVelocidadDisparo());
 		avioneta.dispararLaser();
 		Arma laserA = plano.devolverListaArmas().get(0);
+		int posicionLaserA = (int)laserA.devolverPunto().getY() - algo.devolverAltura();
 		Arma laserB = plano.devolverListaArmas().get(1);
+		int posicionLaserB = (int)laserB.devolverPunto().getY();
 		assertFalse ( laserB.intentarChocar( algo ) );
 
 		/* Esto crea dos instancias de laser: una con origen Algo42 (que por lo tanto se mueve hacia arriba)
 		 * y otra con origen nave enemiga, que se mueve hacia abajo. */
 		assertFalse( laserB.intentarChocar(algo) );
 		algo.moverArriba();
-		laserB.mover();
-		assertEquals( (int)laserB.devolverPunto().getY() , 116 );
+		laserB.mover();	posicionLaserB -= laserB.devolverCantidadAMover();
+		assertEquals( (int)laserB.devolverPunto().getY() , posicionLaserB );
 		assertTrue( laserB.intentarChocar(algo) );
-		laserA.mover();
-		laserA.mover();
-		assertEquals( (int)laserA.devolverPunto().getY() - algo.devolverAltura() , 62 ); 
+		laserA.mover();	posicionLaserA += algo.devolverCantidadAMover();
+		laserA.mover();	posicionLaserA += algo.devolverCantidadAMover();
+		assertEquals( (int)laserA.devolverPunto().getY() - algo.devolverAltura(), posicionLaserA ); 
 		assertTrue( laserA.intentarChocar(avioneta) );
-		laserB.mover();
-		assertEquals( (int)laserB.devolverPunto().getY() , 110 ); 
+		laserB.mover();	posicionLaserB -= laserB.devolverCantidadAMover();
+		assertEquals( (int)laserB.devolverPunto().getY() , posicionLaserB ); 
 		for ( int i = 1 ; i < 11; i++ ) {
-			laserB.mover();
-			assertEquals( (int)laserB.devolverPunto().getY() , (110 - (i*6)) );
+			laserB.mover();	posicionLaserB -= laserB.devolverCantidadAMover();
+			assertEquals( (int)laserB.devolverPunto().getY() , posicionLaserB);
 		}
 
-		assertEquals( (int)laserB.devolverPunto().getY() , 50 );
-		assertEquals ( (int)algo.devolverPunto().getY(), (int)posicionAlgo.getY()+algo.getMovPixel());
+		assertEquals( (int)laserB.devolverPunto().getY() , posicionLaserB );
+		assertEquals ( (int)algo.devolverPunto().getY(), (int)posicionAlgo.getY()+algo.devolverCantidadAMover());
 		//LaserB y algo estan ocupando mismas posiciones
 		assertTrue( laserB.intentarChocar(algo) );
 		for (int i = 1; i<10; i++) {
-			laserA.mover();
-			assertEquals((int)( laserA.devolverPunto().getY()-algo.devolverAltura()), (62+(i*6)));
+			laserA.mover();	posicionLaserA += algo.devolverCantidadAMover();
+			assertEquals((int)( laserA.devolverPunto().getY()-algo.devolverAltura()), posicionLaserA);
 		}
 		assertTrue( laserA.intentarChocar(avioneta) );
 	}
-	
+
 	@Test
 	/* Prueba el uso de armas y sus efectos en naves. Primero crea una instancia de algo42, que destruye un bombardero.
 	 * Toma sus armas. Prueba un cohete con una instancia de helicoptero, y luego un torpedo con una instancia de avion civil */

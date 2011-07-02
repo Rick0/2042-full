@@ -69,19 +69,19 @@ public class Algo42Test extends TestCase{
 		
 		Punto posicionInicial = algo.devolverPunto();
 		algo.moverAbajo();
-		assertEquals(posicionInicial.getY()-algo.getMovPixel(),algo.devolverPunto().getY());
+		assertEquals(posicionInicial.getY()-algo.devolverCantidadAMover(),algo.devolverPunto().getY());
 		
 		posicionInicial = algo.devolverPunto();
 		algo.moverArriba();
-		assertEquals(posicionInicial.getY()+algo.getMovPixel(), algo.devolverPunto().getY());
+		assertEquals(posicionInicial.getY()+algo.devolverCantidadAMover(), algo.devolverPunto().getY());
 		
 		posicionInicial = algo.devolverPunto();
 		algo.moverDerecha();
-		assertEquals(posicionInicial.getX() +algo.getMovPixel(), algo.devolverPunto().getX());
+		assertEquals(posicionInicial.getX() +algo.devolverCantidadAMover(), algo.devolverPunto().getX());
 		
 		posicionInicial = algo.devolverPunto();
 		algo.moverDerecha();
-		assertEquals( posicionInicial.getX()+algo.getMovPixel() , algo.devolverPunto().getX());
+		assertEquals( posicionInicial.getX()+algo.devolverCantidadAMover() , algo.devolverPunto().getX());
 	}
 		
 	@Test
