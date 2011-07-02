@@ -20,6 +20,7 @@ public class Algo42 extends Nave implements Serializable {
 	static int velocidadDisparoTorpedo = 20;
 	int velocidadDisparoTorpedoCont;
 	static int energiaMaxima = 100;
+	boolean puedeDisparar;
 
 
 	/* Crea una nueva instancia de algo42, con ubicacion(determinada por un punto),
@@ -37,6 +38,7 @@ public class Algo42 extends Nave implements Serializable {
 		cohetes = 0;
 		estaDestruida = false;
 		esOperable = true;
+		puedeDisparar = true;
 
 		if ( ( (punto.getX()<(planoJuego.ancho)) & (punto.getY()<(planoJuego.altura)) )  & ((punto.getY()>=0) & (punto.getX()>=0) ) ) {
 			planoJuego.introducirAlgo42(this);
@@ -49,7 +51,8 @@ public class Algo42 extends Nave implements Serializable {
 
 	/* Crea una instancia de laser en la posicion del algo42 */
 	public void dispararLaser() {
-		if (velocidadDisparoCont == velocidadDisparo) {
+
+		if ((velocidadDisparoCont == velocidadDisparo) && puedeDisparar) {
 
 			int ancho = rectangulo.devolverAncho();
 			int altura = rectangulo.devolverAltura();
@@ -62,7 +65,7 @@ public class Algo42 extends Nave implements Serializable {
 	/* Dispara un cohete en la posicion del algo42 */
 	public void dispararCohete() throws ArmaNoDisponibleError {
 
-		if (velocidadDisparoCoheteCont == velocidadDisparoCohete) {
+		if ((velocidadDisparoCoheteCont == velocidadDisparoCohete) && puedeDisparar) {
 
 			if ( cohetes <= 0 ) {
 				throw new ArmaNoDisponibleError("No hay cohetes que lanzar.");
@@ -82,7 +85,7 @@ public class Algo42 extends Nave implements Serializable {
 	 */
 	public void dispararTorpedoRastreadorHacia(Nave unaNave) throws ArmaNoDisponibleError, NaveARastrearError {
 
-		if (velocidadDisparoTorpedoCont == velocidadDisparoTorpedo) {
+		if ((velocidadDisparoTorpedoCont == velocidadDisparoTorpedo) && puedeDisparar) {
 
 			if (unaNave == this) { 
 				throw new NaveARastrearError("La nave rastreada no puede ser la misma algo");
@@ -230,6 +233,10 @@ public class Algo42 extends Nave implements Serializable {
 		if (velocidadDisparoTorpedoCont < velocidadDisparoTorpedo) {
 			velocidadDisparoTorpedoCont++;
 		}
+	}
+
+	public void estadoPuedeDisparar(boolean estado) {
+		this.puedeDisparar = estado;
 	}
 
 }

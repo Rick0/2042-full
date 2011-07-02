@@ -148,6 +148,8 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 	//	System.out.println(objetosVivos.toString());
 		Plano planoDelJuego = this.plano;
 
+		planoDelJuego.getAlgo42().estadoPuedeDisparar(false);
+
 		Iterator<ObjetoUbicable> iteradorObjetosAAgregar = planoDelJuego.devolverListaObjetosAAgregar().iterator();
 		while (iteradorObjetosAAgregar.hasNext()) {
 			ObjetoUbicable unObjeto = iteradorObjetosAAgregar.next();
@@ -162,6 +164,8 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 			this.agregarObjetoVivo(unObjeto);
 		}
 		planoDelJuego.devolverListaObjetosAAgregar().clear();
+
+		planoDelJuego.getAlgo42().estadoPuedeDisparar(true);
 
 		Iterator<ObjetoUbicable> iteradorObjetosABorrar = planoDelJuego.devolverListaObjetosABorrar().iterator();
 		while (iteradorObjetosABorrar.hasNext()) {
