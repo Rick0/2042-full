@@ -11,7 +11,6 @@ public class Programa {
 	 */
 	public static void main(String[] args) {
 		
-		
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				VentanaInicial v= new VentanaInicial();
