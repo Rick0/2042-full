@@ -119,9 +119,9 @@ public abstract class Arma extends ObjetoUbicable implements Serializable {
 
 		Punto nuevaPosicion;
 		if (this.origenAlgo42) {
-			nuevaPosicion = new Punto(this.devolverPunto().getX(),(this.devolverPunto().getY()) + 2);
+			nuevaPosicion = new Punto(this.devolverPunto().getX(),(this.devolverPunto().getY()) + 6);
 		} else {
-			nuevaPosicion = new Punto(this.devolverPunto().getX(),(this.devolverPunto().getY()) - 2);
+			nuevaPosicion = new Punto(this.devolverPunto().getX(),(this.devolverPunto().getY()) - 6);
 		}
 		this.cambiarPosicion(nuevaPosicion);
 	}
