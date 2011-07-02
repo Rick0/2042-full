@@ -17,14 +17,13 @@ public class GenerarFlotaOmega extends GenerarFlota {
 	public void generar() {
 
 		Random generadorRandom = new Random();
-		int posRandom = generadorRandom.nextInt(30);
-		this.posEnX = posRandom + 70;
+		this.posEnX = generadorRandom.nextInt(30) + 60;
 		int navesACrear = 4;
 
 		while (navesACrear > 0) {
 
 			this.generarNaveEnemigaAlAzar();
-			this.posEnX = posEnX + 110;
+			this.posEnX = posEnX + 80 + generadorRandom.nextInt(40);
 			navesACrear--;
 		}
 	}

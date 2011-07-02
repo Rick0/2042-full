@@ -49,7 +49,11 @@ public abstract class ObjetoUbicable implements ObjetoVivo, Posicionable{
 	/*Devuelve la altura del objeto ubicable*/
 	public int devolverAltura() {
 		return rectangulo.altura;
-		
+	}
+
+	/*Devuelve el ancho del objeto ubicable*/
+	public int devolverAncho() {
+		return rectangulo.ancho;
 	}
 
 	/* Metodo implementado para la interface Posicionable */

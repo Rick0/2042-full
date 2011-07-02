@@ -22,8 +22,7 @@ public class GenerarFlotaAlfa extends GenerarFlota {
 
 		Random generadorRandom = new Random();
 		int navesACrear = 5;
-		int posRandom = generadorRandom.nextInt(20);
-		posEnX = posRandom + 5;
+		posEnX = generadorRandom.nextInt(20) + 10;
 	//	ArrayList<NaveNoOperable> lista= new ArrayList<NaveNoOperable>();
 
 		while (navesACrear > 0) {
@@ -40,7 +39,7 @@ public class GenerarFlotaAlfa extends GenerarFlota {
 				e.printStackTrace();
 			}
 
-			posEnX = posEnX + 110;
+			posEnX = posEnX + 100 + generadorRandom.nextInt(20);
 			navesACrear--;		
 		}
 	}

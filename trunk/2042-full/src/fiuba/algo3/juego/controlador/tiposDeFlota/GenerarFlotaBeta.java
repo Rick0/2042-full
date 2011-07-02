@@ -22,14 +22,13 @@ public class GenerarFlotaBeta extends GenerarFlota {
 
 		Random generadorRandom = new Random();
 		int navesACrear = 3;
-		int posRandom = generadorRandom.nextInt(50);
-		posEnX = posRandom + 70;
+		posEnX = generadorRandom.nextInt(50) + 70;
 
 		while (navesACrear > 0) {
 
 			Punto posNave = new Punto(posEnX, (this.posEnY-60));
 			try {
-				new Explorador(posNave, 35, this.plano);
+				new Explorador(posNave, radioNormal, this.plano);
 			} catch (SuperposicionNavesError e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -38,7 +37,7 @@ public class GenerarFlotaBeta extends GenerarFlota {
 				e.printStackTrace();
 			}
 
-			posEnX = posEnX + 150;
+			posEnX = posEnX + 140 + generadorRandom.nextInt(20);
 			navesACrear--;		
 		}
 	}

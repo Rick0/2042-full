@@ -15,6 +15,7 @@ import fiuba.algo3.juego.controlador.GeneradorControlador;
 import fiuba.algo3.juego.controlador.GeneradorFlota;
 import fiuba.algo3.juego.modelo.Plano;
 
+
 public class VentanaInicial extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -24,6 +25,7 @@ public class VentanaInicial extends JFrame {
 	private JButton jButtonRestaurar = null;
 	private JButton jButtonSalir = null;
 	private JLabel jLabelTitulo = null;
+
 
 	/**
 	 * This is the default constructor
@@ -39,9 +41,9 @@ public class VentanaInicial extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(400, 332);
+		this.setSize(550, 570);
 		this.setContentPane(getJContentPane());
-		this.setTitle("Algo 2042");
+		this.setTitle("Algo 2042 Full");
 	}
 
 	/**
