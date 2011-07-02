@@ -13,6 +13,7 @@ public abstract class Arma extends ObjetoUbicable implements Serializable {
 	int danio;
 	boolean fueUsado;
 	boolean origenAlgo42;
+	static int cantidadAMover = 5;
 
 
 	/* True indica que quien lanzo el arma fue una instancia de Algo42,
@@ -119,9 +120,9 @@ public abstract class Arma extends ObjetoUbicable implements Serializable {
 
 		Punto nuevaPosicion;
 		if (this.origenAlgo42) {
-			nuevaPosicion = new Punto(this.devolverPunto().getX(),(this.devolverPunto().getY()) + 6);
+			nuevaPosicion = new Punto(this.devolverPunto().getX(),(this.devolverPunto().getY()) + cantidadAMover);
 		} else {
-			nuevaPosicion = new Punto(this.devolverPunto().getX(),(this.devolverPunto().getY()) - 6);
+			nuevaPosicion = new Punto(this.devolverPunto().getX(),(this.devolverPunto().getY()) - cantidadAMover);
 		}
 		this.cambiarPosicion(nuevaPosicion);
 	}
@@ -152,6 +153,11 @@ public abstract class Arma extends ObjetoUbicable implements Serializable {
 	/* El arma pasa a estar usado */
 	public void pasaAEstarUsado() {
 		this.fueUsado = true;
+	}
+
+	/* Devuelve la cantidad a mover del arma */
+	public int devolverCantidadAMover() {
+		return cantidadAMover;
 	}
 
 }
