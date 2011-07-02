@@ -6,6 +6,10 @@ import fiuba.algo3.titiritero.*;
 
 public class VistaPlano extends Imagen implements ObjetoVivo {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7139934190560517966L;
 	int frameCont;
 	static int velocidadCambio = 7;
 	int velocidadCambioCont;
