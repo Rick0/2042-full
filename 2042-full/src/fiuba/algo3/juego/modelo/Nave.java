@@ -1,11 +1,17 @@
 package fiuba.algo3.juego.modelo;
 
+import java.io.Serializable;
+
 import fiuba.algo3.juego.modelo.excepciones.NaveNoDestruidaError;
 
 
 /* Clase de la cual heredan todas las naves del juego */
-public abstract class Nave extends ObjetoUbicable {
+public abstract class Nave extends ObjetoUbicable implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3433614298451171564L;
 	boolean estaDestruida;
 	boolean esOperable;
 	int energia;

@@ -53,6 +53,10 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 		juegoPerdido = false;
 		juegoGanado = false;
 	}
+	
+	public Plano() {
+		
+	}
 
 	/* Devuelve la altura del plano */
 	public int devolverAltura() {
@@ -169,6 +173,10 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 		return listaArmas;
 	}
 	
+	public ArrayList<Item> devolverListaItems() {
+		return listaItems;
+	}
+	
 	public ArrayList<NaveNoOperable> devolverListaNaves() {
 		return this.listaNaves;
 	}
@@ -236,6 +244,7 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 		try {
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo));
 			Plano planoAux = (Plano) ois.readObject();
+			planoAux.listaObjetosAAgregar.clear();
 			return planoAux;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

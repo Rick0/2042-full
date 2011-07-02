@@ -4,6 +4,10 @@ package fiuba.algo3.juego.modelo;
 /* Explosion de cualquier nave */
 public class NaveExplosion extends ObjetoUbicable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5764960680716822713L;
 	int tiempoDeVida = 22;
 
 

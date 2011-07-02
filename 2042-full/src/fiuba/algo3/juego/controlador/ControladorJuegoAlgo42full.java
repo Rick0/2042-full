@@ -1,10 +1,5 @@
 package fiuba.algo3.juego.controlador;
 
-import fiuba.algo3.juego.modelo.*;
-import fiuba.algo3.juego.vista.*;
-import fiuba.algo3.titiritero.*;
-import fiuba.algo3.titiritero.vista.*;
-import fiuba.algo3.titiritero.audio.Reproductor;
 import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -17,6 +12,29 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+
+import fiuba.algo3.juego.modelo.Arma;
+import fiuba.algo3.juego.modelo.Item;
+import fiuba.algo3.juego.modelo.NaveNoOperable;
+import fiuba.algo3.juego.modelo.ObjetoUbicable;
+import fiuba.algo3.juego.modelo.Plano;
+import fiuba.algo3.juego.vista.GeneradorDeVista;
+import fiuba.algo3.juego.vista.PuntoEntero;
+import fiuba.algo3.juego.vista.TextoEnergiaEInventario;
+import fiuba.algo3.juego.vista.TextoPuntosYNivel;
+import fiuba.algo3.juego.vista.TextoVidas;
+import fiuba.algo3.juego.vista.VentanaPrincipal;
+import fiuba.algo3.juego.vista.VistaAlgo42;
+import fiuba.algo3.juego.vista.VistaEnergiaEInventario;
+import fiuba.algo3.juego.vista.VistaPlano;
+import fiuba.algo3.titiritero.Dibujable;
+import fiuba.algo3.titiritero.KeyPressedObservador;
+import fiuba.algo3.titiritero.MouseClickObservador;
+import fiuba.algo3.titiritero.ObjetoVivo;
+import fiuba.algo3.titiritero.OperacionNoValida;
+import fiuba.algo3.titiritero.SuperficieDeDibujo;
+import fiuba.algo3.titiritero.audio.Reproductor;
+import fiuba.algo3.titiritero.vista.Imagen;
 
 
 public class ControladorJuegoAlgo42full implements Runnable, Serializable {
@@ -287,6 +305,71 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	public void persistirPlano(String archivo) {
+		this.plano.persistir(archivo);
+	}
+	
+	public void restaurarPlano(String archivo) {
+		this.plano = Plano.restaurar(archivo);
+		Iterator <NaveNoOperable>i = plano.devolverListaNaves().iterator();
+		while (i.hasNext()) {
+			this.plano.agregarObjetoNuevo(i.next());
+		}
+		Iterator <Arma>j = plano.devolverListaArmas().iterator();
+		while (j.hasNext()) {
+			this.plano.agregarObjetoNuevo(j.next());
+		}
+		Iterator <Item>k = plano.devolverListaItems().iterator();
+		while (k.hasNext()) {
+			this.plano.agregarObjetoNuevo(k.next());
+		}
+		//Under construction
+	}
+	
+	public Plano getPlano() {
+		return this.plano;
+	}
+	
+	public void restaurarJuegoAPartirDePlano(String archivo) {
+		this.restaurarPlano(archivo);
+		VistaPlano vistaPlano = new VistaPlano();
+		vistaPlano.setPosicionable(this.plano);
+		this.agregarDibujable(vistaPlano);
+		this.agregarObjetoVivo(vistaPlano);
+
+		VentanaPrincipal ventana = new VentanaPrincipal(this, this.plano.getAlgo42());
+		this.setSuperficieDeDibujo(ventana.getSuperficieDeDibujo());
+		ventana.setVisible(true);
+		ventana.setAlwaysOnTop(true);
+		ventana.setEnabled(true);
+		ventana.enableInputMethods(true);
+
+		VistaAlgo42 vistaAlgo42 = new VistaAlgo42();
+		vistaAlgo42.setPosicionable(this.plano.getAlgo42());
+
+		TextoEnergiaEInventario textoEnergiaEInventario = new TextoEnergiaEInventario("Energia:"+"100", this.plano.getAlgo42());
+		VistaEnergiaEInventario energia = new VistaEnergiaEInventario(textoEnergiaEInventario);
+		energia.setPosicionable(new PuntoEntero(75,560));
+		
+		TextoPuntosYNivel textoPuntosYNivel = new TextoPuntosYNivel("Nivel: 1 Puntos: 0", this.plano.devolverNivel() );
+		VistaEnergiaEInventario vistaTextoPuntosYNivel = new VistaEnergiaEInventario(textoPuntosYNivel);
+		vistaTextoPuntosYNivel.setPosicionable(new PuntoEntero(220,20));
+		TextoVidas textoVidas = new TextoVidas("Vidas: 3",this.plano);
+		VistaEnergiaEInventario vistaCantidadVidas = new VistaEnergiaEInventario(textoVidas);
+		vistaCantidadVidas.setPosicionable(new PuntoEntero(130,20));
+		
+		this.agregarDibujable(energia);
+		this.agregarDibujable(vistaCantidadVidas);
+		this.agregarDibujable(vistaAlgo42);
+		this.agregarDibujable(vistaTextoPuntosYNivel);
+		this.agregarObjetoVivo(textoPuntosYNivel);
+		this.agregarObjetoVivo(this.plano.getAlgo42());
+		this.agregarObjetoVivo(textoEnergiaEInventario);
+		this.agregarObjetoVivo(textoVidas);
+		this.agregarObjetoVivo(this.plano);
+		this.setIntervaloSimulacion(20);	
 	}
 
 	private static final long serialVersionUID = -6401581783523170282L;

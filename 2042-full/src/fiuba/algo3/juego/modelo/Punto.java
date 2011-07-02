@@ -9,7 +9,7 @@ import java.io.Serializable;
  */
 public class Punto implements Serializable{
 
-	private static final long serialVersionUID = -423117653563270069L;
+	private static final long serialVersionUID = 423117653563270069L;
 	double posicionX;
 	double posicionY;
 
@@ -18,6 +18,11 @@ public class Punto implements Serializable{
 	public Punto(double x, double y) {
 		posicionX = x;
 		posicionY = y;
+	}
+	
+	public Punto() {
+		posicionX = 0;
+		posicionY = 0;
 	}
 
 	/* Devuelve la posicion en X */

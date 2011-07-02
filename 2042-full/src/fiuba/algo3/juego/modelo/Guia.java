@@ -8,6 +8,10 @@ import fiuba.algo3.juego.modelo.excepciones.NaveNoDestruidaError;
 
 public abstract class Guia extends NaveNoOperable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3148574291086531899L;
 	List<NaveNoOperable> flota;
 
 
