@@ -13,7 +13,8 @@ public class BotonGControlable implements Controlable {
 	
 	@Override
 	public void activarEfecto() {
-		controlador.persistir("savegame.dat");
+		System.out.println("GuardarJuego()");
+		controlador.persistirPlano("savegame.dat");
 	}
 	
 }

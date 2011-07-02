@@ -1,5 +1,7 @@
 package fiuba.algo3.juego.modelo;
 
+import java.io.Serializable;
+
 import fiuba.algo3.titiritero.ObjetoVivo;
 import fiuba.algo3.titiritero.Posicionable;
 
@@ -8,8 +10,12 @@ import fiuba.algo3.titiritero.Posicionable;
  * heredan de esta clase: Todos deben tener una instancia de rectangulo
  * que los representa en el espacio y que les da un tamanio y una ubicacion
  */
-public abstract class ObjetoUbicable implements ObjetoVivo, Posicionable{
+public abstract class ObjetoUbicable implements ObjetoVivo, Posicionable, Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8478744294538118063L;
 	Rectangulo rectangulo;
 	Plano plano;
 

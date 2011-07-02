@@ -10,6 +10,10 @@ import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
  */
 public abstract class NaveNoOperable extends Nave {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3275367912248566223L;
 	boolean fueraDelPlano;
 	int puntos;
 	public boolean tengoQueHuir = false;

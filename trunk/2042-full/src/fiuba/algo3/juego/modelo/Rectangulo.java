@@ -21,6 +21,12 @@ public class Rectangulo implements Serializable{
 		ancho  = anchoR;
 		altura = alturaR;
 	}
+	
+	public Rectangulo() {
+		puntoIzquierdoInferior = null;
+		ancho  = 0;
+		altura = 0;
+	}
 
 	/* Devuelve el punto que determina la posicion del rectangulo */
 	public Punto devolverPuntoIzquierdoInferior() {

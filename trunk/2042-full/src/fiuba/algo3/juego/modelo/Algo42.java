@@ -1,5 +1,11 @@
 package fiuba.algo3.juego.modelo;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import fiuba.algo3.juego.modelo.excepciones.AreaInvalidaError;
 import fiuba.algo3.juego.modelo.excepciones.ArmaNoDisponibleError;
@@ -48,7 +54,24 @@ public class Algo42 extends Nave implements Serializable {
 			throw new AreaInvalidaError("La nave debe ser creada en una posicion valida dentro del area de juego.");
 		}
 	}
+	
+	public Algo42()  {
 
+		velocidadDisparo = 10;
+		velocidadDisparoCont = velocidadDisparo;
+		velocidadDisparoCoheteCont = velocidadDisparoCohete;
+		velocidadDisparoTorpedoCont = velocidadDisparoTorpedo;
+		plano = null;
+		energia = energiaMaxima;
+		torpedos = 0;
+		cohetes = 0;
+		estaDestruida = false;
+		esOperable = true;
+		puedeDisparar = true;
+		rectangulo = null;
+	}
+
+	
 	/* Crea una instancia de laser en la posicion del algo42 */
 	public void dispararLaser() {
 
@@ -218,6 +241,36 @@ public class Algo42 extends Nave implements Serializable {
 	@Override
 	public void vivir() {
 		this.pasaUnTiempo();
+	}
+	
+	public void persistir() {
+
+			try {
+				ObjectOutputStream oos = new ObjectOutputStream(
+				new FileOutputStream( "algo42.dat" ));
+				oos.writeObject(this);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	}
+	
+	public static Algo42 restaurar() {
+		try {
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("algo42.dat"));
+			Algo42 algo = (Algo42) ois.readObject();
+			return algo;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
