@@ -16,7 +16,7 @@ public class TorpedoRastreador extends Arma implements Serializable{
 		this.danio = -20;
 		this.fueUsado = false;
 		this.rectangulo = (new Rectangulo(2 , 2, punto ));
-		this.InicializarOrigenAlgo42(origenAlgo);
+		this.inicializarOrigenAlgo42(origenAlgo);
 		this.determinarPlano(plano);
 
 		try {

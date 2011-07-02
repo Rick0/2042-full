@@ -14,7 +14,7 @@ public class TorpedoAdaptable extends Arma implements Serializable{
 		this.danio = 0;
 		this.fueUsado = false;
 		this.rectangulo = (new Rectangulo(4 , 2, punto));
-		this.InicializarOrigenAlgo42(origenAlgo);
+		this.inicializarOrigenAlgo42(origenAlgo);
 		this.determinarPlano(plano);
 
 		try {

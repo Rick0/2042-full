@@ -19,7 +19,7 @@ public abstract class Arma extends ObjetoUbicable implements Serializable {
 	/* True indica que quien lanzo el arma fue una instancia de Algo42,
 	 * False en caso contrario
 	 */
-	public void InicializarOrigenAlgo42(boolean verdaderoOFalso) {
+	public void inicializarOrigenAlgo42(boolean verdaderoOFalso) {
 		this.origenAlgo42 = verdaderoOFalso;
 	}
 
