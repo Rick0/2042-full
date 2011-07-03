@@ -56,7 +56,7 @@ public class GeneradorFlota implements ObjetoVivo {
 			Random generadorRandom = new Random();
 			int i = generadorRandom.nextInt(tablaGeneradorFlotas.size());
 			GenerarFlota unGeneradorFlota = tablaGeneradorFlotas.get(i);
-		//	GenerarFlota unGeneradorFlota = tablaGeneradorFlotas.get(20);
+		//	GenerarFlota unGeneradorFlota = tablaGeneradorFlotas.get(24);
 			unGeneradorFlota.generar();
 
 			this.velocidadSpawnearCont = 0;
@@ -118,8 +118,14 @@ public class GeneradorFlota implements ObjetoVivo {
 			GenerarFlota generarFlotaNu = new GenerarFlotaNu(this.posEnY, this.plano);
 
 			GenerarFlota generarFlotaZeta = new GenerarFlotaZeta(this.posEnY, this.plano);
+
 			GenerarFlota generarFlotaEta = new GenerarFlotaEta(this.posEnY, this.plano);
 			GenerarFlota generarFlotaTheta = new GenerarFlotaTheta(this.posEnY, this.plano);
+
+			GenerarFlota generarFlotaXi = new GenerarFlotaXi(this.posEnY, this.plano);
+			GenerarFlota generarFlotaPi = new GenerarFlotaPi(this.posEnY, this.plano);
+			GenerarFlota generarFlotaChi = new GenerarFlotaChi(this.posEnY, this.plano);
+			GenerarFlota generarFlotaPhi = new GenerarFlotaPhi(this.posEnY, this.plano);
 
 
 			int i = 0;
@@ -132,6 +138,8 @@ public class GeneradorFlota implements ObjetoVivo {
 			tablaGeneradorFlotas.put(i, generarFlotaOmega);	i++;
 			tablaGeneradorFlotas.put(i, generarFlotaOmega);	i++;
 			tablaGeneradorFlotas.put(i, generarFlotaOmega);	i++;
+			tablaGeneradorFlotas.put(i, generarFlotaOmega);	i++;
+			tablaGeneradorFlotas.put(i, generarFlotaEpsilon);	i++;
 			tablaGeneradorFlotas.put(i, generarFlotaEpsilon);	i++;
 			tablaGeneradorFlotas.put(i, generarFlotaEpsilon);	i++;
 			tablaGeneradorFlotas.put(i, generarFlotaUpsilon);	i++;
@@ -140,14 +148,22 @@ public class GeneradorFlota implements ObjetoVivo {
 			tablaGeneradorFlotas.put(i, generarFlotaMu);	i++;
 			tablaGeneradorFlotas.put(i, generarFlotaMu);	i++;
 			tablaGeneradorFlotas.put(i, generarFlotaMu);	i++;
+			tablaGeneradorFlotas.put(i, generarFlotaMu);	i++;
+			tablaGeneradorFlotas.put(i, generarFlotaNu);	i++;
 			tablaGeneradorFlotas.put(i, generarFlotaNu);	i++;
 			tablaGeneradorFlotas.put(i, generarFlotaNu);	i++;
 			tablaGeneradorFlotas.put(i, generarFlotaNu);	i++;
 			tablaGeneradorFlotas.put(i, generarFlotaNu);	i++;
 
 			tablaGeneradorFlotas.put(i, generarFlotaZeta);	i++;
+
 			tablaGeneradorFlotas.put(i, generarFlotaEta);	i++;
 			tablaGeneradorFlotas.put(i, generarFlotaTheta);	i++;
+
+			tablaGeneradorFlotas.put(i, generarFlotaXi);	i++;
+			tablaGeneradorFlotas.put(i, generarFlotaPi);	i++;
+			tablaGeneradorFlotas.put(i, generarFlotaChi);	i++;
+			tablaGeneradorFlotas.put(i, generarFlotaPhi);	i++;
 		}
 	}
 
