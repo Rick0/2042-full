@@ -114,11 +114,10 @@ public class VentanaInicial extends JFrame {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
 					System.out.println("Restaurar()");
 					
-					ControladorJuegoAlgo42full controlador = new ControladorJuegoAlgo42full(false, null);
-					controlador.restaurarJuegoAPartirDePlano("savegame.dat");
+					GeneradorControlador generadorControlador = new GeneradorControlador(Plano.restaurar("savegame.dat"));
+					ControladorJuegoAlgo42full controlador = generadorControlador.generarControladorAPartirDePlano();
 					GeneradorFlota generadorFlota = new GeneradorFlota(controlador.getPlano());
 					controlador.agregarObjetoVivo(generadorFlota);
-
 					controlador.comenzarJuegoAsyn();
 				}
 			});
