@@ -32,7 +32,7 @@ public class GeneradorControlador {
 	public ControladorJuegoAlgo42full generarControlador() {
 
 		Algo42 algo42 = null;
-		Punto posAlgo = new Punto(250,150);
+		Punto posAlgo = new Punto(200,150);
 		try {
 			algo42 = new Algo42(posAlgo,plano);
 		} catch (AreaInvalidaError e) {
@@ -68,7 +68,6 @@ public class GeneradorControlador {
 		TextoEnergiaEInventario textoEnergiaEInventario = new TextoEnergiaEInventario("Energia:"+"100", algo42);
 		VistaEnergiaEInventario energia = new VistaEnergiaEInventario(textoEnergiaEInventario);
 		energia.setPosicionable(new PuntoEntero(75,560));
-		
 		TextoPuntosYNivel textoPuntosYNivel = new TextoPuntosYNivel("Nivel: 1 Puntos: 0", plano.devolverNivel() );
 		VistaEnergiaEInventario vistaTextoPuntosYNivel = new VistaEnergiaEInventario(textoPuntosYNivel);
 		vistaTextoPuntosYNivel.setPosicionable(new PuntoEntero(220,20));
@@ -78,21 +77,22 @@ public class GeneradorControlador {
 		TextoEstadoJuego textoEstadoJuego = new TextoEstadoJuego("", plano);
 		VistaEstadoJuego vistaEstadoJuego = new VistaEstadoJuego(textoEstadoJuego);
 		vistaEstadoJuego.setPosicionable(new PuntoEntero(( plano.devolverAncho()/4 ) - 20 , plano.devolverAltura()/2));
-		
-		controlador.agregarObjetoVivo(textoEstadoJuego);
+
 		controlador.agregarDibujable(vistaEstadoJuego);
-		
 		controlador.agregarDibujable(energia);
 		controlador.agregarDibujable(vistaCantidadVidas);
 		controlador.agregarDibujable(vistaAlgo42);
 		controlador.agregarDibujable(vistaTextoPuntosYNivel);
+		controlador.agregarObjetoVivo(textoEstadoJuego);
 		controlador.agregarObjetoVivo(textoPuntosYNivel);
 		controlador.agregarObjetoVivo(algo42);
 		controlador.agregarObjetoVivo(textoEnergiaEInventario);
 		controlador.agregarObjetoVivo(textoVidas);
 		controlador.agregarObjetoVivo(plano);
+
 		controlador.setIntervaloSimulacion(20);	
 		
 		return controlador;
-	}		
+	}
+
 }
