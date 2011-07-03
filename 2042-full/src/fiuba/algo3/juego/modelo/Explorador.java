@@ -56,19 +56,20 @@ public class Explorador extends NaveNoOperable implements Serializable{
 	}
 
 	/* Movimiento que se debe llevar a cabo si la funcion 'intentar movimiento' comprueba que el movimiento
-	 * por defecto provocaria un choque entre naves del tipo no operable. Este metodo hace que el explorador
-	 * retroceda en su angulo de giro y se mueva hacia arriba (en lugar de hacia abajo, que es el movimiento normal del explorador)
+	 * por defecto provocaria un choque entre naves del tipo no operable.
 	 */
+	
 	public void moverAlternativo() throws SuperposicionNavesError {
 
-		double pi = Math.PI;
-		double  num=((1.000)/12);
-		anguloActual = (anguloActual - num);
-		puntosHaciaAbajo = (puntosHaciaAbajo - 0.5);
-		Punto nuevoPunto= new Punto( (radio*( Math.cos( pi *anguloActual ) ) + centroInicialX),(centroInicialY - (radio * Math.sin( pi*anguloActual ) ) - puntosHaciaAbajo));
+		Punto posicion= this.devolverPunto();
+		Punto nuevoPunto= new Punto(posicion.getX()+2,posicion.getY());
 		this.cambiarPosicion(nuevoPunto);
 		if (this.seSuperponeConOtraNave() ) {
-			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
+			nuevoPunto= new Punto(posicion.getX()-2,posicion.getY());
+			this.cambiarPosicion(nuevoPunto);
+			if (this.seSuperponeConOtraNave() ){
+				throw new SuperposicionNavesError("La posicion ya esta ocupada.");
+			}
 		}
 		this.estaFueraDelPlano();
 	}
