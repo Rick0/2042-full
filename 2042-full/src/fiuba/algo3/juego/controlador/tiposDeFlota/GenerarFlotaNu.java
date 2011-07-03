@@ -13,17 +13,17 @@ public class GenerarFlotaNu extends GenerarFlota {
 	}
 
 	@Override
-	/* Genera una flota nu, de 1 a 4 naves enemigas al azar, empezando por el lado derecho del plano */
+	/* Genera una flota nu, de 2 a 5 naves enemigas al azar, empezando por el lado derecho del plano */
 	public void generar() {
 
 		Random generadorRandom = new Random();
 		this.posEnX = this.plano.devolverAncho() - generadorRandom.nextInt(60) - 30;
-		int navesACrear = generadorRandom.nextInt(4) + 1;
+		int navesACrear = generadorRandom.nextInt(4) + 2;
 
 		while (navesACrear > 0) {
 
 			this.generarNaveEnemigaAlAzar();
-			this.posEnX = posEnX - 60 - generadorRandom.nextInt(80);
+			this.posEnX = posEnX - 60 - generadorRandom.nextInt(60);
 			navesACrear--;
 		}
 	}
