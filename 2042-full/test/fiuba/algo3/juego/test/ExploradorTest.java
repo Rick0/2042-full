@@ -2,6 +2,8 @@ package fiuba.algo3.juego.test;
 
 import junit.framework.TestCase;
 import org.junit.Test;
+
+import fiuba.algo3.juego.modelo.Avioneta;
 import fiuba.algo3.juego.modelo.Explorador;
 import fiuba.algo3.juego.modelo.Plano;
 import fiuba.algo3.juego.modelo.Punto;
@@ -37,21 +39,31 @@ public class ExploradorTest extends TestCase{
 	
 	@Test
 	/*Prueba el movimiento alternativo de una nave exploradora.
-	 * El mover alternativo basicamente hace el mismo giro en posicion contraria.
-	 * Por lo tanto, estas pruebas haran el giro alternativo desde el principio. Dara media vuelta de helice hacia atras.
+	 * El mover alternativo basicamente se mueve hacia la derecha si puede,
+	 * si no se mueve a la izquierda.
 	 */
 	public void testMoverAlternativo() throws SuperposicionNavesError, NaveDestruidaError { 
 
-		Plano plano = new Plano( 200 , 100 );
-		Punto punto=new Punto(50,70);
-		Explorador explorador = new Explorador( punto, 35 , plano );
-		int n = 0;
-		while ( n < 6 ) {
+		Plano plano = new Plano( 500 , 500 );
+		Punto posicionExplorador=new Punto(50,70);
+		Punto posicionAvioneta=new Punto(106,70);
+		Explorador explorador = new Explorador( posicionExplorador, 35 , plano );
+		@SuppressWarnings("unused")
+		Avioneta avioneta= new Avioneta(posicionAvioneta,plano);
+		int n=0;
+		int posicionXExplorador= 50;
+		while(n<5){
+			posicionXExplorador= posicionXExplorador+2;
 			explorador.moverAlternativo();
-			n = ( n + 1 );
+			assertEquals( (int)explorador.devolverPunto().getX() , posicionXExplorador);
+			n=n+1;
 		}
-		assertEquals( (int)explorador.devolverPunto().getX() , 15 );
-		assertEquals( (int)explorador.devolverPunto().getY() , 108 );
+		assertEquals( (int)explorador.devolverPunto().getX() , 60);
+		assertEquals( (int)explorador.devolverPunto().getY() ,70 );
+		// Al moverlo una vez más, al estar la avioneta en el camino,
+		// deberia moverse a la izquierda.
+		explorador.moverAlternativo();
+		assertEquals( (int)explorador.devolverPunto().getX() ,58 );
 	}
 	
 }
