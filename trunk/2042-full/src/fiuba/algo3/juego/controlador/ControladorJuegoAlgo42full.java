@@ -153,7 +153,7 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 	/** Asigna vista a los objetos nuevos, como tambien los agrega a la lista de objetos vivos y dibujables.
 	 *  Borra vistas de objetos destruidos, y los saca de la lista de objetos vivos y dibujables.
 	 */
-	private synchronized void actualizarPlano() {
+	private void actualizarPlano() {
 
 	//	System.out.println(objetosVivos.toString());
 		Plano planoDelJuego = this.plano;
@@ -345,7 +345,7 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 	private Plano plano;
 
 
-	public synchronized void run() {
+	public void run() {
 		this.comenzarJuego();
 	}
 
