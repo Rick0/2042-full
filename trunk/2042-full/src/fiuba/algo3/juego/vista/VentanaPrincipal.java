@@ -7,8 +7,11 @@ import java.awt.Frame;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
+import fiuba.algo3.juego.controlador.ControladorJuegoAlgo42full;
+import fiuba.algo3.juego.controlador.KeyListenerAlgo42;
+import fiuba.algo3.juego.controlador.KeyListnerOpciones;
 import fiuba.algo3.juego.modelo.Algo42;
-import fiuba.algo3.juego.controlador.*;
 import fiuba.algo3.titiritero.SuperficieDeDibujo;
 
 
@@ -37,8 +40,10 @@ public class VentanaPrincipal extends Frame {
 		
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-
-				System.exit(0);
+				controladorJuego.detenerJuego();
+				dispose();
+				System.out.println("Saliendo del Juego Actual");
+				//System.exit(0);
 			}			
 		} );
 	}

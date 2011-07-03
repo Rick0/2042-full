@@ -5,9 +5,9 @@ public class Programa {
 	/**
 	 * @param args
 	 * Inicializa el juego.
-	 */
+	 
 	public static void main(String[] args) {
-		EjecutableJuego e= new EjecutableJuego();
+		EjecutableJuego e = new EjecutableJuego();
 		e.run();
-	}
+	}*/
 }

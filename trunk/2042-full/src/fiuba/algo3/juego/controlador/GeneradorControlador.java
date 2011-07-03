@@ -61,6 +61,7 @@ public class GeneradorControlador {
 		ventana.setAlwaysOnTop(true);
 		ventana.setEnabled(true);
 		ventana.enableInputMethods(true);
+		
 
 		VistaAlgo42 vistaAlgo42 = new VistaAlgo42();
 		vistaAlgo42.setPosicionable(algo42);
