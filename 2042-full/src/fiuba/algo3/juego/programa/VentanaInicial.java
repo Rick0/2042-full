@@ -38,7 +38,6 @@ public class VentanaInicial extends JFrame {
 	private void initialize() {
 		this.setSize(550, 570);
 		this.setResizable(false);
-		this.setSize(550, 570);
 		this.setContentPane(getJContentPane());
 		this.setTitle("Algo 2042 Full");
 	}
