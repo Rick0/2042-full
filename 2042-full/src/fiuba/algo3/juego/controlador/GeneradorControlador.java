@@ -31,7 +31,6 @@ public class GeneradorControlador {
 	 */
 	public ControladorJuegoAlgo42full generarControlador() {
 
-		ControladorJuegoAlgo42full controlador = new ControladorJuegoAlgo42full(false, this.plano);
 		Algo42 algo42 = null;
 		Punto posAlgo = new Punto(250,150);
 		try {
@@ -40,6 +39,17 @@ public class GeneradorControlador {
 			// No deberia haber creado el algo en una posicion invalida.
 			e.printStackTrace();
 		}
+		plano.introducirAlgo42(algo42);
+		
+		return this.generarControladorAPartirDePlano();
+	}
+	
+	public ControladorJuegoAlgo42full generarControladorAPartirDePlano() {
+
+		ControladorJuegoAlgo42full controlador = new ControladorJuegoAlgo42full(false, plano);
+		Algo42 algo42 = plano.getAlgo42();
+		controlador.restaurarPlano();
+		
 		VistaPlano vistaPlano = new VistaPlano();
 		vistaPlano.setPosicionable(plano);
 		controlador.agregarDibujable(vistaPlano);
