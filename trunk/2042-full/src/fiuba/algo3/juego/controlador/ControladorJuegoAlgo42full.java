@@ -21,11 +21,13 @@ import fiuba.algo3.juego.modelo.Plano;
 import fiuba.algo3.juego.vista.GeneradorDeVista;
 import fiuba.algo3.juego.vista.PuntoEntero;
 import fiuba.algo3.juego.vista.TextoEnergiaEInventario;
+import fiuba.algo3.juego.vista.TextoEstadoJuego;
 import fiuba.algo3.juego.vista.TextoPuntosYNivel;
 import fiuba.algo3.juego.vista.TextoVidas;
 import fiuba.algo3.juego.vista.VentanaPrincipal;
 import fiuba.algo3.juego.vista.VistaAlgo42;
 import fiuba.algo3.juego.vista.VistaEnergiaEInventario;
+import fiuba.algo3.juego.vista.VistaEstadoJuego;
 import fiuba.algo3.juego.vista.VistaPlano;
 import fiuba.algo3.titiritero.Dibujable;
 import fiuba.algo3.titiritero.KeyPressedObservador;
@@ -359,7 +361,12 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 		TextoVidas textoVidas = new TextoVidas("Vidas: 3",this.plano);
 		VistaEnergiaEInventario vistaCantidadVidas = new VistaEnergiaEInventario(textoVidas);
 		vistaCantidadVidas.setPosicionable(new PuntoEntero(130,20));
+		TextoEstadoJuego textoEstadoJuego = new TextoEstadoJuego("", this.plano);
+		VistaEstadoJuego vistaEstadoJuego = new VistaEstadoJuego(textoEstadoJuego);
+		vistaEstadoJuego.setPosicionable(new PuntoEntero(this.plano.devolverAncho()/2 ,this.plano.devolverAltura()/2));
 		
+		this.agregarObjetoVivo(textoEstadoJuego);
+		this.agregarDibujable(vistaEstadoJuego);
 		this.agregarDibujable(energia);
 		this.agregarDibujable(vistaCantidadVidas);
 		this.agregarDibujable(vistaAlgo42);

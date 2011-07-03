@@ -333,4 +333,13 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 		return 0;
 	}
 
+	public boolean estaJuegoPerdido() {
+		return juegoPerdido;
+	}
+
+	public boolean estaJuegoGanado() {
+		return juegoGanado;
+	}
+
+	
 }
