@@ -30,6 +30,12 @@ public class Ventana extends Frame implements SuperficieDeDibujo{
 	public Ventana(ControladorJuego unControlador){
 		this.controlador = unControlador;
 		this.addMouseListener(new MouseClickController(this.controlador));
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent we) {
+				dispose();
+				System.exit(0);
+			}
+		});
 	}
 	// es llamado internamente por el metodo repaint() de la clase Frame
 	public void update(Graphics g) {
@@ -71,7 +77,7 @@ public class Ventana extends Frame implements SuperficieDeDibujo{
 		int y = (screenSize.height - frameSize.height) / 2;
 		setLocation(x, y);
 		addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent e) {
+			public void windowClosing(WindowEvent we) {
 				dispose();
 				System.exit(0);
 			}

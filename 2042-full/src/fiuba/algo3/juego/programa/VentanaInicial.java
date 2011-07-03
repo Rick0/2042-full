@@ -1,6 +1,8 @@
 package fiuba.algo3.juego.programa;
 
 import java.awt.BorderLayout;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -40,6 +42,7 @@ public class VentanaInicial extends JFrame {
 		this.setResizable(false);
 		this.setContentPane(getJContentPane());
 		this.setTitle("Algo 2042 Full");
+		this.setIconImage(new ImageIcon("/recursos/Icono.gif").getImage());
 	}
 
 	/**
@@ -88,7 +91,6 @@ public class VentanaInicial extends JFrame {
 					Plano plano = new Plano(550,570);
 					GeneradorControlador generador = new GeneradorControlador(plano);
 					ControladorJuegoAlgo42full controlador = generador.generarControlador();
-
 					GeneradorFlota generadorFlota = new GeneradorFlota(plano);
 					controlador.agregarObjetoVivo(generadorFlota);
 
