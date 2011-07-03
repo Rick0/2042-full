@@ -19,6 +19,7 @@ import fiuba.algo3.juego.modelo.NaveNoOperable;
 import fiuba.algo3.juego.modelo.ObjetoUbicable;
 import fiuba.algo3.juego.modelo.Plano;
 import fiuba.algo3.juego.vista.GeneradorDeVista;
+import fiuba.algo3.juego.vista.VentanaPrincipal;
 import fiuba.algo3.titiritero.Dibujable;
 import fiuba.algo3.titiritero.KeyPressedObservador;
 import fiuba.algo3.titiritero.MouseClickObservador;
@@ -204,8 +205,17 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 	private void revisarEstadoJuego() {
 
 		if (plano.devolverEstadoJuegoPerdido()) {
+
 			estaEnEjecucion = false;
-			// poner imagen o ventana de "Perdiste  -  y si tiene un nuevo highscore, poder guardarlo"
+
+			try {
+				Thread.sleep(3000);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			this.ventanaDelJuego.setVisible(false);
+			this.ventanaDelJuego.dispose();
 		}
 
 		if (plano.devolverEstadoJuegoGanado()) {
@@ -229,7 +239,11 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 	public void setSuperficieDeDibujo(SuperficieDeDibujo superficieDeDibujo) {
 		this.superficieDeDibujo = superficieDeDibujo;
 	}
-	
+
+	public void setVentanaDelJuego(VentanaPrincipal ventanaDelJuego) {
+		this.ventanaDelJuego = ventanaDelJuego;
+	}
+
 	/**
 	 * Se encarga de derivar el manejo del evento click al objeto vista correspondiente
 	 * @param x posicion horizontal del mouse
@@ -343,6 +357,7 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 	private HashMap<ObjetoUbicable,Imagen> tablaDeVistas;
 	private GeneradorDeVista generadorDeVista;
 	private Plano plano;
+	private VentanaPrincipal ventanaDelJuego;
 
 
 	public void run() {

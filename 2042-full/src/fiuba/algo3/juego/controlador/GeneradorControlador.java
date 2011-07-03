@@ -19,6 +19,7 @@ import fiuba.algo3.juego.vista.VistaEnergiaEInventario;
 public class GeneradorControlador {
 	
 	Plano plano;
+	VentanaPrincipal ventanaDelJuego;
 
 
 	public GeneradorControlador(Plano planoObtenido) {
@@ -55,13 +56,13 @@ public class GeneradorControlador {
 		controlador.agregarDibujable(vistaPlano);
 		controlador.agregarObjetoVivo(vistaPlano);
 
-		VentanaPrincipal ventana = new VentanaPrincipal(controlador,algo42);
-		controlador.setSuperficieDeDibujo(ventana.getSuperficieDeDibujo());
-		ventana.setVisible(true);
-		ventana.setAlwaysOnTop(true);
-		ventana.setEnabled(true);
-		ventana.enableInputMethods(true);
-		
+		ventanaDelJuego = new VentanaPrincipal(controlador,algo42);
+		controlador.setSuperficieDeDibujo(ventanaDelJuego.getSuperficieDeDibujo());
+		ventanaDelJuego.setVisible(true);
+		ventanaDelJuego.setAlwaysOnTop(true);
+		ventanaDelJuego.setEnabled(true);
+		ventanaDelJuego.enableInputMethods(true);
+		controlador.setVentanaDelJuego(ventanaDelJuego);
 
 		VistaAlgo42 vistaAlgo42 = new VistaAlgo42();
 		vistaAlgo42.setPosicionable(algo42);
@@ -94,6 +95,10 @@ public class GeneradorControlador {
 		controlador.setIntervaloSimulacion(20);	
 		
 		return controlador;
+	}
+
+	public VentanaPrincipal devolverVentanaDelJuego() {
+		return ventanaDelJuego;
 	}
 
 }
