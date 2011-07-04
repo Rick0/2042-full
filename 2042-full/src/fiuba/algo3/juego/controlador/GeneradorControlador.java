@@ -5,15 +5,13 @@ import fiuba.algo3.juego.modelo.Plano;
 import fiuba.algo3.juego.modelo.Punto;
 import fiuba.algo3.juego.modelo.excepciones.AreaInvalidaError;
 import fiuba.algo3.juego.vista.PuntoEntero;
-import fiuba.algo3.juego.vista.TextoEstadoJuego;
-import fiuba.algo3.juego.vista.TextoPuntosYNivel;
 import fiuba.algo3.juego.vista.TextoEnergiaEInventario;
+import fiuba.algo3.juego.vista.TextoPuntosYNivel;
 import fiuba.algo3.juego.vista.TextoVidas;
 import fiuba.algo3.juego.vista.VentanaPrincipal;
 import fiuba.algo3.juego.vista.VistaAlgo42;
-import fiuba.algo3.juego.vista.VistaEstadoJuego;
-import fiuba.algo3.juego.vista.VistaPlano;
 import fiuba.algo3.juego.vista.VistaEnergiaEInventario;
+import fiuba.algo3.juego.vista.VistaPlano;
 
 
 public class GeneradorControlador {
@@ -76,16 +74,11 @@ public class GeneradorControlador {
 		TextoVidas textoVidas = new TextoVidas("Vidas: 3", plano);
 		VistaEnergiaEInventario vistaCantidadVidas = new VistaEnergiaEInventario(textoVidas);
 		vistaCantidadVidas.setPosicionable(new PuntoEntero(130,20));
-		TextoEstadoJuego textoEstadoJuego = new TextoEstadoJuego("", plano);
-		VistaEstadoJuego vistaEstadoJuego = new VistaEstadoJuego(textoEstadoJuego);
-		vistaEstadoJuego.setPosicionable(new PuntoEntero(( plano.devolverAncho()/4 ) - 20 , plano.devolverAltura()/2));
 
-		controlador.agregarDibujable(vistaEstadoJuego);
 		controlador.agregarDibujable(energia);
 		controlador.agregarDibujable(vistaCantidadVidas);
 		controlador.agregarDibujable(vistaAlgo42);
 		controlador.agregarDibujable(vistaTextoPuntosYNivel);
-		controlador.agregarObjetoVivo(textoEstadoJuego);
 		controlador.agregarObjetoVivo(textoPuntosYNivel);
 		controlador.agregarObjetoVivo(algo42);
 		controlador.agregarObjetoVivo(textoEnergiaEInventario);
