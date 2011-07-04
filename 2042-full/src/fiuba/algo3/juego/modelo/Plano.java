@@ -49,7 +49,7 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 	public Plano(int dimensionX,int dimensionY) {
 		ancho  = dimensionX;
 		altura = dimensionY;
-		this.setVidas(1);
+		this.setVidas(3);
 		juegoPerdido = false;
 		juegoGanado = false;
 	}
@@ -193,7 +193,7 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 		return this.listaObjetosABorrar;
 	}
 
-	public boolean noHayNavesEnemigas() {
+	public boolean hayNavesEnemigas() {
 
 		if (listaNaves.size() > 0) {
 			return true;
@@ -260,7 +260,7 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 
 	public void vivir() {
 
-		//Eliminacion de naves, armas e items que ya no estan vigentes en el area de juego.
+		// Eliminacion de naves, armas e items que ya no estan vigentes en el area de juego.
 		Iterator<Arma> iteradorArmasUsadas = listaArmasUsadas.iterator();
 		Iterator<Item> iteradorItemsUsados = listaItemsUsados.iterator();
 		Iterator<NaveNoOperable> iteradorNavesDestruidas = listaNavesDestruidas.iterator();

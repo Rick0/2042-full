@@ -78,22 +78,21 @@ public class TorpedoRastreador extends Arma implements Serializable{
 
 			this.pasaUnTiempo();
 
-			if (naveRastreada == null) {
-				
-				if (this.plano.noHayNavesEnemigas()) {
+			if (naveRastreada.estadoActualDestruida()) {
 
-					Punto nuevaPosicion = null;
-					if (origenAlgo42) {
-						nuevaPosicion = new Punto(this.devolverPunto().getX(),this.devolverPunto().getY()+1);	
-					}
-					else {
-						nuevaPosicion = new Punto(this.devolverPunto().getX(),this.devolverPunto().getY()-1);	
-					}
-					this.cambiarPosicion(nuevaPosicion);
-				}
-				else {
+				if (this.plano.hayNavesEnemigas()) {
 					naveRastreada = this.plano.devolverListaNaves().get(0);
 					this.intentarMover();
+				}
+				else {
+					Punto nuevaPosicion = null;
+					if (origenAlgo42) {
+						nuevaPosicion = new Punto(this.devolverPunto().getX(),this.devolverPunto().getY() + cantidadAMover);	
+					}
+					else {
+						nuevaPosicion = new Punto(this.devolverPunto().getX(),this.devolverPunto().getY() - cantidadAMover);	
+					}
+					this.cambiarPosicion(nuevaPosicion);
 				}
 			}
 			else {
