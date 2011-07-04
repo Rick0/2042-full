@@ -13,7 +13,7 @@ public class TanqueEnergia extends Item implements Serializable{
 	public TanqueEnergia(Punto punto, Plano unPlano) {
 		fueUsado = false;
 		aumentoEnergia = 40;
-		rectangulo = new Rectangulo(30, 30, punto);
+		rectangulo = new Rectangulo(40, 40, punto);
 		plano = unPlano;
 		try {
 			plano.agregarItem(this);

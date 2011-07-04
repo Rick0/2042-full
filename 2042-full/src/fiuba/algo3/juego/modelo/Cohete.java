@@ -13,10 +13,10 @@ public class Cohete extends Arma implements Serializable {
 
 		this.danio = -30;
 		this.fueUsado = false;
-		this.rectangulo = (new Rectangulo(4 , 2, punto));
+		this.rectangulo = new Rectangulo(20, 16, punto);
 		this.inicializarOrigenAlgo42(origenAlgo);
 		this.determinarPlano(plano);
-	
+
 		try {
 			this.plano.agregarArma(this);
 			this.plano.agregarObjetoNuevo(this);
