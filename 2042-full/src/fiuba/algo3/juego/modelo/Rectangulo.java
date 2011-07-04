@@ -10,8 +10,8 @@ import java.io.Serializable;
 public class Rectangulo implements Serializable{
 
 	private static final long serialVersionUID = -7570165435552175963L;
-	int ancho;
 	int altura;
+	int ancho;
 	Punto puntoIzquierdoInferior;
 
 

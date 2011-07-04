@@ -16,7 +16,7 @@ public class Civil extends NaveNoOperable implements Serializable{
 		puntos = -300;
 		energia = 1;
 		esOperable = false;
-		rectangulo = new Rectangulo(50, 50, punto);
+		rectangulo = new Rectangulo(48, 48, punto);
 		estaDestruida = false;
 		fueraDelPlano = false;
 		this.determinarPlano(plano);

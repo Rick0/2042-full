@@ -80,8 +80,8 @@ public class NaveNoOperableTest extends TestCase {
 		assertEquals(bombardero1.devolverPunto().getY(),81.5);
 
 		/* Creo otro bombardero para que este por chocarse con el. 
-		 * Tener en cuenta dimensiones del bombardero = 65x65 */
-		Punto posicion= new Punto(24.0,81.5);
+		 * Tener en cuenta dimensiones del bombardero = 44x60 */
+		Punto posicion = new Punto(24.0,81.5);
 		Bombardero bombardero2= new Bombardero(posicion, plano);
 		bombardero2.intentarMover();
 		bombardero1.intentarMover();
@@ -97,8 +97,8 @@ public class NaveNoOperableTest extends TestCase {
 		@SuppressWarnings("unused")
 		Avioneta avioneta = new Avioneta( posAvioneta , plano);
 		bombardero1.intentarMover();
-		assertEquals(bombardero1.devolverPunto().getX(),89.0);	//No se movio
-		assertEquals(bombardero1.devolverPunto().getY(),81.0);	//No se movio
+		assertEquals(bombardero1.devolverPunto().getX(),88.5);	//No se movio
+		assertEquals(bombardero1.devolverPunto().getY(),80.5);	//No se movio
 	}
 	
 	@SuppressWarnings("unused")
@@ -110,7 +110,7 @@ public class NaveNoOperableTest extends TestCase {
 
 		Plano plano = new Plano( 1000 , 1000 );
 		Punto posicionHelicoptero = new Punto(5,126);
-		Helicoptero helicoptero = new Helicoptero( posicionHelicoptero , plano );
+		Helicoptero helicoptero = new Helicoptero( posicionHelicoptero, plano );
 		Punto posicionCivil = new Punto(5,180);
 		Civil civil = new Civil( posicionCivil , plano );
 		civil.intentarMover(); //La primera vez que lo mueva, deberia poder moverse hacia adelante normalmente
@@ -125,7 +125,7 @@ public class NaveNoOperableTest extends TestCase {
 		Punto punto = new Punto(5,228);
 		Avioneta avioneta = new Avioneta(punto, plano ); 
 		civil.intentarMover();
-		assertEquals(civil.devolverPunto().getY() , 177.0 );
+		assertEquals(civil.devolverPunto().getY() , 176.0 );
 	}
 	
 	@Test

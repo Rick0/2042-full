@@ -22,7 +22,7 @@ public class Explorador extends NaveNoOperable implements Serializable{
 		puntosHaciaAbajo = 0;
 		anguloActual = 0;
 		esOperable = false;
-		rectangulo = new Rectangulo(50, 45, punto);
+		rectangulo = new Rectangulo(40, 51, punto);
 		estaDestruida = false;
 		fueraDelPlano = false;
 		this.determinarPlano(plano);
@@ -61,13 +61,13 @@ public class Explorador extends NaveNoOperable implements Serializable{
 	
 	public void moverAlternativo() throws SuperposicionNavesError {
 
-		Punto posicion= this.devolverPunto();
-		Punto nuevoPunto= new Punto(posicion.getX()+2,posicion.getY());
+		Punto posicion = this.devolverPunto();
+		Punto nuevoPunto = new Punto(posicion.getX()+2, posicion.getY());
 		this.cambiarPosicion(nuevoPunto);
 		if (this.seSuperponeConOtraNave() ) {
-			nuevoPunto= new Punto(posicion.getX()-2,posicion.getY());
+			nuevoPunto = new Punto(posicion.getX()-2, posicion.getY());
 			this.cambiarPosicion(nuevoPunto);
-			if (this.seSuperponeConOtraNave() ){
+			if (this.seSuperponeConOtraNave()) {
 				throw new SuperposicionNavesError("La posicion ya esta ocupada.");
 			}
 		}

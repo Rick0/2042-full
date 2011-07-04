@@ -291,19 +291,20 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 	public void testUsoYEfectoMunicionesCohetesTorpedos() throws ArmaNoDisponibleError, NaveARastrearError,	AreaInvalidaError, SuperposicionNavesError, AlgoSeAtacaASiMismoError, AtaqueEntreNavesNoOperables, NaveDestruidaError {
 
 		Plano plano = new Plano( 1000 , 1000 );
-		Punto puntoAlgo= new Punto(50,10);
-		Punto puntoBombardero= new Punto(50,30);
+		Punto puntoAlgo = new Punto(50,10);
+		Punto puntoBombardero = new Punto(50,90);
 		Algo42 algo = new Algo42(puntoAlgo , plano); 
 		Bombardero bombardero = new Bombardero( puntoBombardero , plano );
 
 		//Intentar dejar el arma ahora devuelve error
 		try {
 			bombardero.dejarArma();
-			fail("No puede dejarlporque no murio");
+			fail("No puede dejar porque no murio");
 		} catch (ItemNoDisponibleError error) {
 			//Esto es correcto
 		}
 
+		//Lanzo 5 veces el laser porque el bombardero tiene 50 puntos de energia.
 		ArrayList<Arma> listaLaser = new ArrayList<Arma>(); 
 		for ( int i=0 ; i < 5 ; i++ ) {
 			algo.modificarVelocidadDisparoCont(algo.devolverVelocidadDisparo());
@@ -311,7 +312,6 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 			listaLaser.add( plano.devolverListaArmas().get(i) );
 		}
 
-		//Lanzo 5 veces el laser porque el bombardero tiene 50 puntos de energia.
 		Arma armaAuxiliar = null;
 		while ( !bombardero.estadoActualDestruida() ) {
 			Iterator<Arma> iterador = listaLaser.iterator();

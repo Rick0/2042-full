@@ -22,7 +22,7 @@ public class Bombardero extends NaveNoOperable implements Serializable {
 		haciaDer = 0;
 		haciaIzq = 0;
 		esOperable = false;
-		rectangulo = new Rectangulo(65, 65,punto);
+		rectangulo = new Rectangulo(44, 60,punto);
 		estaDestruida = false;
 		fueraDelPlano = false;
 		this.determinarPlano(plano);
