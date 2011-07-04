@@ -2,6 +2,8 @@ package fiuba.algo3.juego.programa;
 
 import javax.swing.JFrame;
 
+import fiuba.algo3.juego.vista.VentanaInicial;
+
 public class EjecutableJuego implements Runnable {
 
 	@Override
