@@ -178,20 +178,20 @@ public abstract class NaveNoOperable extends Nave {
 		unTorpedo.determinarNaveRastreada(unAlgo42);
 	}
 
-	/* Una nave no operable choca con Algo42 
-	 * El resultado es que la nave no operable se destruye
-	 */
-	public void chocarCon(Algo42 algo42) {
-
-		this.modificarEnergia( -(this.devolverEnergia()) );
-	}
-
 	/* Devuelve el punto en donde se va a crear el arma disparada */
 	private Punto devolverPuntoParaArma() {
 		int posEnX = (int)((this.devolverPunto().getX() + (this.devolverAncho() / 2)) - (this.devolverAncho() / 10));
 		int posEnY = (int)(this.devolverPunto().getY());
 		Punto puntoArma = new Punto(posEnX, posEnY);
 		return puntoArma;
+	}
+
+	/* Una nave no operable choca con Algo42 
+	 * El resultado es que la nave no operable se destruye
+	 */
+	public void chocarCon(Algo42 algo42) {
+
+		this.modificarEnergia( -(this.devolverEnergia()) );
 	}
 
 }

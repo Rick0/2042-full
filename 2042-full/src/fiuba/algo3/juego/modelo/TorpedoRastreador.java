@@ -8,14 +8,15 @@ public class TorpedoRastreador extends Arma implements Serializable{
 
 	private static final long serialVersionUID = 2021359934861160328L;
 	private Nave naveRastreada;
-	private int tiempoDeVida = 400;
+	private int tiempoDeVida = 350;
+	static int cantidadAMover = 2;
 
 
 	public TorpedoRastreador (Punto punto, boolean origenAlgo, Plano plano) {
 
 		this.danio = -20;
 		this.fueUsado = false;
-		this.rectangulo = (new Rectangulo(2 , 2, punto ));
+		this.rectangulo = (new Rectangulo(2 , 2, punto));
 		this.inicializarOrigenAlgo42(origenAlgo);
 		this.determinarPlano(plano);
 
@@ -38,20 +39,20 @@ public class TorpedoRastreador extends Arma implements Serializable{
 	public void mover() {
 
 		if (this.naveRastreada.devolverPunto().getX() < this.devolverPunto().getX() ) {
-			Punto nuevaPosicionX = new Punto(this.devolverPunto().getX() - 1, this.devolverPunto().getY());
+			Punto nuevaPosicionX = new Punto(this.devolverPunto().getX() - cantidadAMover, this.devolverPunto().getY());
 			this.cambiarPosicion( nuevaPosicionX );
 		}
 		else if ( (this.naveRastreada.devolverPunto().getX() > this.devolverPunto().getX() )) {	
-			Punto nuevaPosicionX = new Punto(this.devolverPunto().getX() + 1, this.devolverPunto().getY());
+			Punto nuevaPosicionX = new Punto(this.devolverPunto().getX() + cantidadAMover, this.devolverPunto().getY());
 			this.cambiarPosicion( nuevaPosicionX );
 		}
 
 		if ( (this.naveRastreada.devolverPunto().getY() < this.devolverPunto().getY() )) {
-			Punto nuevaPosicionY = new Punto(this.devolverPunto().getX(), this.devolverPunto().getY() -1 );
+			Punto nuevaPosicionY = new Punto(this.devolverPunto().getX(), this.devolverPunto().getY() - cantidadAMover);
 			this.cambiarPosicion( nuevaPosicionY );
 		}
 		else if ( (this.naveRastreada.devolverPunto().getY() > this.devolverPunto().getY() )) {
-			Punto nuevaPosicionY = new Punto(this.devolverPunto().getX(), this.devolverPunto().getY() +1 );
+			Punto nuevaPosicionY = new Punto(this.devolverPunto().getX(), this.devolverPunto().getY() + cantidadAMover);
 			this.cambiarPosicion( nuevaPosicionY );
 		}
 	}
@@ -101,6 +102,10 @@ public class TorpedoRastreador extends Arma implements Serializable{
 
 			this.intentarChocar();
 		}
+	}
+
+	public int devolverCantidadAMover() {
+		return cantidadAMover;
 	}
 
 }

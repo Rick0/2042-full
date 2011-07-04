@@ -49,10 +49,8 @@ public abstract class GenerarFlota {
 					new Explorador(posNave, radioNormal, this.plano);
 				} catch (SuperposicionNavesError e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
 				} catch (NaveDestruidaError e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
 				break;
 			}
@@ -63,10 +61,8 @@ public abstract class GenerarFlota {
 					new Bombardero(posNave, this.plano);
 				} catch (SuperposicionNavesError e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
 				} catch (NaveDestruidaError e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
 				break;
 			}
@@ -77,10 +73,8 @@ public abstract class GenerarFlota {
 					new Caza(posNave, this.plano);
 				} catch (SuperposicionNavesError e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
 				} catch (NaveDestruidaError e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
 				break;
 			}
@@ -91,10 +85,8 @@ public abstract class GenerarFlota {
 					new Avioneta(posNave, this.plano);
 				} catch (SuperposicionNavesError e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
 				} catch (NaveDestruidaError e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
 				break;
 			}
@@ -105,10 +97,8 @@ public abstract class GenerarFlota {
 					new Helicoptero(posNave, this.plano);
 				} catch (SuperposicionNavesError e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
 				} catch (NaveDestruidaError e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
 				break;
 			}
@@ -119,15 +109,11 @@ public abstract class GenerarFlota {
 					new Civil(posNave, this.plano);
 				} catch (SuperposicionNavesError e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
 				} catch (NaveDestruidaError e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
 				break;
 			}
-
-		//	default: {	}
 		}
 	}
 

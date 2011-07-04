@@ -8,9 +8,6 @@ import fiuba.algo3.juego.modelo.excepciones.NaveNoDestruidaError;
 /* Clase de la cual heredan todas las naves del juego */
 public abstract class Nave extends ObjetoUbicable implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3433614298451171564L;
 	boolean estaDestruida;
 	boolean esOperable;
@@ -61,7 +58,7 @@ public abstract class Nave extends ObjetoUbicable implements Serializable {
 	public void modificarEnergia(int energiaAModificar) {
 
 		energia = (energia + energiaAModificar);
-		if(energia <= 0) {
+		if (energia <= 0) {
 			try {
 				this.destruirse();
 			} catch ( NaveNoDestruidaError excepcion) {

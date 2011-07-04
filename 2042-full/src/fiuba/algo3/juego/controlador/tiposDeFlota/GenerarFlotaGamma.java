@@ -31,10 +31,8 @@ public class GenerarFlotaGamma extends GenerarFlota {
 				new Avioneta(posNave, this.plano);
 			} catch (SuperposicionNavesError e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
 			} catch (NaveDestruidaError e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 
 			posEnX = posEnX + 80 + generadorRandom.nextInt(20);

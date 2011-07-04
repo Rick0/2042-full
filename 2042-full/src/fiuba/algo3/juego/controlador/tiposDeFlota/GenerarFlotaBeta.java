@@ -31,10 +31,8 @@ public class GenerarFlotaBeta extends GenerarFlota {
 				new Explorador(posNave, radioNormal, this.plano);
 			} catch (SuperposicionNavesError e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
 			} catch (NaveDestruidaError e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 
 			posEnX = posEnX + 140 + generadorRandom.nextInt(20);

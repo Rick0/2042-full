@@ -37,10 +37,8 @@ public class GenerarFlotaChi extends GenerarFlota {
 				this.alturaAvioneta = unaAvioneta.devolverAltura();
 			} catch (SuperposicionNavesError e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
 			} catch (NaveDestruidaError e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 
 			posEnYAux = posEnYAux - this.alturaAvioneta - 10;
