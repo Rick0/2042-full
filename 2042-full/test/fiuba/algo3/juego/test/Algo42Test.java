@@ -124,11 +124,11 @@ public class Algo42Test extends TestCase{
 	public void testLanzamientoTorpedoRastreador() throws AreaInvalidaError,SuperposicionNavesError,NaveARastrearError,ArmaNoDisponibleError, NaveDestruidaError {
 
 		Plano plano = new Plano(100,100);
-		Punto posicionAlgo= new Punto(50,50);
-		Punto posicionAvioneta= new Punto(50,50);
+		Punto posicionAlgo = new Punto(50,50);
+		Punto posicionAvioneta = new Punto(50,50);
 		Algo42 algo = new Algo42(posicionAlgo,plano);
 		Nave avioneta = new Avioneta(posicionAvioneta,plano);
-		
+
 		try {
 		    algo.dispararTorpedoRastreadorHacia( avioneta );
 		    fail("Deberia haber lanzado una excepcion");
@@ -136,7 +136,7 @@ public class Algo42Test extends TestCase{
 		catch (ArmaNoDisponibleError error) {
 			// si sale por aqui es que la prueba ha ido bien
 		}
-		  
+
 		try {
 		    algo.dispararTorpedoRastreadorHacia( algo );
 		    fail("Deberia haber lanzado una excepcion, no se puede disparar a si mismo");

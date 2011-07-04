@@ -19,7 +19,7 @@ public class Nivel implements Serializable{
 		puntosNivelActual = 0;
 		puntosTotales = 0;
 	}
-	
+
 	public int devolverNumeroNivel() {
 		return numeroNivel;
 	}
@@ -48,26 +48,27 @@ public class Nivel implements Serializable{
 				puntosTotales = ( puntosTotales + naveAuxiliar.devolverPuntosPorEliminacion() );
 			}
 		}
-		if ( puntosNivelActual >= 1000 ) { 
-			this.avanzarNivel();
-		}
 	}
 
-	/* Avanza un nivel */
-	public boolean avanzarNivel() {
+	/* Avanza un nivel si se tiene mas de 1000 puntos actuales
+	 * Retrocede un nivel si se tiene menos de -1000 puntos actuales
+	 */
+	public void avanzarNivel() {
 
 		if (puntosNivelActual >= 1000) {
 			puntosNivelActual = 0;
 			numeroNivel++;
-			return true;
 		}
-		return false;
+		else if (puntosNivelActual <= -1000) {
+			puntosNivelActual = 0;
+			numeroNivel--;
+		}
 	}
 
 	/* La accion del nivel consiste en sumar su puntaje e intentar avanzar, si es que se puede */
-	public boolean actuarCon(ArrayList<NaveNoOperable> listaEliminados) {
+	public void actuarCon(ArrayList<NaveNoOperable> listaEliminados) {
 		this.sumarPuntajeTurno( listaEliminados );
-		return this.avanzarNivel();
+		this.avanzarNivel();
 	}
 
 }

@@ -19,7 +19,8 @@ public class NivelTest extends TestCase {
 		Nivel nivel = new Nivel();
 		assertEquals( nivel.devolverPuntosActuales() , 0 );
 		//No puede avanzar porque tiene 0 puntos.
-		assertTrue ( !nivel.avanzarNivel() ); 
+		nivel.avanzarNivel();
+		assertFalse (nivel.devolverNumeroNivel() == 2); 
 	}
 	
 	@Test
@@ -45,6 +46,7 @@ public class NivelTest extends TestCase {
 
 		assertTrue(plano.devolverListaNavesEliminades().size() > 1);
 		nivel.sumarPuntajeTurno( plano.devolverListaNavesEliminades() );
+		nivel.avanzarNivel();
 		//Deberia haber avanzado un nivel
 		assertEquals( nivel.devolverNumeroNivel() , 2 );
 	}

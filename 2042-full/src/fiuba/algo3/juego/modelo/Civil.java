@@ -14,7 +14,7 @@ public class Civil extends NaveNoOperable implements Serializable{
 	public Civil(Punto punto, Plano plano) throws SuperposicionNavesError, NaveDestruidaError {
 
 		puntos = -300;
-		energia = 40;
+		energia = 30;
 		esOperable = false;
 		rectangulo = new Rectangulo(48, 48, punto);
 		estaDestruida = false;
