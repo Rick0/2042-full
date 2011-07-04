@@ -1,0 +1,7 @@
+	<target name="ejecutar.aplicacion" depends="compilar.aplicacion">
+		<classpath>
+			<pathelement location ="${build}/app/fiuba/algo3/juego/programa" />
+		</classpath>
+		<java classname="EjecutableJuego"/>
+	</target>
+	
