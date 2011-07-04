@@ -49,7 +49,7 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 	public Plano(int dimensionX,int dimensionY) {
 		ancho  = dimensionX;
 		altura = dimensionY;
-		this.setVidas(3);
+		this.setVidas(1);
 		juegoPerdido = false;
 		juegoGanado = false;
 	}

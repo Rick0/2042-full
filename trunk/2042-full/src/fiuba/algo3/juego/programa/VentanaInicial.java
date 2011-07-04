@@ -95,6 +95,7 @@ public class VentanaInicial extends JFrame {
 					controlador.agregarObjetoVivo(generadorFlota);
 
 					controlador.comenzarJuegoAsyn();
+					dispose();
 				}
 			});
 		}
@@ -120,6 +121,7 @@ public class VentanaInicial extends JFrame {
 					GeneradorFlota generadorFlota = new GeneradorFlota(controlador.getPlano());
 					controlador.agregarObjetoVivo(generadorFlota);
 					controlador.comenzarJuegoAsyn();
+					dispose();
 				}
 			});
 		}

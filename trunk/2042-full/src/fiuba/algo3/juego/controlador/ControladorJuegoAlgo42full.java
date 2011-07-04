@@ -18,6 +18,7 @@ import fiuba.algo3.juego.modelo.Item;
 import fiuba.algo3.juego.modelo.NaveNoOperable;
 import fiuba.algo3.juego.modelo.ObjetoUbicable;
 import fiuba.algo3.juego.modelo.Plano;
+import fiuba.algo3.juego.programa.VentanaJuegoTerminado;
 import fiuba.algo3.juego.vista.GeneradorDeVista;
 import fiuba.algo3.juego.vista.VentanaPrincipal;
 import fiuba.algo3.titiritero.Dibujable;
@@ -215,12 +216,26 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 			}
 
 			this.ventanaDelJuego.setVisible(false);
+			VentanaJuegoTerminado ventanaJuegoPerdido = new VentanaJuegoTerminado("perdido.");
+			ventanaJuegoPerdido.setVisible(true);
+			ventanaJuegoPerdido.setAlwaysOnTop(true);
 			this.ventanaDelJuego.dispose();
 		}
 
 		if (plano.devolverEstadoJuegoGanado()) {
 			estaEnEjecucion = false;
 			// por ahora la condicion de ganar es una arbitraria, llegar al nivel 15
+			try {
+				Thread.sleep(3000);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			this.ventanaDelJuego.setVisible(false);
+			VentanaJuegoTerminado ventanaJuegoPerdido = new VentanaJuegoTerminado("ganado!!!!!");
+			ventanaJuegoPerdido.setVisible(true);
+			ventanaJuegoPerdido.setAlwaysOnTop(true);
+			this.ventanaDelJuego.dispose();
 		}
 	}
 
