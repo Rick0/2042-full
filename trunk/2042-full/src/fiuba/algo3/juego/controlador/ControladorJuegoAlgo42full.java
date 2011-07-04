@@ -19,8 +19,11 @@ import fiuba.algo3.juego.modelo.NaveNoOperable;
 import fiuba.algo3.juego.modelo.ObjetoUbicable;
 import fiuba.algo3.juego.modelo.Plano;
 import fiuba.algo3.juego.vista.GeneradorDeVista;
+import fiuba.algo3.juego.vista.PuntoEntero;
+import fiuba.algo3.juego.vista.TextoEstadoJuego;
 import fiuba.algo3.juego.vista.VentanaJuegoTerminado;
 import fiuba.algo3.juego.vista.VentanaPrincipal;
+import fiuba.algo3.juego.vista.VistaEstadoJuego;
 import fiuba.algo3.titiritero.Dibujable;
 import fiuba.algo3.titiritero.KeyPressedObservador;
 import fiuba.algo3.titiritero.MouseClickObservador;
@@ -208,6 +211,14 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 		if (plano.devolverEstadoJuegoPerdido()) {
 
 			estaEnEjecucion = false;
+			TextoEstadoJuego textoEstadoJuego = new TextoEstadoJuego("", plano);
+			VistaEstadoJuego vistaEstadoJuego = new VistaEstadoJuego(textoEstadoJuego);
+			vistaEstadoJuego.setPosicionable(new PuntoEntero(( plano.devolverAncho()/4 ) - 20 , plano.devolverAltura()/2));
+			this.agregarDibujable(vistaEstadoJuego);
+			this.agregarObjetoVivo(textoEstadoJuego);
+			this.simular();
+			this.dibujar();
+			
 			try {
 				Thread.sleep(2000);
 			} catch (Exception e) {
@@ -224,6 +235,14 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 		if (plano.devolverEstadoJuegoGanado()) {
 
 			estaEnEjecucion = false;
+			TextoEstadoJuego textoEstadoJuego = new TextoEstadoJuego("", plano);
+			VistaEstadoJuego vistaEstadoJuego = new VistaEstadoJuego(textoEstadoJuego);
+			vistaEstadoJuego.setPosicionable(new PuntoEntero(( plano.devolverAncho()/4 ) - 20 , plano.devolverAltura()/2));
+			this.agregarDibujable(vistaEstadoJuego);
+			this.agregarObjetoVivo(textoEstadoJuego);
+			this.simular();
+			this.dibujar();
+			
 			try {
 				Thread.sleep(2000);
 			} catch (Exception e) {
