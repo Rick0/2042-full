@@ -18,6 +18,7 @@ public class BarraControlable implements Controlable {
 	@Override
 	public void activarEfecto() {
 		algo.dispararLaser();
+		System.out.println("Disparar Laser()");
 	}
 
 }
