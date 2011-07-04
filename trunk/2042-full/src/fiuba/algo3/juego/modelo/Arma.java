@@ -92,8 +92,8 @@ public abstract class Arma extends ObjetoUbicable implements Serializable {
 	public void intentarMover() {
 
 		float x,y;
-		x = (this.plano).devolverAncho();
-		y = (this.plano).devolverAltura();
+		x = this.plano.devolverAncho();
+		y = this.plano.devolverAltura();
 
 		if (((this.devolverPunto().getX()) < 0) || (( this.devolverPunto().getX() )> x )) {
 			this.fueUsado = true;
