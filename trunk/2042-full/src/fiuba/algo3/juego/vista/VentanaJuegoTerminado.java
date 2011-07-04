@@ -3,7 +3,6 @@ package fiuba.algo3.juego.vista;
 import java.awt.Button;
 import java.awt.Label;
 import java.awt.Rectangle;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -15,6 +14,7 @@ public class VentanaJuegoTerminado extends JFrame {
 	private Label labelPregunta = null;
 	private Button buttonSi = null;
 	private Button buttonNo = null;
+
 
 	/**
 	 * This is the default constructor
@@ -28,7 +28,6 @@ public class VentanaJuegoTerminado extends JFrame {
 		super();
 		initialize();
 		this.setTitle("Usted ha " + estado);
-		
 	}
 
 	/**
@@ -78,7 +77,7 @@ public class VentanaJuegoTerminado extends JFrame {
 					ventanaInicial.setAlwaysOnTop(true);
 					dispose();
 				}
-			});
+			} );
 		}
 		return buttonSi;
 	}
@@ -98,7 +97,7 @@ public class VentanaJuegoTerminado extends JFrame {
 					System.out.println("No quiero seguir jugando()");
 					System.exit(0);
 				}
-			});
+			} );
 		}
 		return buttonNo;
 	}

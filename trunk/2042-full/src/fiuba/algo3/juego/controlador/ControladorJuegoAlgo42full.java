@@ -208,9 +208,8 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 		if (plano.devolverEstadoJuegoPerdido()) {
 
 			estaEnEjecucion = false;
-
 			try {
-				Thread.sleep(3000);
+				Thread.sleep(2000);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -223,16 +222,16 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 		}
 
 		if (plano.devolverEstadoJuegoGanado()) {
+
 			estaEnEjecucion = false;
-			// por ahora la condicion de ganar es una arbitraria, llegar al nivel 15
 			try {
-				Thread.sleep(3000);
+				Thread.sleep(2000);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
 			this.ventanaDelJuego.setVisible(false);
-			VentanaJuegoTerminado ventanaJuegoPerdido = new VentanaJuegoTerminado("ganado!!!!!");
+			VentanaJuegoTerminado ventanaJuegoPerdido = new VentanaJuegoTerminado("ganado!!!");
 			ventanaJuegoPerdido.setVisible(true);
 			ventanaJuegoPerdido.setAlwaysOnTop(true);
 			this.ventanaDelJuego.dispose();
