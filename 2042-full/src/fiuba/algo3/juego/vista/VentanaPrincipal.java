@@ -41,9 +41,8 @@ public class VentanaPrincipal extends Frame {
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				controladorJuego.detenerJuego();
-				dispose();
 				System.out.println("Saliendo del Juego Actual");
-				//System.exit(0);
+				System.exit(0);
 			}			
 		} );
 	}
