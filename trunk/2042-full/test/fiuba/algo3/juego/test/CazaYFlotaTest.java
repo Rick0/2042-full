@@ -44,14 +44,14 @@ public class CazaYFlotaTest extends TestCase {
 	public void testLanzamientoTorpedo() throws SuperposicionNavesError, NaveDestruidaError { 
 
 		Plano plano = new Plano( 100 , 100 );
-		Punto posicion= new Punto(90,90);
+		Punto posicion= new Punto( 90, 90 );
 		Caza caza = new Caza( posicion, plano );
 		
 		//La responsabilidad del caza es crear un laser y ubicarlo, por lo tanto, solo eso voy a probar en esta prueba unitaria.
 		caza.dispararTorpedo();
 		List<Arma> torpedo = plano.devolverListaArmas(); //Se que solo hay una
 		assertEquals(torpedo.get(0).devolverPunto().getY() , 90.0 );
-		assertEquals((int)torpedo.get(0).devolverPunto().getX() , 90 );
+		assertEquals((int)torpedo.get(0).devolverPunto().getX() , (int)(caza.devolverPunto().getX() + caza.devolverAncho()/2 - caza.devolverAncho() /10) );
 	}
 	
 	@Test

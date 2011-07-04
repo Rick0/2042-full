@@ -220,7 +220,7 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 			this.dibujar();
 			
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(3500);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -244,7 +244,7 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 			this.dibujar();
 			
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(3500);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

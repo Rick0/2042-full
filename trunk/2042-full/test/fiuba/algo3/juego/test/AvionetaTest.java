@@ -84,7 +84,7 @@ public class AvionetaTest extends TestCase{
 		avioneta.dispararLaser();
 		List<Arma> arma = plano.devolverListaArmas();
 
-		assertEquals( arma.get(0).devolverPunto().getX(), 20.0 );
+		assertEquals( arma.get(0).devolverPunto().getX(), (avioneta.devolverPunto().getX() + avioneta.devolverAncho()/2 - avioneta.devolverAncho() /10) );
 		assertEquals( arma.get(0).devolverPunto().getY(), 25.0 );
 	}
 

@@ -10,9 +10,6 @@ import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
  */
 public abstract class NaveNoOperable extends Nave {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3275367912248566223L;
 	boolean fueraDelPlano;
 	int puntos;
@@ -157,28 +154,28 @@ public abstract class NaveNoOperable extends Nave {
 
 	/* La nave dispara un laser */
 	public void dispararLaser() {
-		new Laser(this.devolverPunto(), false, this.plano);
+		new Laser(this.devolverPuntoParaArma(), false, this.plano);
 	}
 
 	/* La nave dispara un cohete */
 	public void dispararCohete() {
-		new Cohete(this.devolverPunto(), false, this.plano);
+		new Cohete(this.devolverPuntoParaArma(), false, this.plano);
 	}
 
 	/* La nave dispara un torpedo simple */
 	public void dispararTorpedo() {
-		new TorpedoSimple(this.devolverPunto(), false, this.plano);
+		new TorpedoSimple(this.devolverPuntoParaArma(), false, this.plano);
 	}
 
 	/* La nave dispara un torpedo adaptable */
 	public void dispararTorpedoAdaptable() {
-		new TorpedoAdaptable(this.devolverPunto(), false, this.plano);
+		new TorpedoAdaptable(this.devolverPuntoParaArma(), false, this.plano);
 	}
 
 	/* La nave dispara un torpedo rastreador */
 	public void dispararTorpedoRastreadorHacia(Algo42 unAlgo42) {
-		TorpedoRastreador T = new TorpedoRastreador( this.devolverPunto(), false, this.plano);
-		T.determinarNaveRastreada(unAlgo42);
+		TorpedoRastreador unTorpedo = new TorpedoRastreador( this.devolverPuntoParaArma(), false, this.plano);
+		unTorpedo.determinarNaveRastreada(unAlgo42);
 	}
 
 	/* Una nave no operable choca con Algo42 
@@ -186,7 +183,15 @@ public abstract class NaveNoOperable extends Nave {
 	 */
 	public void chocarCon(Algo42 algo42) {
 
-		this.modificarEnergia(-(this.devolverEnergia()));
+		this.modificarEnergia( -(this.devolverEnergia()) );
+	}
+
+	/* Devuelve el punto en donde se va a crear el arma disparada */
+	private Punto devolverPuntoParaArma() {
+		int posEnX = (int)((this.devolverPunto().getX() + (this.devolverAncho() / 2)) - (this.devolverAncho() / 10));
+		int posEnY = (int)(this.devolverPunto().getY());
+		Punto puntoArma = new Punto(posEnX, posEnY);
+		return puntoArma;
 	}
 
 }
