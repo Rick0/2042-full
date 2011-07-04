@@ -48,13 +48,13 @@ public class Algo42 extends Nave implements Serializable {
 
 		if ( ( (punto.getX()<(planoJuego.ancho)) & (punto.getY()<(planoJuego.altura)) )  & ((punto.getY()>=0) & (punto.getX()>=0) ) ) {
 			planoJuego.introducirAlgo42(this);
-			rectangulo = new Rectangulo (64,64,punto);
+			rectangulo = new Rectangulo (64,52,punto);
 		}
 		else{
 			throw new AreaInvalidaError("La nave debe ser creada en una posicion valida dentro del area de juego.");
 		}
 	}
-	
+
 	public Algo42()  {
 
 		velocidadDisparo = 10;
@@ -79,7 +79,7 @@ public class Algo42 extends Nave implements Serializable {
 
 			int ancho = rectangulo.devolverAncho();
 			int altura = rectangulo.devolverAltura();
-			Punto posLaser = new Punto(this.devolverPunto().getX()+(ancho/2)-9, this.devolverPunto().getY()+altura);
+			Punto posLaser = new Punto(this.devolverPunto().getX()+(ancho/2)-6, this.devolverPunto().getY()+altura);
 			new Laser(posLaser, true, this.plano);
 			velocidadDisparoCont = 0;
 		}
@@ -96,7 +96,7 @@ public class Algo42 extends Nave implements Serializable {
 
 			int ancho = rectangulo.devolverAncho();
 			int altura = rectangulo.devolverAltura();
-			Punto posCohete = new Punto(this.devolverPunto().getX()+(ancho/2)-9, this.devolverPunto().getY()+altura);
+			Punto posCohete = new Punto(this.devolverPunto().getX()+(ancho/2)-6, this.devolverPunto().getY()+altura);
 			new Cohete(posCohete, true, this.plano);
 			cohetes = (cohetes - 1);
 			velocidadDisparoCoheteCont = 0;
@@ -245,15 +245,15 @@ public class Algo42 extends Nave implements Serializable {
 	
 	public void persistir() {
 
-			try {
-				ObjectOutputStream oos = new ObjectOutputStream(
-				new FileOutputStream( "algo42.dat" ));
-				oos.writeObject(this);
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		try {
+			ObjectOutputStream oos = new ObjectOutputStream(
+			new FileOutputStream( "algo42.dat" ));
+			oos.writeObject(this);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static Algo42 restaurar() {

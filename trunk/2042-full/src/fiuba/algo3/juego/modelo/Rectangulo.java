@@ -16,10 +16,10 @@ public class Rectangulo implements Serializable{
 
 
 	/* Constructor del rectangulo, recibe su posicion en el espacio y sus dimensiones */
-	public Rectangulo(int alturaR, int anchoR, Punto punto ) {
-		puntoIzquierdoInferior= punto;
-		ancho  = anchoR;
+	public Rectangulo(int alturaR, int anchoR, Punto punto) {
+		puntoIzquierdoInferior = punto;
 		altura = alturaR;
+		ancho  = anchoR;
 	}
 	
 	public Rectangulo() {
