@@ -1,4 +1,4 @@
-package fiuba.algo3.juego.controlador.tiposDeFlota;
+package fiuba.algo3.juego.modelo.tiposDeFlota;
 
 import java.util.Random;
 import fiuba.algo3.juego.modelo.Caza;
