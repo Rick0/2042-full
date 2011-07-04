@@ -1,4 +1,4 @@
-package fiuba.algo3.juego.programa;
+package fiuba.algo3.juego.vista;
 
 import java.awt.Button;
 import java.awt.Label;
@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 
 public class VentanaJuegoTerminado extends JFrame {
 
