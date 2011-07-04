@@ -1,12 +1,24 @@
-package fiuba.algo3.juego.controlador;
+package fiuba.algo3.juego.modelo;
 
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.HashMap;
-
-import fiuba.algo3.juego.controlador.tiposDeFlota.GenerarFlota;
-import fiuba.algo3.juego.controlador.tiposDeFlota.*;
-import fiuba.algo3.juego.modelo.*;
+import java.util.Random;
+import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlota;
+import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaAlfa;
+import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaBeta;
+import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaChi;
+import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaEpsilon;
+import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaEta;
+import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaGamma;
+import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaMu;
+import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaNu;
+import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaOmega;
+import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaPhi;
+import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaPi;
+import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaTheta;
+import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaUpsilon;
+import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaXi;
+import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaZeta;
 import fiuba.algo3.titiritero.ObjetoVivo;
 
 

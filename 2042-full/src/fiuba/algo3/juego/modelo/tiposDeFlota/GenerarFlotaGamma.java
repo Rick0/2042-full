@@ -1,41 +1,41 @@
-package fiuba.algo3.juego.controlador.tiposDeFlota;
+package fiuba.algo3.juego.modelo.tiposDeFlota;
 
 import java.util.Random;
-import fiuba.algo3.juego.modelo.Explorador;
+import fiuba.algo3.juego.modelo.Avioneta;
 import fiuba.algo3.juego.modelo.Plano;
 import fiuba.algo3.juego.modelo.Punto;
 import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
 
-public class GenerarFlotaBeta extends GenerarFlota {
+public class GenerarFlotaGamma extends GenerarFlota {
 
 
-	public GenerarFlotaBeta(int posEnY, Plano unPlano) {
+	public GenerarFlotaGamma(int posEnY, Plano unPlano) {
 		this.posEnY = posEnY;
 		this.plano = unPlano;
 	}
 
 	@Override
-	/* Genera una flota beta, compuesto integramente por exploradores */
+	/* Genera una flota gamma, compuesto integramente por avionetas */
 	public void generar() {
 
 		Random generadorRandom = new Random();
-		int navesACrear = 3;
-		posEnX = generadorRandom.nextInt(50) + 70;
+		int navesACrear = 5;
+		posEnX = generadorRandom.nextInt(30) + 20;
 
 		while (navesACrear > 0) {
 
-			Punto posNave = new Punto(posEnX, (this.posEnY-60));
+			Punto posNave = new Punto(posEnX, this.posEnY);
 			try {
-				new Explorador(posNave, radioNormal, this.plano);
+				new Avioneta(posNave, this.plano);
 			} catch (SuperposicionNavesError e) {
 				// TODO Auto-generated catch block
 			} catch (NaveDestruidaError e) {
 				// TODO Auto-generated catch block
 			}
 
-			posEnX = posEnX + 140 + generadorRandom.nextInt(20);
+			posEnX = posEnX + 80 + generadorRandom.nextInt(20);
 			navesACrear--;		
 		}
 	}

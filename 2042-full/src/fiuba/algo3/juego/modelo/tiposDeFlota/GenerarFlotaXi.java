@@ -1,26 +1,26 @@
-package fiuba.algo3.juego.controlador.tiposDeFlota;
+package fiuba.algo3.juego.modelo.tiposDeFlota;
 
 import java.util.Random;
-import fiuba.algo3.juego.modelo.Avioneta;
+import fiuba.algo3.juego.modelo.Bombardero;
 import fiuba.algo3.juego.modelo.Plano;
 import fiuba.algo3.juego.modelo.Punto;
 import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
 
-public class GenerarFlotaChi extends GenerarFlota {
+public class GenerarFlotaXi extends GenerarFlota {
 
-	int alturaAvioneta;
+	int alturaBombardero;
 
 
-	public GenerarFlotaChi(int posEnY, Plano unPlano) {
+	public GenerarFlotaXi(int posEnY, Plano unPlano) {
 		this.posEnY = posEnY;
 		this.plano = unPlano;
-		this.alturaAvioneta = 55;
+		this.alturaBombardero = 65;
 	}
 
 	@Override
-	/* Genera una flota chi, compuesto por 3 avionetas en fila, uno atras de otro */
+	/* Genera una flota xi, compuesto por 3 bombarderos en fila, uno atras de otro */
 	public void generar() {
 
 		Random generadorRandom = new Random();
@@ -31,17 +31,15 @@ public class GenerarFlotaChi extends GenerarFlota {
 		while (navesACrear > 0) {
 
 			Punto posNave = new Punto(this.posEnX, posEnYAux);
-			Avioneta unaAvioneta = null;
+			Bombardero unBombardero = null;
 			try {
-				unaAvioneta = new Avioneta(posNave, this.plano);
-				this.alturaAvioneta = unaAvioneta.devolverAltura();
+				unBombardero = new Bombardero(posNave, this.plano);
+				this.alturaBombardero = unBombardero.devolverAltura();
 			} catch (SuperposicionNavesError e) {
-				// TODO Auto-generated catch block
 			} catch (NaveDestruidaError e) {
-				// TODO Auto-generated catch block
 			}
 
-			posEnYAux = posEnYAux - this.alturaAvioneta - 10;
+			posEnYAux = posEnYAux - this.alturaBombardero - 5;
 			navesACrear--;		
 		}
 	}

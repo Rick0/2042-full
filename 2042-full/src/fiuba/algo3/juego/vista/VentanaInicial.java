@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 
 import fiuba.algo3.juego.controlador.ControladorJuegoAlgo42full;
 import fiuba.algo3.juego.controlador.GeneradorControlador;
-import fiuba.algo3.juego.controlador.GeneradorFlota;
+import fiuba.algo3.juego.modelo.GeneradorFlota;
 import fiuba.algo3.juego.modelo.Plano;
 import fiuba.algo3.juego.programa.JPanelConFondo;
 
