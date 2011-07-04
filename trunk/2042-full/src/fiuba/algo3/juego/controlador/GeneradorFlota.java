@@ -56,7 +56,7 @@ public class GeneradorFlota implements ObjetoVivo {
 			Random generadorRandom = new Random();
 			int i = generadorRandom.nextInt(tablaGeneradorFlotas.size());
 			GenerarFlota unGeneradorFlota = tablaGeneradorFlotas.get(i);
-		//	GenerarFlota unGeneradorFlota = tablaGeneradorFlotas.get(24);
+		//	GenerarFlota unGeneradorFlota = tablaGeneradorFlotas.get(32);
 			unGeneradorFlota.generar();
 
 			this.velocidadSpawnearCont = 0;
@@ -117,8 +117,6 @@ public class GeneradorFlota implements ObjetoVivo {
 			GenerarFlota generarFlotaMu = new GenerarFlotaMu(this.posEnY, this.plano);
 			GenerarFlota generarFlotaNu = new GenerarFlotaNu(this.posEnY, this.plano);
 
-			GenerarFlota generarFlotaZeta = new GenerarFlotaZeta(this.posEnY, this.plano);
-
 			GenerarFlota generarFlotaEta = new GenerarFlotaEta(this.posEnY, this.plano);
 			GenerarFlota generarFlotaTheta = new GenerarFlotaTheta(this.posEnY, this.plano);
 
@@ -126,6 +124,8 @@ public class GeneradorFlota implements ObjetoVivo {
 			GenerarFlota generarFlotaPi = new GenerarFlotaPi(this.posEnY, this.plano);
 			GenerarFlota generarFlotaChi = new GenerarFlotaChi(this.posEnY, this.plano);
 			GenerarFlota generarFlotaPhi = new GenerarFlotaPhi(this.posEnY, this.plano);
+
+			GenerarFlota generarFlotaZeta = new GenerarFlotaZeta(this.posEnY, this.plano);
 
 
 			int i = 0;
@@ -155,15 +155,19 @@ public class GeneradorFlota implements ObjetoVivo {
 			tablaGeneradorFlotas.put(i, generarFlotaNu);	i++;
 			tablaGeneradorFlotas.put(i, generarFlotaNu);	i++;
 
-			tablaGeneradorFlotas.put(i, generarFlotaZeta);	i++;
-
 			tablaGeneradorFlotas.put(i, generarFlotaEta);	i++;
 			tablaGeneradorFlotas.put(i, generarFlotaTheta);	i++;
 
 			tablaGeneradorFlotas.put(i, generarFlotaXi);	i++;
+			tablaGeneradorFlotas.put(i, generarFlotaXi);	i++;
+			tablaGeneradorFlotas.put(i, generarFlotaPi);	i++;
 			tablaGeneradorFlotas.put(i, generarFlotaPi);	i++;
 			tablaGeneradorFlotas.put(i, generarFlotaChi);	i++;
+			tablaGeneradorFlotas.put(i, generarFlotaChi);	i++;
 			tablaGeneradorFlotas.put(i, generarFlotaPhi);	i++;
+			tablaGeneradorFlotas.put(i, generarFlotaPhi);	i++;
+
+			tablaGeneradorFlotas.put(i, generarFlotaZeta);	i++;
 		}
 	}
 

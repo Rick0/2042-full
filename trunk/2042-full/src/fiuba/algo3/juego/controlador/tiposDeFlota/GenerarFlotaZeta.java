@@ -1,43 +1,54 @@
 package fiuba.algo3.juego.controlador.tiposDeFlota;
 
 import java.util.Random;
-import fiuba.algo3.juego.modelo.Caza;
+
+import fiuba.algo3.juego.modelo.ArmaAbandonada;
 import fiuba.algo3.juego.modelo.Plano;
 import fiuba.algo3.juego.modelo.Punto;
-import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
-import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
+import fiuba.algo3.juego.modelo.TanqueEnergia;
 
 
 public class GenerarFlotaZeta extends GenerarFlota {
+
+	int planoAncho;
+	int planoAltura;
 
 
 	public GenerarFlotaZeta(int posEnY, Plano unPlano) {
 		this.posEnY = posEnY;
 		this.plano = unPlano;
+		this.planoAncho = this.plano.devolverAncho();
+		this.planoAltura = this.plano.devolverAltura();
 	}
 
 	@Override
-	/* Genera una flota zeta, muchas pero muchas cazas en fila */
+	/* Genera una flota zeta, muchos items en posiciones al azar */
 	public void generar() {
 
 		Random generadorRandom = new Random();
-		this.posEnX = 2;
-		int planoAncho = this.plano.devolverAncho();
 
-		while (posEnX < planoAncho) {
+		int itemsACrear = generadorRandom.nextInt(5) + 1;
+		while (itemsACrear > 0) {
 
-			Punto posNave = new Punto(this.posEnX, this.posEnY);
-			Caza unCaza = null;
-			try {
-				unCaza = new Caza(posNave, this.plano);
-			} catch (SuperposicionNavesError e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (NaveDestruidaError e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			this.posEnX = posEnX + (int)(unCaza.devolverAncho()) + generadorRandom.nextInt(123) + 1;
+			this.posEnX = generadorRandom.nextInt(this.planoAncho - 60) + 30;
+			this.posEnY = generadorRandom.nextInt(this.planoAltura - 60) + 30;
+		
+			Punto itemPos = new Punto(this.posEnX, this.posEnY);
+			new TanqueEnergia (itemPos, this.plano);	
+
+			itemsACrear--;
+		}
+
+		itemsACrear = generadorRandom.nextInt(5) + 1;
+		while (itemsACrear > 0) {
+
+			this.posEnX = generadorRandom.nextInt(this.planoAncho - 60) + 30;
+			this.posEnY = generadorRandom.nextInt(this.planoAltura - 60) + 30;
+		
+			Punto itemPos = new Punto(this.posEnX, this.posEnY);
+			new ArmaAbandonada (itemPos, this.plano);	
+
+			itemsACrear--;
 		}
 	}
 
