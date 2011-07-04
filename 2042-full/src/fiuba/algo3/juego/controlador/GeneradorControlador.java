@@ -31,7 +31,7 @@ public class GeneradorControlador {
 	public ControladorJuegoAlgo42full generarControlador() {
 
 		Algo42 algo42 = null;
-		Punto posAlgo = new Punto(200,150);
+		Punto posAlgo = new Punto((int)(this.plano.devolverAncho()/2), (int)(this.plano.devolverAltura()/6));
 		try {
 			algo42 = new Algo42(posAlgo,plano);
 		} catch (AreaInvalidaError e) {
