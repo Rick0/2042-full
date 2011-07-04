@@ -78,7 +78,17 @@ public class TorpedoRastreador extends Arma implements Serializable{
 
 			this.pasaUnTiempo();
 
-			if (naveRastreada.estadoActualDestruida()) {
+			boolean naveRastreadaFueraDePlano;
+			if (naveRastreada.esOperable())
+				naveRastreadaFueraDePlano = false;
+			else {
+				if (((NaveNoOperable)naveRastreada).fueraDelPlano())
+					naveRastreadaFueraDePlano = true;
+				else
+					naveRastreadaFueraDePlano = false;
+			}
+
+			if (naveRastreada.estadoActualDestruida() || naveRastreadaFueraDePlano) {
 
 				if (this.plano.hayNavesEnemigas()) {
 					naveRastreada = this.plano.devolverListaNaves().get(0);
@@ -86,12 +96,10 @@ public class TorpedoRastreador extends Arma implements Serializable{
 				}
 				else {
 					Punto nuevaPosicion = null;
-					if (origenAlgo42) {
+					if (origenAlgo42)
 						nuevaPosicion = new Punto(this.devolverPunto().getX(),this.devolverPunto().getY() + cantidadAMover);	
-					}
-					else {
-						nuevaPosicion = new Punto(this.devolverPunto().getX(),this.devolverPunto().getY() - cantidadAMover);	
-					}
+					else
+						nuevaPosicion = new Punto(this.devolverPunto().getX(),this.devolverPunto().getY() - cantidadAMover);
 					this.cambiarPosicion(nuevaPosicion);
 				}
 			}

@@ -11,6 +11,8 @@ public class Bombardero extends NaveNoOperable implements Serializable {
 
 	private static final long serialVersionUID = -7505650596285382873L;
 	double haciaDer, haciaIzq;
+	static int cantidadMoverLateral = 10;
+	static double cantidadPaso = 0.5;
 
 
 	/* Inicializa una instancia de Bombardero */
@@ -75,16 +77,16 @@ public class Bombardero extends NaveNoOperable implements Serializable {
 	 */
 	public void mover() throws SuperposicionNavesError {
 
-		if ( haciaDer < 10 ) {
-			Punto nuevoPunto = new Punto(this.devolverPunto().getX()+0.5,this.devolverPunto().getY()-0.5);
+		if (haciaDer < cantidadMoverLateral) {
+			Punto nuevoPunto = new Punto(this.devolverPunto().getX() + cantidadPaso, this.devolverPunto().getY() - cantidadPaso);
 			this.cambiarPosicion(nuevoPunto);
-			haciaDer = (haciaDer + 0.5);
+			haciaDer = (haciaDer + cantidadPaso);
 		}
 		else {
-			if (haciaIzq  <= 10) {
-				Punto nuevoPunto=new Punto(this.devolverPunto().getX()-0.5,this.devolverPunto().getY()-0.5);
+			if (haciaIzq  <= cantidadMoverLateral) {
+				Punto nuevoPunto = new Punto(this.devolverPunto().getX() - cantidadPaso, this.devolverPunto().getY() - cantidadPaso);
 				this.cambiarPosicion(nuevoPunto);
-				haciaIzq = (haciaIzq + 0.5);
+				haciaIzq = (haciaIzq + cantidadPaso);
 			}
 			else {
 				haciaIzq = 0;
@@ -104,19 +106,19 @@ public class Bombardero extends NaveNoOperable implements Serializable {
 	 */
 	public void moverAlternativo() throws SuperposicionNavesError {
 
-		if ( haciaDer <=10 ) {
+		if ( haciaDer <= cantidadMoverLateral ) {
 			// Se estaba moviendo hacia la derecha. Lo envio a la izquierda
-			Punto nuevoPunto=new Punto(this.devolverPunto().getX()-0.5,this.devolverPunto().getY()-0.5);
+			Punto nuevoPunto=new Punto(this.devolverPunto().getX() - cantidadPaso,this.devolverPunto().getY() - cantidadPaso);
 			this.cambiarPosicion(nuevoPunto);
-			haciaDer = 10.5;
-			haciaIzq = 0.5;
+			haciaDer = cantidadMoverLateral + cantidadPaso;
+			haciaIzq = cantidadPaso;
 		}
 		else {
 			 // Se estaba moviendo hacia la izquierda. Lo envio a la derecha
-			Punto nuevoPunto=new Punto(this.devolverPunto().getX()+0.5,this.devolverPunto().getY()-0.5);
+			Punto nuevoPunto=new Punto(this.devolverPunto().getX() + cantidadPaso,this.devolverPunto().getY() - cantidadPaso);
 			this.cambiarPosicion(nuevoPunto);
-			haciaDer = 0.5;
-			haciaIzq = 10.5;
+			haciaDer = cantidadPaso;
+			haciaIzq = cantidadMoverLateral + cantidadPaso;
 		}
 
 		if ( this.seSuperponeConOtraNave() ) {
@@ -144,6 +146,11 @@ public class Bombardero extends NaveNoOperable implements Serializable {
 			}
 			velocidadDisparoCont = 0;
 		}
+	}
+
+	/* Devuelve la cantidad de movientos laterales maximo */
+	public int devolverCantidadMoverLateral() {
+		return cantidadMoverLateral;
 	}
 
 }
