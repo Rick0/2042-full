@@ -23,20 +23,16 @@ public class GenerarFlotaAlfa extends GenerarFlota {
 		Random generadorRandom = new Random();
 		int navesACrear = 5;
 		posEnX = generadorRandom.nextInt(20) + 10;
-	//	ArrayList<NaveNoOperable> lista= new ArrayList<NaveNoOperable>();
 
 		while (navesACrear > 0) {
 
 			Punto posNave = new Punto(posEnX, this.posEnY);
 			try {
-				/*Bombardero b = */new Bombardero(posNave, this.plano);
-		//		lista.add(b);
+				new Bombardero(posNave, this.plano);
 			} catch (SuperposicionNavesError e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
 			} catch (NaveDestruidaError e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 
 			posEnX = posEnX + 100 + generadorRandom.nextInt(20);

@@ -39,10 +39,8 @@ public class GenerarFlotaPi extends GenerarFlota {
 			this.alturaExplorador = unExplorador.devolverAltura();
 		} catch (SuperposicionNavesError e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (NaveDestruidaError e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 
 		this.posEnX -= (this.anchoExplorador - offSet) * 2;
@@ -56,10 +54,8 @@ public class GenerarFlotaPi extends GenerarFlota {
 			this.alturaExplorador = unExplorador2.devolverAltura();
 		} catch (SuperposicionNavesError e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (NaveDestruidaError e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 
 		this.posEnX += (this.anchoExplorador + offSet) * 4;
@@ -72,10 +68,8 @@ public class GenerarFlotaPi extends GenerarFlota {
 			this.alturaExplorador = unExplorador3.devolverAltura();
 		} catch (SuperposicionNavesError e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (NaveDestruidaError e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 
 		this.posEnX -= (this.anchoExplorador - offSet) * 2;
@@ -89,10 +83,8 @@ public class GenerarFlotaPi extends GenerarFlota {
 			this.alturaExplorador = unExplorador4.devolverAltura();
 		} catch (SuperposicionNavesError e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (NaveDestruidaError e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 

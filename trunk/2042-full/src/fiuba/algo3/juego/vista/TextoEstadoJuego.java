@@ -7,21 +7,21 @@ import fiuba.algo3.titiritero.vista.ObjetoDeTexto;
 
 public class TextoEstadoJuego implements ObjetoDeTexto, ObjetoVivo{
 	
-	private String Texto;
-	private Plano Modelo;
-	
-	
+	private String texto;
+	private Plano unPlano;
+
+
 	public TextoEstadoJuego(String texto, Plano plano) {
 		this.setTexto(texto);
-		this.Modelo = plano;
+		this.unPlano = plano;
 	}
 	
 	@Override
 	public void vivir() {
-		if (this.Modelo.estaJuegoGanado()) {
+		if (this.unPlano.devolverEstadoJuegoGanado()) {
 			this.setTexto("Juego Ganado");
 		}
-		if (this.Modelo.estaJuegoPerdido()) {
+		if (this.unPlano.devolverEstadoJuegoPerdido()) {
 			this.setTexto("Juego Perdido");
 		}
 	}
@@ -29,11 +29,11 @@ public class TextoEstadoJuego implements ObjetoDeTexto, ObjetoVivo{
 	@Override
 	public String getTexto() {
 		
-		return Texto;
+		return texto;
 	}
 	
 	public void setTexto(String texto) {
-		this.Texto = texto;
+		this.texto = texto;
 	}
 
 }

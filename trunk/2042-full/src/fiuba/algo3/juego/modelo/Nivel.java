@@ -58,7 +58,7 @@ public class Nivel implements Serializable{
 
 		if (puntosNivelActual >= 1000) {
 			puntosNivelActual = 0;
-			numeroNivel = (numeroNivel + 1);
+			numeroNivel++;
 			return true;
 		}
 		return false;

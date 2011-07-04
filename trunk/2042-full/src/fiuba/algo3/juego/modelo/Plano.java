@@ -210,19 +210,6 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 		return this.nivel;
 	}
 	
-	public void persistir(String archivo) {
-
-		try {
-			ObjectOutputStream oos = new ObjectOutputStream(
-			new FileOutputStream( archivo ));
-			oos.writeObject(this);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	public int getVidas() {
 		return vidas;
 	}
@@ -237,6 +224,19 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 
 	public boolean devolverEstadoJuegoPerdido() {
 		return juegoPerdido;
+	}
+
+	public void persistir(String archivo) {
+
+		try {
+			ObjectOutputStream oos = new ObjectOutputStream(
+			new FileOutputStream( archivo ));
+			oos.writeObject(this);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static Plano restaurar(String archivo) {
@@ -333,13 +333,4 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 		return 0;
 	}
 
-	public boolean estaJuegoPerdido() {
-		return juegoPerdido;
-	}
-
-	public boolean estaJuegoGanado() {
-		return juegoGanado;
-	}
-
-	
 }
