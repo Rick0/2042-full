@@ -45,25 +45,25 @@ public class ExploradorTest extends TestCase{
 	public void testMoverAlternativo() throws SuperposicionNavesError, NaveDestruidaError { 
 
 		Plano plano = new Plano( 500 , 500 );
-		Punto posicionExplorador=new Punto(50,70);
-		Punto posicionAvioneta=new Punto(106,70);
+		Punto posicionExplorador = new Punto(50,70);
+		Punto posicionAvioneta = new Punto(106,70);
 		Explorador explorador = new Explorador( posicionExplorador, 35 , plano );
 		@SuppressWarnings("unused")
-		Avioneta avioneta= new Avioneta(posicionAvioneta,plano);
-		int n=0;
-		int posicionXExplorador= 50;
-		while(n<5){
-			posicionXExplorador= posicionXExplorador+2;
+		Avioneta avioneta = new Avioneta(posicionAvioneta,plano);
+		int n = 0;
+		int posicionXExplorador = 50;
+		while (n<2) {
+			posicionXExplorador += 2;
 			explorador.moverAlternativo();
 			assertEquals( (int)explorador.devolverPunto().getX() , posicionXExplorador);
-			n=n+1;
+			n++;
 		}
-		assertEquals( (int)explorador.devolverPunto().getX() , 60);
-		assertEquals( (int)explorador.devolverPunto().getY() ,70 );
-		// Al moverlo una vez más, al estar la avioneta en el camino,
+		assertEquals( (int)explorador.devolverPunto().getX(), 54);
+		assertEquals( (int)explorador.devolverPunto().getY(), 70);
+		// Al moverlo una vez mas, al estar la avioneta en el camino,
 		// deberia moverse a la izquierda.
 		explorador.moverAlternativo();
-		assertEquals( (int)explorador.devolverPunto().getX() ,58 );
+		assertEquals( (int)explorador.devolverPunto().getX(), 52);
 	}
-	
+
 }

@@ -22,7 +22,7 @@ public class Caza extends NaveNoOperable implements Serializable{
 		energia = 10;
 		pasosAvanzados = 0;
 		esOperable = false;
-		rectangulo = new Rectangulo(50, 50, punto);
+		rectangulo = new Rectangulo(33, 33, punto);
 		estaDestruida = false;
 		fueraDelPlano = false;
 		this.determinarPlano(plano);

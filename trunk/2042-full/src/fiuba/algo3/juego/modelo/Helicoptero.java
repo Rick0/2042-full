@@ -16,7 +16,7 @@ public class Helicoptero extends NaveNoOperable implements Serializable{
 		puntos = -200;
 		energia = 1;
 		esOperable = false;
-		rectangulo = new Rectangulo(50, 50, punto);
+		rectangulo = new Rectangulo(30, 24, punto);
 		estaDestruida = false;
 		fueraDelPlano = false;
 		this.determinarPlano(plano);

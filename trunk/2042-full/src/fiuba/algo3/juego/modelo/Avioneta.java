@@ -22,13 +22,13 @@ public class Avioneta extends NaveNoOperable implements Serializable {
 		puntosAdelanteCont = 0;
 		puntosAtrasCont = 0;
 		esOperable = false;
-		rectangulo = new Rectangulo(60, 55, punto);
+		rectangulo = new Rectangulo(48, 61, punto);
 		estaDestruida = false;
 		fueraDelPlano = false;
 		this.determinarPlano(plano);
 
 		if (this.seSuperponeConOtraNave()) {
-			throw new SuperposicionNavesError("La posici�n esta ocupada");
+			throw new SuperposicionNavesError("La posicion esta ocupada");
 		}
 		plano.agregarNave(this);
 		plano.agregarObjetoNuevo(this);
