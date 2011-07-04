@@ -14,7 +14,7 @@ public class Helicoptero extends NaveNoOperable implements Serializable{
 	public Helicoptero(Punto punto, Plano plano) throws SuperposicionNavesError, NaveDestruidaError {
 		
 		puntos = -200;
-		energia = 1;
+		energia = 30;
 		esOperable = false;
 		rectangulo = new Rectangulo(30, 24, punto);
 		estaDestruida = false;
