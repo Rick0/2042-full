@@ -13,7 +13,7 @@ public class Laser extends Arma implements Serializable{
 
 		this.danio = -10;
 		this.fueUsado = false;
-		this.rectangulo = (new Rectangulo(5 , 1, punto ));
+		this.rectangulo = new Rectangulo(41, 9, punto);
 		this.inicializarOrigenAlgo42(origenAlgo);
 		this.determinarPlano(plano);
 
