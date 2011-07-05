@@ -12,7 +12,6 @@ import fiuba.algo3.juego.controlador.ControladorJuegoAlgo42full;
 import fiuba.algo3.juego.controlador.GeneradorControlador;
 import fiuba.algo3.juego.modelo.GeneradorFlota;
 import fiuba.algo3.juego.modelo.Plano;
-import fiuba.algo3.juego.programa.JPanelConFondo;
 
 
 public class VentanaInicial extends JFrame {
@@ -53,7 +52,7 @@ public class VentanaInicial extends JFrame {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
-			jContentPane = new JPanelConFondo();
+			jContentPane = new JPanelConFondo("../vista/recursos/PantallaPrincipal/pantallaPrincipal.jpg");
 			jContentPane.setLayout(new BorderLayout());
 			jContentPane.add(getJPanel(), BorderLayout.CENTER);
 		}
@@ -67,7 +66,7 @@ public class VentanaInicial extends JFrame {
 	 */
 	private JPanel getJPanel() {
 		if (jPanel == null) {
-			jPanel = new JPanelConFondo();
+			jPanel = new JPanelConFondo("../vista/recursos/PantallaPrincipal/pantallaPrincipal.jpg");
 			jPanel.setLayout(null);
 			jPanel.add(getJButtonJuegoNuevo(), null);
 			jPanel.add(getJButtonRestaurar(), null);
