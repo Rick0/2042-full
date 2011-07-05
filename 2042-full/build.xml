@@ -40,7 +40,7 @@
 	<target name="correr" depends="compilar.aplicacion">
 		<java fork="yes" classname="fiuba.algo3.juego.programa.EjecutableJuego">
 			<classpath>	
-				<pathelement path="${build}" />
+				<pathelement path="${build}\app" />
 				<fileset dir="lib">
 					<include name="**/*.jar"/>
 				</fileset>
