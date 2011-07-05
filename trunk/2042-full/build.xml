@@ -36,5 +36,15 @@
 			</batchtest>
 		</junit>
 		<fail message="Pruebas fallidas" if="test.failure" />
-  </target>	
+	</target>	
+	<target name="correr" depends="compilar.aplicacion">
+		<java fork="yes" classname="fiuba.algo3.juego.programa.EjecutableJuego">
+			<classpath>	
+				<pathelement path="${build}" />
+				<fileset dir="lib">
+					<include name="**/*.jar"/>
+				</fileset>
+			</classpath>
+		</java>
+  	</target>
 </project>
