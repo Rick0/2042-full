@@ -48,7 +48,7 @@ public class GenerarFlotaXi extends GenerarFlota {
 			flotaNaves.add(unBombardero);
 			navesACrear--;		
 		}
-		Punto posicionGuia= new Punto(0,0);
+		Punto posicionGuia= new Punto(250,500);
 		try {
 			@SuppressWarnings("unused")
 			Guia1 guia= new Guia1(flotaNaves, posicionGuia, plano);

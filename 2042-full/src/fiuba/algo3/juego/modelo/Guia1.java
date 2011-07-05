@@ -13,10 +13,8 @@ import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
 public class Guia1 extends Guia {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -3622971491150863366L;
+
 
 	public Guia1(List<NaveNoOperable> listaNaves,Punto punto, Plano planoJuego) throws NaveDestruidaError{
 		puntos = 1002;
@@ -26,8 +24,10 @@ public class Guia1 extends Guia {
 		fueraDelPlano = false;
 		estaDestruida = false;
 		this.determinarPlano(planoJuego);
-		planoJuego.agregarNave(this);
 		this.recibirFlota(listaNaves);
+
+		planoJuego.agregarNave(this);
+		planoJuego.agregarObjetoNuevo(this);
 	}
 	
 	/* Si la nave guia esta en la posicion de algo42 lo choca. Lanza un laser */
