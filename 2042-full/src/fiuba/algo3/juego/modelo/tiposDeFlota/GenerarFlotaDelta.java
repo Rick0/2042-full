@@ -18,7 +18,7 @@ public class GenerarFlotaDelta extends GenerarFlota {
 	public void generar() {
 
 		Random generadorRandom = new Random();
-		FlotaCazas unaFlota = new FlotaCazas(generadorRandom.nextInt(2) + 3, this.plano);
+		FlotaCazas unaFlota = new FlotaCazas(generadorRandom.nextInt(3) + 3, this.plano);
 		this.plano.agregarObjetoNuevo(unaFlota);
 	}
 

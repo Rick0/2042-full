@@ -1,11 +1,7 @@
 package fiuba.algo3.juego.modelo.tiposDeFlota;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import fiuba.algo3.juego.modelo.Bombardero;
-import fiuba.algo3.juego.modelo.Guia1;
-import fiuba.algo3.juego.modelo.NaveNoOperable;
 import fiuba.algo3.juego.modelo.Plano;
 import fiuba.algo3.juego.modelo.Punto;
 import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
@@ -29,9 +25,8 @@ public class GenerarFlotaXi extends GenerarFlota {
 
 		Random generadorRandom = new Random();
 		int navesACrear = 3;
-		posEnX = generadorRandom.nextInt(this.plano.devolverAncho() - 40) + 20;
+		posEnX = generadorRandom.nextInt(this.plano.devolverAncho() - 120) + 60;
 		int posEnYAux = this.posEnY;
-		List <NaveNoOperable> flotaNaves = new ArrayList<NaveNoOperable>();
 
 		while (navesACrear > 0) {
 
@@ -45,16 +40,7 @@ public class GenerarFlotaXi extends GenerarFlota {
 			}
 
 			posEnYAux = posEnYAux - this.alturaBombardero - 5;
-			flotaNaves.add(unBombardero);
 			navesACrear--;		
-		}
-		Punto posicionGuia= new Punto(250,500);
-		try {
-			@SuppressWarnings("unused")
-			Guia1 guia= new Guia1(flotaNaves, posicionGuia, plano);
-		} catch (NaveDestruidaError e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 

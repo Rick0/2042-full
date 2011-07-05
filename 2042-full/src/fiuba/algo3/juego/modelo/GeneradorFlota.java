@@ -1,6 +1,5 @@
 package fiuba.algo3.juego.modelo;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlota;
@@ -16,6 +15,7 @@ import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaNu;
 import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaOmega;
 import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaPhi;
 import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaPi;
+import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaSigma;
 import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaTheta;
 import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaUpsilon;
 import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaXi;
@@ -31,10 +31,8 @@ public class GeneradorFlota implements ObjetoVivo {
 	int cantidadNaves;
 	static int velocidadSpawnear = 222;
 	int velocidadSpawnearCont;
-	boolean tengoQueGenerar;
 	int posEnY;
-	boolean necesitoJefe;
-	ArrayList<NaveNoOperable> lista;
+	boolean necesitoNaveGuia;
 	HashMap<Integer, GenerarFlota> tablaGeneradorFlotas;
 
 
@@ -42,9 +40,8 @@ public class GeneradorFlota implements ObjetoVivo {
 
 		plano = planoJuego;
 		velocidadSpawnearCont = velocidadSpawnear;
-		tengoQueGenerar = true;
 		posEnY = (this.plano.devolverAltura()-10);
-		necesitoJefe = false;
+		necesitoNaveGuia = false;
 
 		this.tablaGeneradorFlotas = new HashMap<Integer, GenerarFlota>();
 		this.inicializarTablaGenerarFlota();
@@ -58,38 +55,26 @@ public class GeneradorFlota implements ObjetoVivo {
 		this.pasaUnTiempo();
 		this.actualizarCantidadNaves();
 
-
-	/*	if (necesitoJefe && (velocidadSpawnearCont == velocidadSpawnear)) {
-			this.generarJefe(lista);
+		if (this.necesitoNaveGuia && (velocidadSpawnearCont == velocidadSpawnear)) {
+			GenerarFlota unGeneradorFlota = tablaGeneradorFlotas.get(0);
+			unGeneradorFlota.generar();
 			this.velocidadSpawnearCont = 0;
-			necesitoJefe = false;
+			this.necesitoNaveGuia = false;
 		}
-	*/	if ((tengoQueGenerar) && (velocidadSpawnearCont == velocidadSpawnear) && (cantidadNaves < 11)) {
+		else if ((velocidadSpawnearCont == velocidadSpawnear) && (cantidadNaves < 12)) {
 
 		/*	Random generadorRandom = new Random();
 			int i = generadorRandom.nextInt(tablaGeneradorFlotas.size());
 			GenerarFlota unGeneradorFlota = tablaGeneradorFlotas.get(i);
-		*/	GenerarFlota unGeneradorFlota = tablaGeneradorFlotas.get(3);
+		*/	GenerarFlota unGeneradorFlota = tablaGeneradorFlotas.get(4);
 			unGeneradorFlota.generar();
 
 			this.velocidadSpawnearCont = 0;
-			this.necesitoJefe = true;
+
+			if (cantidadNaves >= 10)
+				this.necesitoNaveGuia = true;
 		}
 	}
-
-/*	private Guia1 generarJefe(ArrayList<NaveNoOperable> lista) {
-		Punto posNave = new Punto(150, this.posEnY-200);
-		Guia1 guia = null;
-		try {
-			guia = new Guia1(lista, posNave,this.plano);
-		} catch (NaveDestruidaError e) {
-			System.out.print("entre");
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return guia;		
-	}*/
 
 	/* En cada instante, se actualiza el contador de velocidad de generar flota */
 	public void pasaUnTiempo() {
@@ -139,9 +124,12 @@ public class GeneradorFlota implements ObjetoVivo {
 			GenerarFlota generarFlotaPhi = new GenerarFlotaPhi(this.posEnY, this.plano);
 
 			GenerarFlota generarFlotaZeta = new GenerarFlotaZeta(this.posEnY, this.plano);
+			GenerarFlota generarFlotaSigma = new GenerarFlotaSigma(this.posEnY, this.plano);
 
 
 			int i = 0;
+			tablaGeneradorFlotas.put(i, generarFlotaSigma);	i++;
+
 			tablaGeneradorFlotas.put(i, generarFlotaAlfa);	i++;
 			tablaGeneradorFlotas.put(i, generarFlotaBeta);	i++;
 			tablaGeneradorFlotas.put(i, generarFlotaGamma);	i++;
