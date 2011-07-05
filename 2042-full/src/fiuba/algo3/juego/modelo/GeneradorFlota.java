@@ -33,15 +33,18 @@ public class GeneradorFlota implements ObjetoVivo {
 	int velocidadSpawnearCont;
 	int posEnY;
 	boolean necesitoNaveGuia;
+	boolean tengoQueGenerar;
 	HashMap<Integer, GenerarFlota> tablaGeneradorFlotas;
 
 
 	public GeneradorFlota(Plano planoJuego) {
 
 		plano = planoJuego;
+		tengoQueGenerar = true;
 		velocidadSpawnearCont = velocidadSpawnear;
 		posEnY = (this.plano.devolverAltura()-10);
 		necesitoNaveGuia = false;
+		tengoQueGenerar = true;
 
 		this.tablaGeneradorFlotas = new HashMap<Integer, GenerarFlota>();
 		this.inicializarTablaGenerarFlota();
@@ -52,21 +55,22 @@ public class GeneradorFlota implements ObjetoVivo {
 	/* Vivir del generadorFlota */
 	public void vivir() {
 
-		this.pasaUnTiempo();
 		this.actualizarCantidadNaves();
+		this.revisarNavesHuir();
+		this.pasaUnTiempo();
 
-		if (this.necesitoNaveGuia && (velocidadSpawnearCont == velocidadSpawnear)) {
+		if (this.necesitoNaveGuia && (velocidadSpawnearCont == velocidadSpawnear) && tengoQueGenerar) {
 			GenerarFlota unGeneradorFlota = tablaGeneradorFlotas.get(0);
 			unGeneradorFlota.generar();
 			this.velocidadSpawnearCont = 0;
 			this.necesitoNaveGuia = false;
 		}
-		else if ((velocidadSpawnearCont == velocidadSpawnear) && (cantidadNaves < 12)) {
+		else if ((cantidadNaves < 12) && (velocidadSpawnearCont == velocidadSpawnear) && tengoQueGenerar) {
 
-		/*	Random generadorRandom = new Random();
-			int i = generadorRandom.nextInt(tablaGeneradorFlotas.size());
-			GenerarFlota unGeneradorFlota = tablaGeneradorFlotas.get(i);
-		*/	GenerarFlota unGeneradorFlota = tablaGeneradorFlotas.get(4);
+			Random generadorRandom = new Random();
+			int i = generadorRandom.nextInt(tablaGeneradorFlotas.size()-1);
+			GenerarFlota unGeneradorFlota = tablaGeneradorFlotas.get(i+1);
+		//	GenerarFlota unGeneradorFlota = tablaGeneradorFlotas.get(4);
 			unGeneradorFlota.generar();
 
 			this.velocidadSpawnearCont = 0;
@@ -76,8 +80,21 @@ public class GeneradorFlota implements ObjetoVivo {
 		}
 	}
 
+	/* Se fija si las naves estan huyendo
+	 * Si lo estan, deja de crear naves hasta que se hayan retirado todas */
+	private void revisarNavesHuir() {
+
+		if (cantidadNaves > 0) {
+			if (this.plano.devolverListaNaves().get(0).estaHuyendo())
+				tengoQueGenerar = false;
+		}
+		else if (cantidadNaves == 0) {
+			tengoQueGenerar = true;
+		}
+	}
+	
 	/* En cada instante, se actualiza el contador de velocidad de generar flota */
-	public void pasaUnTiempo() {
+	private void pasaUnTiempo() {
 
 		if (velocidadSpawnearCont < velocidadSpawnear) {
 			velocidadSpawnearCont++;
@@ -94,13 +111,13 @@ public class GeneradorFlota implements ObjetoVivo {
 	}
 
 	/* Actualiza la cantidad de naves no operables en el plano, y lo guarda en la variable 'cantidadNaves' */
-	public void actualizarCantidadNaves() {
+	private void actualizarCantidadNaves() {
 
 		this.cantidadNaves = this.plano.devolverListaNaves().size();
 	}
 
 	/* Inicializa la tabla de las diferentes flotas que se pueden crear */
-	public void inicializarTablaGenerarFlota() {
+	private void inicializarTablaGenerarFlota() {
 
 		if (tablaGeneradorFlotas.isEmpty()) {
 
@@ -169,6 +186,9 @@ public class GeneradorFlota implements ObjetoVivo {
 			tablaGeneradorFlotas.put(i, generarFlotaPhi);	i++;
 
 			tablaGeneradorFlotas.put(i, generarFlotaZeta);	i++;
+
+			tablaGeneradorFlotas.put(i, generarFlotaDelta);	i++;
+			tablaGeneradorFlotas.put(i, generarFlotaDelta);	i++;
 		}
 	}
 
