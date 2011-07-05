@@ -8,7 +8,7 @@ public class BotonZControlable implements Controlable {
 
 	Algo42 algo;
 
-	
+
 	public BotonZControlable(Algo42 algo42) {
 		algo = algo42;
 	}
