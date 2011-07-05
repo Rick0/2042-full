@@ -71,7 +71,6 @@ public class Algo42 extends Nave implements Serializable {
 		rectangulo = null;
 	}
 
-	
 	/* Crea una instancia de laser en la posicion del algo42 */
 	public void dispararLaser() {
 
@@ -146,7 +145,7 @@ public class Algo42 extends Nave implements Serializable {
 		cohetes = 0;
 		estaDestruida = false;
 
-		Punto posInicial = new Punto(((this.plano.devolverAncho())/2)-32, (this.plano.devolverAltura()/6));
+		Punto posInicial = new Punto((((this.plano.devolverAncho())/2) - (this.devolverAncho()/2)), (this.plano.devolverAltura()/6));
 		rectangulo.cambiarPosicion(posInicial);
 	}
 

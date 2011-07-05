@@ -55,7 +55,6 @@ public class Bombardero extends NaveNoOperable implements Serializable {
 
 		energia = (energia + cantidad);
 		if (energia <= 0) {
-
 			try {
 				this.destruirse();
 			} catch (Exception error) { 
