@@ -102,7 +102,7 @@ public class Caza extends NaveNoOperable implements Serializable{
 	/* Los cazas se mueve hacia abajo */
 	public void mover() throws SuperposicionNavesError {
 
-		Punto nuevoPunto= new Punto(this.devolverPunto().getX(),this.devolverPunto().getY()-1);
+		Punto nuevoPunto = new Punto(this.devolverPunto().getX(), this.devolverPunto().getY()-1);
 		this.cambiarPosicion(nuevoPunto);
 		pasosAvanzados = (pasosAvanzados + 1); 
 		if (this.seSuperponeConOtraNave() ) {
