@@ -4,11 +4,13 @@ import fiuba.algo3.juego.modelo.Algo42;
 import fiuba.algo3.titiritero.ObjetoVivo;
 import fiuba.algo3.titiritero.vista.ObjetoDeTexto;
 
+
 public class TextoVidaEInventario implements ObjetoDeTexto, ObjetoVivo{
 	
 	private String Texto;
 	private Algo42 Modelo;
-	
+
+
 	public TextoVidaEInventario(String texto, Algo42 modelo) {
 		this.setTexto(texto);
 		this.Modelo = modelo;
@@ -25,10 +27,7 @@ public class TextoVidaEInventario implements ObjetoDeTexto, ObjetoVivo{
 
 	@Override
 	public void vivir() {
-		this.setTexto("Energia: "+Modelo.devolverEnergia()+""+
-				"   Cohetes: "+Modelo.getCohetes()+""+"   Torpedos: "+
-				Modelo.getTorpedos()+"");
-		
+		this.setTexto("Energia: " + Modelo.devolverEnergia() + "" + "   Cohetes: " + Modelo.getCohetes() + "" + "   Torpedos: " + Modelo.getTorpedos() + "");
 	}
 
 }

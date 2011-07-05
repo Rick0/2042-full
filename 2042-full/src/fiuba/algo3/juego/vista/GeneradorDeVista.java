@@ -1,13 +1,16 @@
 package fiuba.algo3.juego.vista;
 
-import fiuba.algo3.juego.modelo.*;
-import fiuba.algo3.titiritero.vista.*;
+import fiuba.algo3.juego.modelo.Arma;
+import fiuba.algo3.juego.modelo.ObjetoUbicable;
+import fiuba.algo3.titiritero.vista.Imagen;
 
 
 /* Devuelve una vista dependiendo del objeto ubicable que se le pase */
 public class GeneradorDeVista {
 
+
 	public GeneradorDeVista() {	}
+
 
 	/* Devuelve una vista dependiendo del objeto ubicable que se le pase */
 	@SuppressWarnings("unchecked")
@@ -59,7 +62,6 @@ public class GeneradorDeVista {
 			nombreClaseCompleto = "fiuba.algo3.juego.vista.Vista" + nombreClaseCompleto;
 		}
 
-	//	System.out.println(nombreClaseCompleto+"\n");
 		return nombreClaseCompleto;
 	}
 
