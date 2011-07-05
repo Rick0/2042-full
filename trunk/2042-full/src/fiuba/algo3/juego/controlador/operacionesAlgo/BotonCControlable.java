@@ -18,7 +18,6 @@ public class BotonCControlable implements Controlable {
 	@Override
 	public void activarEfecto() {
 		algo.dispararLaser();
-		System.out.println("Disparar Laser()");
 	}
 
 }
