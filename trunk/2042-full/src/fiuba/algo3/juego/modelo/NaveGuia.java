@@ -1,7 +1,6 @@
 package fiuba.algo3.juego.modelo;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.Random;
 import fiuba.algo3.juego.modelo.excepciones.GuiaNoDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;

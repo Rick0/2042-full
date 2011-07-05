@@ -13,9 +13,8 @@ import fiuba.algo3.juego.modelo.Avioneta;
 import fiuba.algo3.juego.modelo.Bombardero;
 import fiuba.algo3.juego.modelo.Caza;
 import fiuba.algo3.juego.modelo.Civil;
-//import fiuba.algo3.juego.modelo.Cohete;
+import fiuba.algo3.juego.modelo.NaveGuia;
 import fiuba.algo3.juego.modelo.Explorador;
-//import fiuba.algo3.juego.modelo.NaveGuia;
 import fiuba.algo3.juego.modelo.Helicoptero;
 import fiuba.algo3.juego.modelo.Item;
 import fiuba.algo3.juego.modelo.NaveNoOperable;
@@ -60,30 +59,27 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 		}
 
 		//Hago que mi lista de avionetas sea la flota que dirigira la nave guia.
-	/*	Punto posicionGuia= new Punto(50,90);
-		NaveGuia guia= new Guia1(flota , posicionGuia , plano);
-	*/	
+		Punto posicionGuia= new Punto(50,90);
+		NaveGuia guia= new NaveGuia(posicionGuia , plano);
+		
 		//Comienzan las pruebas de escena actual
 		algo.modificarVelocidadDisparoCont(algo.devolverVelocidadDisparo());
-		algo.dispararLaser();
-	/*	plano.revisarEventos();
+		int t=0;
+		// Hago ocho disparos para llegar a eliminar a la nave guia.
+		while(t<9){
+			algo.dispararLaser();
+			t=t+1;
+		}
+		plano.revisarEventos();
 		guia.mover();
-	*/
-		//Las armas se mueven dos posiciones por turno; Y el laser tiene una altura de 5 puntos
-		//(o sea que esta de Y=88 a Y=83). Algo42 esta de 83 a 43, va a ser impactado
-		//Ademas la parte inferior de la nave enemiga esta en Y=89; Pero la nave enemiga se mueve.
-		//cuando el algo42 dispare, va a crear un arma en su posicion, que se va a mover. En el turno siguiente,.
-		//va a disparar de nuevo. En el primer turno, la nave enemiga deberia tener 10 de sus 20 puntos
-		//totales, y en el siguiente deberia estar destruida.
-	//	assertEquals(guia.devolverPunto().getY(),89.0 );
 		
 		//No deberia haber cambios en la nave algo42, porque no se movio
 		//En cambio si deberia haber cambios en la nave guia"
-	/*	assertEquals(algo.devolverEnergia(),70); //100 es la inicial, pero fue impactado
+		assertEquals(algo.devolverEnergia(),70); //100 es la inicial, pero fue impactado
 		assertEquals(guia.devolverEnergia(),0);
 		assertTrue(guia.estadoActualDestruida());
-		assertEquals(plano.devolverNumeroDeNivel(),2);
-	*/}
+		assertTrue(plano.devolverNivel().devolverPuntosActuales()==100);
+	}
 
 	@Test
 	/*Prueba que realiza un choque entre una instancia de algo42 y una avioneta
