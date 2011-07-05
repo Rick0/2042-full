@@ -116,7 +116,7 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 		// Pero el helicoptero no porque no es una nave enemiga
 		bombardero.vivir();
 		helicoptero.vivir();
-		assertEquals(bombardero.devolverPunto().getY(),500.5);
+		assertEquals(bombardero.devolverPunto().getY(),501.5);
 		assertEquals(helicoptero.devolverPunto().getY(),148.0);
 		
 	}

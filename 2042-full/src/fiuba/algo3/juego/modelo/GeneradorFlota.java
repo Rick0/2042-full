@@ -75,7 +75,7 @@ public class GeneradorFlota implements ObjetoVivo {
 
 			this.velocidadSpawnearCont = 0;
 
-			if (cantidadNaves >= 10)
+			if (cantidadNaves >= 8)
 				this.necesitoNaveGuia = true;
 		}
 	}
