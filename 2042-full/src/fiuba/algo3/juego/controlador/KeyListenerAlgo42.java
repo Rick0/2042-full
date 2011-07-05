@@ -3,7 +3,6 @@ package fiuba.algo3.juego.controlador;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashMap;
-//import fiuba.algo3.juego.controlador.operacionesAlgo.BarraControlable;
 import fiuba.algo3.juego.controlador.operacionesAlgo.BotonCControlable;
 import fiuba.algo3.juego.controlador.operacionesAlgo.BotonXControlable;
 import fiuba.algo3.juego.controlador.operacionesAlgo.BotonZControlable;
@@ -53,7 +52,6 @@ public class KeyListenerAlgo42 implements KeyListener {
 		Controlable flechaIzquierda = new FlechaIzquierdaControlable(algo);
 		Controlable flechaAbajo = new FlechaAbajoControlable(algo);
 		Controlable flechaArriba = new FlechaArribaControlable(algo);
-	//	Controlable barraEspaciadora = new BarraControlable(algo);
 		Controlable botonCControlable = new BotonCControlable(algo);
 		Controlable botonXControlable = new BotonXControlable(algo);
 		Controlable botonZControlable = new BotonZControlable(algo);
@@ -62,7 +60,6 @@ public class KeyListenerAlgo42 implements KeyListener {
 		diccionario.put(KeyEvent.VK_UP, flechaArriba);
 		diccionario.put(KeyEvent.VK_RIGHT, flechaDerecha);
 		diccionario.put(KeyEvent.VK_LEFT, flechaIzquierda);
-	//	diccionario.put(KeyEvent.VK_SPACE, barraEspaciadora);
 		diccionario.put(KeyEvent.VK_C, botonCControlable);
 		diccionario.put(KeyEvent.VK_X, botonXControlable);
 		diccionario.put(KeyEvent.VK_Z, botonZControlable);
