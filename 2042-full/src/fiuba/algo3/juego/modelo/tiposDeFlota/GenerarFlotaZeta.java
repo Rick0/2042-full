@@ -1,7 +1,6 @@
 package fiuba.algo3.juego.modelo.tiposDeFlota;
 
 import java.util.Random;
-
 import fiuba.algo3.juego.modelo.ArmaAbandonada;
 import fiuba.algo3.juego.modelo.Plano;
 import fiuba.algo3.juego.modelo.Punto;

@@ -1,7 +1,6 @@
 package fiuba.algo3.juego.modelo;
 
 import java.io.Serializable;
-
 import fiuba.algo3.titiritero.ObjetoVivo;
 import fiuba.algo3.titiritero.Posicionable;
 

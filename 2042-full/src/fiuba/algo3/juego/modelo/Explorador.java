@@ -44,7 +44,7 @@ public class Explorador extends NaveNoOperable implements Serializable{
 	/* El explorador se mueve en circulos */
 	public void mover() throws SuperposicionNavesError { 
 		double pi = Math.PI;
-		double  num=((1.000)/12);
+		double num = (1.000 / 12);
 		anguloActual = (anguloActual +num);
 		puntosHaciaAbajo = ( puntosHaciaAbajo + 0.5);
 		Punto nuevoPunto= new Punto((radio*( (Math.cos( pi * anguloActual)))) + centroInicialX,(centroInicialY - (radio * Math.sin( pi * anguloActual )) - puntosHaciaAbajo) );
@@ -58,7 +58,6 @@ public class Explorador extends NaveNoOperable implements Serializable{
 	/* Movimiento que se debe llevar a cabo si la funcion 'intentar movimiento' comprueba que el movimiento
 	 * por defecto provocaria un choque entre naves del tipo no operable.
 	 */
-	
 	public void moverAlternativo() throws SuperposicionNavesError {
 
 		Punto posicion = this.devolverPunto();

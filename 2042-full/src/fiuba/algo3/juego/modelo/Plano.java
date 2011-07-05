@@ -94,7 +94,7 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 	/*Agrega un item del juego a la lista de items usados.*/
 	public void agregarItemUsado(Item item) {
 
-		if(!item.fueUsado()) {
+		if (!item.fueUsado()) {
 			throw new ItemNoUsadoError();
 		}
 		listaItemsUsados.add(item);

@@ -14,7 +14,7 @@ public class FlotaCazas extends ObjetoUbicable implements Serializable, ObjetoVi
 	int cantidadFormacion;
 	int posEnX;
 	int posEnY;
-	static int offSet = 5;
+	static int offSet = 3;
 	static int lapsoEntreCreacion = 33 + offSet;
 	int lapsoEntreCreacionCont;
 	int cazaAncho;
