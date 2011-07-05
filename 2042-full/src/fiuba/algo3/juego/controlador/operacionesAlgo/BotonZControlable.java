@@ -20,10 +20,8 @@ public class BotonZControlable implements Controlable {
 	public void activarEfecto() {
 		try {
 			algo.dispararCohete();
-			System.out.println("Disparar Cohete()");
 		} catch (ArmaNoDisponibleError e) {
 			//Si no tiene el arma, que no haga nada.
-			System.out.println("No tiene cohetes");
 		}
 	}
 

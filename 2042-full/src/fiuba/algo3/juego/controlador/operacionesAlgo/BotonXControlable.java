@@ -30,14 +30,10 @@ public class BotonXControlable implements Controlable {
 		if (listaNavesEnemigas.size() > 0) {
 			try {
 				algo.dispararTorpedoRastreadorHacia(listaNavesEnemigas.get(0));
-				System.out.println("Disparar Torpedo Rastreador()");
 			}
 			catch (ArmaNoDisponibleError e) {
-				System.out.println("No tiene torpedos");
 			}
 			catch (NaveARastrearError e) {
-				// Problema con la nave a rastrear
-				System.out.println("No se puede rastrear esa nave");
 			}
 		}
 	}
