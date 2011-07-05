@@ -32,7 +32,7 @@ public class Guia1 extends Guia {
 	
 	/* Si la nave guia esta en la posicion de algo42 lo choca. Lanza un laser */
 	public void disparar() {
-		this.dispararLaser();
+
 	}
 
 	/* Movimiento de la clase guia1. Se mueve hacia abajo */

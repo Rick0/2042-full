@@ -7,6 +7,7 @@ import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlota;
 import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaAlfa;
 import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaBeta;
 import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaChi;
+import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaDelta;
 import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaEpsilon;
 import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaEta;
 import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaGamma;
@@ -68,7 +69,7 @@ public class GeneradorFlota implements ObjetoVivo {
 		/*	Random generadorRandom = new Random();
 			int i = generadorRandom.nextInt(tablaGeneradorFlotas.size());
 			GenerarFlota unGeneradorFlota = tablaGeneradorFlotas.get(i);
-		*/	GenerarFlota unGeneradorFlota = tablaGeneradorFlotas.get(24);
+		*/	GenerarFlota unGeneradorFlota = tablaGeneradorFlotas.get(3);
 			unGeneradorFlota.generar();
 
 			this.velocidadSpawnearCont = 0;
@@ -121,7 +122,7 @@ public class GeneradorFlota implements ObjetoVivo {
 			GenerarFlota generarFlotaAlfa = new GenerarFlotaAlfa(this.posEnY, this.plano);
 			GenerarFlota generarFlotaBeta = new GenerarFlotaBeta(this.posEnY, this.plano);
 			GenerarFlota generarFlotaGamma = new GenerarFlotaGamma(this.posEnY, this.plano);
-		//	GenerarFlota generarFlotaDelta = new GenerarFlotaDelta(this.posEnY, this.plano);
+			GenerarFlota generarFlotaDelta = new GenerarFlotaDelta(this.posEnY, this.plano);
 
 			GenerarFlota generarFlotaOmega = new GenerarFlotaOmega(this.posEnY, this.plano);
 			GenerarFlota generarFlotaEpsilon = new GenerarFlotaEpsilon(this.posEnY, this.plano);
@@ -144,7 +145,7 @@ public class GeneradorFlota implements ObjetoVivo {
 			tablaGeneradorFlotas.put(i, generarFlotaAlfa);	i++;
 			tablaGeneradorFlotas.put(i, generarFlotaBeta);	i++;
 			tablaGeneradorFlotas.put(i, generarFlotaGamma);	i++;
-		//	tablaGeneradorFlotas.put(i, generarFlotaDelta);	i++;
+			tablaGeneradorFlotas.put(i, generarFlotaDelta);	i++;
 
 			tablaGeneradorFlotas.put(i, generarFlotaOmega);	i++;
 			tablaGeneradorFlotas.put(i, generarFlotaOmega);	i++;

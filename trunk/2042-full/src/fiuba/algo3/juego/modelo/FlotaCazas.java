@@ -1,104 +1,113 @@
 package fiuba.algo3.juego.modelo;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Random;
 import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
+import fiuba.algo3.titiritero.ObjetoVivo;
 
 
-public class FlotaCazas implements Serializable{
+public class FlotaCazas extends ObjetoUbicable implements Serializable, ObjetoVivo{
 
 	private static final long serialVersionUID = -4108150044663064255L;
-	List<Caza> listaCazas, flotasMostradas;
-	int posicionXOriginal, posicionYOriginal;
-	Plano plano;
+	int cantidadCazas;
+	int cantidadFormacion;
+	int posEnX;
+	int posEnY;
+//	Plano plano;
+	static int offSet = 5;
+	static int lapsoEntreCreacion = 33 + offSet;
+	int lapsoEntreCreacionCont;
+	int cazaAncho;
 
 
-	/* Crea una flota, cuyo lider (es decir, la nave que esta adelante de todas) se colocara en la posicion x,y */
-	public FlotaCazas(int centroX, int centroY, Plano planoDeJuego) throws NaveDestruidaError {
-	
-		List<Caza> array;
-		Caza caza;
-		int n=0,i=0;
-		array = new ArrayList<Caza>();
-		this.determinarPlano(planoDeJuego);
-		
-		while (n < 5) {
-			try {
-				Punto posicion= new Punto(0, (n + i));
-				caza = new Caza(posicion, planoDeJuego);
-				n = ( n + 1 );
-				array.add(caza);
-			} catch (SuperposicionNavesError error) { 
-				i = ( i + 1 );
-				n = ( n - 1 );
-			}
-		}
+	/* Crea una flota de cazas en formacion V */
+	public FlotaCazas(int cantidadFormacion, Plano planoDeJuego) {
 
-		Punto punto = new Punto(centroX, centroY);
-		array.get(0).cambiarPosicion(punto);
-		array.get(0).determinarPlano(planoDeJuego);
-		this.determinarPosicion(centroX, centroY); 
-		this.determinarListaCazas(array);		
-	}
-
-	private void determinarListaCazas(List<Caza> array) {
-		listaCazas = array;
-	}
-
-	/* Devuelve la nave lider de la flota de cazas, es decir, la que se encuentra adelante de todas */
-	public Caza devolverNaveLider() {
-		return listaCazas.get(0);
-	}
-	
-	private void determinarPosicion(int centroX, int centroY) {
-		posicionXOriginal = centroX;
-		posicionYOriginal = centroY;
-	}
-
-	/* Devuelve una lista con todas las naves de la flota; El primer lugar lo ocupara la nave lider,
-	 * el segundo y el tercero las naves que le siguen, el cuarto y el quinto los
-	 * dos ultimos lugares, son las naves que se encuentran mas atras
-	 */
-	public List<Caza> devolverListaCazas() {	
-		return listaCazas;
-	}
-
-	private void determinarPlano(Plano planoDeJuego) {
+		this.cantidadCazas = 0;
+		this.cantidadFormacion = cantidadFormacion;
 		this.plano = planoDeJuego;
+		this.lapsoEntreCreacionCont = lapsoEntreCreacion;
+		this.cazaAncho = 33;
+
+		Random generadorRandom = new Random();
+		posEnX = generadorRandom.nextInt(this.plano.devolverAncho() - 400) + 200;
+		posEnY = this.plano.devolverAltura() - 20;
 	}
 
-	/* Se encarga de analizar la formacion de los cazas, y de ir ubicando nuevos cazas
-	 * en el plano, si es que todas las lineas de cazas no se mostraron aun
-	 */
-	public void PosicionarYUbicarNuevoCaza() throws NaveDestruidaError {
+	public void vivir() {
 
-		if (listaCazas.get(4).avanzo3Pasos() ) {
-			return;
-		}
-		if (listaCazas.get(1).avanzo3Pasos() ) {
-			Punto punto1 = new Punto(posicionXOriginal + 10, posicionYOriginal);
-			Punto punto2 = new Punto(posicionXOriginal - 10, posicionYOriginal);
+		this.pasaUnTiempo();
+		this.crearCaza();
 
-			listaCazas.get(3).cambiarPosicion( punto1 );
-			listaCazas.get(4).cambiarPosicion( punto2 );
-			plano.agregarNave(listaCazas.get(3));
-			plano.agregarNave(listaCazas.get(4));
-			listaCazas.get(3).determinarPlano(plano);
-			listaCazas.get(4).determinarPlano(plano);
-			return;
+		if (this.cantidadCazas >= this.cantidadFormacion)
+			this.plano.agregarObjetoDestruido(this);
+	}
+
+	/* En cada instante, se actualiza el contador del tiempo de crear cazas */
+	private void pasaUnTiempo() {
+
+		if (lapsoEntreCreacionCont < lapsoEntreCreacion) {
+			lapsoEntreCreacionCont++;
 		}
-		if (listaCazas.get(0).avanzo3Pasos() ) {
-			Punto puntoa = new Punto(posicionXOriginal + 5, posicionYOriginal);
-			Punto puntob = new Punto(posicionXOriginal - 5, posicionYOriginal);
-			listaCazas.get(2).cambiarPosicion( puntoa );
-			listaCazas.get(1).cambiarPosicion( puntob);
-			listaCazas.get(2).determinarPlano(plano);
-			listaCazas.get(1).determinarPlano(plano);
-			plano.agregarNave(listaCazas.get(1));
-			plano.agregarNave(listaCazas.get(2));
+	}
+
+	/* Crea cazas para que adquieran la formacion V */
+	private void crearCaza() {
+
+		if (lapsoEntreCreacionCont == lapsoEntreCreacion) {
+		
+			if (this.cantidadCazas == 0) {
+
+				Punto posNave = new Punto(this.posEnX, this.posEnY);
+				Caza unCaza = null;
+				try {
+					unCaza = new Caza(posNave, this.plano);
+					this.cazaAncho  = unCaza.devolverAncho();
+				} catch (SuperposicionNavesError e) {
+					// TODO Auto-generated catch block
+				} catch (NaveDestruidaError e) {
+					// TODO Auto-generated catch block
+				}
+			}
+			else {
+
+				Punto posNave = new Punto((this.posEnX - this.cazaAncho*cantidadCazas), this.posEnY);
+				Caza unCaza = null;
+				try {
+					unCaza = new Caza(posNave, this.plano);
+					this.cazaAncho  = unCaza.devolverAncho();
+				} catch (SuperposicionNavesError e) {
+					// TODO Auto-generated catch block
+				} catch (NaveDestruidaError e) {
+					// TODO Auto-generated catch block
+				}
+
+				posNave = new Punto((this.posEnX + this.cazaAncho*cantidadCazas), this.posEnY);
+				unCaza = null;
+				try {
+					unCaza = new Caza(posNave, this.plano);
+					this.cazaAncho  = unCaza.devolverAncho();
+				} catch (SuperposicionNavesError e) {
+					// TODO Auto-generated catch block
+				} catch (NaveDestruidaError e) {
+					// TODO Auto-generated catch block
+				}
+			}
+
+			this.cantidadCazas++;
+			this.lapsoEntreCreacionCont = 0;
 		}
+	}
+
+	@Override
+	public int getX() {
+		return 0;
+	}
+
+	@Override
+	public int getY() {
+		return 0;
 	}
 
 }
