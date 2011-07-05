@@ -28,7 +28,7 @@ public class GeneradorFlota implements ObjetoVivo {
 
 	Plano plano;
 	int cantidadNaves;
-	static int velocidadSpawnear = 250;
+	static int velocidadSpawnear = 222;
 	int velocidadSpawnearCont;
 	boolean tengoQueGenerar;
 	int posEnY;
@@ -68,7 +68,7 @@ public class GeneradorFlota implements ObjetoVivo {
 			Random generadorRandom = new Random();
 			int i = generadorRandom.nextInt(tablaGeneradorFlotas.size());
 			GenerarFlota unGeneradorFlota = tablaGeneradorFlotas.get(i);
-		//	GenerarFlota unGeneradorFlota = tablaGeneradorFlotas.get(32);
+		//	GenerarFlota unGeneradorFlota = tablaGeneradorFlotas.get(26);
 			unGeneradorFlota.generar();
 
 			this.velocidadSpawnearCont = 0;

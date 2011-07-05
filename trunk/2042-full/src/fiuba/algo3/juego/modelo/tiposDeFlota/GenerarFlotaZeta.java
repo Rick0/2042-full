@@ -22,12 +22,13 @@ public class GenerarFlotaZeta extends GenerarFlota {
 	}
 
 	@Override
-	/* Genera una flota zeta, muchos items en posiciones al azar */
+	/* Genera una flota zeta, muchos items en posiciones al azar
+	 * Hay chances de que no genere ningun item */
 	public void generar() {
 
 		Random generadorRandom = new Random();
 
-		int itemsACrear = generadorRandom.nextInt(5) + 1;
+		int itemsACrear = generadorRandom.nextInt(7) - 3;
 		while (itemsACrear > 0) {
 
 			this.posEnX = generadorRandom.nextInt(this.planoAncho - 60) + 30;
@@ -39,7 +40,7 @@ public class GenerarFlotaZeta extends GenerarFlota {
 			itemsACrear--;
 		}
 
-		itemsACrear = generadorRandom.nextInt(5) + 1;
+		itemsACrear = generadorRandom.nextInt(7) - 3;
 		while (itemsACrear > 0) {
 
 			this.posEnX = generadorRandom.nextInt(this.planoAncho - 60) + 30;

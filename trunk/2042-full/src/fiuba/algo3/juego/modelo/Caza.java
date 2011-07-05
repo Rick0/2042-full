@@ -96,7 +96,6 @@ public class Caza extends NaveNoOperable implements Serializable{
 				//esto no puede suceder
 				return;
 			}
-
 		}
 	}
 
