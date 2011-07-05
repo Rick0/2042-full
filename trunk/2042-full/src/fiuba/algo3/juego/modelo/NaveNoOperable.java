@@ -13,11 +13,12 @@ public abstract class NaveNoOperable extends Nave {
 	private static final long serialVersionUID = 3275367912248566223L;
 	boolean fueraDelPlano;
 	int puntos;
-	public boolean tengoQueHuir = false;
+	public boolean tengoQueHuir;
 
 
 	public NaveNoOperable() {
 		super();
+		this.tengoQueHuir = false;
 	}
 
 	public void huir() {
@@ -140,8 +141,9 @@ public abstract class NaveNoOperable extends Nave {
 	 * de arriba a abajo) hasta salir del area de juego
 	 */
 	public void retirarse() {
-		Punto nuevaPosicion = new Punto(this.devolverPunto().getX(),this.devolverPunto().getY()+1);
+		Punto nuevaPosicion = new Punto(this.devolverPunto().getX(),this.devolverPunto().getY()+2);
 		this.cambiarPosicion(nuevaPosicion);
+		this.estaFueraDelPlano();
 	}
 
 	/* Devuelve el estado fueraDeJuego , que es un valor booleano.
@@ -192,6 +194,11 @@ public abstract class NaveNoOperable extends Nave {
 	public void chocarCon(Algo42 algo42) {
 
 		this.modificarEnergia( -(this.devolverEnergia()) );
+	}
+
+	/* Me indica si la nave esta huyendo o no */
+	public boolean estaHuyendo() {
+		return tengoQueHuir;
 	}
 
 }

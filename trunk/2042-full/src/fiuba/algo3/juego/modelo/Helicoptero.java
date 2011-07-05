@@ -28,13 +28,21 @@ public class Helicoptero extends NaveNoOperable implements Serializable{
 		plano.agregarObjetoNuevo(this);
 	}
 
-	@Override
-	/* El helicoptero tiene orden de no disparar */
-	public void disparar() {	}
+	/* El helicoptero, como nave neutral, no huye si alguna nave guia se destruye */
+	public void vivir() {
+
+		if (!estaDestruida) {
+
+			this.intentarMover();
+			this.intentarChocar(this.plano.getAlgo42());
+			this.pasaUnTiempo();
+			this.disparar();
+		}
+	}
 
 	/* El helicoptero se mueve hacia abajo */
 	public void mover() throws SuperposicionNavesError { 
-		Punto punto= new Punto (this.devolverPunto().getX(),this.devolverPunto().getY() -1);
+		Punto punto = new Punto (this.devolverPunto().getX(),this.devolverPunto().getY() -1);
 		this.cambiarPosicion( punto );
 		if ( this.seSuperponeConOtraNave() ) {
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
@@ -47,12 +55,16 @@ public class Helicoptero extends NaveNoOperable implements Serializable{
 	 */
 	public void moverAlternativo() throws SuperposicionNavesError { 
 
-		Punto punto= new Punto (this.devolverPunto().getX(),this.devolverPunto().getY() +1);
+		Punto punto = new Punto (this.devolverPunto().getX(),this.devolverPunto().getY() +1);
 		this.cambiarPosicion( punto);
 		if ( this.seSuperponeConOtraNave() ) {
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
 		}
 		this.estaFueraDelPlano();
 	}
+
+	@Override
+	/* El helicoptero tiene orden de no disparar */
+	public void disparar() {	}
 
 }

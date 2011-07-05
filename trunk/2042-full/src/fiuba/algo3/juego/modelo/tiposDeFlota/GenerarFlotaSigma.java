@@ -23,7 +23,7 @@ public class GenerarFlotaSigma extends GenerarFlota {
 		Random generadorRandom = new Random();
 		this.posEnX = generadorRandom.nextInt(this.plano.devolverAncho() - 300) + 150;
 
-		Punto posNave = new Punto(this.posEnX, this.posEnY - 60);
+		Punto posNave = new Punto(this.posEnX, this.posEnY - 20);
 		try {
 			new NaveGuia(posNave, this.plano);
 		} catch (SuperposicionNavesError e) {

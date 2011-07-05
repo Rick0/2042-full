@@ -28,6 +28,18 @@ public class Civil extends NaveNoOperable implements Serializable{
 		plano.agregarObjetoNuevo(this);
 	}
 
+	/* El helicoptero, como nave neutral, no huye si alguna nave guia se destruye */
+	public void vivir() {
+
+		if (!estaDestruida) {
+
+			this.intentarMover();
+			this.intentarChocar(this.plano.getAlgo42());
+			this.pasaUnTiempo();
+			this.disparar();
+		}
+	}
+
 	/* La nave civil se mueve hacia abajo */
 	public void mover() throws SuperposicionNavesError { 
 
