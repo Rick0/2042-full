@@ -10,10 +10,10 @@ public class GeneradorDeVista {
 	public GeneradorDeVista() {	}
 
 	/* Devuelve una vista dependiendo del objeto ubicable que se le pase */
+	@SuppressWarnings("unchecked")
 	public Imagen devolverVista(ObjetoUbicable unObjeto) {
 
 		String nombreClase = this.convertirANombreClase(unObjeto);
-		@SuppressWarnings("rawtypes")
 		Class claseVistaAInstanciar = null;
 		Object nuevaVista = null;
 
