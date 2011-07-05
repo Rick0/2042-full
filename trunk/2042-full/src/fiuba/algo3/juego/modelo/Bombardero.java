@@ -58,13 +58,13 @@ public class Bombardero extends NaveNoOperable implements Serializable {
 			try {
 				this.destruirse();
 			} catch (Exception error) { 
-				// esto no puede suceder
+				// Esto no puede suceder
 			}
 
 			try {
 				this.dejarArma();
 			} catch (ItemNoDisponibleError error) { 
-				// esto no puede suceder
+				// Esto no puede suceder
 				return;
 			}
 		}
@@ -113,7 +113,7 @@ public class Bombardero extends NaveNoOperable implements Serializable {
 			haciaIzq = cantidadPaso;
 		}
 		else {
-			 // Se estaba moviendo hacia la izquierda. Lo envio a la derecha
+			// Se estaba moviendo hacia la izquierda. Lo envio a la derecha
 			Punto nuevoPunto=new Punto(this.devolverPunto().getX() + cantidadPaso,this.devolverPunto().getY() - cantidadPaso);
 			this.cambiarPosicion(nuevoPunto);
 			haciaDer = cantidadPaso;

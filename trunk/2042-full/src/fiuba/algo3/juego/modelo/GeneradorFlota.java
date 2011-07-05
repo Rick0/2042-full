@@ -70,7 +70,6 @@ public class GeneradorFlota implements ObjetoVivo {
 			Random generadorRandom = new Random();
 			int i = generadorRandom.nextInt(tablaGeneradorFlotas.size()-1);
 			GenerarFlota unGeneradorFlota = tablaGeneradorFlotas.get(i+1);
-		//	GenerarFlota unGeneradorFlota = tablaGeneradorFlotas.get(4);
 			unGeneradorFlota.generar();
 
 			this.velocidadSpawnearCont = 0;

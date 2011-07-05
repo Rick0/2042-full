@@ -82,23 +82,23 @@ public class NaveGuia extends NaveNoOperable {
 		}
 	}
 
-	/* La nave guia siempre dispara un laser, y despues un torpedo o cohete con cierta probabilidad
-	 * Entonces hay posibilidad de que dispare dos armas a la vez */
+	/* La nave guia puede disparar diferentes tipos de torpedos o cohete,
+	 * con diferentes probabilidades para cada arma */
 	public void disparar() {
 
 		if (velocidadDisparoCont == velocidadDisparo) {
 
-			this.dispararLaser();
-
 			Random generadorRandom = new Random();
-			int i = generadorRandom.nextInt(12);
+			int i = generadorRandom.nextInt(10);
 
 			if (i <= 2) {
 				this.dispararCohete();
 			} else if (i == 3) {
 				this.dispararTorpedoRastreadorHacia(this.plano.getAlgo42());
-			} else if (i <= 6) {
+			} else if (i <= 7) {
 				this.dispararTorpedo();
+			} else {
+				this.dispararTorpedoAdaptable();
 			}
 			velocidadDisparoCont = 0;
 		}

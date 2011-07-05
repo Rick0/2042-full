@@ -5,7 +5,7 @@ import fiuba.algo3.juego.modelo.excepciones.ArmaUsadaError;
 
 
 public class TorpedoAdaptable extends Arma implements Serializable{
-	
+
 	private static final long serialVersionUID = -4508120870679103213L;
 
 

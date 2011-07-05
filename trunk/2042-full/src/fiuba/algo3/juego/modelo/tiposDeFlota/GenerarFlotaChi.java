@@ -25,7 +25,7 @@ public class GenerarFlotaChi extends GenerarFlota {
 
 		Random generadorRandom = new Random();
 		int navesACrear = 3;
-		posEnX = generadorRandom.nextInt(this.plano.devolverAncho() - 40) + 20;
+		posEnX = generadorRandom.nextInt(this.plano.devolverAncho() - 120) + 60;
 		int posEnYAux = this.posEnY;
 
 		while (navesACrear > 0) {
