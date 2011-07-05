@@ -80,7 +80,46 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 		assertTrue(guia.estadoActualDestruida());
 		assertTrue(plano.devolverNivel().devolverPuntosActuales()==100);
 	}
-
+	
+	@Test
+	/*Prueba la interaccion entre naves no operables en un plano
+	 * y una nave guia, y el modo en el cual las naves no operables
+	 * deben cambiar su movimiento al ser eliminada una nave guia.
+	 */
+	public void testInteraccionGuiaNaves() throws SuperposicionNavesError, NaveDestruidaError{
+		Plano plano= new Plano(10000,10000);
+		Punto posicion= new Punto(50,50);
+		NaveGuia guia= new NaveGuia(posicion,plano);
+		Punto puntoAlgo= new Punto(1900,1900);
+		try {
+			@SuppressWarnings("unused")
+			Algo42 algo= new Algo42(puntoAlgo,plano);
+		} catch (AreaInvalidaError e) {
+			// No deberia pasar
+		}
+		
+		// Voy a ir creando algunas naves para corroborar que huyen
+		
+		Punto posicionHelicoptero= new Punto(200,150);
+		Helicoptero helicoptero= new Helicoptero(posicionHelicoptero,plano);
+		Punto posicionBombardero= new Punto(500,500);
+		Bombardero bombardero= new Bombardero(posicionBombardero,plano);
+		bombardero.vivir();
+		helicoptero.vivir();
+		// Pruebo que las naves no estan huyendo, es decir, avanzan hacia adelante.
+		assertEquals(bombardero.devolverPunto().getY(),499.5);
+		assertEquals(helicoptero.devolverPunto().getY(),149.0);
+		// Elimino la nave guia
+		guia.modificarEnergia(-80);
+		assertTrue(guia.estadoActualDestruida());
+		// Ahora pruebo que están huyendo-
+		bombardero.vivir();
+		helicoptero.vivir();
+		assertEquals(bombardero.devolverPunto().getY(),500.5);
+		assertEquals(helicoptero.devolverPunto().getY(),150.0);
+		
+	}
+	
 	@Test
 	/*Prueba que realiza un choque entre una instancia de algo42 y una avioneta
 	Los objetos ubicables necesitan un plano donde moverse.*/
