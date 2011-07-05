@@ -1,6 +1,8 @@
 package fiuba.algo3.juego.vista;
 
 import java.awt.BorderLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -30,6 +32,12 @@ public class VentanaInicial extends JFrame {
 	public VentanaInicial() {
 		super();
 		initialize();
+		this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				System.out.println("Saliendo del Programa");
+				System.exit(0);
+			}
+		});
 	}
 
 	/**
