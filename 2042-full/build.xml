@@ -38,11 +38,18 @@
 		<fail message="Pruebas fallidas" if="test.failure" />
 	</target>	
 	<target name="correr" depends="compilar.aplicacion">
+		<copy todir="${build}\app">
+			<fileset dir=".\src">
+					<include name="**/*.gif"/>  
+					<include name="**/*.jpg"/>  
+					<include name="**/*.png"/>
+			</fileset>
+		</copy>
 		<java fork="yes" classname="fiuba.algo3.juego.programa.EjecutableJuego">
 			<classpath>	
 				<pathelement path="${build}\app" />
 				<fileset dir="lib">
-					<include name="**/*.jar"/>
+				
 				</fileset>
 			</classpath>
 		</java>
