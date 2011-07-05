@@ -2,7 +2,6 @@ package fiuba.algo3.juego.vista;
 
 import java.awt.Button;
 import java.awt.Label;
-import java.awt.Rectangle;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -14,6 +13,7 @@ public class VentanaJuegoTerminado extends JFrame {
 	private Label labelPregunta = null;
 	private Button buttonSi = null;
 	private Button buttonNo = null;
+	private String estado= null;
 
 
 	/**
@@ -24,8 +24,9 @@ public class VentanaJuegoTerminado extends JFrame {
 		initialize();
 	}
 	
-	public VentanaJuegoTerminado(String estado) {
+	public VentanaJuegoTerminado(String estadoJuego) {
 		super();
+		estado= estadoJuego;
 		initialize();
 		this.setTitle("Usted ha " + estado);
 	}
@@ -36,7 +37,7 @@ public class VentanaJuegoTerminado extends JFrame {
 	 * @return void
 	 */
 	private void initialize() {
-		this.setSize(300, 187);
+		this.setSize(550, 570);
 		this.setContentPane(getJContentPane());
 	}
 
@@ -48,9 +49,14 @@ public class VentanaJuegoTerminado extends JFrame {
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
 			labelPregunta = new Label();
-			labelPregunta.setBounds(new Rectangle(73, 23, 137, 23));
-			labelPregunta.setText("¿Desea volver a jugar?");
-			jContentPane = new JPanel();
+			labelPregunta.setBounds(new java.awt.Rectangle(213,116,137,23));
+			labelPregunta.setText("Desea volver a jugar?");
+			if(estado=="ganado!!!"){
+				jContentPane = new JPanelConFondo("recursos/PantallaPrincipal/ganaste.jpg");
+			}
+			else{
+				jContentPane= new JPanelConFondo("recursos/PantallaPrincipal/perdiste.jpg");
+			}
 			jContentPane.setLayout(null);
 			jContentPane.add(labelPregunta, null);
 			jContentPane.add(getButtonSi(), null);
@@ -67,7 +73,7 @@ public class VentanaJuegoTerminado extends JFrame {
 	private Button getButtonSi() {
 		if (buttonSi == null) {
 			buttonSi = new Button();
-			buttonSi.setBounds(new Rectangle(11, 107, 174, 23));
+			buttonSi.setBounds(new java.awt.Rectangle(164,174,174,23));
 			buttonSi.setLabel("Si, volver al menu principal.");
 			buttonSi.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -90,7 +96,7 @@ public class VentanaJuegoTerminado extends JFrame {
 	private Button getButtonNo() {
 		if (buttonNo == null) {
 			buttonNo = new Button();
-			buttonNo.setBounds(new Rectangle(215, 107, 36, 23));
+			buttonNo.setBounds(new java.awt.Rectangle(347,174,36,23));
 			buttonNo.setLabel("No.");
 			buttonNo.addActionListener(new java.awt.event.ActionListener() {
 				public void actionPerformed(java.awt.event.ActionEvent e) {
