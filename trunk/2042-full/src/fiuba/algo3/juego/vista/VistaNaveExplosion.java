@@ -1,7 +1,7 @@
 package fiuba.algo3.juego.vista;
 
+import fiuba.algo3.titiritero.ObjetoVivo;
 import fiuba.algo3.titiritero.vista.Imagen;
-import fiuba.algo3.titiritero.*;
 
 
 public class VistaNaveExplosion extends Imagen implements ObjetoVivo {

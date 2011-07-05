@@ -3,12 +3,10 @@ package fiuba.algo3.juego.vista;
 import java.awt.BorderLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
 
 import fiuba.algo3.juego.controlador.ControladorJuegoAlgo42full;
 import fiuba.algo3.juego.controlador.GeneradorControlador;
@@ -37,7 +35,7 @@ public class VentanaInicial extends JFrame {
 				System.out.println("Saliendo del Programa");
 				System.exit(0);
 			}
-		});
+		} );
 	}
 
 	/**
@@ -105,7 +103,7 @@ public class VentanaInicial extends JFrame {
 					controlador.comenzarJuegoAsyn();
 					dispose();
 				}
-			});
+			} );
 		}
 		return jButtonJuegoNuevo;
 	}
@@ -131,7 +129,7 @@ public class VentanaInicial extends JFrame {
 					controlador.comenzarJuegoAsyn();
 					dispose();
 				}
-			});
+			} );
 		}
 		return jButtonRestaurar;
 	}
@@ -151,7 +149,7 @@ public class VentanaInicial extends JFrame {
 					System.out.println("Salir");
 					System.exit( 0 );
 				}
-			});
+			} );
 		}
 		return jButtonSalir;
 	}

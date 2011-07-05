@@ -3,6 +3,7 @@ package fiuba.algo3.juego.modelo;
 import java.io.Serializable;
 import fiuba.algo3.juego.modelo.excepciones.ArmaUsadaError;
 
+
 public class TorpedoSimple extends Arma implements Serializable{
 
 	private static final long serialVersionUID = -23138257791129L;

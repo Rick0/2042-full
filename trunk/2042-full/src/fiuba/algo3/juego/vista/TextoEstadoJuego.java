@@ -1,9 +1,9 @@
 package fiuba.algo3.juego.vista;
 
-
 import fiuba.algo3.juego.modelo.Plano;
 import fiuba.algo3.titiritero.ObjetoVivo;
 import fiuba.algo3.titiritero.vista.ObjetoDeTexto;
+
 
 public class TextoEstadoJuego implements ObjetoDeTexto, ObjetoVivo{
 	

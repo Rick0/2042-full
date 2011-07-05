@@ -2,6 +2,7 @@ package fiuba.algo3.juego.vista;
 
 import fiuba.algo3.titiritero.Posicionable;
 
+
 public class PuntoEntero implements Posicionable{
 
 	public PuntoEntero(int x, int y) {
@@ -29,4 +30,5 @@ public class PuntoEntero implements Posicionable{
 
 	private int X;
 	private int Y;
+
 }

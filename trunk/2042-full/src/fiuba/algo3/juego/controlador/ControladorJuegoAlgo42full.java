@@ -107,7 +107,7 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 	 */
 	public void detenerJuego() {
 		this.estaEnEjecucion = false;
-		if(reproductor!=null)
+		if (reproductor != null)
 			this.reproductor.apagar();
 	}
 	
@@ -160,7 +160,6 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 	 */
 	private void actualizarPlano() {
 
-	//	System.out.println(objetosVivos.toString());
 		Plano planoDelJuego = this.plano;
 
 		planoDelJuego.getAlgo42().estadoPuedeDisparar(false);
@@ -191,9 +190,6 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 				if (unaVista.getClass().toString().equals("class fiuba.algo3.juego.vista.VistaNaveExplosion")) {
 					this.removerObjetoVivo((ObjetoVivo)unaVista);
 				}
-			}
-			else {
-				System.out.println("Vista apunta a null...");
 			}
 
 			this.removerDibujable(unaVista);
@@ -353,7 +349,6 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 	public void restaurarPlano(String archivo) {
 		this.plano = Plano.restaurar(archivo);
 		this.restaurarPlano();
-		//Under construction
 	}
 	
 	public void restaurarPlano() {
@@ -369,7 +364,6 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 		while (k.hasNext()) {
 			this.plano.agregarObjetoNuevo(k.next());
 		}
-		//Under construction
 	}
 	
 	public Plano getPlano() {
