@@ -8,7 +8,7 @@ public class TorpedoRastreador extends Arma implements Serializable{
 
 	private static final long serialVersionUID = 2021359934861160328L;
 	private Nave naveRastreada;
-	private int tiempoDeVida = 333;
+	private int tiempoDeVida;
 	static int cantidadAMover = 2;
 
 
@@ -19,6 +19,11 @@ public class TorpedoRastreador extends Arma implements Serializable{
 		this.rectangulo = new Rectangulo(42, 19, punto);
 		this.inicializarOrigenAlgo42(origenAlgo);
 		this.determinarPlano(plano);
+
+		if (this.origenAlgo42)
+			this.tiempoDeVida = 444;
+		else
+			this.tiempoDeVida = 333;
 
 		try {
 			this.plano.agregarArma(this);
@@ -97,9 +102,9 @@ public class TorpedoRastreador extends Arma implements Serializable{
 				else {
 					Punto nuevaPosicion = null;
 					if (origenAlgo42)
-						nuevaPosicion = new Punto(this.devolverPunto().getX(),this.devolverPunto().getY() + cantidadAMover);	
+						nuevaPosicion = new Punto(this.devolverPunto().getX(), this.devolverPunto().getY() + (cantidadAMover/2));	
 					else
-						nuevaPosicion = new Punto(this.devolverPunto().getX(),this.devolverPunto().getY() - cantidadAMover);
+						nuevaPosicion = new Punto(this.devolverPunto().getX(), this.devolverPunto().getY() - (cantidadAMover/2));
 					this.cambiarPosicion(nuevaPosicion);
 				}
 			}

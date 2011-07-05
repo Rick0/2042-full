@@ -78,7 +78,7 @@ public abstract class Arma extends ObjetoUbicable implements Serializable {
 			throw new AtaqueEntreNavesNoOperables("Una nave no operable no puede atacar a otra del mismo tipo");
 		}
 
-		if (unaNave.coincidePosicionCon(this.rectangulo)) {
+		if (unaNave.coincidePosicionCon(this.rectangulo) && !unaNave.estadoActualDestruida()) {
 			unaNave.chocarCon(this);
 			this.chocarCon(unaNave);
 			return true;
