@@ -1,8 +1,16 @@
 package fiuba.algo3.juego.modelo.tiposDeFlota;
 
 import java.util.Random;
-import fiuba.algo3.juego.modelo.*;
-import fiuba.algo3.juego.modelo.excepciones.*;
+import fiuba.algo3.juego.modelo.Avioneta;
+import fiuba.algo3.juego.modelo.Bombardero;
+import fiuba.algo3.juego.modelo.Caza;
+import fiuba.algo3.juego.modelo.Civil;
+import fiuba.algo3.juego.modelo.Explorador;
+import fiuba.algo3.juego.modelo.Helicoptero;
+import fiuba.algo3.juego.modelo.Plano;
+import fiuba.algo3.juego.modelo.Punto;
+import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
+import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
 
 public abstract class GenerarFlota {
