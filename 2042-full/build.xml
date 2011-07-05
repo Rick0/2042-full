@@ -1,4 +1,4 @@
-<project name="Algo2042" basedir="." default="ejecutar.tests">
+<project name="Algo2042" basedir="." default="ayuda">
 	<property name="build" location="build" />
 	<property name="lib" location="lib" />
 	
@@ -54,4 +54,10 @@
 			</classpath>
 		</java>
   	</target>
+	<target name="ayuda">
+		<echo>ant compilar.aplicacion : compila el programa</echo>
+		<echo>ant compilar.tests : compila el programa y los tests</echo>
+		<echo>ant ejecutar.tests : compila el programa y corre los tests</echo>
+		<echo>ant correr : compila el programa y ejecuta el programa</echo>
+	</target>
 </project>
