@@ -139,7 +139,7 @@ public class NaveNoOperableTest extends TestCase {
 
 		for ( int i= 1 ; i<5 ; i++) {  
 			avioneta.retirarse();
-			posicion = ( posicion + 2.0 );
+			posicion = ( posicion + 1.0 );
 			assertEquals(avioneta.devolverPunto().getY(), posicion );
 		}
 	}
