@@ -58,7 +58,7 @@ public class VentanaInicial extends JFrame {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
-			jContentPane = new JPanelConFondo("../vista/recursos/PantallaPrincipal/pantallaPrincipal.jpg");
+			jContentPane = new JPanelConFondo("recursos/PantallaPrincipal/pantallaPrincipal.jpg");
 			jContentPane.setLayout(new BorderLayout());
 			jContentPane.add(getJPanel(), BorderLayout.CENTER);
 		}
@@ -72,7 +72,7 @@ public class VentanaInicial extends JFrame {
 	 */
 	private JPanel getJPanel() {
 		if (jPanel == null) {
-			jPanel = new JPanelConFondo("../vista/recursos/PantallaPrincipal/pantallaPrincipal.jpg");
+			jPanel = new JPanelConFondo("recursos/PantallaPrincipal/pantallaPrincipal.jpg");
 			jPanel.setLayout(null);
 			jPanel.add(getJButtonJuegoNuevo(), null);
 			jPanel.add(getJButtonRestaurar(), null);
