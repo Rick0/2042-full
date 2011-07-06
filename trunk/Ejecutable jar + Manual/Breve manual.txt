@@ -1,0 +1,34 @@
+- Botones:
+
+Flechitas	Moverse
+C		Dispara laser (municion infinita)
+X		Dispara torpedo rastreador
+Z		Dispara cohete
+
+
+- Aviones enemigos:
+
+Explorador (verde):	No dispara, se mueve en circulos
+Bombardero (amarrillo):	Dispara muchos tipos de armas
+Avioneta (blanco-rojo):	Dispara laser, se mueve hacia adelante y atras
+Caza (azul):		Dispara torpedo simple, se mueve linealmente
+Nave guia (???):	??? [descubrirlo]
+
+
+- Aviones neutrales  =>  IMPORTANTE!  =>  No destruirlos que restan puntaje
+
+Helicopetero (gris)
+Avion civil (gris)
+
+
+- Para ganar: llegar al nivel 15 (se avanza un nivel cada 1000 puntos)
+- Para perder: tener vida 0
+
+
+- Mas botones:
+
+P:	Pausa el juego, tocar otra vez para continuar
+G:	Graba el juego (en la pantalla inicial, esta la opcion de cargar partidas)
+
+
+- ACLARACION: no hacer click sobre la pantalla del juego (ya que las teclas no tendran efecto)
