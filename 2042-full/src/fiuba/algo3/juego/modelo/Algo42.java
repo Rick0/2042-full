@@ -21,11 +21,11 @@ public class Algo42 extends Nave implements Serializable {
 	static int cantidadAMover = 5;
 	int torpedos;
 	int cohetes;
-	static int velocidadDisparoCohete = 10;
+	static final int velocidadDisparoCohete = 10;
 	int velocidadDisparoCoheteCont;
-	static int velocidadDisparoTorpedo = 15;
+	static final int velocidadDisparoTorpedo = 15;
 	int velocidadDisparoTorpedoCont;
-	static int energiaMaxima = 100;
+	static final int energiaMaxima = 100;
 	boolean puedeDisparar;
 
 
