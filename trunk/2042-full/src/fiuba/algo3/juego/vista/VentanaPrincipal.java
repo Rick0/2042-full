@@ -9,7 +9,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import fiuba.algo3.juego.controlador.ControladorJuegoAlgo42full;
-import fiuba.algo3.juego.controlador.KeyListenerAlgo42;
+import fiuba.algo3.juego.controlador.KeyListenerAlgo42Armas;
+import fiuba.algo3.juego.controlador.KeyListenerAlgo42MovHorizontal;
+import fiuba.algo3.juego.controlador.KeyListenerAlgo42MovVertical;
 import fiuba.algo3.juego.controlador.KeyListenerOpciones;
 import fiuba.algo3.juego.modelo.Algo42;
 import fiuba.algo3.titiritero.SuperficieDeDibujo;
@@ -35,7 +37,9 @@ public class VentanaPrincipal extends Frame {
 		this.setBackground(Color.black);
 		panel.setBackground(Color.black);
 
-		this.addKeyListener(new KeyListenerAlgo42(algo));
+		this.addKeyListener(new KeyListenerAlgo42MovVertical(algo));
+		this.addKeyListener(new KeyListenerAlgo42MovHorizontal(algo));
+		this.addKeyListener(new KeyListenerAlgo42Armas(algo));
 		this.addKeyListener(new KeyListenerOpciones(controladorJuego));
 		
 		addWindowListener(new WindowAdapter() {

@@ -19,7 +19,6 @@ import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaSigma;
 import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaTheta;
 import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaUpsilon;
 import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaXi;
-import fiuba.algo3.juego.modelo.tiposDeFlota.GenerarFlotaZeta;
 import fiuba.algo3.titiritero.ObjetoVivo;
 
 
@@ -29,7 +28,7 @@ public class GeneradorFlota implements ObjetoVivo {
 
 	Plano plano;
 	int cantidadNaves;
-	static int velocidadSpawnear = 222;
+	final int velocidadSpawnear = 200;
 	int velocidadSpawnearCont;
 	int posEnY;
 	boolean necesitoNaveGuia;
@@ -139,7 +138,6 @@ public class GeneradorFlota implements ObjetoVivo {
 			GenerarFlota generarFlotaChi = new GenerarFlotaChi(this.posEnY, this.plano);
 			GenerarFlota generarFlotaPhi = new GenerarFlotaPhi(this.posEnY, this.plano);
 
-			GenerarFlota generarFlotaZeta = new GenerarFlotaZeta(this.posEnY, this.plano);
 			GenerarFlota generarFlotaSigma = new GenerarFlotaSigma(this.posEnY, this.plano);
 
 
@@ -183,8 +181,6 @@ public class GeneradorFlota implements ObjetoVivo {
 			tablaGeneradorFlotas.put(i, generarFlotaChi);	i++;
 			tablaGeneradorFlotas.put(i, generarFlotaPhi);	i++;
 			tablaGeneradorFlotas.put(i, generarFlotaPhi);	i++;
-
-			tablaGeneradorFlotas.put(i, generarFlotaZeta);	i++;
 
 			tablaGeneradorFlotas.put(i, generarFlotaDelta);	i++;
 			tablaGeneradorFlotas.put(i, generarFlotaDelta);	i++;
