@@ -318,6 +318,7 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 		try {
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream( archivo ));
 			oos.writeObject(this);
+			oos.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -329,6 +330,7 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 		try {
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo));
 			ControladorJuegoAlgo42full controladorAux = (ControladorJuegoAlgo42full) ois.readObject();
+			ois.close();
 			return controladorAux;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

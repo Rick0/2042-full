@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Random;
 import fiuba.algo3.juego.modelo.excepciones.AreaInvalidaError;
 import fiuba.algo3.juego.modelo.excepciones.ArmaNoDisponibleError;
 import fiuba.algo3.juego.modelo.excepciones.NaveARastrearError;
@@ -21,27 +23,33 @@ public class Algo42 extends Nave implements Serializable {
 	static int cantidadAMover = 5;
 	int torpedos;
 	int cohetes;
+	int torpedosV2;
 	static final int velocidadDisparoCohete = 10;
 	int velocidadDisparoCoheteCont;
 	static final int velocidadDisparoTorpedo = 15;
 	int velocidadDisparoTorpedoCont;
-	static final int energiaMaxima = 100;
+	static final int velocidadDisparoTorpedoV2 = 15;
+	int velocidadDisparoTorpedoV2Cont;
+	static final int energiaMaxima = 123;
+	static final int energiaInicial = 100;
 	boolean puedeDisparar;
 
 
 	/* Crea una nueva instancia de algo42, con ubicacion(determinada por un punto),
 	 * en el plano de juego que recibe por parametro
 	 */
-	public Algo42(Punto punto,Plano planoJuego) throws AreaInvalidaError {
+	public Algo42(Punto punto, Plano planoJuego) throws AreaInvalidaError {
 
 		velocidadDisparo = 10;
 		velocidadDisparoCont = velocidadDisparo;
 		velocidadDisparoCoheteCont = velocidadDisparoCohete;
 		velocidadDisparoTorpedoCont = velocidadDisparoTorpedo;
+		velocidadDisparoTorpedoV2Cont = velocidadDisparoTorpedoV2;
 		plano = planoJuego;
-		energia = energiaMaxima;
+		energia = energiaInicial;
 		torpedos = 0;
 		cohetes = 0;
+		torpedosV2 = 299;
 		estaDestruida = false;
 		esOperable = true;
 		puedeDisparar = true;
@@ -61,10 +69,12 @@ public class Algo42 extends Nave implements Serializable {
 		velocidadDisparoCont = velocidadDisparo;
 		velocidadDisparoCoheteCont = velocidadDisparoCohete;
 		velocidadDisparoTorpedoCont = velocidadDisparoTorpedo;
+		velocidadDisparoTorpedoV2Cont = velocidadDisparoTorpedoV2;
 		plano = null;
-		energia = energiaMaxima;
+		energia = energiaInicial;
 		torpedos = 0;
 		cohetes = 0;
+		torpedosV2 = 299;
 		estaDestruida = false;
 		esOperable = true;
 		puedeDisparar = true;
@@ -84,7 +94,7 @@ public class Algo42 extends Nave implements Serializable {
 		}
 	}
 
-	/* Dispara un cohete en la posicion del algo42 */
+	/* Crea una instancia de cohete en la posicion del algo42 */
 	public void dispararCohete() throws ArmaNoDisponibleError {
 
 		if ((velocidadDisparoCoheteCont == velocidadDisparoCohete) && puedeDisparar) {
@@ -110,7 +120,7 @@ public class Algo42 extends Nave implements Serializable {
 		if ((velocidadDisparoTorpedoCont == velocidadDisparoTorpedo) && puedeDisparar) {
 
 			if (unaNave == this) { 
-				throw new NaveARastrearError("La nave rastreada no puede ser la misma algo");
+				throw new NaveARastrearError("La nave rastreada no puede ser la misma algo42");
 			}
 			if (torpedos <= 0) {
 				throw new ArmaNoDisponibleError("No hay torpedos que lanzar.");
@@ -126,7 +136,48 @@ public class Algo42 extends Nave implements Serializable {
 		}
 	}
 
-	/* Aumenta las cantidades de torpedos y cohetes recibidos por parametro */
+	/* Crea una instancia de torpedoRastreadorV2; recibe una nave por parametro,
+	 * esa nave sera el objetivo del torpedo
+	 */
+	public void dispararTorpedoRastreadorV2() throws ArmaNoDisponibleError {
+
+		if ((velocidadDisparoTorpedoV2Cont == velocidadDisparoTorpedoV2) && puedeDisparar) {
+
+			if (torpedosV2 <= 0) {
+				throw new ArmaNoDisponibleError("No hay torpedosV2 que lanzar.");
+			}
+			
+			Random generadorRandom = new Random();
+			int ancho = rectangulo.devolverAncho();
+			int altura = rectangulo.devolverAltura();
+			int cantNaves = this.plano.devolverCantidadNaves();
+			int cantTorpedosDisp = generadorRandom.nextInt(5) + 3;
+			int i = 0;
+			ArrayList<NaveNoOperable> listaNaves = this.devolverPlano().devolverListaNaves();
+			
+			while (i < cantTorpedosDisp  &&  torpedosV2 > 0) {
+				int x = generadorRandom.nextInt(ancho);
+				int y = generadorRandom.nextInt(altura);
+				
+				int k;
+				if (cantNaves == 1)
+					k = 0;
+				else
+					k = generadorRandom.nextInt(cantNaves);
+				
+				Nave unaNave = listaNaves.get(k);
+				Punto posTorpedo = new Punto(this.devolverPunto().getX() + x, this.devolverPunto().getY() + y);
+				TorpedoRastreadorV2 unTorpedoV2 = new TorpedoRastreadorV2(posTorpedo, true, this.plano);
+				unTorpedoV2.determinarNaveRastreada(unaNave);
+				torpedosV2 = (torpedosV2 - 1);
+				i++;
+			}
+			
+			velocidadDisparoTorpedoV2Cont = 0;
+		}
+	}
+
+	/* Aumenta las cantidades de las armas recibidas por parametro */
 	public void aumentarArmas(int cantidadTorpedos, int cantidadCohetes) {
 		this.torpedos = (this.torpedos + cantidadTorpedos);
 		this.cohetes = (this.cohetes + cantidadCohetes);
@@ -140,9 +191,11 @@ public class Algo42 extends Nave implements Serializable {
 		velocidadDisparoCont = velocidadDisparo;
 		velocidadDisparoCoheteCont = velocidadDisparoCohete;
 		velocidadDisparoTorpedoCont = velocidadDisparoTorpedo;
-		energia = 100;
+		velocidadDisparoTorpedoV2Cont = velocidadDisparoTorpedoV2;
+		energia = energiaInicial;
 		torpedos = 0;
 		cohetes = 0;
+		torpedosV2 = 299;
 		estaDestruida = false;
 
 		Punto posInicial = new Punto((((this.plano.devolverAncho())/2) - (this.devolverAncho()/2)), (this.plano.devolverAltura()/6));
@@ -233,6 +286,14 @@ public class Algo42 extends Nave implements Serializable {
 		torpedos = cantidad;
 	}
 
+	public int getTorpedosV2() {		
+		return torpedosV2;
+	}
+
+	public void setToperdosV2(int cantidad) {
+		torpedosV2 = cantidad;
+	}
+
 	public int devolverCantidadAMover() {
 		return cantidadAMover;
 	}
@@ -248,6 +309,7 @@ public class Algo42 extends Nave implements Serializable {
 			ObjectOutputStream oos = new ObjectOutputStream(
 			new FileOutputStream( "algo42.dat" ));
 			oos.writeObject(this);
+			oos.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -259,6 +321,7 @@ public class Algo42 extends Nave implements Serializable {
 		try {
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("algo42.dat"));
 			Algo42 algo = (Algo42) ois.readObject();
+			ois.close();
 			return algo;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -284,6 +347,9 @@ public class Algo42 extends Nave implements Serializable {
 		}
 		if (velocidadDisparoTorpedoCont < velocidadDisparoTorpedo) {
 			velocidadDisparoTorpedoCont++;
+		}
+		if (velocidadDisparoTorpedoV2Cont < velocidadDisparoTorpedoV2) {
+			velocidadDisparoTorpedoV2Cont++;
 		}
 	}
 

@@ -3,37 +3,37 @@ package fiuba.algo3.titiritero.audio;
 import java.util.concurrent.ArrayBlockingQueue;
 
 public class Reproductor implements Runnable {
-
+	
 	private ArrayBlockingQueue<Elemento> cola;
 	private boolean encendido;
 	private Piano piano = null;
 	
-	public Reproductor(){
+	public Reproductor() {
 		 this.cola = new ArrayBlockingQueue<Elemento>(30);
 		 this.encendido = false;
 		 this.piano = new Piano();
 	}
+	
 	@Override
 	public void run() {
-			while (encendido){
-				System.out.println(this.cola.size());
-				Elemento elemento = this.cola.poll();
-				if(elemento != null){
-					System.out.print("ping");
-					piano.reproducir(elemento.getNota(), elemento.getDuracion());
-				}
-				else{
-					try {
-						System.out.print("silencio");
-						Thread.sleep(500);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+		while (encendido){
+			System.out.println(this.cola.size());
+			Elemento elemento = this.cola.poll();
+			if(elemento != null){
+				System.out.print("ping");
+				piano.reproducir(elemento.getNota(), elemento.getDuracion());
+			}
+			else{
+				try {
+					System.out.print("silencio");
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
+		}
 	}
-	
 	
 	public void encender(){
 		this.encendido = true;
@@ -48,6 +48,7 @@ public class Reproductor implements Runnable {
 			e.printStackTrace();
 		}
 	}
+	
 	public void apagar() {
 		this.encendido = false;
 	}

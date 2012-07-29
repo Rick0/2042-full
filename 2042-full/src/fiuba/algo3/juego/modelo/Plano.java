@@ -193,6 +193,10 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 		return this.listaObjetosABorrar;
 	}
 
+	public int devolverCantidadNaves() {
+		return this.listaNaves.size();
+	}
+	
 	public boolean hayNavesEnemigas() {
 
 		if (listaNaves.size() > 0) {
@@ -232,6 +236,7 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 			ObjectOutputStream oos = new ObjectOutputStream(
 			new FileOutputStream( archivo ));
 			oos.writeObject(this);
+			oos.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -245,6 +250,7 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo));
 			Plano planoAux = (Plano) ois.readObject();
 			planoAux.listaObjetosAAgregar.clear();
+			ois.close();
 			return planoAux;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
