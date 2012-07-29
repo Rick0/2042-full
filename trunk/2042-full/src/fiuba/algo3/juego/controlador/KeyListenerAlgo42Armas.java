@@ -6,6 +6,7 @@ import java.util.HashMap;
 import fiuba.algo3.juego.controlador.operacionesAlgo.BotonCControlable;
 import fiuba.algo3.juego.controlador.operacionesAlgo.BotonXControlable;
 import fiuba.algo3.juego.controlador.operacionesAlgo.BotonZControlable;
+import fiuba.algo3.juego.controlador.operacionesAlgo.BotonSControlable;
 import fiuba.algo3.juego.controlador.operacionesAlgo.Controlable;
 import fiuba.algo3.juego.modelo.Algo42;
 
@@ -47,10 +48,12 @@ public class KeyListenerAlgo42Armas implements KeyListener {
 		Controlable botonCControlable = new BotonCControlable(algo);
 		Controlable botonXControlable = new BotonXControlable(algo);
 		Controlable botonZControlable = new BotonZControlable(algo);
+		Controlable botonSControlable = new BotonSControlable(algo);
 		
 		diccionario.put(KeyEvent.VK_C, botonCControlable);
 		diccionario.put(KeyEvent.VK_X, botonXControlable);
 		diccionario.put(KeyEvent.VK_Z, botonZControlable);
+		diccionario.put(KeyEvent.VK_S, botonSControlable);
 
 		return diccionario;
 	}
