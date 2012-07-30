@@ -14,7 +14,7 @@ public class JPanelConFondo extends JPanel {
 
 
 	public JPanelConFondo(String direccion){
-		ubicacionImagen=direccion;
+		ubicacionImagen = direccion;
 	}
 
     @Override

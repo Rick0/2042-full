@@ -174,61 +174,7 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 			fail("Se auto ataca, esto no puede pasar");
 		} catch (AlgoSeAtacaASiMismoError error) {}
 	}
-	
-	@Test
-	/* Prueba el uso tanto de los torpedos simples como de los tanques de energia,
-	 * con una instancia de caza y una nave algo 42 */
-	public void testInteraccionAlgoYCazaItemsYArmas() throws AreaInvalidaError, SuperposicionNavesError, NaveDestruidaError {
 
-		Plano plano = new Plano( 1000 , 1000 );
-		Punto puntoAlgo= new Punto(50,5);
-		Punto puntoCaza= new Punto(50,80);
-		Algo42 algo = new Algo42( puntoAlgo , plano );
-		Caza caza = new Caza( puntoCaza , plano );
-		Item item = null;
-		
-		caza.dispararTorpedo();
-		Arma torpedo = plano.devolverListaArmas().get(0);
-		algo.modificarVelocidadDisparoCont(algo.devolverVelocidadDisparo());
-		algo.dispararLaser();
-		Arma laser = plano.devolverListaArmas().get(1);
-
-		while ( algo.devolverEnergia() == 100 ) {
-			try {
-				torpedo.intentarChocar(algo);
-			} catch (AtaqueEntreNavesNoOperables error) {
-				//NO puede pasar, hay una sola nave no operable!
-			} catch (AlgoSeAtacaASiMismoError error) {
-				//Los objetos son distintos
-			}
-			torpedo.mover();
-		}
-		assertEquals( algo.devolverEnergia() , 80 );
-
-		while ( !caza.estadoActualDestruida() ) {
-			laser.mover();
-			try {
-				laser.intentarChocar(caza);
-			} catch (AtaqueEntreNavesNoOperables error) {
-				//NO puede pasar, hay una sola nave no operable!
-			} catch (AlgoSeAtacaASiMismoError error) {
-				//Los objetos son distintos
-			}
-		}
-
-		try {
-			item = caza.dejarTanque();
-		} catch (ItemNoDisponibleError error) {
-			//Esto sucede si el caza no ha muerto, pero yo me aseguro de que si lo hizo
-		}
-	
-		//Muevo la nave hacia arriba 76 veces para alcanzar el tanque
-		for ( int i = 1 ; i < 30 ; i++ ) { 
-			algo.moverArriba();
-			item.intentarChocar( algo );
-		}
-		assertEquals( algo.devolverEnergia() , 100 );
-	}
 
 	@Test
 	/* Prueba interacciones entre naves no operables y las armas que ellas mismas lanzan.

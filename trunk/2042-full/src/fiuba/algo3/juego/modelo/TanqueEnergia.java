@@ -1,6 +1,7 @@
 package fiuba.algo3.juego.modelo;
 
 import java.io.Serializable;
+import java.util.Random;
 import fiuba.algo3.juego.modelo.excepciones.ItemUsadoError;
 
 
@@ -12,7 +13,8 @@ public class TanqueEnergia extends Item implements Serializable{
 
 	public TanqueEnergia(Punto punto, Plano unPlano) {
 		fueUsado = false;
-		aumentoEnergia = 40;
+		Random generadorRandom = new Random();
+		aumentoEnergia = generadorRandom.nextInt(11) + 25;
 		rectangulo = new Rectangulo(40, 40, punto);
 		plano = unPlano;
 		try {
