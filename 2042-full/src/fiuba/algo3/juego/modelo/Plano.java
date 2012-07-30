@@ -205,7 +205,6 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 		return false;
 	}
 
-	/*Devuelve el nivel actual*/
 	public int devolverNumeroDeNivel() {
 		return (nivel.devolverNumeroNivel());
 	}
@@ -271,26 +270,28 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 		Iterator<Item> iteradorItemsUsados = listaItemsUsados.iterator();
 		Iterator<NaveNoOperable> iteradorNavesDestruidas = listaNavesDestruidas.iterator();
 
-		while(iteradorItemsUsados.hasNext()) {
+		while (iteradorItemsUsados.hasNext()) {
 			Item elemento = iteradorItemsUsados.next(); 
 			listaItems.remove(elemento);
 			listaObjetosABorrar.add(elemento);
 		}
-		while(iteradorNavesDestruidas.hasNext()) {
+		while (iteradorNavesDestruidas.hasNext()) {
 			NaveNoOperable elemento = iteradorNavesDestruidas.next(); 
 			listaNaves.remove(elemento);
 			listaObjetosABorrar.add(elemento);
 		}
-		while(iteradorArmasUsadas.hasNext()) {
+		while (iteradorArmasUsadas.hasNext()) {
 			Arma elemento = iteradorArmasUsadas.next(); 
 			listaArmas.remove(elemento);
 			listaObjetosABorrar.add(elemento);
 		}
 
-		nivel.actuarCon(listaNavesDestruidas);
-		if ((nivel.devolverNumeroNivel() >= 15) && (!juegoPerdido)) {
+		this.nivel.actuarCon(listaNavesDestruidas);
+		if ((nivel.devolverNumeroNivel() >= 15) && (!juegoPerdido))
 			juegoGanado = true;
-		}
+		
+		if (this.nivel.devolverPuntosActuales() > 200  &&  this.algo42.superMode == 0)
+			this.algo42.entrarASuperMode();
 
 		listaArmasUsadas.clear();
 		listaItemsUsados.clear();
@@ -307,17 +308,17 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 		Iterator<Arma> iteradorArmas = listaArmas.iterator();
 		Iterator<NaveNoOperable> iteradorNaveEnemiga = listaNaves.iterator();
 
-		while(iteradorItem.hasNext()) {
+		while (iteradorItem.hasNext()) {
 		    Item elemento = iteradorItem.next(); 
 		    elemento.vivir();
 		}
 
-		while(iteradorArmas.hasNext()) {
+		while (iteradorArmas.hasNext()) {
 		    Arma elemento = iteradorArmas.next(); 
 		    elemento.vivir();
 		}
 
-		while(iteradorNaveEnemiga.hasNext()) {
+		while (iteradorNaveEnemiga.hasNext()) {
 		    NaveNoOperable elemento = iteradorNaveEnemiga.next(); 
 		    elemento.vivir();
 		}

@@ -59,7 +59,7 @@ public class Nivel implements Serializable{
 			puntosNivelActual = 0;
 			numeroNivel++;
 		}
-		else if (puntosNivelActual <= -1000) {
+		else if (puntosNivelActual < -1000) {
 			puntosNivelActual = 0;
 			numeroNivel--;
 		}
