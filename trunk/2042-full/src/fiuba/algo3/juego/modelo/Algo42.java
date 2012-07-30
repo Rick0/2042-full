@@ -20,7 +20,8 @@ import fiuba.algo3.juego.modelo.excepciones.NaveARastrearError;
 public class Algo42 extends Nave implements Serializable {
 
 	private static final long serialVersionUID = -3316879072392921990L;
-	static int cantidadAMover = 5;
+	static int cantAMover = 5;
+	static int cantAMoverSuperMode = 7;
 	int torpedos;
 	int cohetes;
 	int torpedosV2;
@@ -28,12 +29,16 @@ public class Algo42 extends Nave implements Serializable {
 	int velocidadDisparoCoheteCont;
 	static final int velocidadDisparoTorpedo = 15;
 	int velocidadDisparoTorpedoCont;
-	static final int velocidadDisparoTorpedoV2 = 15;
+	static final int velocidadDisparoTorpedoV2 = 20;
 	int velocidadDisparoTorpedoV2Cont;
 	static final int energiaMaxima = 123;
 	static final int energiaInicial = 100;
 	boolean puedeDisparar;
-
+	int superMode;	// 0 es false, 1 es true
+	static int tiempoSuperMode = 500;
+	int tiempoSuperModeCont;
+	static int afterImageDelay = 8;
+	int afterImageDelayCont;
 
 	/* Crea una nueva instancia de algo42, con ubicacion(determinada por un punto),
 	 * en el plano de juego que recibe por parametro
@@ -53,6 +58,8 @@ public class Algo42 extends Nave implements Serializable {
 		estaDestruida = false;
 		esOperable = true;
 		puedeDisparar = true;
+		superMode = 0;
+		tiempoSuperModeCont = tiempoSuperMode;
 
 		if ( ( (punto.getX()<(planoJuego.ancho)) & (punto.getY()<(planoJuego.altura)) )  & ((punto.getY()>=0) & (punto.getX()>=0) ) ) {
 			planoJuego.introducirAlgo42(this);
@@ -78,6 +85,8 @@ public class Algo42 extends Nave implements Serializable {
 		estaDestruida = false;
 		esOperable = true;
 		puedeDisparar = true;
+		superMode = 0;
+		tiempoSuperModeCont = tiempoSuperMode;
 		rectangulo = null;
 	}
 
@@ -197,6 +206,8 @@ public class Algo42 extends Nave implements Serializable {
 		cohetes = 0;
 		torpedosV2 = 299;
 		estaDestruida = false;
+		superMode = 0;
+		tiempoSuperModeCont = tiempoSuperMode;
 
 		Punto posInicial = new Punto((((this.plano.devolverAncho())/2) - (this.devolverAncho()/2)), (this.plano.devolverAltura()/6));
 		rectangulo.cambiarPosicion(posInicial);
@@ -213,7 +224,7 @@ public class Algo42 extends Nave implements Serializable {
 		}
 
 		if (energia <= 0) {
-
+		
 			this.estaDestruida = true;
 			new NaveExplosion(this.devolverPunto(), this.plano);
 
@@ -224,37 +235,37 @@ public class Algo42 extends Nave implements Serializable {
 
 	/* La nave Algo42 se mueve un lugar hacia abajo */
 	public void moverAbajo () throws AreaInvalidaError {	
-		if((this.devolverPunto().getY())<=0){
+		if ((this.devolverPunto().getY()) <= 0){
 			throw new AreaInvalidaError("La nave ya no puede moverse mas hacia abajo");
 		}
-		Punto nuevoPunto= new Punto(this.devolverPunto().getX(), (this.devolverPunto().getY() - cantidadAMover));
+		Punto nuevoPunto = new Punto(this.devolverPunto().getX(), (this.devolverPunto().getY() - this.cantAMoverse() ));
 		this.cambiarPosicion(nuevoPunto);
 	}
 
 	/* La nave Algo42 se mueve un lugar hacia arriba */
 	public void moverArriba () throws AreaInvalidaError {	
-		if((this.devolverPunto().getY() + (rectangulo.devolverAltura()))>plano.devolverAltura()){
+		if ((this.devolverPunto().getY() + (rectangulo.devolverAltura())) > plano.devolverAltura()){
 			throw new AreaInvalidaError("La nave ya no puede moverse mas hacia arriba");
 		}
-		Punto nuevaPosicion=new Punto(this.devolverPunto().getX(), (this.devolverPunto().getY() + cantidadAMover));
+		Punto nuevaPosicion = new Punto(this.devolverPunto().getX(), (this.devolverPunto().getY() + this.cantAMoverse() ));
 		this.cambiarPosicion(nuevaPosicion);
 	}
 
 	/* La nave Algo42 se mueve un lugar hacia la derecha */
 	public void moverDerecha () throws AreaInvalidaError {
-		if((this.devolverPunto().getX() + (rectangulo.devolverAncho()))>plano.devolverAncho()){
+		if ((this.devolverPunto().getX() + (rectangulo.devolverAncho())) > plano.devolverAncho()){
 			throw new AreaInvalidaError("La nave ya no puede moverse mas hacia la derecha");
 		}
-		Punto nuevaPosicion=new Punto((this.devolverPunto().getX()) + cantidadAMover, (this.devolverPunto().getY()));
+		Punto nuevaPosicion = new Punto((this.devolverPunto().getX()) + this.cantAMoverse(), (this.devolverPunto().getY()));
 		this.cambiarPosicion(nuevaPosicion);
 	}
 
 	/* La nave Algo42 se mueve un lugar hacia la izquierda */
 	public void moverIzquierda () throws AreaInvalidaError {
-		if((this.devolverPunto().getX())<=0){
+		if ((this.devolverPunto().getX()) <= 0){
 			throw new AreaInvalidaError("La nave ya no puede moverse mas hacia la izquierda");
 		}
-		Punto nuevaPosicion=new Punto((this.devolverPunto().getX()) - cantidadAMover,(this.devolverPunto().getY()));
+		Punto nuevaPosicion = new Punto((this.devolverPunto().getX()) - this.cantAMoverse(), (this.devolverPunto().getY()));
 		this.cambiarPosicion(nuevaPosicion);
 	}
 
@@ -295,7 +306,7 @@ public class Algo42 extends Nave implements Serializable {
 	}
 
 	public int devolverCantidadAMover() {
-		return cantidadAMover;
+		return cantAMover;
 	}
 
 	@Override
@@ -351,10 +362,45 @@ public class Algo42 extends Nave implements Serializable {
 		if (velocidadDisparoTorpedoV2Cont < velocidadDisparoTorpedoV2) {
 			velocidadDisparoTorpedoV2Cont++;
 		}
+		
+		if (this.superMode == 1) {
+			
+			if (this.energia < Algo42.energiaMaxima)
+				this.autoRecuperarse();
+			if (this.tiempoSuperModeCont > 0)
+				this.tiempoSuperModeCont--;
+			if (this.tiempoSuperModeCont <= 0)
+				this.salirDeSuperMode();
+			if (afterImageDelayCont >= afterImageDelay) {
+				new Algo42afterImage(this.devolverPunto(), this.plano);
+				afterImageDelayCont = 0;
+			}
+			else
+				afterImageDelayCont++;
+		}
+	
 	}
 
 	public void estadoPuedeDisparar(boolean estado) {
 		this.puedeDisparar = estado;
 	}
+	
+	public void autoRecuperarse() {
+		this.energia = this.energia + 1;
+	}
 
+	private int cantAMoverse() {
+		return (cantAMover + cantAMoverSuperMode * superMode);
+	}
+	
+	public void entrarASuperMode() {
+		this.superMode = 1;
+		this.afterImageDelayCont = afterImageDelay;
+	}
+	
+	private void salirDeSuperMode() {
+		this.superMode = 0;
+		this.tiempoSuperModeCont = tiempoSuperMode;
+	}
+	
 }

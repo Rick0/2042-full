@@ -161,7 +161,6 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 	private void actualizarPlano() {
 
 		Plano planoDelJuego = this.plano;
-
 		planoDelJuego.getAlgo42().estadoPuedeDisparar(false);
 
 		Iterator<ObjetoUbicable> iteradorObjetosAAgregar = planoDelJuego.devolverListaObjetosAAgregar().iterator();
@@ -170,7 +169,7 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 			Imagen unaVista = this.asignarVista(unObjeto);
 			this.tablaDeVistas.put(unObjeto,unaVista);
 
-			if (unaVista.getClass().toString().equals("class fiuba.algo3.juego.vista.VistaNaveExplosion")) {
+			if (unaVista.getClass().toString().equals("class fiuba.algo3.juego.vista.VistaNaveExplosion") || unaVista.getClass().toString().equals("class fiuba.algo3.juego.vista.VistaAlgo42afterImage")) {
 				this.agregarObjetoVivo((ObjetoVivo)unaVista);
 			}
 
@@ -187,7 +186,7 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 			Imagen unaVista = this.tablaDeVistas.get(unObjeto);
 
 			if (unaVista != null) {
-				if (unaVista.getClass().toString().equals("class fiuba.algo3.juego.vista.VistaNaveExplosion")) {
+				if (unaVista.getClass().toString().equals("class fiuba.algo3.juego.vista.VistaNaveExplosion") || unaVista.getClass().toString().equals("class fiuba.algo3.juego.vista.VistaAlgo42afterImage")) {
 					this.removerObjetoVivo((ObjetoVivo)unaVista);
 				}
 			}
