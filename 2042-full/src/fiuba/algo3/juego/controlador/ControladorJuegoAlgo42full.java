@@ -43,7 +43,7 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 		this.mouseClickObservadores = new ArrayList<MouseClickObservador>();
 		this.keyPressedObservadores = new ArrayList<KeyPressedObservador>();
 		this.estaReproductorActivo = activarReproductor;
-		if(this.estaReproductorActivo)
+		if (this.estaReproductorActivo)
 			this.reproductor = new Reproductor();
 		this.tablaDeVistas = new HashMap<ObjetoUbicable,Imagen>();
 		this.generadorDeVista = new GeneradorDeVista();

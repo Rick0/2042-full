@@ -31,7 +31,7 @@ public class Algo42 extends Nave implements Serializable {
 	int velocidadDisparoTorpedoCont;
 	static final int velocidadDisparoTorpedoV2 = 20;
 	int velocidadDisparoTorpedoV2Cont;
-	static final int energiaMaxima = 123;
+	public static final int energiaMaxima = 123;
 	static final int energiaInicial = 100;
 	boolean puedeDisparar;
 	int superMode;	// 0 es false, 1 es true
@@ -401,6 +401,14 @@ public class Algo42 extends Nave implements Serializable {
 	private void salirDeSuperMode() {
 		this.superMode = 0;
 		this.tiempoSuperModeCont = tiempoSuperMode;
+	}
+	
+	public int estadoSuperMode() {
+		return this.superMode;
+	}
+	
+	public int tiempoSuperModeRestante() {
+		return this.tiempoSuperModeCont;
 	}
 	
 }

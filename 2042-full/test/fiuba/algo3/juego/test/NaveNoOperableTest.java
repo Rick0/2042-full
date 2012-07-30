@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import fiuba.algo3.juego.modelo.Algo42;
 import fiuba.algo3.juego.modelo.Avioneta;
-import fiuba.algo3.juego.modelo.Bombardero;
+//import fiuba.algo3.juego.modelo.Bombardero;
 import fiuba.algo3.juego.modelo.Civil;
 import fiuba.algo3.juego.modelo.Helicoptero;
 import fiuba.algo3.juego.modelo.Plano;
@@ -60,46 +60,7 @@ public class NaveNoOperableTest extends TestCase {
 		assertEquals(avioneta.fueraDelPlano(),true);
 		assertEquals(avioneta.estaFueraDelPlano() ,true);
 	}
-	
-	@Test
-	/* Voy a probar el uso de la funcion Intentar mover con un bombardero */
-	public void testIntentarMoverBombardero() throws SuperposicionNavesError, NaveDestruidaError{
 
-		Plano plano=new Plano (1000 , 1000);
-		Punto punto= new Punto(80 , 92);
-		Bombardero bombardero1 = new Bombardero( punto, plano);
-		for (int i=0; i<20; i++) { 
-			bombardero1.intentarMover();
-		}
-		assertEquals(bombardero1.devolverPunto().getX(),90.0);
-		assertEquals(bombardero1.devolverPunto().getY(),82.0);
-
-		/* ahora deberia empezar a moverse a la izquierda */
-		bombardero1.intentarMover();
-		assertEquals(bombardero1.devolverPunto().getX(),89.5);
-		assertEquals(bombardero1.devolverPunto().getY(),81.5);
-
-		/* Creo otro bombardero para que este por chocarse con el. 
-		 * Tener en cuenta dimensiones del bombardero = 44x60 */
-		Punto posicion = new Punto(24.0,81.5);
-		Bombardero bombardero2= new Bombardero(posicion, plano);
-		bombardero2.intentarMover();
-		bombardero1.intentarMover();
-		assertEquals(bombardero1.devolverPunto().getX(),89.0);
-		assertEquals(bombardero1.devolverPunto().getY(),81.0);
-
-		/*Ahora el bombardero 1 y dos estan pegados uno al otro. Voy a crear una avioneta al lado de bombardero 1
-		 * con lo cual este quedara totalmente bloqueado y no podra moverse */
-
-		/*Suprimi un warning, porque este metodo no necesita a la 
-		 * avioneta para nada, por eso el compilador indica warning */
-		Punto posAvioneta = new Punto( 154.3 , 81.5 );
-		@SuppressWarnings("unused")
-		Avioneta avioneta = new Avioneta( posAvioneta , plano);
-		bombardero1.intentarMover();
-		assertEquals(bombardero1.devolverPunto().getX(),88.5);	//No se movio
-		assertEquals(bombardero1.devolverPunto().getY(),80.5);	//No se movio
-	}
 	
 	@SuppressWarnings("unused")
 	@Test

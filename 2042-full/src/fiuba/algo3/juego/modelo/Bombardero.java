@@ -11,7 +11,7 @@ public class Bombardero extends NaveNoOperable implements Serializable {
 
 	private static final long serialVersionUID = -7505650596285382873L;
 	double haciaDer, haciaIzq;
-	static int cantidadMoverLateral = 10;
+	static int cantidadMoverLateral = 20;
 	static double cantidadPaso = 0.5;
 
 
@@ -107,14 +107,14 @@ public class Bombardero extends NaveNoOperable implements Serializable {
 
 		if ( haciaDer <= cantidadMoverLateral ) {
 			// Se estaba moviendo hacia la derecha. Lo envio a la izquierda
-			Punto nuevoPunto=new Punto(this.devolverPunto().getX() - cantidadPaso,this.devolverPunto().getY() - cantidadPaso);
+			Punto nuevoPunto = new Punto(this.devolverPunto().getX() - cantidadPaso,this.devolverPunto().getY() - cantidadPaso);
 			this.cambiarPosicion(nuevoPunto);
 			haciaDer = cantidadMoverLateral + cantidadPaso;
 			haciaIzq = cantidadPaso;
 		}
 		else {
 			// Se estaba moviendo hacia la izquierda. Lo envio a la derecha
-			Punto nuevoPunto=new Punto(this.devolverPunto().getX() + cantidadPaso,this.devolverPunto().getY() - cantidadPaso);
+			Punto nuevoPunto = new Punto(this.devolverPunto().getX() + cantidadPaso,this.devolverPunto().getY() - cantidadPaso);
 			this.cambiarPosicion(nuevoPunto);
 			haciaDer = cantidadPaso;
 			haciaIzq = cantidadMoverLateral + cantidadPaso;
