@@ -23,7 +23,7 @@ public abstract class Item extends ObjetoUbicable implements Serializable {
 
 		if (!fueUsado) {
 			this.pasaUnTiempo();
-			this.intentarChocar(plano.getAlgo42());
+			this.intentarChocar(plano.devolverAlgo42());
 		}
 	}
 

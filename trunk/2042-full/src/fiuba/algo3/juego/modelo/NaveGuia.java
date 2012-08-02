@@ -76,7 +76,7 @@ public class NaveGuia extends NaveNoOperable {
 		if (!estaDestruida) {
 
 			this.intentarMover();
-			this.intentarChocar(this.plano.getAlgo42());
+			this.intentarChocar(this.plano.devolverAlgo42());
 			this.pasaUnTiempo();
 			this.disparar();
 		}
@@ -94,7 +94,7 @@ public class NaveGuia extends NaveNoOperable {
 			if (i <= 2) {
 				this.dispararCohete();
 			} else if (i == 3) {
-				this.dispararTorpedoRastreadorHacia(this.plano.getAlgo42());
+				this.dispararTorpedoRastreador();
 			} else if (i <= 7) {
 				this.dispararTorpedo();
 			} else {

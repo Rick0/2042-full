@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import fiuba.algo3.juego.modelo.Algo42;
 import fiuba.algo3.juego.modelo.NaveNoOperable;
 import fiuba.algo3.juego.modelo.excepciones.ArmaNoDisponibleError;
-import fiuba.algo3.juego.modelo.excepciones.NaveARastrearError;
 
 
 public class BotonXControlable implements Controlable {
@@ -28,11 +27,9 @@ public class BotonXControlable implements Controlable {
 
 		if (listaNavesEnemigas.size() > 0) {
 			try {
-				algo.dispararTorpedoRastreadorHacia(listaNavesEnemigas.get(0));
+				algo.dispararTorpedoRastreador();
 			}
 			catch (ArmaNoDisponibleError e) {
-			}
-			catch (NaveARastrearError e) {
 			}
 		}
 	}

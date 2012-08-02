@@ -144,13 +144,12 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 		this.superficieDeDibujo.actualizar();
 	}
 	
-	/**
-	 * Ejecuta la simulacion recorriendo la coleccion de objetivos vivos.
+	/** Ejecuta la simulacion recorriendo la coleccion de objetivos vivos.
 	 */
 	private void simular() {
 		this.superficieDeDibujo.limpiar();
 		Iterator<ObjetoVivo> iterador = objetosVivos.iterator();
-		while(iterador.hasNext()){
+		while (iterador.hasNext()) {
 			iterador.next().vivir();
 		}
 	}
@@ -161,7 +160,7 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 	private void actualizarPlano() {
 
 		Plano planoDelJuego = this.plano;
-		planoDelJuego.getAlgo42().estadoPuedeDisparar(false);
+		planoDelJuego.devolverAlgo42().estadoPuedeDisparar(false);
 
 		Iterator<ObjetoUbicable> iteradorObjetosAAgregar = planoDelJuego.devolverListaObjetosAAgregar().iterator();
 		while (iteradorObjetosAAgregar.hasNext()) {
@@ -177,8 +176,6 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 			this.agregarObjetoVivo(unObjeto);
 		}
 		planoDelJuego.devolverListaObjetosAAgregar().clear();
-
-		planoDelJuego.getAlgo42().estadoPuedeDisparar(true);
 
 		Iterator<ObjetoUbicable> iteradorObjetosABorrar = planoDelJuego.devolverListaObjetosABorrar().iterator();
 		while (iteradorObjetosABorrar.hasNext()) {
@@ -196,6 +193,8 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 			this.tablaDeVistas.remove(unObjeto);
 		}
 		planoDelJuego.devolverListaObjetosABorrar().clear();
+		
+		planoDelJuego.devolverAlgo42().estadoPuedeDisparar(true);
 	}
 
 	/**Revisa si se ha ganado o perdido el juego.

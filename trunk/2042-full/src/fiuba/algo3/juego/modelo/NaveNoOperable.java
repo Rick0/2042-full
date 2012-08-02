@@ -45,11 +45,11 @@ public abstract class NaveNoOperable extends Nave {
 
 			if (tengoQueHuir) {
 				this.retirarse();
-				this.intentarChocar(this.plano.getAlgo42());
+				this.intentarChocar(this.plano.devolverAlgo42());
 			}
 			else {
 				this.intentarMover();
-				this.intentarChocar(this.plano.getAlgo42());
+				this.intentarChocar(this.plano.devolverAlgo42());
 				this.pasaUnTiempo();
 				this.disparar();
 			}
@@ -175,9 +175,8 @@ public abstract class NaveNoOperable extends Nave {
 	}
 
 	/* La nave dispara un torpedo rastreador */
-	public void dispararTorpedoRastreadorHacia(Algo42 unAlgo42) {
-		TorpedoRastreador unTorpedo = new TorpedoRastreador( this.devolverPuntoParaArma(), false, this.plano);
-		unTorpedo.determinarNaveRastreada(unAlgo42);
+	public void dispararTorpedoRastreador() {
+		new TorpedoRastreador( this.devolverPuntoParaArma(), false, this.plano);
 	}
 
 	/* Devuelve el punto en donde se va a crear el arma disparada */

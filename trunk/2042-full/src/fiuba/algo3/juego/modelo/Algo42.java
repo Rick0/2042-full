@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import fiuba.algo3.juego.modelo.excepciones.AreaInvalidaError;
 import fiuba.algo3.juego.modelo.excepciones.ArmaNoDisponibleError;
-import fiuba.algo3.juego.modelo.excepciones.NaveARastrearError;
+import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
 
 
 /* El Algo42 es la nave principal del juego
@@ -124,13 +124,10 @@ public class Algo42 extends Nave implements Serializable {
 	/* Crea una instancia de torpedoRastreador; recibe una nave por parametro,
 	 * esa nave sera el objetivo del torpedo
 	 */
-	public void dispararTorpedoRastreadorHacia(Nave unaNave) throws ArmaNoDisponibleError, NaveARastrearError {
+	public void dispararTorpedoRastreador() throws ArmaNoDisponibleError {
 
 		if ((velocidadDisparoTorpedoCont == velocidadDisparoTorpedo) && puedeDisparar) {
 
-			if (unaNave == this) { 
-				throw new NaveARastrearError("La nave rastreada no puede ser la misma algo42");
-			}
 			if (torpedos <= 0) {
 				throw new ArmaNoDisponibleError("No hay torpedos que lanzar.");
 			}
@@ -138,8 +135,7 @@ public class Algo42 extends Nave implements Serializable {
 			int ancho = rectangulo.devolverAncho();
 			int altura = rectangulo.devolverAltura();
 			Punto posTorpedo = new Punto(this.devolverPunto().getX()+(ancho/2)-9, this.devolverPunto().getY()+altura);
-			TorpedoRastreador unTorpedo = new TorpedoRastreador(posTorpedo, true, this.plano);
-			unTorpedo.determinarNaveRastreada(unaNave);
+			new TorpedoRastreador(posTorpedo, true, this.plano);
 			torpedos = (torpedos - 1);
 			velocidadDisparoTorpedoCont = 0;
 		}
@@ -372,7 +368,12 @@ public class Algo42 extends Nave implements Serializable {
 			if (this.tiempoSuperModeCont <= 0)
 				this.salirDeSuperMode();
 			if (afterImageDelayCont >= afterImageDelay) {
-				new Algo42afterImage(this.devolverPunto(), this.plano);
+				try {
+					new Algo42afterImage(this.devolverPunto(), this.plano);
+				} catch (NaveDestruidaError e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				afterImageDelayCont = 0;
 			}
 			else

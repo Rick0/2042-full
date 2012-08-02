@@ -13,7 +13,7 @@ public class Civil extends NaveNoOperable implements Serializable{
 	/* Inicializa una instancia de Civil */
 	public Civil(Punto punto, Plano plano) throws SuperposicionNavesError, NaveDestruidaError {
 
-		puntos = -150;
+		puntos = -(300/4);
 		energia = 30;
 		esOperable = false;
 		rectangulo = new Rectangulo(48, 48, punto);
@@ -34,7 +34,7 @@ public class Civil extends NaveNoOperable implements Serializable{
 		if (!estaDestruida) {
 
 			this.intentarMover();
-			this.intentarChocar(this.plano.getAlgo42());
+			this.intentarChocar(this.plano.devolverAlgo42());
 			this.pasaUnTiempo();
 			this.disparar();
 		}
@@ -43,7 +43,7 @@ public class Civil extends NaveNoOperable implements Serializable{
 	/* La nave civil se mueve hacia abajo */
 	public void mover() throws SuperposicionNavesError { 
 
-		Punto nuevoPunto= new Punto(this.devolverPunto().getX(),this.devolverPunto().getY()-1);
+		Punto nuevoPunto = new Punto(this.devolverPunto().getX(),this.devolverPunto().getY() - 1);
 		this.cambiarPosicion( nuevoPunto );
 		if ( this.seSuperponeConOtraNave() ) {
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
@@ -57,7 +57,7 @@ public class Civil extends NaveNoOperable implements Serializable{
 	 */
 	public void moverAlternativo() throws SuperposicionNavesError {
 
-		Punto nuevoPunto= new Punto(this.devolverPunto().getX(),this.devolverPunto().getY()+1);
+		Punto nuevoPunto= new Punto(this.devolverPunto().getX(),this.devolverPunto().getY() + 1);
 		this.cambiarPosicion( nuevoPunto );
 		if (this.seSuperponeConOtraNave() ) {
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");

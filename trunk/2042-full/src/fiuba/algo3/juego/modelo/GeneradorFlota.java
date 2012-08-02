@@ -28,7 +28,7 @@ public class GeneradorFlota implements ObjetoVivo {
 
 	Plano plano;
 	int cantidadNaves;
-	final int velocidadSpawnear = 10;
+	final int velocidadSpawnear = 200;
 	int velocidadSpawnearCont;
 	int posEnY;
 	boolean necesitoNaveGuia;
