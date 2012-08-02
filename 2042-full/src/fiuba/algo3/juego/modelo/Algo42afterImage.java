@@ -11,7 +11,7 @@ import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 public class Algo42afterImage extends NaveNoOperable implements Serializable {
 
 	private static final long serialVersionUID = -3109680188616011654L;
-	int tiempoDeVida = 121;
+	int tiempoDeVida = 41;
 
 
 	public Algo42afterImage(Punto punto, Plano unPlano) throws NaveDestruidaError {

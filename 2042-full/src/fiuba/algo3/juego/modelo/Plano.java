@@ -323,7 +323,7 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 			juegoGanado = true;
 		
 		/// ---
-		if (this.nivel.devolverPuntosActuales() > 100  &&  this.devolverAlgo42().superMode == 0)
+		if (this.nivel.devolverPuntosActuales() > 50  &&  this.devolverAlgo42().superMode == 0)
 			this.devolverAlgo42().entrarASuperMode();
 
 		listaArmasUsadas.clear();
