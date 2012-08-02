@@ -10,16 +10,20 @@ public class FlechaAbajoControlable implements Controlable {
 
 
 	public FlechaAbajoControlable(Algo42 algo42) {
-		algo=algo42;
+		algo = algo42;
 	}
 
 	@Override
 	public void activarEfecto() {
-		try {
-			algo.moverAbajo();
-		} catch (AreaInvalidaError e) {
-			System.out.print("Area invalida\n");
-			// Si hay error de area invalida, que no se mueva.
+	
+		this.algo.cambiarEfectoAutomaticoMover(1);
+		if (!this.algo.estadoModoAutomatico()) {
+			try {
+				algo.moverAbajo();
+			} catch (AreaInvalidaError e) {
+				System.out.print("Area invalida\n");
+				// Si hay error de area invalida, que no se mueva.
+			}
 		}
 	}
 

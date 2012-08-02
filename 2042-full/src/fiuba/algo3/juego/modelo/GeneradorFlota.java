@@ -64,7 +64,7 @@ public class GeneradorFlota implements ObjetoVivo {
 			this.velocidadSpawnearCont = 0;
 			this.necesitoNaveGuia = false;
 		}
-		else if ((cantidadNaves < 12) && (velocidadSpawnearCont == velocidadSpawnear) && tengoQueGenerar) {
+		else if ((cantidadNaves < 15) && (velocidadSpawnearCont == velocidadSpawnear) && tengoQueGenerar) {
 
 			Random generadorRandom = new Random();
 			int i = generadorRandom.nextInt(tablaGeneradorFlotas.size()-1);

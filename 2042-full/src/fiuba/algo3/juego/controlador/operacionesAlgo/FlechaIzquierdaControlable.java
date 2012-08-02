@@ -15,11 +15,15 @@ public class FlechaIzquierdaControlable implements Controlable {
 
 	@Override
 	public void activarEfecto() {
-		try {
-			algo.moverIzquierda();
-		} catch (AreaInvalidaError e) {
-			System.out.print("Area invalida\n");
-			// Si hay error de area invalida, que no se mueva.
+
+		this.algo.cambiarEfectoAutomaticoMover(4);
+		if (!this.algo.estadoModoAutomatico()) {
+			try {
+				algo.moverIzquierda();
+			} catch (AreaInvalidaError e) {
+				System.out.print("Area invalida\n");
+				// Si hay error de area invalida, que no se mueva.
+			}
 		}
 	}
 

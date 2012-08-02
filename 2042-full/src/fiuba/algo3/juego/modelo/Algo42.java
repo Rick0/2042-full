@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Random;
 import fiuba.algo3.juego.modelo.excepciones.AreaInvalidaError;
 import fiuba.algo3.juego.modelo.excepciones.ArmaNoDisponibleError;
@@ -21,31 +20,39 @@ public class Algo42 extends Nave implements Serializable {
 
 	private static final long serialVersionUID = -3316879072392921990L;
 	static int cantAMover = 5;
-	static int cantAMoverSuperMode = 7;
+	static int cantAMoverSuperMode = 6;
 	int torpedos;
 	int cohetes;
 	int torpedosV2;
-	static final int velocidadDisparoCohete = 10;
+	static final int velocidadDisparoCohete = 15;
 	int velocidadDisparoCoheteCont;
-	static final int velocidadDisparoTorpedo = 15;
+	static final int velocidadDisparoTorpedo = 20;
 	int velocidadDisparoTorpedoCont;
-	static final int velocidadDisparoTorpedoV2 = 20;
+	static final int velocidadDisparoTorpedoV2 = 25;
 	int velocidadDisparoTorpedoV2Cont;
+	static final int laserV2offSet = 18;
+	
 	public static final int energiaMaxima = 123;
 	static final int energiaInicial = 100;
 	boolean puedeDisparar;
 	int superMode;	// 0 es false, 1 es true
 	static int tiempoSuperMode = 500;
 	int tiempoSuperModeCont;
-	static int afterImageDelay = 8;
+	static int afterImageDelay = 6;
 	int afterImageDelayCont;
+	boolean modoAutomatico;
+	int efectoAutomaticoMover;
+	int efectoAutomaticoDisparar;
+	static final int automaticoMoverDelay = 0;
+	int automaticoMoverDelayCont;
+	
 
 	/* Crea una nueva instancia de algo42, con ubicacion(determinada por un punto),
 	 * en el plano de juego que recibe por parametro
 	 */
 	public Algo42(Punto punto, Plano planoJuego) throws AreaInvalidaError {
 
-		velocidadDisparo = 10;
+		velocidadDisparo = 12;
 		velocidadDisparoCont = velocidadDisparo;
 		velocidadDisparoCoheteCont = velocidadDisparoCohete;
 		velocidadDisparoTorpedoCont = velocidadDisparoTorpedo;
@@ -60,6 +67,10 @@ public class Algo42 extends Nave implements Serializable {
 		puedeDisparar = true;
 		superMode = 0;
 		tiempoSuperModeCont = tiempoSuperMode;
+		modoAutomatico = false;
+		efectoAutomaticoMover = 0;
+		efectoAutomaticoDisparar = 0;
+		automaticoMoverDelayCont = automaticoMoverDelay;
 
 		if ( ( (punto.getX()<(planoJuego.ancho)) & (punto.getY()<(planoJuego.altura)) )  & ((punto.getY()>=0) & (punto.getX()>=0) ) ) {
 			planoJuego.introducirAlgo42(this);
@@ -72,7 +83,7 @@ public class Algo42 extends Nave implements Serializable {
 
 	public Algo42()  {
 
-		velocidadDisparo = 10;
+		velocidadDisparo = 12;
 		velocidadDisparoCont = velocidadDisparo;
 		velocidadDisparoCoheteCont = velocidadDisparoCohete;
 		velocidadDisparoTorpedoCont = velocidadDisparoTorpedo;
@@ -87,11 +98,23 @@ public class Algo42 extends Nave implements Serializable {
 		puedeDisparar = true;
 		superMode = 0;
 		tiempoSuperModeCont = tiempoSuperMode;
+		modoAutomatico = false;
+		efectoAutomaticoMover = 0;
+		efectoAutomaticoDisparar = 0;
+		automaticoMoverDelayCont = automaticoMoverDelay;
 		rectangulo = null;
 	}
 
 	/* Crea una instancia de laser en la posicion del algo42 */
 	public void dispararLaser() {
+
+		if (this.superMode == 0)
+			this.dispararLaserV1();
+		else
+			this.dispararLaserV2();
+	}
+	
+	private void dispararLaserV1() {
 
 		if ((velocidadDisparoCont == velocidadDisparo) && puedeDisparar) {
 
@@ -100,6 +123,22 @@ public class Algo42 extends Nave implements Serializable {
 			Punto posLaser = new Punto(this.devolverPunto().getX()+(ancho/2)-6, this.devolverPunto().getY()+altura);
 			new Laser(posLaser, true, this.plano);
 			velocidadDisparoCont = 0;
+			this.efectoAutomaticoDisparar = 1;
+		}
+	}
+	
+	private void dispararLaserV2() {
+
+		if ((velocidadDisparoCont == velocidadDisparo) && puedeDisparar) {
+
+			int ancho = rectangulo.devolverAncho();
+			int altura = rectangulo.devolverAltura();
+			Punto posLaser1 = new Punto(this.devolverPunto().getX()+(ancho/2)-6+laserV2offSet, this.devolverPunto().getY()+altura);
+			Punto posLaser2 = new Punto(this.devolverPunto().getX()+(ancho/2)-6-laserV2offSet, this.devolverPunto().getY()+altura);
+			new Laser(posLaser1, true, this.plano);
+			new Laser(posLaser2, true, this.plano);
+			velocidadDisparoCont = 0;
+			this.efectoAutomaticoDisparar = 1;
 		}
 	}
 
@@ -118,13 +157,23 @@ public class Algo42 extends Nave implements Serializable {
 			new Cohete(posCohete, true, this.plano);
 			cohetes = (cohetes - 1);
 			velocidadDisparoCoheteCont = 0;
+			if (cohetes <= 0)
+				this.efectoAutomaticoDisparar = 0;
+			else
+				this.efectoAutomaticoDisparar = 2;
 		}
 	}
 
-	/* Crea una instancia de torpedoRastreador; recibe una nave por parametro,
-	 * esa nave sera el objetivo del torpedo
-	 */
+	/* Crea una instancia de torpedoRastreador */
 	public void dispararTorpedoRastreador() throws ArmaNoDisponibleError {
+
+		if (this.superMode == 0)
+			this.dispararTorpedoRastreadorV1();
+		else
+			this.dispararTorpedoRastreadorV2();
+	}
+
+	private void dispararTorpedoRastreadorV1() throws ArmaNoDisponibleError {
 
 		if ((velocidadDisparoTorpedoCont == velocidadDisparoTorpedo) && puedeDisparar) {
 
@@ -138,13 +187,14 @@ public class Algo42 extends Nave implements Serializable {
 			new TorpedoRastreador(posTorpedo, true, this.plano);
 			torpedos = (torpedos - 1);
 			velocidadDisparoTorpedoCont = 0;
+			if (torpedos <= 0)
+				this.efectoAutomaticoDisparar = 0;
+			else
+				this.efectoAutomaticoDisparar = 3;
 		}
 	}
 
-	/* Crea una instancia de torpedoRastreadorV2; recibe una nave por parametro,
-	 * esa nave sera el objetivo del torpedo
-	 */
-	public void dispararTorpedoRastreadorV2() throws ArmaNoDisponibleError {
+	private void dispararTorpedoRastreadorV2() throws ArmaNoDisponibleError {
 
 		if ((velocidadDisparoTorpedoV2Cont == velocidadDisparoTorpedoV2) && puedeDisparar) {
 
@@ -155,37 +205,32 @@ public class Algo42 extends Nave implements Serializable {
 			Random generadorRandom = new Random();
 			int ancho = rectangulo.devolverAncho();
 			int altura = rectangulo.devolverAltura();
-			int cantNaves = this.plano.devolverCantidadNaves();
 			int cantTorpedosDisp = generadorRandom.nextInt(5) + 3;
 			int i = 0;
-			ArrayList<NaveNoOperable> listaNaves = this.devolverPlano().devolverListaNaves();
 			
 			while (i < cantTorpedosDisp  &&  torpedosV2 > 0) {
 				int x = generadorRandom.nextInt(ancho);
 				int y = generadorRandom.nextInt(altura);
 				
-				int k;
-				if (cantNaves == 1)
-					k = 0;
-				else
-					k = generadorRandom.nextInt(cantNaves);
-				
-				Nave unaNave = listaNaves.get(k);
 				Punto posTorpedo = new Punto(this.devolverPunto().getX() + x, this.devolverPunto().getY() + y);
-				TorpedoRastreadorV2 unTorpedoV2 = new TorpedoRastreadorV2(posTorpedo, true, this.plano);
-				unTorpedoV2.determinarNaveRastreada(unaNave);
+				new TorpedoRastreadorV2(posTorpedo, true, this.plano);
 				torpedosV2 = (torpedosV2 - 1);
 				i++;
 			}
 			
 			velocidadDisparoTorpedoV2Cont = 0;
+			if (torpedosV2 <= 0)
+				this.efectoAutomaticoDisparar = 0;
+			else
+				this.efectoAutomaticoDisparar = 3;
 		}
 	}
 
 	/* Aumenta las cantidades de las armas recibidas por parametro */
-	public void aumentarArmas(int cantidadTorpedos, int cantidadCohetes) {
+	public void aumentarArmas(int cantidadTorpedos, int cantidadCohetes, int cantidadTorpedosV2) {
 		this.torpedos = (this.torpedos + cantidadTorpedos);
 		this.cohetes = (this.cohetes + cantidadCohetes);
+		this.torpedosV2 = (this.torpedosV2 + cantidadTorpedosV2);
 	}
 
 	/* Este metodo se llama cuando se destruye el Algo42
@@ -204,6 +249,10 @@ public class Algo42 extends Nave implements Serializable {
 		estaDestruida = false;
 		superMode = 0;
 		tiempoSuperModeCont = tiempoSuperMode;
+		modoAutomatico = false;
+		efectoAutomaticoMover = 0;
+		efectoAutomaticoDisparar = 0;
+		automaticoMoverDelayCont = automaticoMoverDelay;
 
 		Punto posInicial = new Punto((((this.plano.devolverAncho())/2) - (this.devolverAncho()/2)), (this.plano.devolverAltura()/6));
 		rectangulo.cambiarPosicion(posInicial);
@@ -274,7 +323,7 @@ public class Algo42 extends Nave implements Serializable {
 	}
 
 	public void chocarCon(ArmaAbandonada unTanque) {
-		this.aumentarArmas(unTanque.getNumeroTorpedos(), unTanque.getNumeroCohetes());
+		this.aumentarArmas(unTanque.getNumeroTorpedos(), unTanque.getNumeroCohetes(), unTanque.getNumeroTorpedosV2() );
 	}
 
 	public int getCohetes() {		
@@ -308,6 +357,16 @@ public class Algo42 extends Nave implements Serializable {
 	@Override
 	public void vivir() {
 		this.pasaUnTiempo();
+		this.efectoSuperMode();
+		try {
+			this.efectoModoAutomatico();
+		} catch (AreaInvalidaError e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ArmaNoDisponibleError e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void persistir() {
@@ -358,35 +417,13 @@ public class Algo42 extends Nave implements Serializable {
 		if (velocidadDisparoTorpedoV2Cont < velocidadDisparoTorpedoV2) {
 			velocidadDisparoTorpedoV2Cont++;
 		}
-		
-		if (this.superMode == 1) {
-			
-			if (this.energia < Algo42.energiaMaxima)
-				this.autoRecuperarse();
-			if (this.tiempoSuperModeCont > 0)
-				this.tiempoSuperModeCont--;
-			if (this.tiempoSuperModeCont <= 0)
-				this.salirDeSuperMode();
-			if (afterImageDelayCont >= afterImageDelay) {
-				try {
-					new Algo42afterImage(this.devolverPunto(), this.plano);
-				} catch (NaveDestruidaError e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				afterImageDelayCont = 0;
-			}
-			else
-				afterImageDelayCont++;
-		}
-	
 	}
 
 	public void estadoPuedeDisparar(boolean estado) {
 		this.puedeDisparar = estado;
 	}
 	
-	public void autoRecuperarse() {
+	private void autoRecuperarse() {
 		this.energia = this.energia + 1;
 	}
 
@@ -410,6 +447,95 @@ public class Algo42 extends Nave implements Serializable {
 	
 	public int tiempoSuperModeRestante() {
 		return this.tiempoSuperModeCont;
+	}
+	
+	private void efectoModoAutomatico() throws AreaInvalidaError, ArmaNoDisponibleError {
+	
+		if (this.modoAutomatico == true) {
+		
+			if (automaticoMoverDelayCont >= automaticoMoverDelay) {
+				switch (this.efectoAutomaticoMover) {
+					case 1: {
+						this.moverAbajo();
+						break;
+					}
+					case 2: {
+						this.moverArriba();
+						break;
+					}
+					case 3: {
+						this.moverDerecha();
+						break;
+					}
+					case 4: {
+						this.moverIzquierda();
+						break;
+					}
+					default: {
+						break;
+					}
+				}
+				automaticoMoverDelayCont = 0;
+			}
+			else
+				automaticoMoverDelayCont++;
+			
+			switch (this.efectoAutomaticoDisparar) {
+				case 1: {
+					this.dispararLaser();
+					break;
+				}
+				case 2: {
+			//		this.dispararCohete();
+					break;
+				}
+				case 3: {
+			//		this.dispararTorpedoRastreador();
+					break;
+				}
+				default: {
+					break;
+				}
+			}
+		}
+	}
+	
+	private void efectoSuperMode() {
+		if (this.superMode == 1) {
+			
+			if (this.energia < Algo42.energiaMaxima)
+				this.autoRecuperarse();
+			if (this.tiempoSuperModeCont > 0)
+				this.tiempoSuperModeCont--;
+			if (this.tiempoSuperModeCont <= 0)
+				this.salirDeSuperMode();
+			if (afterImageDelayCont >= afterImageDelay) {
+				try {
+					new Algo42afterImage(this.devolverPunto(), this.plano);
+				} catch (NaveDestruidaError e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				afterImageDelayCont = 0;
+			}
+			else
+				afterImageDelayCont++;
+		}
+	}
+	
+	public void cambiarModoAutomatico() {
+		if (this.modoAutomatico)
+			this.modoAutomatico = false;
+		else
+			this.modoAutomatico = true;
+	}
+	
+	public void cambiarEfectoAutomaticoMover(int direccion) {
+		this.efectoAutomaticoMover = direccion;
+	}
+	
+	public boolean estadoModoAutomatico() {
+		return this.modoAutomatico;
 	}
 	
 }

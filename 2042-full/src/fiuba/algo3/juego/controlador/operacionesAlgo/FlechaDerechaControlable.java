@@ -6,22 +6,25 @@ import fiuba.algo3.juego.modelo.excepciones.AreaInvalidaError;
 
 public class FlechaDerechaControlable implements Controlable{
 
-	Algo42 algo42;
+	Algo42 algo;
 
 
-	public FlechaDerechaControlable(Algo42 algo) {
-		algo42=algo;
+	public FlechaDerechaControlable(Algo42 algo42) {
+		algo = algo42;
 	}
 
-	/*El algo42 se mueve a la derecha*/
 	@Override
 	public void activarEfecto() {
-		try {
-			algo42.moverDerecha();
-		} catch (AreaInvalidaError e) {
-			System.out.print("Area invalida\n");
-			// Si hay error de area invalida, que no se mueva.
-		}		
+	
+		this.algo.cambiarEfectoAutomaticoMover(3);
+		if (!this.algo.estadoModoAutomatico()) {
+			try {
+				algo.moverDerecha();
+			} catch (AreaInvalidaError e) {
+				System.out.print("Area invalida\n");
+				// Si hay error de area invalida, que no se mueva.
+			}
+		}
 	}
 
 }
