@@ -3,8 +3,6 @@ package fiuba.algo3.juego.test;
 import junit.framework.TestCase;
 import org.junit.Test;
 import fiuba.algo3.juego.modelo.Algo42;
-import fiuba.algo3.juego.modelo.Avioneta;
-import fiuba.algo3.juego.modelo.Nave;
 import fiuba.algo3.juego.modelo.Plano;
 import fiuba.algo3.juego.modelo.Punto;
 import fiuba.algo3.juego.modelo.excepciones.AreaInvalidaError;
@@ -125,32 +123,22 @@ public class Algo42Test extends TestCase{
 
 		Plano plano = new Plano(100,100);
 		Punto posicionAlgo = new Punto(50,50);
-		Punto posicionAvioneta = new Punto(50,50);
 		Algo42 algo = new Algo42(posicionAlgo,plano);
-		Nave avioneta = new Avioneta(posicionAvioneta,plano);
 
 		try {
-		    algo.dispararTorpedoRastreadorHacia( avioneta );
+		    algo.dispararTorpedoRastreador();
 		    fail("Deberia haber lanzado una excepcion");
 		}
 		catch (ArmaNoDisponibleError error) {
 			// si sale por aqui es que la prueba ha ido bien
 		}
 
-		try {
-		    algo.dispararTorpedoRastreadorHacia( algo );
-		    fail("Deberia haber lanzado una excepcion, no se puede disparar a si mismo");
-		}
-		catch (NaveARastrearError error) {
-		   // si sale por aqui es que la prueba ha ido bien
-		}
-		
 		
 		// Le doy cohetes.
 		algo.aumentarArmas(4, 0);
 		// Ahora si deberia poder disparar."
 		try {
-			algo.dispararTorpedoRastreadorHacia( avioneta );
+			algo.dispararTorpedoRastreador();
 			//Si esto anda es porque no lanzo excepcion y ademas dispara
 		} catch (ArmaNoDisponibleError error) {}
 		

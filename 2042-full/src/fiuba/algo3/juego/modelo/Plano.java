@@ -29,13 +29,18 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 	int ancho;
 	int altura;
 	int vidas;
+	
 	Algo42 algo42;
-	ArrayList<Arma> listaArmas = new ArrayList<Arma>();
+	ArrayList<NaveNoOperable> listaNavesAI = new ArrayList<NaveNoOperable>();
 	ArrayList<NaveNoOperable> listaNaves = new ArrayList<NaveNoOperable>();
 	ArrayList<Item> listaItems = new ArrayList<Item>();
+	ArrayList<Arma> listaArmas = new ArrayList<Arma>();
+	
+	ArrayList<NaveNoOperable> listaNavesAIDestruidas = new ArrayList<NaveNoOperable>();
 	ArrayList<NaveNoOperable> listaNavesDestruidas = new ArrayList<NaveNoOperable>();
 	ArrayList<Item> listaItemsUsados = new ArrayList<Item>();
 	ArrayList<Arma> listaArmasUsadas = new ArrayList<Arma>();
+	
 	Nivel nivel = new Nivel();
 	ArrayList<ObjetoUbicable> listaObjetosAAgregar = new ArrayList<ObjetoUbicable>();
 	ArrayList<ObjetoUbicable> listaObjetosABorrar  = new ArrayList<ObjetoUbicable>();
@@ -69,10 +74,19 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 	}
 
 	/* Introduce un algo42 al plano */
-	public void introducirAlgo42(Algo42 algo) {
-		algo42 = algo;
+	public void introducirAlgo42(Algo42 naveJugador) {
+		this.algo42 = naveJugador;
 	}
 
+	/* Agrega una referencia a la nave destruida */
+	public void agregarNaveAIEliminada(NaveNoOperable nave) throws NaveNoDestruidaError {
+
+		if (!nave.estaDestruida) {
+			throw new NaveNoDestruidaError("La nave aun no esta destruida");
+		}
+		listaNavesAIDestruidas.add(nave);
+	}
+	
 	/* Agrega una referencia a la nave destruida */
 	public void agregarNaveEliminada(Nave nave) throws NaveNoDestruidaError {
 
@@ -101,8 +115,8 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 	}
 
 	/* Devuelve la unica nave operable, el Algo42 */
-	public Algo42 getAlgo42() {
-		return algo42;
+	public Algo42 devolverAlgo42() {
+		return this.algo42;
 	}
 
 	/* Decrece una vida del juego, consecuencia de que se destruyo el Algo42 
@@ -150,6 +164,15 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 		this.listaNaves.add( unaNave );
 	}
 
+	/* Agrega una nave (seguramente after-image) a la lista de naves jugador */
+	public void agregarNaveAI(NaveNoOperable unaNave) throws NaveDestruidaError {
+		
+		if ( unaNave.estadoActualDestruida() ) {
+			throw new NaveDestruidaError("La nave esta destruida");
+		}
+		this.listaNavesAI.add( unaNave );
+	}
+
 	/* Agrega un item al area de Juego */
 	public void agregarItem(Item item) throws ItemUsadoError {
 		
@@ -177,6 +200,10 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 		return listaItems;
 	}
 	
+	public ArrayList<NaveNoOperable> devolverListaNavesAI() {
+		return this.listaNavesAI;
+	}
+	
 	public ArrayList<NaveNoOperable> devolverListaNaves() {
 		return this.listaNaves;
 	}
@@ -199,9 +226,8 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 	
 	public boolean hayNavesEnemigas() {
 
-		if (listaNaves.size() > 0) {
+		if (listaNaves.size() > 0)
 			return true;
-		}
 		return false;
 	}
 
@@ -269,7 +295,13 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 		Iterator<Arma> iteradorArmasUsadas = listaArmasUsadas.iterator();
 		Iterator<Item> iteradorItemsUsados = listaItemsUsados.iterator();
 		Iterator<NaveNoOperable> iteradorNavesDestruidas = listaNavesDestruidas.iterator();
+		Iterator<NaveNoOperable> iteradorNavesAIDestruidas = listaNavesAIDestruidas.iterator();
 
+		while (iteradorArmasUsadas.hasNext()) {
+			Arma elemento = iteradorArmasUsadas.next(); 
+			listaArmas.remove(elemento);
+			listaObjetosABorrar.add(elemento);
+		}
 		while (iteradorItemsUsados.hasNext()) {
 			Item elemento = iteradorItemsUsados.next(); 
 			listaItems.remove(elemento);
@@ -280,9 +312,9 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 			listaNaves.remove(elemento);
 			listaObjetosABorrar.add(elemento);
 		}
-		while (iteradorArmasUsadas.hasNext()) {
-			Arma elemento = iteradorArmasUsadas.next(); 
-			listaArmas.remove(elemento);
+		while (iteradorNavesAIDestruidas.hasNext()) {
+			NaveNoOperable elemento = iteradorNavesAIDestruidas.next(); 
+			listaNavesAI.remove(elemento);
 			listaObjetosABorrar.add(elemento);
 		}
 
@@ -290,12 +322,14 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 		if ((nivel.devolverNumeroNivel() >= 15) && (!juegoPerdido))
 			juegoGanado = true;
 		
-		if (this.nivel.devolverPuntosActuales() > 200  &&  this.algo42.superMode == 0)
-			this.algo42.entrarASuperMode();
+		/// ---
+		if (this.nivel.devolverPuntosActuales() > 100  &&  this.devolverAlgo42().superMode == 0)
+			this.devolverAlgo42().entrarASuperMode();
 
 		listaArmasUsadas.clear();
 		listaItemsUsados.clear();
 		listaNavesDestruidas.clear();
+		listaNavesAIDestruidas.clear();
 	}
 
 	/* En cada turno, se debe invocar este metodo para revisar 
@@ -307,19 +341,22 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 		Iterator<Item> iteradorItem = listaItems.iterator();
 		Iterator<Arma> iteradorArmas = listaArmas.iterator();
 		Iterator<NaveNoOperable> iteradorNaveEnemiga = listaNaves.iterator();
+		Iterator<NaveNoOperable> iteradorNaveJugador = listaNavesAI.iterator();
 
 		while (iteradorItem.hasNext()) {
 		    Item elemento = iteradorItem.next(); 
 		    elemento.vivir();
 		}
-
 		while (iteradorArmas.hasNext()) {
 		    Arma elemento = iteradorArmas.next(); 
 		    elemento.vivir();
 		}
-
 		while (iteradorNaveEnemiga.hasNext()) {
 		    NaveNoOperable elemento = iteradorNaveEnemiga.next(); 
+		    elemento.vivir();
+		}
+		while (iteradorNaveJugador.hasNext()) {
+			NaveNoOperable elemento = iteradorNaveJugador.next(); 
 		    elemento.vivir();
 		}
 

@@ -45,7 +45,7 @@ public class GeneradorControlador {
 	public ControladorJuegoAlgo42full generarControladorAPartirDePlano() {
 
 		ControladorJuegoAlgo42full controlador = new ControladorJuegoAlgo42full(false, plano);
-		Algo42 algo42 = plano.getAlgo42();
+		Algo42 algo42 = plano.devolverAlgo42();
 		controlador.restaurarPlano();
 		
 		VistaPlano vistaPlano = new VistaPlano();

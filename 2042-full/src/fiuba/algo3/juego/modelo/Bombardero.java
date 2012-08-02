@@ -139,7 +139,7 @@ public class Bombardero extends NaveNoOperable implements Serializable {
 			if (i <= 2) {
 				this.dispararCohete();
 			} else if (i == 3) {
-				this.dispararTorpedoRastreadorHacia(this.plano.getAlgo42());
+				this.dispararTorpedoRastreador();
 			} else {
 				this.dispararLaser();
 			}

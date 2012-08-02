@@ -17,14 +17,14 @@ public class TorpedoRastreadorTest extends TestCase{
 	 * deberia ir acercandose a su objetivo */
 	public void testMover() throws SuperposicionNavesError, NaveDestruidaError{
 
-		Plano plano= new Plano( 100 ,100);
+		Plano plano = new Plano( 100 ,100);
 
 		/* Pruebas de lanzamiento de torpedos. Para probarlos, necesito un objetivo. */
-		Punto posicionAvioneta= new Punto(70,70);
-		Punto posicionTorpedo= new Punto(60,65);
-		Avioneta avioneta=new Avioneta(posicionAvioneta, plano);
-		TorpedoRastreador torpedo= new TorpedoRastreador (posicionTorpedo, true , plano);
-		torpedo.determinarNaveRastreada( avioneta );
+		Punto posicionAvioneta = new Punto(70,70);
+		Punto posicionTorpedo = new Punto(60,65);
+		Avioneta avioneta = new Avioneta(posicionAvioneta, plano);
+		TorpedoRastreador torpedo = new TorpedoRastreador (posicionTorpedo, true , plano);
+		torpedo.setNaveRastreada( avioneta );
 
 		torpedo.mover();
 		/* Deberia haberse acercado un poco a la avioneta. */

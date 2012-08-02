@@ -336,9 +336,9 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 			}
 		}
 
-		Punto posicionCivil= new Punto(20,500);
+		Punto posicionCivil = new Punto(20,500);
 		Civil avion = new Civil( posicionCivil , plano );
-		algo.dispararTorpedoRastreadorHacia(avion);
+		algo.dispararTorpedoRastreador();
 		Arma TorpedoRastreador = plano.devolverListaArmas().get(6);
 		while ( !avion.estadoActualDestruida() ) {
 			TorpedoRastreador.mover();

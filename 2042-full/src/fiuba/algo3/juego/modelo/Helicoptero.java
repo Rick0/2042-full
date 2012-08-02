@@ -13,7 +13,7 @@ public class Helicoptero extends NaveNoOperable implements Serializable{
 	/* Instancia un Helicoptero */
 	public Helicoptero(Punto punto, Plano plano) throws SuperposicionNavesError, NaveDestruidaError {
 		
-		puntos = -100;
+		puntos = -(200/4);
 		energia = 20;
 		esOperable = false;
 		rectangulo = new Rectangulo(30, 24, punto);
@@ -34,7 +34,7 @@ public class Helicoptero extends NaveNoOperable implements Serializable{
 		if (!estaDestruida) {
 
 			this.intentarMover();
-			this.intentarChocar(this.plano.getAlgo42());
+			this.intentarChocar(this.plano.devolverAlgo42());
 			this.pasaUnTiempo();
 			this.disparar();
 		}
@@ -42,7 +42,7 @@ public class Helicoptero extends NaveNoOperable implements Serializable{
 
 	/* El helicoptero se mueve hacia abajo */
 	public void mover() throws SuperposicionNavesError { 
-		Punto punto = new Punto (this.devolverPunto().getX(),this.devolverPunto().getY() -1);
+		Punto punto = new Punto (this.devolverPunto().getX(),this.devolverPunto().getY() - 2);
 		this.cambiarPosicion( punto );
 		if ( this.seSuperponeConOtraNave() ) {
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
@@ -55,7 +55,7 @@ public class Helicoptero extends NaveNoOperable implements Serializable{
 	 */
 	public void moverAlternativo() throws SuperposicionNavesError { 
 
-		Punto punto = new Punto (this.devolverPunto().getX(),this.devolverPunto().getY() +1);
+		Punto punto = new Punto (this.devolverPunto().getX(),this.devolverPunto().getY() + 1);
 		this.cambiarPosicion( punto);
 		if ( this.seSuperponeConOtraNave() ) {
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
