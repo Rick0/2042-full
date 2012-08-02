@@ -22,7 +22,7 @@ public class TorpedoRastreadorV2 extends Arma implements Serializable{
 		Random generadorRandom = new Random();
 		int i = generadorRandom.nextInt(7) + 2;
 		this.cantidadAMover = i;
-		this.danio = (-50)/i;
+		this.danio = (-60)/i;
 		
 		if (this.origenAlgo42)
 			this.tiempoDeVida = 444;
