@@ -100,7 +100,7 @@ public class Algo42Test extends TestCase{
 		  }
 		
 		 //Le doy cohetes.
-		  algo.aumentarArmas(0, 4);
+		  algo.aumentarArmas(0, 4, 0);
 		//Ahora si deberia poder disparar."
 		 try {
 			 algo.dispararCohete();
@@ -135,7 +135,7 @@ public class Algo42Test extends TestCase{
 
 		
 		// Le doy cohetes.
-		algo.aumentarArmas(4, 0);
+		algo.aumentarArmas(4, 0, 0);
 		// Ahora si deberia poder disparar."
 		try {
 			algo.dispararTorpedoRastreador();

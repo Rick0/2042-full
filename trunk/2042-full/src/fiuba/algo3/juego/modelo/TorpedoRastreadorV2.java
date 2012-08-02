@@ -22,7 +22,8 @@ public class TorpedoRastreadorV2 extends Arma implements Serializable{
 		Random generadorRandom = new Random();
 		int i = generadorRandom.nextInt(7) + 2;
 		this.cantidadAMover = i;
-		this.danio = (-60)/i;
+		this.danio = (-50)/i;
+		this.determinarNaveRastreada();
 		
 		if (this.origenAlgo42)
 			this.tiempoDeVida = 444;
@@ -40,8 +41,32 @@ public class TorpedoRastreadorV2 extends Arma implements Serializable{
 	/* Guarda la nave a la cual rasteara el torpedo. 
 	 * Cuando se utilice el metodo mover, el torpedo se movera hacia esa nave
 	 */
-	public void determinarNaveRastreada(Nave unaNave) {
-		this.naveRastreada = unaNave;
+	public void determinarNaveRastreada() {
+	
+		Random generadorRandom = new Random();
+		int i;
+		if (this.origenAlgo42 == true) {
+		
+			int n = this.plano.devolverCantidadNaves();
+			if (n == 1)
+				i = 0;
+			else
+				i = generadorRandom.nextInt(n);
+			naveRastreada = this.plano.devolverListaNaves().get(i);
+		}
+		else {
+		
+			int n = this.plano.devolverListaNavesAI().size();
+			if (n == 0)
+				this.naveRastreada = this.plano.devolverAlgo42();
+			else {
+				if (n == 1)
+					i = 0;
+				else
+					i = generadorRandom.nextInt(n);
+				this.naveRastreada = this.plano.devolverListaNavesAI().get(i);
+			}
+		}
 	}
 
 	/* El torpedo rastreador se mueve de tal forma que se acerque a la nave que persigue */ 
@@ -87,39 +112,28 @@ public class TorpedoRastreadorV2 extends Arma implements Serializable{
 
 			this.pasaUnTiempo();
 
-			boolean naveRastreadaFueraDePlano;
-			if (naveRastreada.esOperable())
-				naveRastreadaFueraDePlano = false;
-			else {
-				if (((NaveNoOperable)naveRastreada).fueraDelPlano())
-					naveRastreadaFueraDePlano = true;
+			if (origenAlgo42) {
+				
+				if (naveRastreada.estadoActualDestruida() || ((NaveNoOperable)naveRastreada).fueraDelPlano()) {
+
+					if (this.plano.hayNavesEnemigas()) {
+						this.determinarNaveRastreada();
+						this.intentarMover();
+					}
+					else {
+						Punto nuevaPosicion = new Punto(this.devolverPunto().getX(), this.devolverPunto().getY() + (cantidadAMover/2));	
+						this.cambiarPosicion(nuevaPosicion);
+					}
+				}
 				else
-					naveRastreadaFueraDePlano = false;
-			}
-
-			if (naveRastreada.estadoActualDestruida() || naveRastreadaFueraDePlano) {
-
-				if (this.plano.hayNavesEnemigas()) {
-					Random generadorRandom = new Random();
-					int n = this.plano.devolverCantidadNaves();
-					int i;
-					if (n == 1)
-						i = 0;
-					else
-						i = generadorRandom.nextInt(n);
-					naveRastreada = this.plano.devolverListaNaves().get(i);
 					this.intentarMover();
-				}
-				else {
-					Punto nuevaPosicion = null;
-					if (origenAlgo42)
-						nuevaPosicion = new Punto(this.devolverPunto().getX(), this.devolverPunto().getY() + (cantidadAMover/2));	
-					else
-						nuevaPosicion = new Punto(this.devolverPunto().getX(), this.devolverPunto().getY() - (cantidadAMover/2));
-					this.cambiarPosicion(nuevaPosicion);
-				}
 			}
 			else {
+				
+				boolean naveRastreadaEsta = this.plano.devolverListaNavesAI().contains(naveRastreada);
+				
+				if (!naveRastreadaEsta)
+					this.determinarNaveRastreada();
 				this.intentarMover();
 			}
 

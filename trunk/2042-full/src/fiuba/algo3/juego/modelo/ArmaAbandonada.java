@@ -14,7 +14,7 @@ public class ArmaAbandonada extends Item implements Serializable{
 		fueUsado = false;
 		numeroTorpedos = 5;
 		numeroCohetes  = 6;
-		numeroTorpedosV2 = 10;
+		numeroTorpedosV2 = 12;
 	//	numeroCohetesV2  = 2;
 		rectangulo = new Rectangulo(40, 40, punto);
 		plano = unPlano;

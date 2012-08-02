@@ -108,7 +108,7 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 		helicoptero.vivir();
 		// Pruebo que las naves no estan huyendo, es decir, avanzan hacia adelante.
 		assertEquals(bombardero.devolverPunto().getY(),499.5);
-		assertEquals(helicoptero.devolverPunto().getY(),149.0);
+		assertEquals(helicoptero.devolverPunto().getY(),148.0);
 		// Elimino la nave guia
 		guia.modificarEnergia(-80);
 		assertTrue(guia.estadoActualDestruida());

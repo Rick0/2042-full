@@ -7,7 +7,7 @@ import fiuba.algo3.titiritero.vista.Imagen;
 public class VistaAlgo42afterImage extends Imagen implements ObjetoVivo {
 
 	int frameCont;
-	static int velocidadCambio = 4;
+	static int velocidadCambio = 2;
 	int velocidadCambioCont;
 
 
