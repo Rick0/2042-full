@@ -167,10 +167,10 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 			ObjetoUbicable unObjeto = iteradorObjetosAAgregar.next();
 			Imagen unaVista = this.asignarVista(unObjeto);
 			this.tablaDeVistas.put(unObjeto,unaVista);
-
-			if (unaVista.getClass().toString().equals("class fiuba.algo3.juego.vista.VistaNaveExplosion") || unaVista.getClass().toString().equals("class fiuba.algo3.juego.vista.VistaAlgo42afterImage")) {
+			
+			String vistaNombre = unaVista.getClass().toString();
+			if (vistaNombre.equals("class fiuba.algo3.juego.vista.VistaNaveExplosion") || vistaNombre.equals("class fiuba.algo3.juego.vista.VistaAlgo42afterImage") || vistaNombre.equals("class fiuba.algo3.juego.vista.VistaGranExplosion"))
 				this.agregarObjetoVivo((ObjetoVivo)unaVista);
-			}
 
 			this.agregarDibujable(unaVista);
 			this.agregarObjetoVivo(unObjeto);
@@ -183,9 +183,9 @@ public class ControladorJuegoAlgo42full implements Runnable, Serializable {
 			Imagen unaVista = this.tablaDeVistas.get(unObjeto);
 
 			if (unaVista != null) {
-				if (unaVista.getClass().toString().equals("class fiuba.algo3.juego.vista.VistaNaveExplosion") || unaVista.getClass().toString().equals("class fiuba.algo3.juego.vista.VistaAlgo42afterImage")) {
+				String vistaNombre = unaVista.getClass().toString();
+				if (vistaNombre.equals("class fiuba.algo3.juego.vista.VistaNaveExplosion") || vistaNombre.equals("class fiuba.algo3.juego.vista.VistaAlgo42afterImage") || vistaNombre.equals("class fiuba.algo3.juego.vista.VistaGranExplosion"))
 					this.removerObjetoVivo((ObjetoVivo)unaVista);
-				}
 			}
 
 			this.removerDibujable(unaVista);

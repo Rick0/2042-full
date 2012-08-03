@@ -32,20 +32,32 @@ public class Nivel implements Serializable{
 		return puntosTotales;
 	}
 
-	/* Recibe la lista de enemigos que elimino el algo42 durante un turno
-	 * y los agrega tanto al puntaje total como al puntaje del nivel actual.
-	 * Si el puntaje actual es mayor a 1000, avanza un nivel
-	 */
-	public void sumarPuntajeTurno(ArrayList<NaveNoOperable> arrayList) {
+	/* Recibe la lista de enemigos que elimino Algo42 durante un turno, y agrega puntaje */
+	public void sumarPuntajeNaves(ArrayList<NaveNoOperable> listaNavesEliminadas) {
 
-		NaveNoOperable naveAuxiliar;
-		Iterator<NaveNoOperable> nave = arrayList.iterator();
+		NaveNoOperable unaNave;
+		Iterator<NaveNoOperable> iteradorNave = listaNavesEliminadas.iterator();
 
-		while (nave.hasNext()) {
-			naveAuxiliar = nave.next();
-			if (naveAuxiliar.estadoActualDestruida() ) {
-				puntosNivelActual = ( puntosNivelActual + naveAuxiliar.devolverPuntosPorEliminacion() );
-				puntosTotales = ( puntosTotales + naveAuxiliar.devolverPuntosPorEliminacion() );
+		while (iteradorNave.hasNext()) {
+			unaNave = iteradorNave.next();
+			if (unaNave.estadoActualDestruida() ) {
+				puntosNivelActual = ( puntosNivelActual + unaNave.devolverPuntosPorEliminacion() );
+				puntosTotales = ( puntosTotales + unaNave.devolverPuntosPorEliminacion() );
+			}
+		}
+	}
+	
+	/* Recibe la lista de items que eso Algo42 durante un turno, y agrega puntaje */
+	public void sumarPuntajeItems(ArrayList<Item> listaItemsUsados) {
+
+		Item unItem;
+		Iterator<Item> iteradorItem = listaItemsUsados.iterator();
+
+		while (iteradorItem.hasNext()) {
+			unItem = iteradorItem.next();
+			if (unItem.fueUsado() ) {
+				puntosNivelActual = ( puntosNivelActual + unItem.devolverPuntosPorUtilizacion() );
+				puntosTotales = ( puntosTotales + unItem.devolverPuntosPorUtilizacion() );
 			}
 		}
 	}
@@ -66,8 +78,9 @@ public class Nivel implements Serializable{
 	}
 
 	/* La accion del nivel consiste en sumar su puntaje e intentar avanzar, si es que se puede */
-	public void actuarCon(ArrayList<NaveNoOperable> listaEliminados) {
-		this.sumarPuntajeTurno( listaEliminados );
+	public void actuarCon(ArrayList<NaveNoOperable> listaNavesEliminadas, ArrayList<Item> listaItemsUsados) {
+		this.sumarPuntajeNaves(listaNavesEliminadas);
+		this.sumarPuntajeItems(listaItemsUsados);
 		this.avanzarNivel();
 	}
 

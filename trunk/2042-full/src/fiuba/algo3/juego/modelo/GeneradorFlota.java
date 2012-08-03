@@ -28,7 +28,8 @@ public class GeneradorFlota implements ObjetoVivo {
 
 	Plano plano;
 	int cantidadNaves;
-	final int velocidadSpawnear = 150;
+	final int velocidadSpawnear = 180;
+	int velocidadSpawnearAparente;
 	int velocidadSpawnearCont;
 	int posEnY;
 	boolean necesitoNaveGuia;
@@ -40,7 +41,8 @@ public class GeneradorFlota implements ObjetoVivo {
 
 		plano = planoJuego;
 		tengoQueGenerar = true;
-		velocidadSpawnearCont = velocidadSpawnear;
+		velocidadSpawnearAparente = velocidadSpawnear;
+		velocidadSpawnearCont = velocidadSpawnearAparente;
 		posEnY = (this.plano.devolverAltura()-10);
 		necesitoNaveGuia = false;
 		tengoQueGenerar = true;
@@ -57,14 +59,19 @@ public class GeneradorFlota implements ObjetoVivo {
 		this.actualizarCantidadNaves();
 		this.revisarNavesHuir();
 		this.pasaUnTiempo();
+		
+		if (this.plano.devolverAlgo42().estadoSuperMode() == 0)
+			velocidadSpawnearAparente = velocidadSpawnear;
+		else
+			velocidadSpawnearAparente = velocidadSpawnear/4;
 
-		if (this.necesitoNaveGuia && (velocidadSpawnearCont == velocidadSpawnear) && tengoQueGenerar) {
+		if (this.necesitoNaveGuia && (velocidadSpawnearCont >= velocidadSpawnearAparente) && tengoQueGenerar) {
 			GenerarFlota unGeneradorFlota = tablaGeneradorFlotas.get(0);
 			unGeneradorFlota.generar();
 			this.velocidadSpawnearCont = 0;
 			this.necesitoNaveGuia = false;
 		}
-		else if ((cantidadNaves < 15) && (velocidadSpawnearCont == velocidadSpawnear) && tengoQueGenerar) {
+		else if ((cantidadNaves < 15) && (velocidadSpawnearCont >= velocidadSpawnearAparente) && tengoQueGenerar) {
 
 			Random generadorRandom = new Random();
 			int i = generadorRandom.nextInt(tablaGeneradorFlotas.size()-1);

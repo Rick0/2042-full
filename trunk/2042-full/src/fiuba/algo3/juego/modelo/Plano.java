@@ -318,7 +318,7 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 			listaObjetosABorrar.add(elemento);
 		}
 
-		this.nivel.actuarCon(listaNavesDestruidas);
+		this.nivel.actuarCon(listaNavesDestruidas, listaItemsUsados);
 		if ((nivel.devolverNumeroNivel() >= 15) && (!juegoPerdido))
 			juegoGanado = true;
 		
