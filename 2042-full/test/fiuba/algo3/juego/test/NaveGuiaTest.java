@@ -39,13 +39,13 @@ public class NaveGuiaTest extends TestCase{
 		
 		// Voy a ir creando algunas naves para corroborar que huyen
 		
-		Punto posicionHelicoptero= new Punto(200,150);
-		Helicoptero helicoptero= new Helicoptero(posicionHelicoptero,plano);
-		Punto posicionBombardero= new Punto(500,500);
-		Bombardero bombardero= new Bombardero(posicionBombardero,plano);
+		Punto posicionHelicoptero = new Punto(200,150);
+		Helicoptero helicoptero = new Helicoptero(posicionHelicoptero,plano);
+		Punto posicionBombardero = new Punto(500,500);
+		Bombardero bombardero = new Bombardero(posicionBombardero,plano);
 		assertFalse(bombardero.tengoQueHuir);
 		assertFalse(helicoptero.tengoQueHuir);
-		guia.modificarEnergia(-80);
+		guia.modificarEnergia(-2000);
 		assertTrue(bombardero.tengoQueHuir);
 		assertTrue(helicoptero.tengoQueHuir);
 	}

@@ -11,7 +11,7 @@ public class VistaBombardero extends Imagen {
 
 	public VistaBombardero() {
 		Random generadorRandom = new Random();
-		int i = generadorRandom.nextInt(2);
+		int i = generadorRandom.nextInt(4);
 
 		if (i == 0)
 			this.setNombreArchivoImagen(imagenPath+"Bombardero.png");

@@ -27,9 +27,9 @@ public class Algo42 extends Nave implements Serializable {
 	int torpedosV2;
 	static final int velocidadDisparoCohete = 15;
 	int velocidadDisparoCoheteCont;
-	static final int velocidadDisparoCoheteV2 = 60;
+	static final int velocidadDisparoCoheteV2 = 50;
 	int velocidadDisparoCoheteV2Cont;
-	static final int velocidadDisparoTorpedo = 20;
+	static final int velocidadDisparoTorpedo = 18;
 	int velocidadDisparoTorpedoCont;
 	static final int velocidadDisparoTorpedoV2 = 25;
 	int velocidadDisparoTorpedoV2Cont;
@@ -39,7 +39,7 @@ public class Algo42 extends Nave implements Serializable {
 	static final int energiaInicial = 100;
 	boolean puedeDisparar;
 	int superMode;	// 0 es false, 1 es true
-	static int tiempoSuperMode = 500;
+	static int tiempoSuperMode = 555;
 	int tiempoSuperModeCont;
 	static int afterImageDelay = 6;
 	int afterImageDelayCont;
@@ -48,6 +48,8 @@ public class Algo42 extends Nave implements Serializable {
 	int efectoAutomaticoDisparar;
 	static final int automaticoMoverDelay = 0;
 	int automaticoMoverDelayCont;
+	static final int autoRecuperarseDelay = 10;
+	int autoRecuperarseCont;
 	
 
 	/* Crea una nueva instancia de algo42, con ubicacion(determinada por un punto),
@@ -63,10 +65,10 @@ public class Algo42 extends Nave implements Serializable {
 		velocidadDisparoTorpedoV2Cont = velocidadDisparoTorpedoV2;
 		plano = planoJuego;
 		energia = energiaInicial;
-		cohetes = 299;
-		cohetesV2 = 299;
-		torpedos = 299;
-		torpedosV2 = 299;
+		cohetes = 0;
+		cohetesV2 = 0;
+		torpedos = 0;
+		torpedosV2 = 0;
 		estaDestruida = false;
 		esOperable = true;
 		puedeDisparar = true;
@@ -76,6 +78,7 @@ public class Algo42 extends Nave implements Serializable {
 		efectoAutomaticoMover = 0;
 		efectoAutomaticoDisparar = 0;
 		automaticoMoverDelayCont = automaticoMoverDelay;
+		autoRecuperarseCont = autoRecuperarseDelay;
 
 		if ( ( (punto.getX()<(planoJuego.ancho)) & (punto.getY()<(planoJuego.altura)) )  & ((punto.getY()>=0) & (punto.getX()>=0) ) ) {
 			planoJuego.introducirAlgo42(this);
@@ -96,10 +99,10 @@ public class Algo42 extends Nave implements Serializable {
 		velocidadDisparoTorpedoV2Cont = velocidadDisparoTorpedoV2;
 		plano = null;
 		energia = energiaInicial;
-		cohetes = 299;
-		cohetesV2 = 299;
-		torpedos = 299;
-		torpedosV2 = 299;
+		cohetes = 0;
+		cohetesV2 = 0;
+		torpedos = 0;
+		torpedosV2 = 0;
 		estaDestruida = false;
 		esOperable = true;
 		puedeDisparar = true;
@@ -109,6 +112,8 @@ public class Algo42 extends Nave implements Serializable {
 		efectoAutomaticoMover = 0;
 		efectoAutomaticoDisparar = 0;
 		automaticoMoverDelayCont = automaticoMoverDelay;
+		autoRecuperarseCont = autoRecuperarseDelay;
+		
 		rectangulo = null;
 	}
 
@@ -271,10 +276,10 @@ public class Algo42 extends Nave implements Serializable {
 		velocidadDisparoTorpedoCont = velocidadDisparoTorpedo;
 		velocidadDisparoTorpedoV2Cont = velocidadDisparoTorpedoV2;
 		energia = energiaInicial;
-		cohetes = 299;
-		cohetesV2 = 299;
-		torpedos = 299;
-		torpedosV2 = 299;
+		cohetes = 0;
+		cohetesV2 = 0;
+		torpedos = 0;
+		torpedosV2 = 0;
 		estaDestruida = false;
 		superMode = 0;
 		tiempoSuperModeCont = tiempoSuperMode;
@@ -282,6 +287,7 @@ public class Algo42 extends Nave implements Serializable {
 		efectoAutomaticoMover = 0;
 		efectoAutomaticoDisparar = 0;
 		automaticoMoverDelayCont = automaticoMoverDelay;
+		autoRecuperarseCont = autoRecuperarseDelay;
 
 		Punto posInicial = new Punto((((this.plano.devolverAncho())/2) - (this.devolverAncho()/2)), (this.plano.devolverAltura()/6));
 		rectangulo.cambiarPosicion(posInicial);
@@ -464,7 +470,13 @@ public class Algo42 extends Nave implements Serializable {
 	}
 	
 	private void autoRecuperarse() {
-		this.energia = this.energia + 1;
+	
+		if (autoRecuperarseCont >= autoRecuperarseDelay) {
+			this.energia++;
+			autoRecuperarseCont = 0;
+		}
+		else
+			autoRecuperarseCont++;
 	}
 
 	private int cantAMoverse() {
