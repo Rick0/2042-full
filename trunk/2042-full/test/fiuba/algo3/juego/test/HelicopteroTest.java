@@ -22,8 +22,8 @@ public class HelicopteroTest extends TestCase {
 		
 		for (int i=0; i<20; i++) {
 			helicoptero.mover();
-			pos=pos-1;
-			assertEquals(helicoptero.devolverPunto().getY(),pos);
+			pos = pos - 2;
+			assertEquals(helicoptero.devolverPunto().getY(), pos);
 			assertEquals(helicoptero.devolverPunto().getX(), 10.0);
 		}
 	}

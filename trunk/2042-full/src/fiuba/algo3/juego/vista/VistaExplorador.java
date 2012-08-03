@@ -11,7 +11,7 @@ public class VistaExplorador extends Imagen {
 
 	public VistaExplorador() {
 		Random generadorRandom = new Random();
-		int i = generadorRandom.nextInt(2);
+		int i = generadorRandom.nextInt(4);
 
 		if (i == 0)
 			this.setNombreArchivoImagen(imagenPath+"Explorador.png");

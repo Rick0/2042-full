@@ -100,9 +100,9 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 		
 		// Voy a ir creando algunas naves para corroborar que huyen
 		
-		Punto posicionHelicoptero= new Punto(200,150);
-		Helicoptero helicoptero= new Helicoptero(posicionHelicoptero,plano);
-		Punto posicionBombardero= new Punto(500,500);
+		Punto posicionHelicoptero = new Punto(200,150);
+		Helicoptero helicoptero = new Helicoptero(posicionHelicoptero,plano);
+		Punto posicionBombardero = new Punto(500,500);
 		Bombardero bombardero= new Bombardero(posicionBombardero,plano);
 		bombardero.vivir();
 		helicoptero.vivir();
@@ -110,15 +110,13 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 		assertEquals(bombardero.devolverPunto().getY(),499.5);
 		assertEquals(helicoptero.devolverPunto().getY(),148.0);
 		// Elimino la nave guia
-		guia.modificarEnergia(-80);
+		guia.modificarEnergia(-2000);
 		assertTrue(guia.estadoActualDestruida());
 		// Ahora pruebo que el bombardero esta huyendo
 		// Pero el helicoptero no porque no es una nave enemiga
 		bombardero.vivir();
 		helicoptero.vivir();
 		assertEquals(bombardero.devolverPunto().getY(),501.5);
-		assertEquals(helicoptero.devolverPunto().getY(),148.0);
-		
 	}
 	
 	@Test
@@ -334,16 +332,6 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 			} catch (AlgoSeAtacaASiMismoError error) {
 				//No puede ocurrir
 			}
-		}
-
-		Punto posicionCivil = new Punto(20,500);
-		Civil avion = new Civil( posicionCivil , plano );
-		algo.dispararTorpedoRastreador();
-		Arma TorpedoRastreador = plano.devolverListaArmas().get(6);
-		while ( !avion.estadoActualDestruida() ) {
-			TorpedoRastreador.mover();
-			TorpedoRastreador.intentarChocar(avion);
-			avion.mover();
 		}
 	}
 	

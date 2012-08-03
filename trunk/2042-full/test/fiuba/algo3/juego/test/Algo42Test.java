@@ -3,6 +3,7 @@ package fiuba.algo3.juego.test;
 import junit.framework.TestCase;
 import org.junit.Test;
 import fiuba.algo3.juego.modelo.Algo42;
+import fiuba.algo3.juego.modelo.Caza;
 import fiuba.algo3.juego.modelo.Plano;
 import fiuba.algo3.juego.modelo.Punto;
 import fiuba.algo3.juego.modelo.excepciones.AreaInvalidaError;
@@ -124,6 +125,7 @@ public class Algo42Test extends TestCase{
 		Plano plano = new Plano(100,100);
 		Punto posicionAlgo = new Punto(50,50);
 		Algo42 algo = new Algo42(posicionAlgo,plano);
+		new Caza(new Punto(80,80),plano);
 
 		try {
 		    algo.dispararTorpedoRastreador();
@@ -133,7 +135,6 @@ public class Algo42Test extends TestCase{
 			// si sale por aqui es que la prueba ha ido bien
 		}
 
-		
 		// Le doy cohetes.
 		algo.aumentarArmas(4, 0, 0, 0);
 		// Ahora si deberia poder disparar."
@@ -142,7 +143,7 @@ public class Algo42Test extends TestCase{
 			//Si esto anda es porque no lanzo excepcion y ademas dispara
 		} catch (ArmaNoDisponibleError error) {}
 		
-		assertEquals( plano.devolverListaArmas().size(),1);
+		assertEquals( plano.devolverListaArmas().size(), 1);
 	}
 	
 	@Test
