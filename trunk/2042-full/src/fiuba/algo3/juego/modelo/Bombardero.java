@@ -36,17 +36,6 @@ public class Bombardero extends NaveNoOperable implements Serializable {
 		plano.agregarObjetoNuevo(this);
 	}
 
-	/* Crea una instancia de ArmaAbandonada y la devuelve */ 
-	public Item dejarArma() throws ItemNoDisponibleError {
-
-		if (!this.estaDestruida) {
-			throw new ItemNoDisponibleError("El bombardero aun no esta destruido, no puede dejar armas");
-		}
-		Item itemDejado = new ArmaAbandonada(this.devolverPunto(),this.plano);		
-
-		return itemDejado;
-	}
-
 	@Override
 	/* Recibe una cierta cantidad de puntos y los suma a la energia de la nave. Ademas,
 	 * si la energia es menor a 0, el bombardero deja un paquete de armas en el escenario de juego

@@ -1,6 +1,8 @@
 package fiuba.algo3.juego.modelo;
 
 import java.util.Iterator;
+import java.util.Random;
+import fiuba.algo3.juego.modelo.excepciones.ItemNoDisponibleError;
 import fiuba.algo3.juego.modelo.excepciones.NaveNoDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
@@ -176,7 +178,26 @@ public abstract class NaveNoOperable extends Nave {
 
 	/* La nave dispara un torpedo rastreador */
 	public void dispararTorpedoRastreador() {
-		new TorpedoRastreador( this.devolverPuntoParaArma(), false, this.plano);
+		new TorpedoRastreador(this.devolverPuntoParaArma(), false, this.plano);
+	}
+
+	/* La nave dispara un torpedo rastreador V2 */
+	public void dispararTorpedoRastreadorV2() {
+	
+		Random generadorRandom = new Random();
+		int ancho = rectangulo.devolverAncho();
+		int altura = rectangulo.devolverAltura();
+		int cantTorpedosDisp = generadorRandom.nextInt(2) + 3;
+		int i = 0;
+		
+		while (i < cantTorpedosDisp) {
+			int x = generadorRandom.nextInt(ancho);
+			int y = generadorRandom.nextInt(altura);
+			
+			Punto posTorpedo = new Punto(this.devolverPunto().getX() + x, this.devolverPunto().getY() + y);
+			new TorpedoRastreadorV2(posTorpedo, false, this.plano);
+			i++;
+		}
 	}
 
 	/* Devuelve el punto en donde se va a crear el arma disparada */
@@ -198,6 +219,25 @@ public abstract class NaveNoOperable extends Nave {
 	/* Me indica si la nave esta huyendo o no */
 	public boolean estaHuyendo() {
 		return tengoQueHuir;
+	}
+
+	/* Crea una instancia de ArmaAbandonada y la devuelve */ 
+	public Item dejarArma() throws ItemNoDisponibleError {
+
+		if (!this.estaDestruida)
+			throw new ItemNoDisponibleError("La nave aun no esta destruida, no puede dejar armas");
+		Item itemDejado = new ArmaAbandonada(this.devolverPunto(), this.plano);		
+		return itemDejado;
+	}
+	
+	/* Crea una instancia de TanqueEnergia y la devuelve */
+	public Item dejarTanque() throws ItemNoDisponibleError {
+		
+		Item itemDejado;
+		if (!this.estaDestruida)
+			throw new ItemNoDisponibleError("La nave aun no esta destruida, no puede dejar armas.");
+		itemDejado = new TanqueEnergia(this.devolverPunto(), this.plano);
+		return itemDejado;
 	}
 
 }

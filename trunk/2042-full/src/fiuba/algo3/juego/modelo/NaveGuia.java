@@ -35,9 +35,8 @@ public class NaveGuia extends NaveNoOperable {
 	 */
 	public void destruirse() throws NaveNoDestruidaError {
 
-		if (this.devolverEnergia() > 0) {
+		if (this.devolverEnergia() > 0)
 			throw new NaveNoDestruidaError("La nave aun tiene energia en su tanque");
-		}
 		else {
 			estaDestruida = true;
 			plano.agregarNaveEliminada(this);
@@ -63,14 +62,12 @@ public class NaveGuia extends NaveNoOperable {
 				unaNave.huir();
 			}
 		}
-		else {
+		else
 			throw new GuiaNoDestruidaError("La nave guia no fue destruida. La flota no tiene por que retirarse.");
-		}
 	}
 
 	@Override
-	/* Vivir de la nave guia
-	 * Obviamente esta nave no se retira */
+	/* Vivir de la nave guia */
 	public void vivir() {
 
 		if (!estaDestruida) {
@@ -87,16 +84,16 @@ public class NaveGuia extends NaveNoOperable {
 	public void disparar() {
 
 		if (velocidadDisparoCont == velocidadDisparo) {
-
+			
 			Random generadorRandom = new Random();
 			int i = generadorRandom.nextInt(10);
 
 			if (i <= 2) {
 				this.dispararCohete();
-			} else if (i == 3) {
+			} else if (i <= 5) {
 				this.dispararTorpedoRastreador();
-			} else if (i <= 7) {
-				this.dispararTorpedo();
+			} else if (i <= 8) {
+				this.dispararTorpedoRastreadorV2();
 			} else {
 				this.dispararTorpedoAdaptable();
 			}
