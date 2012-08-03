@@ -56,7 +56,7 @@ public abstract class Nave extends ObjetoUbicable implements Serializable {
 	/* Recibe una cierta cantidad de puntos y los suma a la energia de la nave */
 	public void modificarEnergia(int energiaAModificar) {
 
-		energia = (energia + energiaAModificar);
+		energia = energia + energiaAModificar;
 		if (energia <= 0) {
 			try {
 				this.destruirse();

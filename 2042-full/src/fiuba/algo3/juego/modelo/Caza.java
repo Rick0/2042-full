@@ -53,18 +53,6 @@ public class Caza extends NaveNoOperable implements Serializable{
 		}
 	}
 
-	/* Crea una instancia de TanqueEnergia y la devuelve */
-	public Item dejarTanque() throws ItemNoDisponibleError {
-		
-		Item itemDejado;
-		if (!this.estaDestruida) {
-			throw new ItemNoDisponibleError("El caza aun no esta destruido, no puede dejar armas.");
-		}
-		itemDejado = new TanqueEnergia(this.devolverPunto(), this.plano);
-
-		return itemDejado;
-	}
-
 	@Override
 	/* Recibe una cierta cantidad de puntos y los suma a la energ�a de la nave. Ademas,
 	/* si la energia es menor a 0, el bombardero deja un paquete de armas en el escenario de juego
