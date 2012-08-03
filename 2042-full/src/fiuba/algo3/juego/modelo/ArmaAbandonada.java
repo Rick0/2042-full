@@ -7,15 +7,16 @@ import fiuba.algo3.juego.modelo.excepciones.ItemUsadoError;
 public class ArmaAbandonada extends Item implements Serializable{
 
 	private static final long serialVersionUID = 4277112145617414325L;
-	private int numeroTorpedos, numeroCohetes, numeroTorpedosV2;
+	private int numeroTorpedos, numeroCohetes, numeroTorpedosV2, numeroCohetesV2;
 
 
 	public ArmaAbandonada(Punto punto, Plano unPlano) {
+		puntos = 10;
 		fueUsado = false;
-		numeroTorpedos = 5;
-		numeroCohetes  = 6;
-		numeroTorpedosV2 = 12;
-	//	numeroCohetesV2  = 2;
+		numeroTorpedos = 4;
+		numeroCohetes  = 5;
+		numeroTorpedosV2 = 8;
+		numeroCohetesV2  = 2;
 		rectangulo = new Rectangulo(40, 40, punto);
 		plano = unPlano;
 		try {
@@ -48,6 +49,11 @@ public class ArmaAbandonada extends Item implements Serializable{
 	/* Devuelve la cantidad de torpedosV2 del tanque */
 	public int getNumeroTorpedosV2() {
 		return numeroTorpedosV2;
+	}
+
+	/* Devuelve la cantidad de cohetesV2 del tanque */
+	public int getNumeroCohetesV2() {
+		return numeroCohetesV2;
 	}
 
 }

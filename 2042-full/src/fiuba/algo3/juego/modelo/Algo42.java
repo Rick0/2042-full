@@ -21,11 +21,14 @@ public class Algo42 extends Nave implements Serializable {
 	private static final long serialVersionUID = -3316879072392921990L;
 	static int cantAMover = 5;
 	static int cantAMoverSuperMode = 6;
-	int torpedos;
 	int cohetes;
+	int cohetesV2;
+	int torpedos;
 	int torpedosV2;
 	static final int velocidadDisparoCohete = 15;
 	int velocidadDisparoCoheteCont;
+	static final int velocidadDisparoCoheteV2 = 60;
+	int velocidadDisparoCoheteV2Cont;
 	static final int velocidadDisparoTorpedo = 20;
 	int velocidadDisparoTorpedoCont;
 	static final int velocidadDisparoTorpedoV2 = 25;
@@ -55,12 +58,14 @@ public class Algo42 extends Nave implements Serializable {
 		velocidadDisparo = 12;
 		velocidadDisparoCont = velocidadDisparo;
 		velocidadDisparoCoheteCont = velocidadDisparoCohete;
+		velocidadDisparoCoheteV2Cont = velocidadDisparoCoheteV2;
 		velocidadDisparoTorpedoCont = velocidadDisparoTorpedo;
 		velocidadDisparoTorpedoV2Cont = velocidadDisparoTorpedoV2;
 		plano = planoJuego;
 		energia = energiaInicial;
-		torpedos = 0;
-		cohetes = 0;
+		cohetes = 299;
+		cohetesV2 = 299;
+		torpedos = 299;
 		torpedosV2 = 299;
 		estaDestruida = false;
 		esOperable = true;
@@ -86,12 +91,14 @@ public class Algo42 extends Nave implements Serializable {
 		velocidadDisparo = 12;
 		velocidadDisparoCont = velocidadDisparo;
 		velocidadDisparoCoheteCont = velocidadDisparoCohete;
+		velocidadDisparoCoheteV2Cont = velocidadDisparoCoheteV2;
 		velocidadDisparoTorpedoCont = velocidadDisparoTorpedo;
 		velocidadDisparoTorpedoV2Cont = velocidadDisparoTorpedoV2;
 		plano = null;
 		energia = energiaInicial;
-		torpedos = 0;
-		cohetes = 0;
+		cohetes = 299;
+		cohetesV2 = 299;
+		torpedos = 299;
 		torpedosV2 = 299;
 		estaDestruida = false;
 		esOperable = true;
@@ -112,6 +119,8 @@ public class Algo42 extends Nave implements Serializable {
 			this.dispararLaserV1();
 		else
 			this.dispararLaserV2();
+		
+		this.efectoAutomaticoDisparar = 1;
 	}
 	
 	private void dispararLaserV1() {
@@ -123,7 +132,6 @@ public class Algo42 extends Nave implements Serializable {
 			Punto posLaser = new Punto(this.devolverPunto().getX()+(ancho/2)-6, this.devolverPunto().getY()+altura);
 			new Laser(posLaser, true, this.plano);
 			velocidadDisparoCont = 0;
-			this.efectoAutomaticoDisparar = 1;
 		}
 	}
 	
@@ -138,18 +146,29 @@ public class Algo42 extends Nave implements Serializable {
 			new Laser(posLaser1, true, this.plano);
 			new Laser(posLaser2, true, this.plano);
 			velocidadDisparoCont = 0;
-			this.efectoAutomaticoDisparar = 1;
 		}
 	}
 
 	/* Crea una instancia de cohete en la posicion del algo42 */
 	public void dispararCohete() throws ArmaNoDisponibleError {
 
+		if (this.superMode == 0)
+			this.dispararCoheteV1();
+		else
+			this.dispararCoheteV2();
+			
+		if (cohetes <= 0  ||  cohetesV2 <= 0)
+			this.efectoAutomaticoDisparar = 0;
+		else
+			this.efectoAutomaticoDisparar = 2;
+	}
+
+	public void dispararCoheteV1() throws ArmaNoDisponibleError {
+
 		if ((velocidadDisparoCoheteCont == velocidadDisparoCohete) && puedeDisparar) {
 
-			if ( cohetes <= 0 ) {
+			if ( cohetes <= 0 )
 				throw new ArmaNoDisponibleError("No hay cohetes que lanzar.");
-			}
 
 			int ancho = rectangulo.devolverAncho();
 			int altura = rectangulo.devolverAltura();
@@ -157,10 +176,22 @@ public class Algo42 extends Nave implements Serializable {
 			new Cohete(posCohete, true, this.plano);
 			cohetes = (cohetes - 1);
 			velocidadDisparoCoheteCont = 0;
-			if (cohetes <= 0)
-				this.efectoAutomaticoDisparar = 0;
-			else
-				this.efectoAutomaticoDisparar = 2;
+		}
+	}
+
+	public void dispararCoheteV2() throws ArmaNoDisponibleError {
+
+		if ((velocidadDisparoCoheteV2Cont == velocidadDisparoCoheteV2) && puedeDisparar) {
+
+			if ( cohetesV2 <= 0 )
+				throw new ArmaNoDisponibleError("No hay cohetesV2 que lanzar.");
+
+			int ancho = rectangulo.devolverAncho();
+			int altura = rectangulo.devolverAltura();
+			Punto posCohete = new Punto(this.devolverPunto().getX()+(ancho/2)-6, this.devolverPunto().getY()+altura);
+			new CoheteV2(posCohete, true, this.plano);
+			cohetesV2 = (cohetesV2 - 1);
+			velocidadDisparoCoheteV2Cont = 0;
 		}
 	}
 
@@ -171,15 +202,19 @@ public class Algo42 extends Nave implements Serializable {
 			this.dispararTorpedoRastreadorV1();
 		else
 			this.dispararTorpedoRastreadorV2();
+			
+		if (torpedos <= 0  ||  torpedosV2 <= 0)
+			this.efectoAutomaticoDisparar = 0;
+		else
+			this.efectoAutomaticoDisparar = 3;
 	}
 
 	private void dispararTorpedoRastreadorV1() throws ArmaNoDisponibleError {
 
 		if ((velocidadDisparoTorpedoCont == velocidadDisparoTorpedo) && puedeDisparar) {
 
-			if (torpedos <= 0) {
+			if (torpedos <= 0)
 				throw new ArmaNoDisponibleError("No hay torpedos que lanzar.");
-			}
 
 			int ancho = rectangulo.devolverAncho();
 			int altura = rectangulo.devolverAltura();
@@ -187,10 +222,6 @@ public class Algo42 extends Nave implements Serializable {
 			new TorpedoRastreador(posTorpedo, true, this.plano);
 			torpedos = (torpedos - 1);
 			velocidadDisparoTorpedoCont = 0;
-			if (torpedos <= 0)
-				this.efectoAutomaticoDisparar = 0;
-			else
-				this.efectoAutomaticoDisparar = 3;
 		}
 	}
 
@@ -198,9 +229,8 @@ public class Algo42 extends Nave implements Serializable {
 
 		if ((velocidadDisparoTorpedoV2Cont == velocidadDisparoTorpedoV2) && puedeDisparar) {
 
-			if (torpedosV2 <= 0) {
+			if (torpedosV2 <= 0)
 				throw new ArmaNoDisponibleError("No hay torpedosV2 que lanzar.");
-			}
 			
 			Random generadorRandom = new Random();
 			int ancho = rectangulo.devolverAncho();
@@ -219,18 +249,15 @@ public class Algo42 extends Nave implements Serializable {
 			}
 			
 			velocidadDisparoTorpedoV2Cont = 0;
-			if (torpedosV2 <= 0)
-				this.efectoAutomaticoDisparar = 0;
-			else
-				this.efectoAutomaticoDisparar = 3;
 		}
 	}
 
 	/* Aumenta las cantidades de las armas recibidas por parametro */
-	public void aumentarArmas(int cantidadTorpedos, int cantidadCohetes, int cantidadTorpedosV2) {
+	public void aumentarArmas(int cantidadTorpedos, int cantidadCohetes, int cantidadTorpedosV2, int cantidadCohetesV2) {
 		this.torpedos = (this.torpedos + cantidadTorpedos);
 		this.cohetes = (this.cohetes + cantidadCohetes);
 		this.torpedosV2 = (this.torpedosV2 + cantidadTorpedosV2);
+		this.cohetesV2 = (this.cohetesV2 + cantidadCohetesV2);
 	}
 
 	/* Este metodo se llama cuando se destruye el Algo42
@@ -240,11 +267,13 @@ public class Algo42 extends Nave implements Serializable {
 
 		velocidadDisparoCont = velocidadDisparo;
 		velocidadDisparoCoheteCont = velocidadDisparoCohete;
+		velocidadDisparoCoheteV2Cont = velocidadDisparoCoheteV2;
 		velocidadDisparoTorpedoCont = velocidadDisparoTorpedo;
 		velocidadDisparoTorpedoV2Cont = velocidadDisparoTorpedoV2;
 		energia = energiaInicial;
-		torpedos = 0;
-		cohetes = 0;
+		cohetes = 299;
+		cohetesV2 = 299;
+		torpedos = 299;
 		torpedosV2 = 299;
 		estaDestruida = false;
 		superMode = 0;
@@ -323,7 +352,7 @@ public class Algo42 extends Nave implements Serializable {
 	}
 
 	public void chocarCon(ArmaAbandonada unTanque) {
-		this.aumentarArmas(unTanque.getNumeroTorpedos(), unTanque.getNumeroCohetes(), unTanque.getNumeroTorpedosV2() );
+		this.aumentarArmas(unTanque.getNumeroTorpedos(), unTanque.getNumeroCohetes(), unTanque.getNumeroTorpedosV2(), unTanque.getNumeroCohetesV2() );
 	}
 
 	public int getCohetes() {		
@@ -332,6 +361,14 @@ public class Algo42 extends Nave implements Serializable {
 
 	public void setCohetes(int cantidad) {
 		cohetes = cantidad;
+	}
+
+	public int getCohetesV2() {		
+		return cohetesV2;
+	}
+
+	public void setCohetesV2(int cantidad) {
+		cohetesV2 = cantidad;
 	}
 
 	public int getTorpedos() {		
@@ -410,6 +447,9 @@ public class Algo42 extends Nave implements Serializable {
 		}
 		if (velocidadDisparoCoheteCont < velocidadDisparoCohete) {
 			velocidadDisparoCoheteCont++;
+		}
+		if (velocidadDisparoCoheteV2Cont < velocidadDisparoCoheteV2) {
+			velocidadDisparoCoheteV2Cont++;
 		}
 		if (velocidadDisparoTorpedoCont < velocidadDisparoTorpedo) {
 			velocidadDisparoTorpedoCont++;

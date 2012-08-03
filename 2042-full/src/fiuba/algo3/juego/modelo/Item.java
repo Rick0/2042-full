@@ -9,6 +9,7 @@ public abstract class Item extends ObjetoUbicable implements Serializable {
 	private static final long serialVersionUID = -4828893549103315270L;
 	boolean fueUsado;
 	int tiempoDeVida = 555;
+	int puntos;
 
 
 	/* Recibe una nave Algo42 (la nave manejada por el usuario)
@@ -55,6 +56,10 @@ public abstract class Item extends ObjetoUbicable implements Serializable {
 		else {
 			tiempoDeVida--;
 		}
+	}
+
+	public int devolverPuntosPorUtilizacion() {
+		return this.puntos;
 	}
 
 }

@@ -133,7 +133,7 @@ public abstract class NaveNoOperable extends Nave {
 	}
 
 	public int devolverPuntosPorEliminacion() {
-		return puntos;
+		return this.puntos;
 	}
 
 	/* Con este metodo, las naves no operables empiezan a retroceder en linea recta 

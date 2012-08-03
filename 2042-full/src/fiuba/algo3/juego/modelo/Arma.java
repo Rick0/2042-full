@@ -13,7 +13,7 @@ public abstract class Arma extends ObjetoUbicable implements Serializable {
 	int danio;
 	boolean fueUsado;
 	boolean origenAlgo42;
-	static int cantidadAMover = 5;
+	int cantidadAMover = 5;
 
 
 	/* True indica que quien lanzo el arma fue una instancia de Algo42,

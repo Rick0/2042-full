@@ -45,7 +45,7 @@ public class NivelTest extends TestCase {
 		}
 
 		assertTrue(plano.devolverListaNavesEliminades().size() > 1);
-		nivel.sumarPuntajeTurno( plano.devolverListaNavesEliminades() );
+		nivel.sumarPuntajeNaves( plano.devolverListaNavesEliminades() );
 		nivel.avanzarNivel();
 		//Deberia haber avanzado un nivel
 		assertEquals( nivel.devolverNumeroNivel() , 2 );

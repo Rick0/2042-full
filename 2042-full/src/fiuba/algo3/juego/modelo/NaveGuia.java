@@ -15,7 +15,7 @@ public class NaveGuia extends NaveNoOperable {
 
 	public NaveGuia(Punto punto, Plano planoJuego) throws SuperposicionNavesError, NaveDestruidaError{
 		puntos = 100;
-		energia = 80;
+		energia = 100;
 		rectangulo = new Rectangulo (112, 80, punto);
 		esOperable = false;
 		fueraDelPlano = false;

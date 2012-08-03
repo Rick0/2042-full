@@ -38,12 +38,12 @@ public class TextoEnergiaEInventario implements ObjetoDeTexto, ObjetoVivo{
 		
 		if (algo42.estadoSuperMode() == 0)
 			this.setTexto("Energia: " + energiaActual +
-							espacio + espacio + espacio + espacio + espacio +
+							espacio + espacio + espacio + espacio +
 						  "Misiles: " + algo42.getCohetes() +
-						    espacio + espacio + espacio + espacio + espacio +
+						    espacio + espacio + espacio + espacio +
 						  "Torpedos: " + algo42.getTorpedos() );
 		else if (algo42.estadoSuperMode() == 1)
-			this.setTexto("Energia: " + energiaActual + espacio + "Misiles Nucleares: " + algo42.getCohetes() + espacio + "Multi Torpedos: " + algo42.getTorpedosV2() );
+			this.setTexto("Energia: " + energiaActual + espacio + "Misiles Nucleares: " + algo42.getCohetesV2() + espacio + "Multi Torpedos: " + algo42.getTorpedosV2() );
 	}
 
 }

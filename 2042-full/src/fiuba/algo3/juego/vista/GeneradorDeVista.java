@@ -11,7 +11,6 @@ public class GeneradorDeVista {
 
 	public GeneradorDeVista() {	}
 
-
 	/* Devuelve una vista dependiendo del objeto ubicable que se le pase */
 	@SuppressWarnings("rawtypes")
 	public Imagen devolverVista(ObjetoUbicable unObjeto) {
@@ -52,11 +51,11 @@ public class GeneradorDeVista {
 		nombreClaseRaw.getChars(indice+1, largo, nombreClase, 0);
 		nombreClaseCompleto = new String(nombreClase);
 
-		if ( (nombreClaseCompleto.equals("Laser")) || (nombreClaseCompleto.equals("Cohete")) || (nombreClaseCompleto.equals("TorpedoRastreador")) || (nombreClaseCompleto.equals("TorpedoRastreadorV2")) ) {
-			if (((Arma) unObjeto).origenAlgo42()) {
+		if ( (nombreClaseCompleto.equals("Laser")) || (nombreClaseCompleto.equals("Cohete")) || (nombreClaseCompleto.equals("CoheteV2"))|| (nombreClaseCompleto.equals("TorpedoRastreador")) || (nombreClaseCompleto.equals("TorpedoRastreadorV2")) ) {
+			if ( ((Arma) unObjeto).origenAlgo42() )
 				nombreClaseCompleto = ("fiuba.algo3.juego.vista.Vista" + nombreClaseCompleto + "HaciaArriba"); 
-			}
-			else { nombreClaseCompleto = ("fiuba.algo3.juego.vista.Vista" + nombreClaseCompleto + "HaciaAbajo"); }
+			else
+				nombreClaseCompleto = ("fiuba.algo3.juego.vista.Vista" + nombreClaseCompleto + "HaciaAbajo");
 		}
 		else {
 			nombreClaseCompleto = "fiuba.algo3.juego.vista.Vista" + nombreClaseCompleto;
