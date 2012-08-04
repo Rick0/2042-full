@@ -17,7 +17,7 @@ public abstract class Nave extends ObjetoUbicable implements Serializable {
 
 	public Nave() {
 		velocidadDisparo = 120;
-		velocidadDisparoCont = velocidadDisparo - 1;
+		velocidadDisparoCont = velocidadDisparo;
 	}
 
 	/* Devuelve la velocidad de disparo de la nave */

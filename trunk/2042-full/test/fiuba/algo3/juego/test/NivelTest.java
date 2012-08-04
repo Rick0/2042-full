@@ -25,7 +25,7 @@ public class NivelTest extends TestCase {
 	
 	@Test
 	/* Crea un plano y una lista de naves, a las cuales les modificara la energia para que pasen a estar destruidas.
-	 * Las naves seran 20 cazas. La destruccion de un caza da 50 puntos; Eliminar 20 da los 1000 puntos necesarios para avanzar de nivel. */
+	 * Las naves seran 20 cazas. La destruccion de un caza da 50 puntos; Eliminar 40, y me da suficientes puntos necesarios para avanzar de nivel. */
 	public void testAvanzarNiveles() throws SuperposicionNavesError, NaveDestruidaError {
 
 		Nivel nivel = new Nivel();
@@ -35,13 +35,13 @@ public class NivelTest extends TestCase {
 		assertEquals( nivel.devolverNumeroNivel() , 1 );
 		int i = 1;
 
-		while ( i < 21 ) {
+		while ( i < 41 ) {
 			i++;
 			posx = ( posx + 100 );
 			posy = ( posy + 100 );
 			Punto punto= new Punto(posx,posy);
 			Caza caza = new Caza( punto , plano );
-			caza.modificarEnergia( -20 ); //Destruyo el caza
+			caza.modificarEnergia( -80 ); //Destruyo el caza
 		}
 
 		assertTrue(plano.devolverListaNavesEliminades().size() > 1);

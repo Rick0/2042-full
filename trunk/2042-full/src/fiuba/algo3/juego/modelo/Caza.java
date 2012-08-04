@@ -16,6 +16,8 @@ public class Caza extends NaveNoOperable implements Serializable{
 	public Caza(Punto punto, Plano plano) throws SuperposicionNavesError, NaveDestruidaError {
 
 		super();
+		Random generadorRandom = new Random();
+		velocidadDisparo = 100 + generadorRandom.nextInt(21);
 		puntos = 50;
 		energia = 10;
 		esOperable = false;
@@ -37,18 +39,18 @@ public class Caza extends NaveNoOperable implements Serializable{
 	 */
 	public void disparar() {
 
-		if (velocidadDisparoCont == velocidadDisparo) {
+		if (velocidadDisparoCont >= velocidadDisparo) {
 
 			Random generadorRandom = new Random();
 			// Genera un entero que va desde 0 hasta nextInt-1, o sea 3
 			// Hay 75% de que dispare torpedo simple, y 25% para el torpedo adaptable
 			int i = generadorRandom.nextInt(4);
 
-			if (i == 0) {
+			if (i == 0)
 				this.dispararTorpedoAdaptable();
-			} else {
+			else
 				this.dispararTorpedo();
-			}
+
 			velocidadDisparoCont = 0;
 		}
 	}
@@ -59,7 +61,7 @@ public class Caza extends NaveNoOperable implements Serializable{
 	 */
 	public void modificarEnergia( int cantidad ) {
 
-		energia = (energia + cantidad);
+		energia = energia + cantidad;
 		if (energia <= 0) {
 			try {
 				this.destruirse();
@@ -81,9 +83,8 @@ public class Caza extends NaveNoOperable implements Serializable{
 
 		Punto nuevoPunto = new Punto(this.devolverPunto().getX(), this.devolverPunto().getY()-1);
 		this.cambiarPosicion(nuevoPunto);
-		if (this.seSuperponeConOtraNave() ) {
+		if (this.seSuperponeConOtraNave() )
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
-		}
 		this.estaFueraDelPlano();
 	}
 
@@ -95,9 +96,8 @@ public class Caza extends NaveNoOperable implements Serializable{
 
 		Punto nuevoPunto = new Punto(this.devolverPunto().getX(), this.devolverPunto().getY()+1);
 		this.cambiarPosicion(nuevoPunto);
-		if (this.seSuperponeConOtraNave() ) {
+		if (this.seSuperponeConOtraNave() )
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
-		}
 		this.estaFueraDelPlano();
 	}
 

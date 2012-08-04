@@ -12,6 +12,7 @@ public class Nivel implements Serializable{
 	int puntosNivelActual;
 	int puntosTotales;
 	int numeroNivel;
+	final int puntosParaUnNivel = 1500;
 
 
 	public Nivel() {
@@ -62,16 +63,16 @@ public class Nivel implements Serializable{
 		}
 	}
 
-	/* Avanza un nivel si se tiene mas de 1000 puntos actuales
-	 * Retrocede un nivel si se tiene menos de -1000 puntos actuales
+	/* Avanza un nivel si se tiene mas de 1500 puntos actuales
+	 * Retrocede un nivel si se tiene menos de -1500 puntos actuales
 	 */
 	public void avanzarNivel() {
 
-		if (puntosNivelActual >= 1000) {
+		if (puntosNivelActual >= this.puntosParaUnNivel) {
 			puntosNivelActual = 0;
 			numeroNivel++;
 		}
-		else if (puntosNivelActual < -1000) {
+		else if (puntosNivelActual < (this.puntosParaUnNivel * -1)) {
 			puntosNivelActual = 0;
 			numeroNivel--;
 		}
