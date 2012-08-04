@@ -13,7 +13,9 @@ public class NaveGuia extends NaveNoOperable {
 	private static final long serialVersionUID = 3148574291086531899L;
 
 
-	public NaveGuia(Punto punto, Plano planoJuego) throws SuperposicionNavesError, NaveDestruidaError{
+	public NaveGuia(Punto punto, Plano planoJuego) throws SuperposicionNavesError, NaveDestruidaError {
+		
+		velocidadDisparo = 100;
 		puntos = 100;
 		energia = 100;
 		rectangulo = new Rectangulo (112, 80, punto);
@@ -21,10 +23,10 @@ public class NaveGuia extends NaveNoOperable {
 		fueraDelPlano = false;
 		estaDestruida = false;
 		this.determinarPlano(planoJuego);
-
-		if (this.seSuperponeConOtraNave()) {
+		
+		if (this.seSuperponeConOtraNave())
 			throw new SuperposicionNavesError("La posicion esta ocupada");
-		}
+		
 		planoJuego.agregarNave(this);
 		planoJuego.agregarObjetoNuevo(this);
 	}
@@ -73,7 +75,7 @@ public class NaveGuia extends NaveNoOperable {
 		if (!estaDestruida) {
 
 			this.intentarMover();
-			this.intentarChocar(this.plano.devolverAlgo42());
+		//	this.intentarChocar(this.plano.devolverAlgo42());
 			this.pasaUnTiempo();
 			this.disparar();
 		}
@@ -86,17 +88,17 @@ public class NaveGuia extends NaveNoOperable {
 		if (velocidadDisparoCont == velocidadDisparo) {
 			
 			Random generadorRandom = new Random();
-			int i = generadorRandom.nextInt(10);
+			int i = generadorRandom.nextInt(11);
 
-			if (i <= 2) {
+			if (i <= 2)
 				this.dispararCohete();
-			} else if (i <= 5) {
+			else if (i <= 6)
 				this.dispararTorpedoRastreador();
-			} else if (i <= 8) {
+			else if (i <= 8)
 				this.dispararTorpedoRastreadorV2();
-			} else {
+			else
 				this.dispararTorpedoAdaptable();
-			}
+
 			velocidadDisparoCont = 0;
 		}
 	}

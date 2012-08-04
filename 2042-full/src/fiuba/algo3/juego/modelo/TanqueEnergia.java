@@ -14,6 +14,7 @@ public class TanqueEnergia extends Item implements Serializable{
 	public TanqueEnergia(Punto punto, Plano unPlano) {
 		puntos = 5;
 		fueUsado = false;
+		sinTiempoDeVida = false;
 		Random generadorRandom = new Random();
 		aumentoEnergia = generadorRandom.nextInt(11) + 25;
 		rectangulo = new Rectangulo(40, 40, punto);

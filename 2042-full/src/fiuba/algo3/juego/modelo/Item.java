@@ -8,6 +8,7 @@ public abstract class Item extends ObjetoUbicable implements Serializable {
 
 	private static final long serialVersionUID = -4828893549103315270L;
 	boolean fueUsado;
+	boolean sinTiempoDeVida;
 	int tiempoDeVida = 555;
 	int puntos;
 
@@ -32,6 +33,11 @@ public abstract class Item extends ObjetoUbicable implements Serializable {
 	boolean fueUsado() {
 		return fueUsado;
 	}
+	
+	/* Devuelve true si el item ya no tiene mas tiempo de vida, false en caso contrario */
+	boolean sinTiempoDeVida() {
+		return sinTiempoDeVida;
+	}
 
 	/* Modifica el estado a no usado */
 	public void noUsado() {
@@ -50,12 +56,11 @@ public abstract class Item extends ObjetoUbicable implements Serializable {
 	public void pasaUnTiempo() {
 
 		if (tiempoDeVida <= 0) {
-			this.fueUsado = true;
+			this.sinTiempoDeVida = true;
 			plano.agregarItemUsado(this);
 		}
-		else {
+		else
 			tiempoDeVida--;
-		}
 	}
 
 	public int devolverPuntosPorUtilizacion() {

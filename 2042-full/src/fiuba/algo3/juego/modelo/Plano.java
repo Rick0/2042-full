@@ -29,6 +29,9 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 	int ancho;
 	int altura;
 	int vidas;
+	Nivel nivel = new Nivel();
+	boolean juegoPerdido;
+	boolean juegoGanado;
 	
 	Algo42 algo42;
 	ArrayList<NaveNoOperable> listaNavesAI = new ArrayList<NaveNoOperable>();
@@ -41,13 +44,10 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 	ArrayList<Item> listaItemsUsados = new ArrayList<Item>();
 	ArrayList<Arma> listaArmasUsadas = new ArrayList<Arma>();
 	
-	Nivel nivel = new Nivel();
 	ArrayList<ObjetoUbicable> listaObjetosAAgregar = new ArrayList<ObjetoUbicable>();
 	ArrayList<ObjetoUbicable> listaObjetosABorrar  = new ArrayList<ObjetoUbicable>();
-	boolean juegoPerdido;
-	boolean juegoGanado;
 
-
+	
 	/* Constructor del plano, recibe sus dimensiones
 	 * Crea sus listas de armas, naves e items, que se posicionaran en el plano
 	 */
@@ -108,9 +108,8 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 	/*Agrega un item del juego a la lista de items usados.*/
 	public void agregarItemUsado(Item item) {
 
-		if (!item.fueUsado()) {
+		if (!item.fueUsado()  &&  !item.sinTiempoDeVida())
 			throw new ItemNoUsadoError();
-		}
 		listaItemsUsados.add(item);
 	}
 
@@ -319,7 +318,7 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 		}
 
 		this.nivel.actuarCon(listaNavesDestruidas, listaItemsUsados);
-		if ((nivel.devolverNumeroNivel() >= 15) && (!juegoPerdido))
+		if ((nivel.devolverNumeroNivel() >= 20) && (!juegoPerdido))
 			juegoGanado = true;
 		
 		if (this.nivel.devolverPuntosActuales() > 50  &&  this.devolverAlgo42().superMode == 0)

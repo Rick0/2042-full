@@ -20,7 +20,7 @@ public class Algo42 extends Nave implements Serializable {
 
 	private static final long serialVersionUID = -3316879072392921990L;
 	static int cantAMover = 5;
-	static int cantAMoverSuperMode = 6;
+	static int cantAMoverSuperMode = 5;
 	int cohetes;
 	int cohetesV2;
 	int torpedos;
@@ -39,7 +39,7 @@ public class Algo42 extends Nave implements Serializable {
 	static final int energiaInicial = 100;
 	boolean puedeDisparar;
 	int superMode;	// 0 es false, 1 es true
-	static int tiempoSuperMode = 555;
+	static int tiempoSuperMode = 500;
 	int tiempoSuperModeCont;
 	static int afterImageDelay = 6;
 	int afterImageDelayCont;
@@ -314,39 +314,43 @@ public class Algo42 extends Nave implements Serializable {
 	}
 
 	/* La nave Algo42 se mueve un lugar hacia abajo */
-	public void moverAbajo () throws AreaInvalidaError {	
-		if ((this.devolverPunto().getY()) <= 0){
-			throw new AreaInvalidaError("La nave ya no puede moverse mas hacia abajo");
+	public void moverAbajo () {	
+		if ((this.devolverPunto().getY()) <= 0)
+			this.efectoAutomaticoMover = 2;
+		else {
+			Punto nuevoPunto = new Punto(this.devolverPunto().getX(), (this.devolverPunto().getY() - this.cantAMoverse() ));
+			this.cambiarPosicion(nuevoPunto);
 		}
-		Punto nuevoPunto = new Punto(this.devolverPunto().getX(), (this.devolverPunto().getY() - this.cantAMoverse() ));
-		this.cambiarPosicion(nuevoPunto);
 	}
 
 	/* La nave Algo42 se mueve un lugar hacia arriba */
-	public void moverArriba () throws AreaInvalidaError {	
-		if ((this.devolverPunto().getY() + (rectangulo.devolverAltura())) > plano.devolverAltura()){
-			throw new AreaInvalidaError("La nave ya no puede moverse mas hacia arriba");
+	public void moverArriba () {	
+		if ((this.devolverPunto().getY() + (rectangulo.devolverAltura())) > plano.devolverAltura())
+			this.efectoAutomaticoMover = 1;
+		else {
+			Punto nuevaPosicion = new Punto(this.devolverPunto().getX(), (this.devolverPunto().getY() + this.cantAMoverse() ));
+			this.cambiarPosicion(nuevaPosicion);
 		}
-		Punto nuevaPosicion = new Punto(this.devolverPunto().getX(), (this.devolverPunto().getY() + this.cantAMoverse() ));
-		this.cambiarPosicion(nuevaPosicion);
 	}
 
 	/* La nave Algo42 se mueve un lugar hacia la derecha */
-	public void moverDerecha () throws AreaInvalidaError {
-		if ((this.devolverPunto().getX() + (rectangulo.devolverAncho())) > plano.devolverAncho()){
-			throw new AreaInvalidaError("La nave ya no puede moverse mas hacia la derecha");
+	public void moverDerecha () {
+		if ((this.devolverPunto().getX() + (rectangulo.devolverAncho())) > plano.devolverAncho())
+			this.efectoAutomaticoMover = 4;
+		else {
+			Punto nuevaPosicion = new Punto((this.devolverPunto().getX()) + this.cantAMoverse(), (this.devolverPunto().getY()));
+			this.cambiarPosicion(nuevaPosicion);
 		}
-		Punto nuevaPosicion = new Punto((this.devolverPunto().getX()) + this.cantAMoverse(), (this.devolverPunto().getY()));
-		this.cambiarPosicion(nuevaPosicion);
 	}
 
 	/* La nave Algo42 se mueve un lugar hacia la izquierda */
-	public void moverIzquierda () throws AreaInvalidaError {
-		if ((this.devolverPunto().getX()) <= 0){
-			throw new AreaInvalidaError("La nave ya no puede moverse mas hacia la izquierda");
+	public void moverIzquierda () {
+		if ((this.devolverPunto().getX()) <= 0)
+			this.efectoAutomaticoMover = 3;
+		else {
+			Punto nuevaPosicion = new Punto((this.devolverPunto().getX()) - this.cantAMoverse(), (this.devolverPunto().getY()));
+			this.cambiarPosicion(nuevaPosicion);
 		}
-		Punto nuevaPosicion = new Punto((this.devolverPunto().getX()) - this.cantAMoverse(), (this.devolverPunto().getY()));
-		this.cambiarPosicion(nuevaPosicion);
 	}
 
 	public void chocarCon(NaveNoOperable unaNave) {
