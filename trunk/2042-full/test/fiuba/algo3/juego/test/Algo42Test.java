@@ -24,22 +24,8 @@ public class Algo42Test extends TestCase{
 		Punto punto = new Punto(0,96);
 		Algo42 algo = new Algo42(punto,plano);
 
-		/*Intentar mover la nave hacia arriba deberia devolver un error del tipo AreaInvalida*/
-		algo.moverArriba();
-		fail("Deberia haber lanzado una excepcion");
-
-		/*Muestro como podria capturar el error del tipo AreaInvalida: simplemente no muevo la nave.*/
-		algo.moverArriba();
-
 		assertEquals(algo.devolverPunto().getX(),0.0);
 		assertEquals(algo.devolverPunto().getY(),96.0);
-
-		/*Intentar mover la nave hacia  la izquierda tambien deberia devolver un error del tipo AreaInvalida*/
-		algo.moverIzquierda();
-		fail("Deberia haber lanzado una excepcion");
-
-
-
 	}
 
 

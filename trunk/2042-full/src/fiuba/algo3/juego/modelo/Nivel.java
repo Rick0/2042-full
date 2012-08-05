@@ -47,6 +47,21 @@ public class Nivel implements Serializable{
 			}
 		}
 	}
+
+	/* Recibe la lista de aliados que se eliminaron durante un turno, y agrega puntaje */
+	public void sumarPuntajeNavesAliadas(ArrayList<NaveNoOperable> listaNavesAliadasEliminadas) {
+
+		NaveNoOperable unaNave;
+		Iterator<NaveNoOperable> iteradorNavesAliadas = listaNavesAliadasEliminadas.iterator();
+
+		while (iteradorNavesAliadas.hasNext()) {
+			unaNave = iteradorNavesAliadas.next();
+			if (unaNave.estadoActualDestruida() ) {
+				puntosNivelActual = ( puntosNivelActual + unaNave.devolverPuntosPorEliminacion() );
+				puntosTotales = ( puntosTotales + unaNave.devolverPuntosPorEliminacion() );
+			}
+		}
+	}
 	
 	/* Recibe la lista de items que eso Algo42 durante un turno, y agrega puntaje */
 	public void sumarPuntajeItems(ArrayList<Item> listaItemsUsados) {
@@ -79,8 +94,9 @@ public class Nivel implements Serializable{
 	}
 
 	/* La accion del nivel consiste en sumar su puntaje e intentar avanzar, si es que se puede */
-	public void actuarCon(ArrayList<NaveNoOperable> listaNavesEliminadas, ArrayList<Item> listaItemsUsados) {
+	public void actuarCon(ArrayList<NaveNoOperable> listaNavesEliminadas, ArrayList<NaveNoOperable> listaNavesAliadasEliminadas, ArrayList<Item> listaItemsUsados) {
 		this.sumarPuntajeNaves(listaNavesEliminadas);
+		this.sumarPuntajeNavesAliadas(listaNavesAliadasEliminadas);
 		this.sumarPuntajeItems(listaItemsUsados);
 		this.avanzarNivel();
 	}

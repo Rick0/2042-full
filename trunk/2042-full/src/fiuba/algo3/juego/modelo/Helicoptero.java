@@ -2,6 +2,7 @@ package fiuba.algo3.juego.modelo;
 
 import java.io.Serializable;
 import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
+import fiuba.algo3.juego.modelo.excepciones.NaveNoDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
 
@@ -20,11 +21,14 @@ public class Helicoptero extends NaveNoOperable implements Serializable{
 		estaDestruida = false;
 		fueraDelPlano = false;
 		this.determinarPlano(plano);
+		chanceTanqueVida = 0;
+		chanceTanqueArma = 1;
+		this.cantAMover = 2;
 		
 		if (this.seSuperponeConOtraNave()) {
 			throw new SuperposicionNavesError("La posicion esta ocupada");
 		}
-		plano.agregarNave(this);
+		plano.agregarNaveAliada(this);
 		plano.agregarObjetoNuevo(this);
 	}
 
@@ -34,7 +38,7 @@ public class Helicoptero extends NaveNoOperable implements Serializable{
 		if (!estaDestruida) {
 
 			this.intentarMover();
-			this.intentarChocar(this.plano.devolverAlgo42());
+		//	this.intentarChocar(this.plano.devolverAlgo42());
 			this.pasaUnTiempo();
 			this.disparar();
 		}
@@ -42,11 +46,10 @@ public class Helicoptero extends NaveNoOperable implements Serializable{
 
 	/* El helicoptero se mueve hacia abajo */
 	public void mover() throws SuperposicionNavesError { 
-		Punto punto = new Punto (this.devolverPunto().getX(),this.devolverPunto().getY() - 2);
+		Punto punto = new Punto (this.devolverPunto().getX(),this.devolverPunto().getY() - this.cantAMover);
 		this.cambiarPosicion( punto );
-		if ( this.seSuperponeConOtraNave() ) {
+		if ( this.seSuperponeConOtraNave() )
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
-		}
 		this.estaFueraDelPlano();
 	}
 
@@ -55,11 +58,10 @@ public class Helicoptero extends NaveNoOperable implements Serializable{
 	 */
 	public void moverAlternativo() throws SuperposicionNavesError { 
 
-		Punto punto = new Punto (this.devolverPunto().getX(),this.devolverPunto().getY() + 1);
+		Punto punto = new Punto (this.devolverPunto().getX(),this.devolverPunto().getY() + (this.cantAMover/2) );
 		this.cambiarPosicion( punto);
-		if ( this.seSuperponeConOtraNave() ) {
+		if ( this.seSuperponeConOtraNave() )
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
-		}
 		this.estaFueraDelPlano();
 	}
 
@@ -67,4 +69,17 @@ public class Helicoptero extends NaveNoOperable implements Serializable{
 	/* El helicoptero tiene orden de no disparar */
 	public void disparar() {	}
 
+	@Override
+	/* Lleva a cabo las acciones correspondientes si debe destruirse */
+	public void destruirse() throws NaveNoDestruidaError {
+
+		if (this.devolverEnergia() > 0)
+			throw new NaveNoDestruidaError("La nave aun tiene energia en su tanque");
+		else {
+			estaDestruida = true;
+			plano.agregarNaveAliadaEliminada(this);
+			new NaveExplosion(this.devolverPunto(), this.plano);
+		}
+	}
+	
 }

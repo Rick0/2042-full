@@ -46,9 +46,8 @@ public class FlotaCazas extends ObjetoUbicable implements Serializable, ObjetoVi
 	/* En cada instante, se actualiza el contador del tiempo de crear cazas */
 	private void pasaUnTiempo() {
 
-		if (lapsoEntreCreacionCont < lapsoEntreCreacion) {
+		if (lapsoEntreCreacionCont < lapsoEntreCreacion)
 			lapsoEntreCreacionCont++;
-		}
 	}
 
 	/* Crea cazas para que adquieran la formacion V */

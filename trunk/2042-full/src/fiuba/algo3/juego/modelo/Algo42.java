@@ -259,10 +259,10 @@ public class Algo42 extends Nave implements Serializable {
 
 	/* Aumenta las cantidades de las armas recibidas por parametro */
 	public void aumentarArmas(int cantidadTorpedos, int cantidadCohetes, int cantidadTorpedosV2, int cantidadCohetesV2) {
-		this.torpedos = (this.torpedos + cantidadTorpedos);
-		this.cohetes = (this.cohetes + cantidadCohetes);
-		this.torpedosV2 = (this.torpedosV2 + cantidadTorpedosV2);
-		this.cohetesV2 = (this.cohetesV2 + cantidadCohetesV2);
+		this.torpedos = this.torpedos + cantidadTorpedos;
+		this.cohetes  = this.cohetes  + cantidadCohetes;
+		this.torpedosV2 = this.torpedosV2 + cantidadTorpedosV2;
+		this.cohetesV2  = this.cohetesV2  + cantidadCohetesV2;
 	}
 
 	/* Este metodo se llama cuando se destruye el Algo42
@@ -316,7 +316,7 @@ public class Algo42 extends Nave implements Serializable {
 	/* La nave Algo42 se mueve un lugar hacia abajo */
 	public void moverAbajo () {	
 		if ((this.devolverPunto().getY()) <= 0)
-			this.efectoAutomaticoMover = 2;
+			this.efectoAutomaticoMover = 0;
 		else {
 			Punto nuevoPunto = new Punto(this.devolverPunto().getX(), (this.devolverPunto().getY() - this.cantAMoverse() ));
 			this.cambiarPosicion(nuevoPunto);
@@ -326,7 +326,7 @@ public class Algo42 extends Nave implements Serializable {
 	/* La nave Algo42 se mueve un lugar hacia arriba */
 	public void moverArriba () {	
 		if ((this.devolverPunto().getY() + (rectangulo.devolverAltura())) > plano.devolverAltura())
-			this.efectoAutomaticoMover = 1;
+			this.efectoAutomaticoMover = 0;
 		else {
 			Punto nuevaPosicion = new Punto(this.devolverPunto().getX(), (this.devolverPunto().getY() + this.cantAMoverse() ));
 			this.cambiarPosicion(nuevaPosicion);
@@ -336,7 +336,7 @@ public class Algo42 extends Nave implements Serializable {
 	/* La nave Algo42 se mueve un lugar hacia la derecha */
 	public void moverDerecha () {
 		if ((this.devolverPunto().getX() + (rectangulo.devolverAncho())) > plano.devolverAncho())
-			this.efectoAutomaticoMover = 4;
+			this.efectoAutomaticoMover = 0;
 		else {
 			Punto nuevaPosicion = new Punto((this.devolverPunto().getX()) + this.cantAMoverse(), (this.devolverPunto().getY()));
 			this.cambiarPosicion(nuevaPosicion);
@@ -346,7 +346,7 @@ public class Algo42 extends Nave implements Serializable {
 	/* La nave Algo42 se mueve un lugar hacia la izquierda */
 	public void moverIzquierda () {
 		if ((this.devolverPunto().getX()) <= 0)
-			this.efectoAutomaticoMover = 3;
+			this.efectoAutomaticoMover = 0;
 		else {
 			Punto nuevaPosicion = new Punto((this.devolverPunto().getX()) - this.cantAMoverse(), (this.devolverPunto().getY()));
 			this.cambiarPosicion(nuevaPosicion);

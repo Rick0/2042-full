@@ -41,7 +41,7 @@ public abstract class Arma extends ObjetoUbicable implements Serializable {
 
 		if (origenAlgo42) {
 			Iterator<NaveNoOperable> iteradorNave = plano.listaNaves.iterator();
-			while(iteradorNave.hasNext()) {
+			while (iteradorNave.hasNext()) {
 			    NaveNoOperable elemento = iteradorNave.next(); 
 			    try {
 					this.intentarChocar(elemento);
@@ -53,10 +53,25 @@ public abstract class Arma extends ObjetoUbicable implements Serializable {
 					e.printStackTrace();
 				}
 			}
+			
+			Iterator<NaveNoOperable> iteradorNaveAliadas = plano.listaNavesAliadas.iterator();
+			while (iteradorNaveAliadas.hasNext()) {
+				NaveNoOperable unaNaveAliada = iteradorNaveAliadas.next(); 
+				try {
+					this.intentarChocar(unaNaveAliada);
+				} catch (AlgoSeAtacaASiMismoError e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (AtaqueEntreNavesNoOperables e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
 		}
 		else {
 			Iterator<NaveNoOperable> iteradorNaveAI = plano.listaNavesAI.iterator();
-			while(iteradorNaveAI.hasNext()) {
+			while (iteradorNaveAI.hasNext()) {
 				NaveNoOperable elemento = iteradorNaveAI.next(); 
 				try {
 					this.intentarChocar(elemento);
@@ -68,6 +83,7 @@ public abstract class Arma extends ObjetoUbicable implements Serializable {
 					e.printStackTrace();
 				}
 			}
+			
 			try {
 				this.intentarChocar(this.plano.devolverAlgo42());
 			} catch (AlgoSeAtacaASiMismoError e) {
@@ -78,17 +94,16 @@ public abstract class Arma extends ObjetoUbicable implements Serializable {
 				e.printStackTrace();
 			}
 		}
+		
 	}
 
 	/* Ataca a la nave que recibe por parametro. Devuelve true si el ataque fue efectivo, false en caso contrario */
 	public boolean intentarChocar(Nave unaNave) throws AlgoSeAtacaASiMismoError, AtaqueEntreNavesNoOperables {
 		
-		if ( unaNave.esOperable &&  origenAlgo42) {
+		if ( unaNave.esOperable &&  origenAlgo42)
 			throw new AlgoSeAtacaASiMismoError("Una nave algo42 no puede atacarse a si misma");
-		}
-		if (!unaNave.esOperable && !origenAlgo42) {
+		if (!unaNave.esOperable && !origenAlgo42)
 			throw new AtaqueEntreNavesNoOperables("Una nave no operable no puede atacar a otra del mismo tipo");
-		}
 
 		if (unaNave.coincidePosicionCon(this.rectangulo) && !unaNave.estadoActualDestruida()) {
 			unaNave.chocarCon(this);

@@ -27,13 +27,13 @@ public class CazaYFlotaTest extends TestCase {
 		/*Un caza es inicializado con 10 puntos de energia. Hasta que no sean iguales o menores que cero,
 		no puede dejar un item.*/
 		try {
-			caza.dejarTanque();
+			caza.dejarTanqueVida();
 			fail("NO ha muerto, no puede dejar un item");
 		} catch (ItemNoDisponibleError error) {}
 
 		//Modifico su energia y ahora si deberia crearlo, y en la posicion del caza"
 		caza.modificarEnergia( -10 );
-		Item item = caza.dejarTanque();
+		Item item = caza.dejarTanqueVida();
 		
 		assertEquals(item.devolverPunto().getX() , 50.0 );
 		assertEquals(item.devolverPunto().getY() , 50.0 );

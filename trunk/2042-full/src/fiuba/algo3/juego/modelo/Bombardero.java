@@ -2,7 +2,6 @@ package fiuba.algo3.juego.modelo;
 
 import java.io.Serializable;
 import java.util.Random;
-import fiuba.algo3.juego.modelo.excepciones.ItemNoDisponibleError;
 import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
@@ -28,40 +27,19 @@ public class Bombardero extends NaveNoOperable implements Serializable {
 		estaDestruida = false;
 		fueraDelPlano = false;
 		this.determinarPlano(plano);
+		chanceTanqueVida = 2;
+		chanceTanqueArma = 950;
 
-		if (this.seSuperponeConOtraNave()) {
+		if (this.seSuperponeConOtraNave())
 			throw new SuperposicionNavesError("La posicion esta ocupada");
-		}
+		
 		plano.agregarNave(this);
 		plano.agregarObjetoNuevo(this);
 	}
-
-	@Override
-	/* Recibe una cierta cantidad de puntos y los suma a la energia de la nave. Ademas,
-	 * si la energia es menor a 0, el bombardero deja un paquete de armas en el escenario de juego
-	 */
-	public void modificarEnergia(int cantidad) {
-
-		energia = (energia + cantidad);
-		if (energia <= 0) {
-			try {
-				this.destruirse();
-			} catch (Exception error) { 
-				// Esto no puede suceder
-			}
-
-			try {
-				this.dejarArma();
-			} catch (ItemNoDisponibleError error) { 
-				// Esto no puede suceder
-				return;
-			}
-		}
-	}
 	
 	/* El bombardero se mueve en Zig Zag; Primero se mueve 0.5 puntos hacia abajo y hacia la derecha.
-	 * Cuando ya bajo 10 puntos, empieza a ir 0.5 puntos hacia abajo y hacia la izquierda, hasta bajar
-	 * 10 puntos mas, y asi sucesivamente
+	 * Cuando ya bajo 20 puntos, empieza a ir 0.5 puntos hacia abajo y hacia la izquierda, hasta bajar
+	 * 20 puntos mas, y asi sucesivamente
 	 */
 	public void mover() throws SuperposicionNavesError {
 

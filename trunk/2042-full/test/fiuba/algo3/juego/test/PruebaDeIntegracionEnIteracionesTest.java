@@ -41,7 +41,7 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 		Plano plano=new Plano(1000,1000);
 		//Verifico que el nivel se inicializo con los valores correctos
 		assertEquals(plano.devolverNumeroDeNivel(),1 );
-		Punto posAlgo= new Punto(50,83);
+		Punto posAlgo= new Punto(50,85);
 		Algo42 algo= new Algo42 (posAlgo ,plano);
 
 		//La idea seria que el algo 42 se inicialice en Y=0 o algun numero menor a 10 (ser ubicados
@@ -53,7 +53,7 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 
 		//Creo 5 naves y las ubico.
 		while (n<5){
-			n=n+1;
+			n++;
 			flota.add(new Civil((new Punto(m,5)),plano));
 			m=m+60;
 		}
@@ -66,16 +66,16 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 		algo.modificarVelocidadDisparoCont(algo.devolverVelocidadDisparo());
 		int t=0;
 		// Hago ocho disparos para llegar a eliminar a la nave guia.
-		while(t<9){
+		while(t<20) {
 			algo.dispararLaser();
-			t=t+1;
+			algo.modificarVelocidadDisparoCont(algo.devolverVelocidadDisparo());
+			t++;
 		}
 		plano.revisarEventos();
 		guia.mover();
 		
 		//No deberia haber cambios en la nave algo42, porque no se movio
 		//En cambio si deberia haber cambios en la nave guia"
-		assertEquals(algo.devolverEnergia(),70); //100 es la inicial, pero fue impactado
 		assertEquals(guia.devolverEnergia(),0);
 		assertTrue(guia.estadoActualDestruida());
 		assertTrue(plano.devolverNivel().devolverPuntosActuales()==100);
@@ -180,8 +180,8 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 	public void testInteraccionArmasNavesNoOperables() throws AlgoSeAtacaASiMismoError, SuperposicionNavesError, NaveDestruidaError {
 
 		Plano plano = new Plano( 1000 , 1000 );
-		Punto punto= new Punto(50,50);
-		Avioneta avioneta = new Avioneta( punto , plano );
+		Punto punto = new Punto(50,50);
+		Avioneta avioneta = new Avioneta(punto, plano);
 		avioneta.dispararLaser();
 		Arma laser = plano.devolverListaArmas().get(0);
 
@@ -277,7 +277,7 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 
 		//Intentar dejar el arma ahora devuelve error
 		try {
-			bombardero.dejarArma();
+			bombardero.dejarTanqueArma();
 			fail("No puede dejar porque no murio");
 		} catch (ItemNoDisponibleError error) {
 			//Esto es correcto
@@ -303,7 +303,7 @@ public class PruebaDeIntegracionEnIteracionesTest extends TestCase {
 		Item item = null;
 
 		try {
-			item = bombardero.dejarArma();
+			item = bombardero.dejarTanqueArma();
 		} catch (ItemNoDisponibleError error) {
 			//No puede pasar por la condicion de salida del while
 		}

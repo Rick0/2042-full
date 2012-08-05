@@ -11,12 +11,12 @@ public class VistaAvioneta extends Imagen {
 
 	public VistaAvioneta() {
 		Random generadorRandom = new Random();
-		int i = generadorRandom.nextInt(4);
+		int i = generadorRandom.nextInt(5);
 
 		if (i == 0)
-			this.setNombreArchivoImagen(imagenPath+"Avioneta.png");
-		else
 			this.setNombreArchivoImagen(imagenPath+"Avioneta1.png");
+		else
+			this.setNombreArchivoImagen(imagenPath+"Avioneta.png");
 	}
 
 }
