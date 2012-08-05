@@ -2,7 +2,6 @@ package fiuba.algo3.juego.modelo;
 
 import java.io.Serializable;
 import java.util.Random;
-import fiuba.algo3.juego.modelo.excepciones.ItemNoDisponibleError;
 import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
@@ -25,10 +24,12 @@ public class Caza extends NaveNoOperable implements Serializable{
 		estaDestruida = false;
 		fueraDelPlano = false;
 		this.determinarPlano(plano);
+		chanceTanqueVida = 950;
+		chanceTanqueArma = 2;
 
-		if (this.seSuperponeConOtraNave()) {
+		if (this.seSuperponeConOtraNave())
 			throw new SuperposicionNavesError("La posicion esta ocupada");
-		}
+		
 		plano.agregarNave(this);
 		plano.agregarObjetoNuevo(this);
 	}
@@ -55,33 +56,10 @@ public class Caza extends NaveNoOperable implements Serializable{
 		}
 	}
 
-	@Override
-	/* Recibe una cierta cantidad de puntos y los suma a la energ�a de la nave. Ademas,
-	/* si la energia es menor a 0, el bombardero deja un paquete de armas en el escenario de juego
-	 */
-	public void modificarEnergia( int cantidad ) {
-
-		energia = energia + cantidad;
-		if (energia <= 0) {
-			try {
-				this.destruirse();
-			} catch (Exception error) { 
-				// Esto no puede suceder
-			}
-
-			try {
-				this.dejarTanque();
-			} catch (ItemNoDisponibleError error) { 
-				// Esto no puede suceder
-				return;
-			}
-		}
-	}
-
 	/* Los cazas se mueve hacia abajo */
 	public void mover() throws SuperposicionNavesError {
 
-		Punto nuevoPunto = new Punto(this.devolverPunto().getX(), this.devolverPunto().getY()-1);
+		Punto nuevoPunto = new Punto(this.devolverPunto().getX(), this.devolverPunto().getY() - this.cantAMover);
 		this.cambiarPosicion(nuevoPunto);
 		if (this.seSuperponeConOtraNave() )
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
@@ -94,7 +72,7 @@ public class Caza extends NaveNoOperable implements Serializable{
 	 */
 	public void moverAlternativo() throws SuperposicionNavesError {
 
-		Punto nuevoPunto = new Punto(this.devolverPunto().getX(), this.devolverPunto().getY()+1);
+		Punto nuevoPunto = new Punto(this.devolverPunto().getX(), this.devolverPunto().getY() + this.cantAMover);
 		this.cambiarPosicion(nuevoPunto);
 		if (this.seSuperponeConOtraNave() )
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");

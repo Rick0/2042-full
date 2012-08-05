@@ -15,6 +15,7 @@ public class NaveGuia extends NaveNoOperable {
 
 	public NaveGuia(Punto punto, Plano planoJuego) throws SuperposicionNavesError, NaveDestruidaError {
 		
+		super();
 		velocidadDisparo = 100;
 		puntos = 100;
 		energia = 100;
@@ -23,6 +24,8 @@ public class NaveGuia extends NaveNoOperable {
 		fueraDelPlano = false;
 		estaDestruida = false;
 		this.determinarPlano(planoJuego);
+		chanceTanqueVida = 500;
+		chanceTanqueArma = 500;
 		
 		if (this.seSuperponeConOtraNave())
 			throw new SuperposicionNavesError("La posicion esta ocupada");

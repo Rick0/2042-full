@@ -2,6 +2,7 @@ package fiuba.algo3.juego.modelo;
 
 import java.io.Serializable;
 import fiuba.algo3.juego.modelo.excepciones.NaveDestruidaError;
+import fiuba.algo3.juego.modelo.excepciones.NaveNoDestruidaError;
 import fiuba.algo3.juego.modelo.excepciones.SuperposicionNavesError;
 
 
@@ -20,11 +21,13 @@ public class Civil extends NaveNoOperable implements Serializable{
 		estaDestruida = false;
 		fueraDelPlano = false;
 		this.determinarPlano(plano);
+		chanceTanqueVida = 1;
+		chanceTanqueArma = 0;
 		
 		if (this.seSuperponeConOtraNave()) {
 			throw new SuperposicionNavesError("La posicion esta ocupada");
 		}
-		plano.agregarNave(this);
+		plano.agregarNaveAliada(this);
 		plano.agregarObjetoNuevo(this);
 	}
 
@@ -43,11 +46,10 @@ public class Civil extends NaveNoOperable implements Serializable{
 	/* La nave civil se mueve hacia abajo */
 	public void mover() throws SuperposicionNavesError { 
 
-		Punto nuevoPunto = new Punto(this.devolverPunto().getX(),this.devolverPunto().getY() - 1);
+		Punto nuevoPunto = new Punto(this.devolverPunto().getX(),this.devolverPunto().getY() - this.cantAMover);
 		this.cambiarPosicion( nuevoPunto );
-		if ( this.seSuperponeConOtraNave() ) {
+		if ( this.seSuperponeConOtraNave() )
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
-		}
 		this.estaFueraDelPlano();
 	}
 
@@ -57,11 +59,10 @@ public class Civil extends NaveNoOperable implements Serializable{
 	 */
 	public void moverAlternativo() throws SuperposicionNavesError {
 
-		Punto nuevoPunto= new Punto(this.devolverPunto().getX(),this.devolverPunto().getY() + 1);
+		Punto nuevoPunto= new Punto(this.devolverPunto().getX(),this.devolverPunto().getY() + this.cantAMover);
 		this.cambiarPosicion( nuevoPunto );
-		if (this.seSuperponeConOtraNave() ) {
+		if (this.seSuperponeConOtraNave() )
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
-		}
 		this.estaFueraDelPlano();
 	}
 	
@@ -69,4 +70,17 @@ public class Civil extends NaveNoOperable implements Serializable{
 	/* El avion civil no tiene armas */
 	public void disparar() {	}
 
+	@Override
+	/* Lleva a cabo las acciones correspondientes si debe destruirse */
+	public void destruirse() throws NaveNoDestruidaError {
+
+		if (this.devolverEnergia() > 0)
+			throw new NaveNoDestruidaError("La nave aun tiene energia en su tanque");
+		else {
+			estaDestruida = true;
+			plano.agregarNaveAliadaEliminada(this);
+			new NaveExplosion(this.devolverPunto(), this.plano);
+		}
+	}
+	
 }

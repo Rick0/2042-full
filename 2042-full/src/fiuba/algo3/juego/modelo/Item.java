@@ -1,6 +1,7 @@
 package fiuba.algo3.juego.modelo;
 
 import java.io.Serializable;
+import java.util.Random;
 
 
 /* Clase abstracta de la cual heredaran los items del juego */
@@ -11,8 +12,21 @@ public abstract class Item extends ObjetoUbicable implements Serializable {
 	boolean sinTiempoDeVida;
 	int tiempoDeVida = 555;
 	int puntos;
+	int cantAMover;
+	int movDelay;
+	int movDelayCont;
 
-
+	
+	public Item() {
+		Random generadorRandom = new Random();
+		cantAMover = generadorRandom.nextInt(3) + 1;
+		movDelay = generadorRandom.nextInt(5) + 2;
+		movDelayCont = 0;
+		
+		fueUsado = false;
+		sinTiempoDeVida = false;
+	}
+	
 	/* Recibe una nave Algo42 (la nave manejada por el usuario)
 	 * e intenta aplicar el efecto del item sobre ella.
 	 * Para eso, el Algo42 debe estar en la misma posicion que el item
@@ -26,6 +40,7 @@ public abstract class Item extends ObjetoUbicable implements Serializable {
 		if (!fueUsado) {
 			this.pasaUnTiempo();
 			this.intentarChocar(plano.devolverAlgo42());
+			this.mover();
 		}
 	}
 
@@ -43,7 +58,7 @@ public abstract class Item extends ObjetoUbicable implements Serializable {
 	public void noUsado() {
 		fueUsado = false;
 	}
-
+	
 	/* El item choca con el avion Algo42 */
 	public void chocarCon(Algo42 algo42) {
 		this.fueUsado = true;
@@ -61,10 +76,22 @@ public abstract class Item extends ObjetoUbicable implements Serializable {
 		}
 		else
 			tiempoDeVida--;
+		
+		if (this.movDelayCont < this.movDelay)
+			this.movDelayCont++;
 	}
 
 	public int devolverPuntosPorUtilizacion() {
 		return this.puntos;
+	}
+	
+	private void mover() {
+		
+		if (this.movDelayCont >= this.movDelay) {
+			Punto nuevoPunto = new Punto(this.devolverPunto().getX(),this.devolverPunto().getY() - this.cantAMover);
+			this.cambiarPosicion( nuevoPunto );
+			this.movDelayCont = 0;
+		}
 	}
 
 }

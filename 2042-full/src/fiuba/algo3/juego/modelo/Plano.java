@@ -36,11 +36,13 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 	Algo42 algo42;
 	ArrayList<NaveNoOperable> listaNavesAI = new ArrayList<NaveNoOperable>();
 	ArrayList<NaveNoOperable> listaNaves = new ArrayList<NaveNoOperable>();
+	ArrayList<NaveNoOperable> listaNavesAliadas = new ArrayList<NaveNoOperable>();
 	ArrayList<Item> listaItems = new ArrayList<Item>();
 	ArrayList<Arma> listaArmas = new ArrayList<Arma>();
 	
 	ArrayList<NaveNoOperable> listaNavesAIDestruidas = new ArrayList<NaveNoOperable>();
 	ArrayList<NaveNoOperable> listaNavesDestruidas = new ArrayList<NaveNoOperable>();
+	ArrayList<NaveNoOperable> listaNavesAliadasDestruidas = new ArrayList<NaveNoOperable>();
 	ArrayList<Item> listaItemsUsados = new ArrayList<Item>();
 	ArrayList<Arma> listaArmasUsadas = new ArrayList<Arma>();
 	
@@ -81,19 +83,25 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 	/* Agrega una referencia a la nave destruida */
 	public void agregarNaveAIEliminada(NaveNoOperable nave) throws NaveNoDestruidaError {
 
-		if (!nave.estaDestruida) {
+		if (!nave.estaDestruida)
 			throw new NaveNoDestruidaError("La nave aun no esta destruida");
-		}
 		listaNavesAIDestruidas.add(nave);
 	}
 	
 	/* Agrega una referencia a la nave destruida */
 	public void agregarNaveEliminada(Nave nave) throws NaveNoDestruidaError {
 
-		if (((!nave.estaDestruida) && (!((NaveNoOperable)nave).fueraDelPlano))) {
+		if (!nave.estaDestruida  &&  !((NaveNoOperable)nave).fueraDelPlano)
 			throw new NaveNoDestruidaError("La nave aun no esta destruida");
-		}
 		listaNavesDestruidas.add((NaveNoOperable) nave);
+	}
+
+	/* Agrega una referencia a la nave aliada destruida */
+	public void agregarNaveAliadaEliminada(NaveNoOperable nave) throws NaveNoDestruidaError {
+
+		if (!nave.estaDestruida  &&  !nave.fueraDelPlano)
+			throw new NaveNoDestruidaError("La nave aun no esta destruida");
+		listaNavesAliadasDestruidas.add(nave);
 	}
 
 	/* Agrega un arma a la lista de armas usadas */
@@ -148,28 +156,33 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 	/* Agrega una municion al plano */
 	public void agregarArma(Arma arma) throws ArmaUsadaError {
 
-		if ( arma.fueUsado() ) {
+		if ( arma.fueUsado() )
 			throw new ArmaUsadaError("Esta municion ya fue usada");
-		}
 		this.listaArmas.add(arma);
-	}
-
-	/* Agrega una nave no operable a la lista de naves */
-	public void agregarNave(NaveNoOperable unaNave) throws NaveDestruidaError {
-		
-		if ( unaNave.estadoActualDestruida() ) {
-			throw new NaveDestruidaError("La nave esta destruida");
-		}
-		this.listaNaves.add( unaNave );
 	}
 
 	/* Agrega una nave (seguramente after-image) a la lista de naves jugador */
 	public void agregarNaveAI(NaveNoOperable unaNave) throws NaveDestruidaError {
 		
-		if ( unaNave.estadoActualDestruida() ) {
+		if ( unaNave.estadoActualDestruida() )
 			throw new NaveDestruidaError("La nave esta destruida");
-		}
 		this.listaNavesAI.add( unaNave );
+	}
+
+	/* Agrega una nave no operable a la lista de naves */
+	public void agregarNave(NaveNoOperable unaNave) throws NaveDestruidaError {
+		
+		if ( unaNave.estadoActualDestruida() )
+			throw new NaveDestruidaError("La nave esta destruida");
+		this.listaNaves.add( unaNave );
+	}
+
+	/* Agrega una nave aliada a la lista de naves */
+	public void agregarNaveAliada(NaveNoOperable unaNave) throws NaveDestruidaError {
+		
+		if ( unaNave.estadoActualDestruida() )
+			throw new NaveDestruidaError("La nave esta destruida");
+		this.listaNavesAliadas.add( unaNave );
 	}
 
 	/* Agrega un item al area de Juego */
@@ -205,6 +218,10 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 	
 	public ArrayList<NaveNoOperable> devolverListaNaves() {
 		return this.listaNaves;
+	}
+
+	public ArrayList<NaveNoOperable> devolverListaNavesAliadas() {
+		return this.listaNavesAliadas;
 	}
 
 	public ArrayList<NaveNoOperable> devolverListaNavesEliminades() {
@@ -295,6 +312,7 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 		Iterator<Item> iteradorItemsUsados = listaItemsUsados.iterator();
 		Iterator<NaveNoOperable> iteradorNavesDestruidas = listaNavesDestruidas.iterator();
 		Iterator<NaveNoOperable> iteradorNavesAIDestruidas = listaNavesAIDestruidas.iterator();
+		Iterator<NaveNoOperable> iteradorNavesAliadasDestruidas = listaNavesAliadasDestruidas.iterator();
 
 		while (iteradorArmasUsadas.hasNext()) {
 			Arma elemento = iteradorArmasUsadas.next(); 
@@ -316,8 +334,13 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 			listaNavesAI.remove(elemento);
 			listaObjetosABorrar.add(elemento);
 		}
+		while (iteradorNavesAliadasDestruidas.hasNext()) {
+			NaveNoOperable elemento = iteradorNavesAliadasDestruidas.next(); 
+			listaNavesAliadas.remove(elemento);
+			listaObjetosABorrar.add(elemento);
+		}
 
-		this.nivel.actuarCon(listaNavesDestruidas, listaItemsUsados);
+		this.nivel.actuarCon(listaNavesDestruidas, listaNavesAliadasDestruidas, listaItemsUsados);
 		if ((nivel.devolverNumeroNivel() >= 20) && (!juegoPerdido))
 			juegoGanado = true;
 		
@@ -328,6 +351,7 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 		listaItemsUsados.clear();
 		listaNavesDestruidas.clear();
 		listaNavesAIDestruidas.clear();
+		listaNavesAliadasDestruidas.clear();
 	}
 
 	/* En cada turno, se debe invocar este metodo para revisar 
@@ -340,6 +364,7 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 		Iterator<Arma> iteradorArmas = listaArmas.iterator();
 		Iterator<NaveNoOperable> iteradorNaveEnemiga = listaNaves.iterator();
 		Iterator<NaveNoOperable> iteradorNaveJugador = listaNavesAI.iterator();
+		Iterator<NaveNoOperable> iteradorNaveAliada = listaNavesAliadas.iterator();
 
 		while (iteradorItem.hasNext()) {
 		    Item elemento = iteradorItem.next(); 
@@ -355,6 +380,10 @@ public class Plano implements Posicionable, ObjetoVivo, Serializable {
 		}
 		while (iteradorNaveJugador.hasNext()) {
 			NaveNoOperable elemento = iteradorNaveJugador.next(); 
+		    elemento.vivir();
+		}
+		while (iteradorNaveAliada.hasNext()) {
+			NaveNoOperable elemento = iteradorNaveAliada.next(); 
 		    elemento.vivir();
 		}
 

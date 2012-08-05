@@ -11,12 +11,12 @@ public class VistaCaza extends Imagen {
 
 	public VistaCaza() {
 		Random generadorRandom = new Random();
-		int i = generadorRandom.nextInt(4);
+		int i = generadorRandom.nextInt(5);
 
 		if (i == 0)
-			this.setNombreArchivoImagen(imagenPath+"Caza.png");
-		else
 			this.setNombreArchivoImagen(imagenPath+"Caza1.png");
+		else
+			this.setNombreArchivoImagen(imagenPath+"Caza.png");
 	}
 
 }

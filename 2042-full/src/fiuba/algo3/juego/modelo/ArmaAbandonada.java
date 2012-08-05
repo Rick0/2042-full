@@ -11,15 +11,15 @@ public class ArmaAbandonada extends Item implements Serializable{
 
 
 	public ArmaAbandonada(Punto punto, Plano unPlano) {
+		super();
 		puntos = 10;
-		fueUsado = false;
-		sinTiempoDeVida = false;
 		numeroTorpedos   = 3;
 		numeroCohetes    = 4;
 		numeroTorpedosV2 = 6;
 		numeroCohetesV2  = 1;
 		rectangulo = new Rectangulo(40, 40, punto);
 		plano = unPlano;
+		
 		try {
 			plano.agregarItem(this);
 			plano.agregarObjetoNuevo(this);

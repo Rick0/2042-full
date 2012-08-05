@@ -26,10 +26,13 @@ public class Avioneta extends NaveNoOperable implements Serializable {
 		estaDestruida = false;
 		fueraDelPlano = false;
 		this.determinarPlano(plano);
+		chanceTanqueVida = 2;
+		chanceTanqueArma = 2;
+		this.cantAMover = 2;
 
-		if (this.seSuperponeConOtraNave()) {
+		if (this.seSuperponeConOtraNave())
 			throw new SuperposicionNavesError("La posicion esta ocupada");
-		}
+		
 		plano.agregarNave(this);
 		plano.agregarObjetoNuevo(this);
 	}
@@ -41,23 +44,23 @@ public class Avioneta extends NaveNoOperable implements Serializable {
 	public void mover() throws SuperposicionNavesError {
 
 		if ( (this.puntosAdelanteCont <= puntosAdelante) ) {
-			this.puntosAdelanteCont = (this.puntosAdelanteCont + 2);
-			Punto nuevaPosicion= new Punto(devolverPunto().getX(),devolverPunto().getY()-2);
+			this.puntosAdelanteCont = (this.puntosAdelanteCont + this.cantAMover);
+			Punto nuevaPosicion= new Punto(devolverPunto().getX(),devolverPunto().getY() - this.cantAMover);
 			this.cambiarPosicion(nuevaPosicion);
 		}
 		else {
-			this.puntosAtrasCont = (this.puntosAtrasCont + 2);
-			Punto nuevaPosicion= new Punto(devolverPunto().getX(),devolverPunto().getY()+2);
+			this.puntosAtrasCont = (this.puntosAtrasCont + this.cantAMover);
+			Punto nuevaPosicion = new Punto(devolverPunto().getX(),devolverPunto().getY() + this.cantAMover);
 			this.cambiarPosicion(nuevaPosicion);
 			if (this.puntosAtrasCont >= puntosAtras) {
 				this.puntosAtrasCont = 0;
-				this.puntosAdelanteCont =0;
+				this.puntosAdelanteCont = 0;
 			}
 		}
 
-		if (this.seSuperponeConOtraNave()) {
+		if (this.seSuperponeConOtraNave()) 
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
-		}
+		
 		this.estaFueraDelPlano();
 	}
 
@@ -66,23 +69,22 @@ public class Avioneta extends NaveNoOperable implements Serializable {
 	 */
 	public void moverAlternativo() throws SuperposicionNavesError {
 
-		if (this.puntosAdelanteCont < (puntosAdelante+2)) {
+		if (this.puntosAdelanteCont < (puntosAdelante + this.cantAMover)) {
 			this.puntosAtrasCont = 0;
 			this.puntosAdelanteCont = 0;
 			// Hago que empiece a moverse hacia adelante desde 0,
 			// pero antes lo hago moverse hacia atras, si es que puedo.
-			Punto nuevaPosicion= new Punto(devolverPunto().getX(),devolverPunto().getY()+2);
+			Punto nuevaPosicion = new Punto(devolverPunto().getX(),devolverPunto().getY() + this.cantAMover);
 			this.cambiarPosicion(nuevaPosicion);
 		}
 		else {
 			this.puntosAtrasCont = 0;
-			Punto nuevaPosicion= new Punto(devolverPunto().getX(),devolverPunto().getY()-2);
+			Punto nuevaPosicion = new Punto(devolverPunto().getX(),devolverPunto().getY() - this.cantAMover);
 			this.cambiarPosicion(nuevaPosicion);
 		}
 
-		if ( this.seSuperponeConOtraNave() ) {
+		if ( this.seSuperponeConOtraNave() )
 			throw new SuperposicionNavesError("La posicion ya esta ocupada");
-		}
 
 		this.estaFueraDelPlano();
 	}

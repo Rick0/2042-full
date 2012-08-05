@@ -16,6 +16,7 @@ public class Explorador extends NaveNoOperable implements Serializable{
 	/* Inicializa una instancia de Bombardero */
 	public Explorador(Punto punto, int radioDeGiro, Plano plano) throws SuperposicionNavesError, NaveDestruidaError {
 
+		super();
 		puntos = 50;
 		energia = 30;
 		inicializado = false;
@@ -27,10 +28,13 @@ public class Explorador extends NaveNoOperable implements Serializable{
 		fueraDelPlano = false;
 		this.determinarPlano(plano);
 		this.determinarRadio(radioDeGiro);
+		chanceTanqueVida = 2;
+		chanceTanqueArma = 2;
+		this.cantAMover = 2;
 
-		if (this.seSuperponeConOtraNave()) {
+		if (this.seSuperponeConOtraNave())
 			throw new SuperposicionNavesError("La posicion esta ocupada");
-		}
+		
 		this.cambiarPosicion(punto);
 		plano.agregarNave(this);
 		plano.agregarObjetoNuevo(this);
@@ -46,12 +50,13 @@ public class Explorador extends NaveNoOperable implements Serializable{
 		double pi = Math.PI;
 		double num = (1.000 / 12);
 		anguloActual = (anguloActual +num);
-		puntosHaciaAbajo = ( puntosHaciaAbajo + 0.5);
+		puntosHaciaAbajo = puntosHaciaAbajo + 0.5;
 		Punto nuevoPunto= new Punto((radio*( (Math.cos( pi * anguloActual)))) + centroInicialX,(centroInicialY - (radio * Math.sin( pi * anguloActual )) - puntosHaciaAbajo) );
 		this.cambiarPosicion(nuevoPunto );
-		if ( this.seSuperponeConOtraNave() ) {
+		
+		if ( this.seSuperponeConOtraNave() )
 			throw new SuperposicionNavesError("La posicion ya esta ocupada.");
-		}
+		
 		this.estaFueraDelPlano();
 	}
 
@@ -61,14 +66,13 @@ public class Explorador extends NaveNoOperable implements Serializable{
 	public void moverAlternativo() throws SuperposicionNavesError {
 
 		Punto posicion = this.devolverPunto();
-		Punto nuevoPunto = new Punto(posicion.getX()+2, posicion.getY());
+		Punto nuevoPunto = new Punto(posicion.getX() + this.cantAMover, posicion.getY());
 		this.cambiarPosicion(nuevoPunto);
 		if (this.seSuperponeConOtraNave() ) {
-			nuevoPunto = new Punto(posicion.getX()-2, posicion.getY());
+			nuevoPunto = new Punto(posicion.getX() - this.cantAMover, posicion.getY());
 			this.cambiarPosicion(nuevoPunto);
-			if (this.seSuperponeConOtraNave()) {
+			if (this.seSuperponeConOtraNave())
 				throw new SuperposicionNavesError("La posicion ya esta ocupada.");
-			}
 		}
 		this.estaFueraDelPlano();
 	}

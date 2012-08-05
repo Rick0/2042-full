@@ -11,12 +11,12 @@ public class VistaExplorador extends Imagen {
 
 	public VistaExplorador() {
 		Random generadorRandom = new Random();
-		int i = generadorRandom.nextInt(4);
+		int i = generadorRandom.nextInt(5);
 
 		if (i == 0)
-			this.setNombreArchivoImagen(imagenPath+"Explorador.png");
-		else
 			this.setNombreArchivoImagen(imagenPath+"Explorador1.png");
+		else
+			this.setNombreArchivoImagen(imagenPath+"Explorador.png");
 	}
 
 }

@@ -38,9 +38,8 @@ public abstract class Nave extends ObjetoUbicable implements Serializable {
 	/* Lleva a cabo las acciones correspondientes si debe destruirse */
 	public void destruirse() throws NaveNoDestruidaError {
 
-		if ( (this.devolverEnergia()) > 0 ) {
+		if (this.devolverEnergia() > 0)
 			throw new NaveNoDestruidaError("La nave aun tiene energia en su tanque");
-		}
 		else {
 			estaDestruida = true;
 			plano.agregarNaveEliminada(this);

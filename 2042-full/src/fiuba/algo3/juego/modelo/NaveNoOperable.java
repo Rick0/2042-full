@@ -16,6 +16,11 @@ public abstract class NaveNoOperable extends Nave {
 	boolean fueraDelPlano;
 	int puntos;
 	public boolean tengoQueHuir;
+	final int chanceParaItems = 1000;
+	int chanceTanqueVida;
+	int chanceTanqueArma;
+//	int chanceTanqueSuper;
+	int cantAMover = 1;
 
 
 	public NaveNoOperable() {
@@ -222,7 +227,7 @@ public abstract class NaveNoOperable extends Nave {
 	}
 
 	/* Crea una instancia de ArmaAbandonada y la devuelve */ 
-	public Item dejarArma() throws ItemNoDisponibleError {
+	public Item dejarTanqueArma() throws ItemNoDisponibleError {
 
 		if (!this.estaDestruida)
 			throw new ItemNoDisponibleError("La nave aun no esta destruida, no puede dejar armas");
@@ -231,13 +236,46 @@ public abstract class NaveNoOperable extends Nave {
 	}
 	
 	/* Crea una instancia de TanqueEnergia y la devuelve */
-	public Item dejarTanque() throws ItemNoDisponibleError {
+	public Item dejarTanqueVida() throws ItemNoDisponibleError {
 		
-		Item itemDejado;
 		if (!this.estaDestruida)
 			throw new ItemNoDisponibleError("La nave aun no esta destruida, no puede dejar armas.");
-		itemDejado = new TanqueEnergia(this.devolverPunto(), this.plano);
+		Item itemDejado = new TanqueEnergia(this.devolverPunto(), this.plano);
 		return itemDejado;
 	}
 
+	@Override
+	/* Lleva a cabo las acciones correspondientes si debe destruirse */
+	public void destruirse() throws NaveNoDestruidaError {
+
+		if (this.devolverEnergia() > 0)
+			throw new NaveNoDestruidaError("La nave aun tiene energia en su tanque");
+		else {
+			estaDestruida = true;
+			plano.agregarNaveEliminada(this);
+			new NaveExplosion(this.devolverPunto(), this.plano);
+			
+			Random generadorRandom = new Random();
+			int numeroTanqueVida = generadorRandom.nextInt(this.chanceParaItems);
+			int numeroTanqueArma = generadorRandom.nextInt(this.chanceParaItems);
+			
+			if (numeroTanqueVida < this.chanceTanqueVida) {
+				try {
+					this.dejarTanqueVida();
+				} catch (ItemNoDisponibleError error) { 
+					// Esto no puede suceder
+					return;
+				}
+			}
+			if (numeroTanqueArma < this.chanceTanqueArma) {
+				try {
+					this.dejarTanqueArma();
+				} catch (ItemNoDisponibleError error) { 
+					// Esto no puede suceder
+					return;
+				}
+			}
+		}
+	}
+	
 }
